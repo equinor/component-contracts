@@ -394,6 +394,17 @@
           { label: 'Attempt 1 · thin doc', href: 'demos/attempt-1-thin.html' },
           { label: 'Attempt 2 · thin doc', href: 'demos/attempt-2-thin.html' },
         ] },
+        // the principles as runnable algorithms — demos + source
+        { name: 'Skills', links: [
+          { label: 'Typography', href: 'https://equinor.github.io/skills/typography/', blank: true },
+          { label: 'Typography scale', href: 'https://equinor.github.io/skills/typography-scale/', blank: true },
+          { label: 'Typography overlay', href: 'https://equinor.github.io/skills/typography-overlay/', blank: true },
+          { label: 'equinor/skills', href: 'https://github.com/equinor/skills', blank: true },
+        ] },
+        { name: 'Resources', links: [
+          { label: 'Colour generator', href: 'https://color-palette-generator-eds-prod.radix.equinor.com/', blank: true },
+          { label: 'equinor/component-contracts', href: 'https://github.com/equinor/component-contracts', blank: true },
+        ] },
       ]
       // a group's items: registry entries (hash-routed) or plain links
       const groupItems = (g) =>
@@ -404,6 +415,8 @@
             })
           : g.links
       const GROUP_GLYPHS = {
+        Skills: 'M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM12 18.72l5-2.73v-3.72L12 15l-5-2.73v3.72z',
+        Resources: 'M5 3c-1.093 0-2 .907-2 2v14c0 1.093.907 2 2 2h14c1.093 0 2-.907 2-2v-7h-2v7H5V5h7V3zm9 0v2h3.586l-9.293 9.293 1.414 1.414L19 6.414V10h2V3z',
         Demos: 'm4.8 12 4.6 4.6L8 18l-6-6 6-6 1.4 1.4zm14.4 0-4.6 4.6L16 18l6-6-6-6-1.4 1.4z',
         Inputs: 'M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25ZM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z',
         'Data Display': 'M3 5v14h18V5H3Zm2 2h14v3H5V7Zm0 5h14v5H5v-5Z',
@@ -678,7 +691,7 @@
             (g) =>
               `<button class="eds-side-bar-item" type="button" data-has-menu data-group="${g.name}" aria-expanded="false" aria-label="${g.name}">${glyph(GROUP_GLYPHS[g.name])}<span class="label">${g.name}</span><span class="chevron"></span></button>` +
               `<div class="submenu" hidden>${groupItems(g)
-                .map((it) => `<a class="eds-side-bar-sub-item" href="${it.href}"${it.nav ? ` data-nav="${it.nav}"` : ''} aria-label="${it.label}"><span class="label">${it.label}</span></a>`)
+                .map((it) => `<a class="eds-side-bar-sub-item" href="${it.href}"${it.nav ? ` data-nav="${it.nav}"` : ''}${it.blank ? ' target="_blank" rel="noopener"' : ''} aria-label="${it.label}"><span class="label">${it.label}</span></a>`)
                 .join('')}</div>`,
           ).join('') +
           `<button class="eds-side-bar-item" type="button" id="nav-collapse" aria-label="Collapse">${glyph(COLLAPSE)}<span class="label">Collapse</span></button>`
@@ -702,7 +715,7 @@
                 return
               const g = GROUPS.find((x) => x.name === btn.dataset.group)
               float.innerHTML = groupItems(g)
-                .map((it) => `<a class="eds-menu-item" role="menuitem" href="${it.href}">${it.label}</a>`)
+                .map((it) => `<a class="eds-menu-item" role="menuitem" href="${it.href}"${it.blank ? ' target="_blank" rel="noopener"' : ''}>${it.label}</a>`)
                 .join('')
               float.style.positionAnchor = `--nav-group-${i}`
               float.togglePopover()
