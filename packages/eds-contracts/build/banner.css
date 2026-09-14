@@ -1,0 +1,153 @@
+/* Generated from contracts/banner.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-banner {
+      /* Size-dependent parameters (single size). */
+      --_font-size: var(--eds-typography-ui-body-md-font-size);
+      --_line-height: var(--eds-typography-ui-body-md-line-height-default);
+      --_half-leading: var(--eds-half-leading-md-default);
+      --_inset-v: var(--eds-spacing-inset-md-vertical-squished);
+      --_inset-h: var(--eds-spacing-inset-md-horizontal);
+      --_gap: var(--eds-spacing-horizontal-md);
+      --_glyph: var(--eds-sizing-icon-md);
+      --_cap: var(--eds-cap-rounded-md);
+      --_trim-lead: var(--_half-leading);
+      --_baseline-pad: 0px;
+
+      display: inline-flex;
+      gap: var(--_gap);
+      align-items: start;
+
+      /* The contract's invariant, kept as a mechanism: height = inset × 2 + cap(label).
+       * Resolves to 24 / 36 / 44 px across densities (default size). Do not bake, do not round.
+       * border-box so min-height measures the BOX — buttons get this from the UA
+       * stylesheet, a <div> pays its padding twice without it. */
+      box-sizing: border-box;
+      min-height: calc(var(--_inset-v) * 2 + var(--eds-cap-rounded));
+      padding-block: calc(var(--_inset-v) - var(--_trim-lead));
+      padding-inline: var(--_inset-h);
+      border: none;
+
+      font: var(--eds-font-weight-normal) var(--_font-size) / var(--_line-height) var(--eds-typography-ui-body-font-family);
+      color: var(--_fg);
+
+      background-color: var(--_bg);
+      outline: var(--eds-sizing-stroke-thin) solid var(--_border, transparent);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+      & .icon {
+        /* an empty element has no min-content — pin it, or a
+         * wrapping message squeezes the glyph to nothing. */
+        flex: none;
+
+        inline-size: var(--_glyph);
+        block-size: var(--_glyph);
+
+        /* a glyph part: its footprint is the label's cap box; the ink
+         * overflows it like ascenders and descenders. Negative by construction. */
+        margin: calc((var(--_cap) - var(--_glyph)) / 2);
+
+        /* seated on the FIRST LINE: with the trim, cap box top = text
+         * cap top = the inset, exactly; the fallback adds the leading. */
+        margin-block-start: calc((var(--_cap) - var(--_glyph)) / 2 + var(--_trim-lead));
+
+        /* emitter-owned artwork: the variant's icon is the mask (a
+         * build-time data URI from @equinor/eds-icons), the background
+         * is the ink — the CSS twin of the Figma mask+tint. An empty
+         * element can never carry the wrong glyph. */
+        background-color: var(--_icon-fg, var(--_fg));
+
+        mask-image: var(--_mask);
+        mask-repeat: no-repeat;
+        mask-size: 100% 100%;
+      }
+
+      /* the message is a <p>: the trim needs a block container, and
+       * the paragraph is the filling middle of the row. Baseline-grid
+       * alignment (codepen VYmaowY): trim to ex over alphabetic, then
+       * pad the top by round(1cap,4px) − 1ex — the occupied box is
+       * exactly the ROUNDED cap (a raw cap trim would miss the grid),
+       * and the baseline sits on the 4px grid at the box bottom.
+       * Both declarations self-gate: the tokens only exist under
+       * @supports, so engines without text-box keep the half-leading
+       * fallback. */
+      & > p {
+        flex: 1 1 auto;
+        margin: 0;
+        padding-block: var(--_baseline-pad) 0;
+
+        text-box: var(--eds-text-box);
+      }
+
+      /* the dismiss IS the Button (composition, not imitation):
+       * it brings its own plate, ring and name guard. The banner only
+       * seats its CAP BOX on the corner — the plate overflows by the
+       * declared overhang, ink not box; you only see the circle on
+       * hover anyway. The seat follows the trim switch. */
+      & > .eds-button {
+        /* pseudo-private channels INHERIT: the banner sets --_border
+         * for its own frame, and the nested component only sets it in
+         * some of its variants — clear it, or the ghost grows a ring
+         * at rest. The container resets what it sets. */
+        --_border: initial;
+
+        align-self: start;
+        margin-block-start: calc(var(--_trim-lead) - var(--eds-spacing-inset-md-vertical-squished));
+        margin-inline: auto calc(-1 * var(--eds-spacing-inset-md-vertical-squished));
+
+        & .icon {
+          background-color: currentcolor;
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M19%206.41%2017.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012z%22%2F%3E%3C%2Fsvg%3E");
+          mask-repeat: no-repeat;
+          mask-size: 100% 100%;
+        }
+      }
+    }
+
+    /* Trim on: the root padding measures to the message's cap-rounded
+     * box, and the baseline compensation switches in. */
+    @supports (text-box: trim-both ex alphabetic) {
+      .eds-banner {
+        --_trim-lead: 0px;
+        --_baseline-pad: var(--eds-padding-top-baseline);
+      }
+    }
+  }
+
+  @layer variants {
+    .eds-banner:is([data-tone='info'], :not([data-tone])) {
+      --_bg: var(--eds-color-bg-info-surface);
+      --_fg: var(--eds-color-text-info-strong);
+      --_icon-fg: var(--eds-color-icon-info);
+      --_border: var(--eds-color-border-info-subtle);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M12.01%2022C17.53%2022%2022%2017.52%2022%2012S17.53%202%2012.01%202C6.48%202%202%206.48%202%2012s4.48%2010%2010.01%2010M13%209V7h-2v2zm0%208v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8%203.58-8%208%203.58%208%208%208%208-3.58%208-8%22%2F%3E%3C%2Fsvg%3E");
+    }
+
+    .eds-banner[data-tone='warning'] {
+      --_bg: var(--eds-color-bg-warning-surface);
+      --_fg: var(--eds-color-text-warning-strong);
+      --_icon-fg: var(--eds-color-icon-warning);
+      --_border: var(--eds-color-border-warning-subtle);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22m1%2021.5%2011-19%2011%2019zm18.53-2L12%206.49%204.47%2019.5zm-8.53-3v2h2v-2zm0-6h2v4h-2z%22%2F%3E%3C%2Fsvg%3E");
+    }
+
+    .eds-banner[data-tone='danger'] {
+      --_bg: var(--eds-color-bg-danger-surface);
+      --_fg: var(--eds-color-text-danger-strong);
+      --_icon-fg: var(--eds-color-icon-danger);
+      --_border: var(--eds-color-border-danger-subtle);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M11.99%202C6.47%202%202%206.48%202%2012s4.47%2010%209.99%2010C17.52%2022%2022%2017.52%2022%2012S17.52%202%2011.99%202M13%2013V7h-2v6zm0%204v-2h-2v2zm-9-5c0%204.42%203.58%208%208%208s8-3.58%208-8-3.58-8-8-8-8%203.58-8%208%22%2F%3E%3C%2Fsvg%3E");
+    }
+
+    .eds-banner[data-tone='success'] {
+      --_bg: var(--eds-color-bg-success-surface);
+      --_fg: var(--eds-color-text-success-strong);
+      --_icon-fg: var(--eds-color-icon-success);
+      --_border: var(--eds-color-border-success-subtle);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202m0%2018c-4.41%200-8-3.59-8-8s3.59-8%208-8%208%203.59%208%208-3.59%208-8%208m-2-5.83%206.59-6.59L18%209l-8%208-4-4%201.41-1.41z%22%2F%3E%3C%2Fsvg%3E");
+    }
+  }
+}

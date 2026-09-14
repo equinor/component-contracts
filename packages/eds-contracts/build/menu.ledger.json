@@ -1,0 +1,20 @@
+[
+  {
+    "fact": "bleed guard: the panel pads its block ends by ITS OWN radius",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "Same token as the corner radius, so full-bleed item fills can never clip the rounded corners; the sides stay unpadded — items run edge to edge."
+  },
+  {
+    "fact": "items: a true SLOT — designers add as many children as they want",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "Slots GA'd June 2026. CSS: the root's children ARE the content; Figma: a SLOT node seeded with 3 representative instances (demo content, freely replaced per instance)."
+  },
+  {
+    "fact": "semantics: <div> role=menu",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

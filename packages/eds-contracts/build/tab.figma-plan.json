@@ -1,0 +1,92 @@
+{
+  "component": "eds.tab",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-md-squared-lg-label",
+      "collection": "density",
+      "values": {
+        "compact": 10,
+        "comfortable": 12,
+        "relaxed": 16
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-md-vertical-squared) - var(--eds-half-leading-lg))",
+      "description": "eds.tab: lg label in the md-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 36/44/52."
+    }
+  ],
+  "componentSet": {
+    "name": "Tab",
+    "description": "Tab — a ghost selectable with a bottom border. md squared (Curtis: a tab is squared where a button is squished), so heights resolve to 32 / 44 / 52 across densities. Resting: transparent fill, subtle text, subtle underline. Selected: accent text and accent-medium underline — state, not affordance: no selected-hover (why re-click a selected tab?), but it stays focusable (the WAI-ARIA tabs pattern puts roving tabindex on the selected tab).\n\nGenerated from eds.tab v0.2.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default",
+        "Hover",
+        "Selected",
+        "Disabled"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Tab",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Tab"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "recipe/optical-padding-md-squared-lg-label",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "insetVar": "spacing/inset-md-vertical-squared",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/lg",
+          "lineHeight": "typography/line-height/compressed/lg"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-subtle",
+        "borderBottom": "semantic/border-subtle"
+      },
+      {
+        "name": "State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-subtle",
+        "borderBottom": "semantic/border-subtle"
+      },
+      {
+        "name": "State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "borderBottom": "semantic/border-accent-medium"
+      },
+      {
+        "name": "State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "borderBottom": "semantic/border-subtle"
+      }
+    ]
+  }
+}

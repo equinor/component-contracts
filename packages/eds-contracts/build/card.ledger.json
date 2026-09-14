@@ -1,0 +1,20 @@
+[
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "semantics: <div>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

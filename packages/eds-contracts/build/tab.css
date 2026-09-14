@@ -1,0 +1,68 @@
+/* Generated from contracts/tab.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-tab {
+      /* No variant axes — the channel variables live on the root. */
+      --_bg: var(--eds-color-bg-neutral-fill-ghost-default);
+      --_fg: var(--eds-color-text-subtle);
+      --_border-bottom: var(--eds-color-border-subtle);
+
+      /* Size-dependent parameters (single size). */
+      --_font-size: var(--eds-typography-ui-body-lg-font-size);
+      --_line-height: var(--eds-typography-ui-body-lg-line-height-compressed);
+      --_half-leading: var(--eds-half-leading-lg);
+      --_inset-v: var(--eds-spacing-inset-md-vertical-squared);
+      --_inset-h: var(--eds-spacing-inset-md-horizontal);
+
+      cursor: var(--_cursor, pointer);
+
+      display: inline-flex;
+      align-items: center;
+
+      /* The contract's invariant, kept as a mechanism: height = inset × 2 + cap(label).
+       * Resolves to 36 / 44 / 52 px across densities (default size). Do not bake, do not round.
+       * border-box so min-height measures the BOX — buttons get this from the UA
+       * stylesheet, a <div> pays its padding twice without it. */
+      box-sizing: border-box;
+      min-height: calc(var(--_inset-v) * 2 + var(--eds-cap-rounded));
+      padding-block: calc(var(--_inset-v) - var(--_half-leading));
+      padding-inline: var(--_inset-h);
+      border: none;
+
+      font: var(--eds-font-weight-normal) var(--_font-size) / var(--_line-height) var(--eds-typography-ui-body-font-family);
+      color: var(--_fg);
+
+      background-color: var(--_bg);
+      outline: var(--eds-sizing-stroke-thin) solid var(--_border, transparent);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+      /* the underline: an inset shadow so geometry is untouched — exact parity
+       * with Figma's inside stroke; a real border would displace the cap box. */
+      box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thick)) 0 var(--_border-bottom);
+    }
+  }
+
+  @layer states {
+    .eds-tab:disabled {
+      --_cursor: not-allowed;
+      --_fg: var(--eds-color-text-disabled);
+    }
+
+    .eds-tab:focus-visible {
+      outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thin);
+    }
+
+    .eds-tab:not(:disabled, [aria-selected='true']):hover {
+      --_bg: var(--eds-color-bg-neutral-fill-ghost-hover);
+    }
+
+    .eds-tab[aria-selected='true']:not(:disabled) {
+      --_fg: var(--eds-color-text-accent-strong);
+      --_border-bottom: var(--eds-color-border-accent-medium);
+    }
+  }
+}

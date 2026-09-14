@@ -1,0 +1,91 @@
+{
+  "component": "eds.switch",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Switch",
+    "description": "Switch — the control, and only the control. The glyph IS an icon from the EDS set (as EDS 1.x rendered it), rendered as a MASK on the native input itself (appearance: none; background-color is the ink - the CSS twin of the Figma mask+tint) and swapped by the platform's own :checked. One element, no wrapper, native focus/keyboard/forms behaviour. Interactive green in both states (EDS 1.0 — Victor, 2026-08-29). Labelled rows are COMPOSITION.\n\nGenerated from eds.switch v0.1.0 — edit the contract, not this component.",
+    "axes": {
+      "Checked": [
+        "Unchecked",
+        "Checked"
+      ],
+      "State": [
+        "Default",
+        "Disabled"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "glyph-off",
+        "swap": {
+          "componentKey": "1be4c7f50e1304faf352ba781555527e16e3fe65",
+          "icon": "switch_off"
+        }
+      },
+      {
+        "kind": "glyph",
+        "name": "glyph-on",
+        "swap": {
+          "componentKey": "1f7bc01c6dead857348a368af18f548dd7b651b8",
+          "icon": "switch_on"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "glyph-off": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-2xl"
+          },
+          "glyph-on": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-2xl"
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Checked=Unchecked, State=Default",
+        "size": "Default",
+        "iconFg": "semantic/icon-accent",
+        "hideParts": [
+          "glyph-on"
+        ]
+      },
+      {
+        "name": "Checked=Unchecked, State=Disabled",
+        "size": "Default",
+        "iconFg": "concept/text-disabled",
+        "hideParts": [
+          "glyph-on"
+        ]
+      },
+      {
+        "name": "Checked=Checked, State=Default",
+        "size": "Default",
+        "iconFg": "semantic/icon-accent",
+        "hideParts": [
+          "glyph-off"
+        ]
+      },
+      {
+        "name": "Checked=Checked, State=Disabled",
+        "size": "Default",
+        "iconFg": "concept/text-disabled",
+        "hideParts": [
+          "glyph-off"
+        ]
+      }
+    ]
+  }
+}

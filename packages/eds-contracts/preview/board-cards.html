@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Review board — tooltip + card</title>
+    <link rel="stylesheet" href="../../eds-tokens/build/css/index.css" />
+    <link rel="stylesheet" href="../build/card.css" />
+    <link rel="stylesheet" href="../build/tooltip.css" />
+    <style>
+      /* board chrome only — not part of the system */
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: Inter, sans-serif;
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-strong);
+      }
+      section { margin-block-end: 28px; }
+      h2 {
+        margin: 0 0 8px;
+        font: 500 11px/1.5 Inter, sans-serif;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2>Card — the container primitive</h2>
+      <div class="row" style="align-items: stretch">
+        <div class="eds-card" style="max-width: 220px">
+          <strong>Static card</strong>
+          A plain div: no cursor, no hover, no ring.
+        </div>
+        <a class="eds-card" href="#" style="max-width: 220px; text-decoration: none; color: inherit">
+          <strong>Interactive card</strong>
+          An anchor: hover lifts it, focus rings it.
+        </a>
+        <button class="eds-card" type="button" style="max-width: 220px; text-align: start; font: inherit; color: inherit">
+          <strong>Button card</strong>
+          One action per card.
+        </button>
+      </div>
+    </section>
+    <section>
+      <h2>Tooltip</h2>
+      <div class="row" style="gap: 2.5rem">
+        <div class="eds-tooltip" data-placement="top" role="tooltip">top</div>
+        <div class="eds-tooltip" data-placement="top-start" role="tooltip">top-start</div>
+        <div class="eds-tooltip" data-placement="bottom-start" role="tooltip">bottom-start</div>
+        <div class="eds-tooltip" data-placement="bottom" role="tooltip">bottom</div>
+        <div class="eds-tooltip" data-placement="right-end" role="tooltip">right-end</div>
+        <div class="eds-tooltip" data-placement="left" role="tooltip">left</div>
+      </div>
+    </section>
+    <script>
+      const scheme = location.hash.slice(1);
+      if (scheme) document.documentElement.dataset.colorScheme = scheme;
+    </script>
+  </body>
+</html>

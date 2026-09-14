@@ -1,0 +1,32 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (4/6/10) and hug reproduces the height (20/24/36)."
+  },
+  {
+    "fact": "arrow is the pointer: root fill, cap-derived, opposite the placement",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: a ::before — width = cap box, protrusion = cap/2, positioned by the data-placement attribute; Figma: a triangle in the placement wrapper, rotated toward the anchor."
+  },
+  {
+    "fact": "prop label (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop placement (top-start|top|top-end|bottom-start|bottom|bottom-end|left-start|left|left-end|right-start|right|right-end)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Placement variant axis."
+  },
+  {
+    "fact": "semantics: <div> role=tooltip",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

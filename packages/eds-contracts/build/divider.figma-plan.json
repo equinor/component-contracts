@@ -1,0 +1,45 @@
+{
+  "component": "eds.divider",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Divider",
+    "description": "Divider — a rule. The thickness is the stroke token and the ink is a border color: a divider IS a border that happens to be its own element. Margins are deliberately absent — inter-element space belongs to the parent (flex/auto-layout gap), not the component.\n\nGenerated from eds.divider v0.1.0 — edit the contract, not this component.",
+    "axes": {
+      "Weight": [
+        "Subtle",
+        "Medium"
+      ],
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "rule": {
+        "thicknessVar": "sizing/stroke-thin"
+      }
+    },
+    "parts": [],
+    "bySize": {
+      "Default": {
+        "glyphs": {}
+      }
+    },
+    "variants": [
+      {
+        "name": "Weight=Subtle",
+        "size": "Default",
+        "bg": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "Weight=Medium",
+        "size": "Default",
+        "bg": "semantic/border-neutral-medium"
+      }
+    ]
+  }
+}

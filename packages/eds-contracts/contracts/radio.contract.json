@@ -1,0 +1,80 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.radio",
+  "version": "0.1.0",
+  "description": "Radio — the control, and only the control. The glyph IS an icon from the EDS set (as EDS 1.x rendered it), rendered as a MASK on the native input itself (appearance: none; background-color is the ink - the CSS twin of the Figma mask+tint) and swapped by the platform's own :checked. One element, no wrapper, native focus/keyboard/forms behaviour. Interactive green in both states (EDS 1.0 — Victor, 2026-08-29). Labelled rows are COMPOSITION.",
+  "notes": "Selection-control colour history (Victor, 2026-08-29): EDS 2.0 planned neutral-at-rest -> accent-when-checked to reduce accent usage; EDS 1.0 is green in both states — going with 1.0 for now, one token flip per state to revisit. The control glyph footprint is the md cap box, so a control beside an md label sits on the text's cap like any other glyph. REFUSED for now: the EDS 1.x radial hover halo. The focus ring is a 4-way drop-shadow filter: a mask clips the outline (measured in Chrome, 2026-08-29), and filters apply AFTER masking - the ring hugs the glyph.",
+  "props": [
+    {
+      "name": "checked",
+      "description": "The platform's own state — :checked in CSS, a variant axis in Figma.",
+      "type": {
+        "enum": ["unchecked", "checked"]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked"
+        },
+        "code": {
+          "pseudo": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {},
+    "glyph-off": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "unchecked"
+      },
+      "glyph": "{spacing.sizing-icon-lg}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "4060bc0c8cb3e1aa9d276ca351a57d0b31822438",
+        "icon": "radio_button_unselected"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    },
+    "glyph-on": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "checked"
+      },
+      "glyph": "{spacing.sizing-icon-lg}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "ffe51fe22a9115f9a9e958e115bccfa5151513e4",
+        "icon": "radio_button_selected"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "glyph-off/color": "{color.concept.text-disabled}",
+        "glyph-on/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "input",
+    "aria": {
+      "type": "the control is <input type=\"radio\">; checkedness is the platform's, reflected by :checked"
+    }
+  }
+}

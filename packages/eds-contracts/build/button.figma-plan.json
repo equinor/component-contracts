@@ -1,0 +1,912 @@
+{
+  "component": "eds.button",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-md-squished",
+      "collection": "density",
+      "values": {
+        "compact": 6,
+        "comfortable": 10,
+        "relaxed": 12
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-md-vertical-squished) - var(--eds-half-leading-md))",
+      "description": "eds.button: md label in the md-squished inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 24/36/44."
+    },
+    {
+      "name": "recipe/optical-padding-sm-squished",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 6,
+        "relaxed": 10
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-sm-vertical-squished) - var(--eds-half-leading-sm))",
+      "description": "eds.button: sm label in the sm-squished inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 20/24/36."
+    }
+  ],
+  "componentSet": {
+    "name": "Button",
+    "description": "Button — the selectable. Height is never stated: inset × 2 + cap(label) resolves per size and density (default: 24/36/44, small: 20/24/36), with or without an icon. Primary fills; Secondary, Ghost and Ghost-icon rest transparent and bind the ghost ladder. Ghost-icon is EDS 1.x's ghost_icon: icon-only, round — with no text there is no half-leading to compensate, so padding = inset on all sides and the button is a circle by construction.\n\nGenerated from eds.button v0.8.0 — edit the contract, not this component.",
+    "axes": {
+      "Tone": [
+        "Neutral",
+        "Accent",
+        "Danger"
+      ],
+      "Variant": [
+        "Primary",
+        "Secondary",
+        "Ghost",
+        "Ghost-icon"
+      ],
+      "Size": [
+        "Default",
+        "Small"
+      ],
+      "State": [
+        "Default",
+        "Hover",
+        "Active",
+        "Disabled"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Click me!",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Has Leading Icon",
+        "default": true,
+        "part": "icon"
+      },
+      {
+        "property": "Has Trailing Icon",
+        "default": false,
+        "part": "trailing-icon"
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "radiusVar": "spacing/border-radius-rounded",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swap": {
+          "property": "↳ Leading Icon",
+          "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Click me!"
+      },
+      {
+        "kind": "glyph",
+        "name": "trailing-icon",
+        "swap": {
+          "property": "↳ Trailing Icon",
+          "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          },
+          "trailing-icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-md-squished",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "insetVar": "spacing/inset-md-vertical-squished",
+        "gap": "spacing/icon-md-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/bolder",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/compressed/md"
+        }
+      },
+      "Small": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-sm",
+            "glyphVar": "sizing/icon-xs"
+          },
+          "trailing-icon": {
+            "containerVar": "recipe/cap-rounded-sm",
+            "glyphVar": "sizing/icon-xs"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-sm-squished",
+        "paddingInline": "spacing/inset-sm-horizontal",
+        "insetVar": "spacing/inset-sm-vertical-squished",
+        "gap": "spacing/icon-sm-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/bolder",
+          "fontSize": "typography/font-size/sm",
+          "lineHeight": "typography/line-height/compressed/sm"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-default",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-hover",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-active",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-emphasis-default",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-emphasis-hover",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-emphasis-active",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Primary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Secondary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Neutral, Variant=Ghost-icon, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-default",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-hover",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-active",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-emphasis-default",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-emphasis-hover",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-emphasis-active",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Variant=Primary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-strong"
+      },
+      {
+        "name": "Tone=Accent, Variant=Secondary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Accent, Variant=Ghost-icon, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-accent-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-default",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-hover",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-active",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-emphasis-default",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-emphasis-hover",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-emphasis-active",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Variant=Primary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-strong"
+      },
+      {
+        "name": "Tone=Danger, Variant=Secondary, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Default, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Default, State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Small, State=Default",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Small, State=Hover",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Small, State=Active",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      },
+      {
+        "name": "Tone=Danger, Variant=Ghost-icon, Size=Small, State=Disabled",
+        "size": "Small",
+        "bg": "semantic/bg-danger-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled",
+        "iconOnly": "icon",
+        "radiusVar": "spacing/border-radius-pill"
+      }
+    ]
+  }
+}

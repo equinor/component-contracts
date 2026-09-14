@@ -1,0 +1,81 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.switch",
+  "version": "0.1.0",
+  "description": "Switch — the control, and only the control. The glyph IS an icon from the EDS set (as EDS 1.x rendered it), rendered as a MASK on the native input itself (appearance: none; background-color is the ink - the CSS twin of the Figma mask+tint) and swapped by the platform's own :checked. One element, no wrapper, native focus/keyboard/forms behaviour. Interactive green in both states (EDS 1.0 — Victor, 2026-08-29). Labelled rows are COMPOSITION.",
+  "notes": "Selection-control colour history (Victor, 2026-08-29): EDS 2.0 planned neutral-at-rest -> accent-when-checked to reduce accent usage; EDS 1.0 is green in both states — going with 1.0 for now, one token flip per state to revisit. The control glyph footprint is the md cap box, so a control beside an md label sits on the text's cap like any other glyph. REFUSED for now: the EDS 1.x radial hover halo (a switch is role=switch semantics on a checkbox input). The focus ring is a 4-way drop-shadow filter: a mask clips the outline (measured in Chrome, 2026-08-29), and filters apply AFTER masking - the ring hugs the glyph.",
+  "props": [
+    {
+      "name": "checked",
+      "description": "The platform's own state — :checked in CSS, a variant axis in Figma.",
+      "type": {
+        "enum": ["unchecked", "checked"]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked"
+        },
+        "code": {
+          "pseudo": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {},
+    "glyph-off": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "unchecked"
+      },
+      "glyph": "{spacing.sizing-icon-2xl}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "1be4c7f50e1304faf352ba781555527e16e3fe65",
+        "icon": "switch_off"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    },
+    "glyph-on": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "checked"
+      },
+      "glyph": "{spacing.sizing-icon-2xl}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "1f7bc01c6dead857348a368af18f548dd7b651b8",
+        "icon": "switch_on"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "glyph-off/color": "{color.concept.text-disabled}",
+        "glyph-on/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "input",
+    "aria": {
+      "type": "the control is <input type=\"checkbox\">; checkedness is the platform's, reflected by :checked"
+    },
+    "role": "switch"
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (10/14/16) and hug reproduces the height (32/44/52)."
+  },
+  {
+    "fact": "prop label (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "leading indent aligns the label with eds.side-bar-item's label",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "parent inset + icon cap cell + icon gap. CSS composes the calc live; Figma gets the minted per-density value. The alignment rule survives any future change to its three inputs."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state active",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :active; Figma: State variant."
+  },
+  {
+    "fact": "state selected",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [aria-current] (omit the attribute when not current) — an ARIA state, not a pseudo-class; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "semantics: <a> role=none",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

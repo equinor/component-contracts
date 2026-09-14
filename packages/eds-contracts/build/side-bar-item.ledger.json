@@ -1,0 +1,92 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (14/18/20) and hug reproduces the height (40/52/60)."
+  },
+  {
+    "fact": "icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "chevron is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "prop label (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop collapsed (false|true)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Collapsed variant axis."
+  },
+  {
+    "fact": "prop hasMenu (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "collapsed cascades from any ancestor",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: one attribute on the container flips every item ([data-collapsed] * matches descendants). Figma cannot reach consumer SLOT content (instance content is the instance's own — the slots model): baked defaults mirror the variant; edited slots are flipped WITH the rail by multi-select."
+  },
+  {
+    "fact": "flag: corner flag marks the submenu on the collapsed square",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "Legs = the xs spacing rung. CSS: an ::after pseudo (clip-path triangle) — emitter-owned decoration, no markup to get wrong; Figma: a corner-constrained vector, size variable-bound, corner offset baked (absolute offsets are not bindable — bounded)."
+  },
+  {
+    "fact": "collapsed=true is icon-only: padding = inset, a circle by construction",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "No text, so no half-leading to compensate — the optical correction drops out. CSS: the variant attribute zeroes --_half-leading and squares the insets; Figma: even inset binds, pill radius, only the icon part is built."
+  },
+  {
+    "fact": "collapsed=true requires an accessible name",
+    "css": "RESOLVED",
+    "figma": "LOWERED",
+    "note": "No text child names the control. CSS: a zero-specificity guard paints any icon-only control missing aria-label/aria-labelledby with a dashed danger outline — the omission is visible, never silent. Figma: the component description carries the requirement."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state active",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :active; Figma: State variant."
+  },
+  {
+    "fact": "state selected",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [aria-current] (omit the attribute when not current) — an ARIA state, not a pseudo-class; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "semantics: <a> role=none",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

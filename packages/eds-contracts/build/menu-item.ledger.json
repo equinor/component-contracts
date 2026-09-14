@@ -1,0 +1,62 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (6/10/12) and hug reproduces the height (24/36/44)."
+  },
+  {
+    "fact": "icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "prop label (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop icon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state active",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :active; Figma: State variant."
+  },
+  {
+    "fact": "state selected",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :is([aria-selected='true'], [aria-checked='true']) — an ARIA state, not a pseudo-class; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "state disabled",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :disabled; Figma: State variant (no interactivity on canvas)."
+  },
+  {
+    "fact": "semantics: <button> role=menuitem",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

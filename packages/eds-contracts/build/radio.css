@@ -1,0 +1,58 @@
+/* Generated from contracts/radio.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-radio {
+      /* Size-dependent parameters (single size). */
+      --_glyph: var(--eds-sizing-icon-lg);
+      --_cap: var(--eds-cap-rounded-md);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M2%2012C2%206.48%206.48%202%2012%202s10%204.48%2010%2010-4.48%2010-10%2010S2%2017.52%202%2012m2%200c0%204.42%203.58%208%208%208s8-3.58%208-8-3.58-8-8-8-8%203.58-8%208%22%2F%3E%3C%2Fsvg%3E");
+
+      cursor: var(--_cursor, pointer);
+
+      /* The element IS the control: the EDS icon (from @equinor/eds-icons,
+       * resolved at build time) is the MASK, the background is the ink —
+       * the CSS twin of the Figma mask+tint. The footprint stays the cap
+       * box, so the control sits on a label's cap line like any glyph. */
+      inline-size: var(--_glyph);
+      block-size: var(--_glyph);
+      margin: calc((var(--_cap) - var(--_glyph)) / 2);
+
+      appearance: none;
+      background-color: var(--_icon-fg);
+
+      mask-image: var(--_mask);
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
+  }
+
+  @layer variants {
+    .eds-radio:not(:checked) {
+      --_icon-fg: var(--eds-color-icon-accent);
+    }
+
+    .eds-radio:checked {
+      --_icon-fg: var(--eds-color-icon-accent);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202m0%2018c-4.42%200-8-3.58-8-8s3.58-8%208-8%208%203.58%208%208-3.58%208-8%208m-5-8a5%205%200%201%201%2010%200%205%205%200%200%201-10%200%22%2F%3E%3C%2Fsvg%3E");
+    }
+  }
+
+  @layer states {
+    .eds-radio:disabled {
+      --_cursor: not-allowed;
+      --_icon-fg: var(--eds-color-text-disabled);
+    }
+
+    .eds-radio:focus-visible {
+      /* a mask clips the outline (measured), and filters apply AFTER
+       * masking — four hard drop-shadows draw a ring hugging the glyph. */
+      filter: drop-shadow(var(--eds-sizing-stroke-thick) 0 0 var(--eds-color-border-focus))
+        drop-shadow(calc(-1 * var(--eds-sizing-stroke-thick)) 0 0 var(--eds-color-border-focus))
+        drop-shadow(0 var(--eds-sizing-stroke-thick) 0 var(--eds-color-border-focus))
+        drop-shadow(0 calc(-1 * var(--eds-sizing-stroke-thick)) 0 var(--eds-color-border-focus));
+    }
+  }
+}

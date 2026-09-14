@@ -1,0 +1,136 @@
+{
+  "component": "eds.input",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-xs-stretched-md-label",
+      "collection": "density",
+      "values": {
+        "compact": 6,
+        "comfortable": 10,
+        "relaxed": 12
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-xs-vertical-stretched) - var(--eds-half-leading-md))",
+      "description": "eds.input: md label in the xs-stretched inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 24/36/44."
+    }
+  ],
+  "componentSet": {
+    "name": "Input",
+    "description": "Input — the field box, and only the box. The root is a WRAPPER (an <input> cannot contain children — icons live inside the field), with the native control reset flat inside; states read through it via :has(). THE CLASSIC EDS FIELD (the EDS 1.0 identity, restored v0.6.0 from mock 345:1023): bg-input fill, square corners, and a thin bottom border that carries the states — border-neutral-medium at rest. xs-STRETCHED inset (a field is a stretched box; converges vertically with md-squished while the horizontal inset drops to xs — the field hugs its text). Height is never stated: inset × 2 + cap(value) resolves to 24 / 36 / 44. The assembled field is a COMPOSITION — see compositions/text-field.json.\n\nGenerated from eds.input v0.7.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default",
+        "Hover",
+        "Invalid",
+        "Disabled"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Value",
+        "default": "Value",
+        "part": "value"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Has Leading Icon",
+        "default": false,
+        "part": "icon"
+      },
+      {
+        "property": "Has Trailing Icon",
+        "default": false,
+        "part": "trailing-icon"
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "underlineVar": "sizing/stroke-thin",
+      "fixedWidth": 256
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swap": {
+          "property": "↳ Leading Icon",
+          "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "value",
+        "defaultText": "Value",
+        "fill": true
+      },
+      {
+        "kind": "glyph",
+        "name": "trailing-icon",
+        "swap": {
+          "property": "↳ Trailing Icon",
+          "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          },
+          "trailing-icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-xs-stretched-md-label",
+        "paddingInline": "spacing/inset-xs-horizontal",
+        "insetVar": "spacing/inset-xs-vertical-stretched",
+        "gap": "spacing/icon-md-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/compressed/md"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default",
+        "size": "Default",
+        "bg": "concept/bg-input",
+        "fg": "concept/text-placeholder",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-medium"
+      },
+      {
+        "name": "State=Hover",
+        "size": "Default",
+        "bg": "concept/bg-input",
+        "fg": "concept/text-placeholder",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-strong"
+      },
+      {
+        "name": "State=Invalid",
+        "size": "Default",
+        "bg": "concept/bg-input",
+        "fg": "concept/text-placeholder",
+        "iconFg": "semantic/icon-danger",
+        "borderBottom": "semantic/border-danger-strong"
+      },
+      {
+        "name": "State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "borderBottom": "concept/border-disabled"
+      }
+    ]
+  }
+}

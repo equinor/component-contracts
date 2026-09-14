@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Building the button — three attempts</title>
+    <style>
+      body {
+        margin: 0;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        block-size: 100vh;
+        font-family: Inter, system-ui, sans-serif;
+        background: #f7f7f7;
+      }
+      .rungs {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1px;
+        background: #ddd;
+        min-block-size: 0;
+      }
+      .rung {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        background: #fff;
+        min-block-size: 0;
+      }
+      header {
+        padding: 1rem 1.5rem;
+        border-block-end: 1px solid #eee;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+      .rung h2 {
+        margin: 0;
+        padding: 0.75rem 1rem 0;
+        font-size: 0.95rem;
+      }
+      .rung p {
+        margin: 0.15rem 0 0.6rem;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+        color: #666;
+      }
+      .rung p b {
+        color: #b30d2f;
+      }
+      .rung:last-child p b {
+        color: #007079;
+      }
+      iframe {
+        inline-size: 100%;
+        block-size: 100%;
+        border: none;
+        border-block-start: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Building the button — the same request, three levels of teaching</h1>
+    </header>
+    <main class="rungs">
+      <section class="rung">
+        <h2>1 · The document</h2>
+        <p>An Atlassian-grade DESIGN.md — 1,071 lines, every value. Colors transfer; derivations don't. <b>8 confessed guesses</b> <small>(a thin doc scored <a href="attempt-1-thin.html">16</a>)</small>.</p>
+        <iframe src="attempt-1.html" title="Attempt 1 — verbose DESIGN.md only"></iframe>
+      </section>
+      <section class="rung">
+        <h2>2 · The skills</h2>
+        <p>+ five skills. Geometry <em>computed</em>, fixtures passing. <a href="attempt-2-first.html">The first run</a> seated icons 4px low: measured, filed, and the skill learnt <em>the glyph seat</em> overnight; this re-run seats them at <b>0px, measured</b>. What remains guessed is interpretive: defaults, glyphs, weights <small>(first run <a href="attempt-2-first.html">5 guesses</a>; thin doc <a href="attempt-2-thin.html">11</a>)</small>. Better. Not perfect.</p>
+        <iframe src="attempt-2.html" title="Attempt 2 — verbose DESIGN.md + skills"></iframe>
+      </section>
+      <section class="rung">
+        <h2>3 · The contract</h2>
+        <p>Generated from button.contract.json, parity-verified against the Figma set. <b>0 guesses</b>, and the icons seat with 0px drift, measured.</p>
+        <iframe src="attempt-3.html" title="Attempt 3 — the emitted component"></iframe>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+{
+  "component": "eds.banner",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-md-squished-default-leading",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 8,
+        "relaxed": 10
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-md-vertical-squished) - var(--eds-half-leading-md-default))",
+      "description": "eds.banner: md label in the md-squished inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 24/36/44."
+    }
+  ],
+  "componentSet": {
+    "name": "Banner",
+    "description": "Banner — a tone strip announcing something about the whole view. A tone surface with a subtle tone border (the EDS 2.0 mock, refined), the tone's own icon seated on the first line, a message set for READING and trimmed to the cap box, and an optional dismiss that IS the ghost icon-button, its cap box on the corner. Height is never stated: it emerges from the recipe and grows with a wrapping message.\n\nGenerated from eds.banner v0.4.0 — edit the contract, not this component.",
+    "axes": {
+      "Tone": [
+        "Info",
+        "Warning",
+        "Danger",
+        "Success"
+      ],
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Message",
+        "default": "Something happened that you should know about.",
+        "part": "message"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Icon",
+        "default": true,
+        "part": "icon"
+      },
+      {
+        "property": "Dismissible",
+        "default": false,
+        "part": "dismiss"
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "MIN",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swapByProp": {
+          "prop": "tone",
+          "glyphs": {
+            "info": {
+              "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874",
+              "icon": "info_circle"
+            },
+            "warning": {
+              "componentKey": "e64c0cf5114185fee9676e7b695d947081bbab77",
+              "icon": "warning_outlined"
+            },
+            "danger": {
+              "componentKey": "c01ecb263ad4c0516f712fbf419a84601e2b5411",
+              "icon": "error_outlined"
+            },
+            "success": {
+              "componentKey": "050ceb37d839afb67598ed064579564b158ee708",
+              "icon": "check_circle_outlined"
+            }
+          }
+        }
+      },
+      {
+        "kind": "text",
+        "name": "message",
+        "defaultText": "Something happened that you should know about."
+      },
+      {
+        "kind": "instance",
+        "name": "dismiss",
+        "component": "Button",
+        "overrides": {
+          "Variant": "Ghost-icon",
+          "Tone": "Neutral",
+          "↳ Leading Icon": "key:3bd72d0a163f1d70993eb1b648540442f161567e"
+        },
+        "corner": true
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md",
+            "containerHVar": "typography/line-height/default/md"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-md-squished-default-leading",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "insetVar": "spacing/inset-md-vertical-squished",
+        "gap": "spacing/horizontal-md",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/default/md"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Tone=Info",
+        "size": "Default",
+        "bg": "semantic/bg-info-surface",
+        "fg": "semantic/text-info-strong",
+        "iconFg": "semantic/icon-info",
+        "border": "semantic/border-info-subtle",
+        "glyphSwaps": {
+          "icon": "9fd93824c3b0d41f7e1eed3b16fa433589b91874"
+        }
+      },
+      {
+        "name": "Tone=Warning",
+        "size": "Default",
+        "bg": "semantic/bg-warning-surface",
+        "fg": "semantic/text-warning-strong",
+        "iconFg": "semantic/icon-warning",
+        "border": "semantic/border-warning-subtle",
+        "glyphSwaps": {
+          "icon": "e64c0cf5114185fee9676e7b695d947081bbab77"
+        }
+      },
+      {
+        "name": "Tone=Danger",
+        "size": "Default",
+        "bg": "semantic/bg-danger-surface",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-subtle",
+        "glyphSwaps": {
+          "icon": "c01ecb263ad4c0516f712fbf419a84601e2b5411"
+        }
+      },
+      {
+        "name": "Tone=Success",
+        "size": "Default",
+        "bg": "semantic/bg-success-surface",
+        "fg": "semantic/text-success-strong",
+        "iconFg": "semantic/icon-success",
+        "border": "semantic/border-success-subtle",
+        "glyphSwaps": {
+          "icon": "050ceb37d839afb67598ed064579564b158ee708"
+        }
+      }
+    ]
+  }
+}

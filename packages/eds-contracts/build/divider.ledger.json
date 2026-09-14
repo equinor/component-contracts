@@ -1,0 +1,14 @@
+[
+  {
+    "fact": "prop weight (subtle|medium)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Weight variant axis."
+  },
+  {
+    "fact": "semantics: <hr>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (6/10/12) and hug reproduces the height (24/36/44)."
+  },
+  {
+    "fact": "icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "value is the native control inside a field wrapper",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "An <input> cannot contain children, so the root is a wrapper and states read THROUGH the control: :has(:disabled), :has(:user-invalid), :focus-within. The control is reset flat and inherits the wrapper. Figma: a text node stands in."
+  },
+  {
+    "fact": "trailing-icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "prop value (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop leadingIcon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "prop trailingIcon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "placeholder ink",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: ::placeholder styled from its own channel; typed text keeps the value ink. Figma: the canvas component PRESENTS the empty field, so its value text wears the placeholder ink (2026-09-04, was REFUSED — Victor's hand mock bound a low ink on the demo text; the typed-state ink stays CSS-only)."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "state invalid",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :has(:user-invalid) — the platform validates, the wrapper reads through the control; Figma: State variant."
+  },
+  {
+    "fact": "state disabled",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :has(:disabled) — read through the control; Figma: State variant (no interactivity on canvas)."
+  },
+  {
+    "fact": "semantics: <input>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

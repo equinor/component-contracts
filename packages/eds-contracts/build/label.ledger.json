@@ -1,0 +1,20 @@
+[
+  {
+    "fact": "prop text (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "the text sits ON the baseline grid — the box is the cap cell",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "CSS: text-box trim-both ex alphabetic + padding-top round(1cap,4px)−1ex, @supports-gated (fallback: the untrimmed line box). Figma (the La Dupla mechanism): leadingTrim CAP_HEIGHT + FILL width, and a FIGMA-ONLY top pad (capRounded − rawCap per density — a minted value code must NEVER read). An n-line text measures capRounded + (n−1)·lineHeight on BOTH surfaces — exact at every line count, with Inter's own cap metric (1490/2048): the first CARRIED trim — 'Figma cannot trim' was wrong (issue #40)."
+  },
+  {
+    "fact": "semantics: <label>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

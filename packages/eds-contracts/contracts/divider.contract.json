@@ -1,0 +1,38 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.divider",
+  "version": "0.1.0",
+  "description": "Divider — a rule. The thickness is the stroke token and the ink is a border color: a divider IS a border that happens to be its own element. Margins are deliberately absent — inter-element space belongs to the parent (flex/auto-layout gap), not the component.",
+  "notes": "EDS 1.x carried small/medium gutter variants (margins baked into the component); refused, not deferred — margins-as-props predate gap, and the December system puts spacing in the parent. The weight prop maps EDS 1.x's light/medium colors onto the border ladder.",
+  "props": [
+    {
+      "name": "weight",
+      "description": "Visual weight of the rule — the border-color ladder step.",
+      "type": {
+        "enum": ["subtle", "medium"]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Weight"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "thickness": "{spacing.sizing-stroke-thin}",
+      "tokens": {
+        "background-color": "{color.semantic.border-neutral-{weight}}"
+      }
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "hr"
+  }
+}

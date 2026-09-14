@@ -1,0 +1,106 @@
+{
+  "component": "eds.side-bar-sub-item",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-md-squared",
+      "collection": "density",
+      "values": {
+        "compact": 10,
+        "comfortable": 14,
+        "relaxed": 16
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-md-vertical-squared) - var(--eds-half-leading-md))",
+      "description": "eds.side-bar-sub-item: md label in the md-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 32/44/52."
+    },
+    {
+      "name": "recipe/indent-side-bar-sub-item",
+      "collection": "density",
+      "values": {
+        "compact": 32,
+        "comfortable": 40,
+        "relaxed": 46
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-lg-horizontal) + var(--eds-cap-rounded-md) + var(--eds-spacing-icon-md-gap-horizontal))",
+      "description": "eds.side-bar-sub-item: leading indent so the label aligns with eds.side-bar-item's label (parent inset + icon cap cell + icon gap). Resolved because Figma cannot calc; CSS composes it live."
+    }
+  ],
+  "componentSet": {
+    "name": "Side-bar-sub-item",
+    "description": "SideBar sub-item — a submenu row inside the expanded sidebar. md-squared vertically (height 32/44/52), no icon, and the leading inset is DERIVED, not authored: the sub-item's label aligns with its parent item's label, so the indent = the parent's inset + the icon's cap cell + the icon gap (32/40/46 across densities). Same ghost ladder, same accent selected, same thin underline separator as the parent item.\n\nGenerated from eds.side-bar-sub-item v0.2.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default",
+        "Hover",
+        "Active",
+        "Selected"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Submenu item",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "underlineVar": "sizing/stroke-thin",
+      "fixedWidth": 256
+    },
+    "parts": [
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Submenu item"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "recipe/optical-padding-md-squared",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "indentVar": "recipe/indent-side-bar-sub-item",
+        "insetVar": "spacing/inset-md-vertical-squared",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/compressed/md"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-subtle",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-subtle",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-subtle",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-selected",
+        "fg": "semantic/text-accent-strong",
+        "borderBottom": "semantic/border-accent-strong"
+      }
+    ]
+  }
+}

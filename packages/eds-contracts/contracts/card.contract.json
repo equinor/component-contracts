@@ -1,0 +1,51 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.card",
+  "version": "0.2.0",
+  "description": "Card — THE CONTAINER PRIMITIVE, one card, everything else is assembly (EDS 1.0's philosophy, and the team's own architecture: their showcase cards all compose a bare _Card Container). Neutral surface with a subtle outline; interactivity is the MARKUP's fact, not a prop — an <a> or <button> card affords, a <div> card sits still. Plain (uncorrected) inset: no text to compensate for.",
+  "notes": "v0.2.0 (Victor 2026-08-31): tones DELETED (a 'danger card' was a banner in a costume — the banner carries tone messaging; the team's cards are neutral-only too) and elevation DELETED (cards sit, they don't float; the team dropped it as well). The outline is adopted from the team's cards — but bound to border-neutral-subtle, our STATIC tier, not their interactive-namespace token: a resting card is a static surface (the banner rule). INTERACTIVE BY ELEMENT: hover (the team's nice hover shadow via elevation-low, plus a strengthened border) is gated on :is(a, button) — no data-interactive attribute; the markup already says it. Focus ring needs no gate (a div cannot match :focus-visible) and stays REFUSED in Figma as always. Figma: State=Default/Hover only, and a placeholder frame named 'Slot' for teams to fill with anything (the Plugin API cannot create true SLOT nodes yet — upgrade it by hand in the UI when it can, or when Figma allows). Container rule: md-squared 16 inset, and vertical-md 16 gap between slotted children. The rich product cards (the baseline-grid card in Victor's pen) are DEMO-LAYER compositions on this primitive, not variants of it.",
+  "props": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "column",
+        "gap": "{spacing.spacing-vertical-md}",
+        "align": "start"
+      },
+      "inset": {
+        "size": "md",
+        "proportion": "squared"
+      },
+      "radius": "{spacing.spacing-border-radius-rounded}",
+      "tokens": {
+        "background-color": "{color.semantic.bg-surface}",
+        "border-color": "{color.semantic.border-neutral-subtle}"
+      }
+    },
+    "content": {
+      "figmaSlot": true
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "interactiveOnly": true,
+      "tokens": {
+        "root/elevation": "{elevation.low}",
+        "root/border-color": "{color.semantic.border-neutral-medium}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "div",
+    "aria": {
+      "interactive": "an interactive card IS an <a> or <button> with the class — one action per card; do not nest controls inside a button card"
+    }
+  }
+}

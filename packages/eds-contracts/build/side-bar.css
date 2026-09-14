@@ -1,0 +1,65 @@
+/* Generated from contracts/side-bar.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-side-bar {
+      display: flex;
+      flex-direction: column;
+
+      border: none;
+      background-color: var(--_bg);
+
+      /* the inline-end edge: the underline, rotated — an OUTER shadow
+       * (geometry untouched, and full-bleed children cannot paint over
+       * it; Figma's twin is an OUTSIDE stroke — Victor's catch). */
+      box-shadow: var(--eds-sizing-stroke-thick) 0 0 var(--_border-right);
+
+      /* the rail defines its own width — the rare authored dimension;
+       * constant across densities (content width, not rhythm). */
+      inline-size: 256px;
+
+      /* collapsed, the rail is exactly as wide as its squares are tall:
+       * eds.side-bar-item's edge, composed live. */
+      &[data-collapsed='true'] {
+        inline-size: calc(var(--eds-spacing-inset-lg-vertical-squared) * 2 + var(--eds-cap-rounded-md));
+
+        /* collapsed, the rail keeps only its squares: anything that
+         * cannot collapse (sub-items — their submenu floats) leaves.
+         * Figma's twin: seeds that cannot mirror the axis hide. */
+        & > :not(.eds-side-bar-item) {
+          display: none;
+        }
+      }
+
+      /* distribution is the contract's fact: the items area absorbs
+       * the spare space — the last child (the Collapse item) pins
+       * to the block end. */
+      & > :last-child {
+        margin-block-start: auto;
+      }
+
+      /* the Collapse control faces the other way when collapsed:
+       * last_page IS first_page mirrored, so the mirror IS the
+       * swap — one svg in the markup serves both directions (the
+       * pinned last item is the Collapse by the same convention
+       * that pins it; Figma swaps the component instead). */
+      &[data-collapsed='true'] > :last-child .icon {
+        scale: -1 1;
+      }
+    }
+  }
+
+  @layer variants {
+    .eds-side-bar:is([data-collapsed='false'], :not([data-collapsed])) {
+      --_bg: var(--eds-color-bg-surface);
+      --_border-right: var(--eds-color-border-neutral-subtle);
+    }
+
+    .eds-side-bar[data-collapsed='true'] {
+      --_bg: var(--eds-color-bg-surface);
+      --_border-right: var(--eds-color-border-neutral-subtle);
+    }
+  }
+}

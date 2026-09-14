@@ -1,0 +1,565 @@
+{
+  "component": "eds.chip",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-xs-squared-sm-label",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 6,
+        "relaxed": 10
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-xs-vertical-squared) - var(--eds-half-leading-sm))",
+      "description": "eds.chip: sm label in the xs-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 20/24/36."
+    }
+  ],
+  "componentSet": {
+    "name": "Chip",
+    "description": "Chip — a compact selectable. The height is never stated: it is inset × 2 + cap(label), which resolves to 20 / 24 / 36 px across compact / comfortable / relaxed — EDS 1.0’s 24px chip, on the shared rhythm. Two emphasis tiers across all six tones: muted (wash + tone border) and emphasis (filled + on-emphasis ink), per the Component Mocks review (outlined/filled, 2026-08-29).\n\nGenerated from eds.chip v0.5.0 — edit the contract, not this component.",
+    "axes": {
+      "Tone": [
+        "Neutral",
+        "Accent",
+        "Danger",
+        "Warning",
+        "Success",
+        "Info"
+      ],
+      "Emphasis": [
+        "Muted",
+        "Emphasis"
+      ],
+      "State": [
+        "Default",
+        "Hover",
+        "Active",
+        "Selected",
+        "Disabled"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Chip",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Icon",
+        "default": false,
+        "part": "icon"
+      },
+      {
+        "property": "Dismissible",
+        "default": false,
+        "part": "dismiss"
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "radiusVar": "spacing/border-radius-pill",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swap": {
+          "property": "↳ Icon",
+          "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Chip"
+      },
+      {
+        "kind": "glyph",
+        "name": "dismiss",
+        "swap": {
+          "property": "↳ Dismiss Icon",
+          "componentKey": "3bd72d0a163f1d70993eb1b648540442f161567e"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-sm",
+            "glyphVar": "sizing/icon-sm"
+          },
+          "dismiss": {
+            "containerVar": "recipe/cap-rounded-sm",
+            "glyphVar": "sizing/icon-sm"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-xs-squared-sm-label",
+        "paddingInline": "spacing/inset-xs-horizontal",
+        "insetVar": "spacing/inset-xs-vertical-squared",
+        "gap": "spacing/icon-sm-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/sm",
+          "lineHeight": "typography/line-height/compressed/sm"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Tone=Neutral, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-muted-default",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-medium"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-muted-hover",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-medium"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-muted-active",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-medium"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-muted-selected",
+        "fg": "semantic/text-neutral-strong",
+        "iconFg": "semantic/icon-neutral",
+        "border": "semantic/border-neutral-medium"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-default",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-hover",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-active",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-emphasis-selected",
+        "fg": "semantic/text-neutral-strong-on-emphasis",
+        "iconFg": "semantic/icon-neutral-on-emphasis"
+      },
+      {
+        "name": "Tone=Neutral, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-muted-default",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-medium"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-muted-hover",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-medium"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-muted-active",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-medium"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-muted-selected",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "border": "semantic/border-accent-medium"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-default",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-hover",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-active",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-emphasis-selected",
+        "fg": "semantic/text-accent-strong-on-emphasis",
+        "iconFg": "semantic/icon-accent-on-emphasis"
+      },
+      {
+        "name": "Tone=Accent, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-muted-default",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-medium"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-muted-hover",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-medium"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-muted-active",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-medium"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-muted-selected",
+        "fg": "semantic/text-danger-strong",
+        "iconFg": "semantic/icon-danger",
+        "border": "semantic/border-danger-medium"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-default",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-hover",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-active",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-danger-fill-emphasis-selected",
+        "fg": "semantic/text-danger-strong-on-emphasis",
+        "iconFg": "semantic/icon-danger-on-emphasis"
+      },
+      {
+        "name": "Tone=Danger, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-muted-default",
+        "fg": "semantic/text-warning-strong",
+        "iconFg": "semantic/icon-warning",
+        "border": "semantic/border-warning-medium"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-muted-hover",
+        "fg": "semantic/text-warning-strong",
+        "iconFg": "semantic/icon-warning",
+        "border": "semantic/border-warning-medium"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-muted-active",
+        "fg": "semantic/text-warning-strong",
+        "iconFg": "semantic/icon-warning",
+        "border": "semantic/border-warning-medium"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-muted-selected",
+        "fg": "semantic/text-warning-strong",
+        "iconFg": "semantic/icon-warning",
+        "border": "semantic/border-warning-medium"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-emphasis-default",
+        "fg": "semantic/text-warning-strong-on-emphasis",
+        "iconFg": "semantic/icon-warning-on-emphasis"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-emphasis-hover",
+        "fg": "semantic/text-warning-strong-on-emphasis",
+        "iconFg": "semantic/icon-warning-on-emphasis"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-emphasis-active",
+        "fg": "semantic/text-warning-strong-on-emphasis",
+        "iconFg": "semantic/icon-warning-on-emphasis"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-warning-fill-emphasis-selected",
+        "fg": "semantic/text-warning-strong-on-emphasis",
+        "iconFg": "semantic/icon-warning-on-emphasis"
+      },
+      {
+        "name": "Tone=Warning, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-muted-default",
+        "fg": "semantic/text-success-strong",
+        "iconFg": "semantic/icon-success",
+        "border": "semantic/border-success-medium"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-muted-hover",
+        "fg": "semantic/text-success-strong",
+        "iconFg": "semantic/icon-success",
+        "border": "semantic/border-success-medium"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-muted-active",
+        "fg": "semantic/text-success-strong",
+        "iconFg": "semantic/icon-success",
+        "border": "semantic/border-success-medium"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-muted-selected",
+        "fg": "semantic/text-success-strong",
+        "iconFg": "semantic/icon-success",
+        "border": "semantic/border-success-medium"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-emphasis-default",
+        "fg": "semantic/text-success-strong-on-emphasis",
+        "iconFg": "semantic/icon-success-on-emphasis"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-emphasis-hover",
+        "fg": "semantic/text-success-strong-on-emphasis",
+        "iconFg": "semantic/icon-success-on-emphasis"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-emphasis-active",
+        "fg": "semantic/text-success-strong-on-emphasis",
+        "iconFg": "semantic/icon-success-on-emphasis"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-success-fill-emphasis-selected",
+        "fg": "semantic/text-success-strong-on-emphasis",
+        "iconFg": "semantic/icon-success-on-emphasis"
+      },
+      {
+        "name": "Tone=Success, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Muted, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-muted-default",
+        "fg": "semantic/text-info-strong",
+        "iconFg": "semantic/icon-info",
+        "border": "semantic/border-info-medium"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Muted, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-muted-hover",
+        "fg": "semantic/text-info-strong",
+        "iconFg": "semantic/icon-info",
+        "border": "semantic/border-info-medium"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Muted, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-muted-active",
+        "fg": "semantic/text-info-strong",
+        "iconFg": "semantic/icon-info",
+        "border": "semantic/border-info-medium"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Muted, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-muted-selected",
+        "fg": "semantic/text-info-strong",
+        "iconFg": "semantic/icon-info",
+        "border": "semantic/border-info-medium"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Muted, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled",
+        "border": "concept/border-disabled"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Emphasis, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-emphasis-default",
+        "fg": "semantic/text-info-strong-on-emphasis",
+        "iconFg": "semantic/icon-info-on-emphasis"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Emphasis, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-emphasis-hover",
+        "fg": "semantic/text-info-strong-on-emphasis",
+        "iconFg": "semantic/icon-info-on-emphasis"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Emphasis, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-emphasis-active",
+        "fg": "semantic/text-info-strong-on-emphasis",
+        "iconFg": "semantic/icon-info-on-emphasis"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Emphasis, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-info-fill-emphasis-selected",
+        "fg": "semantic/text-info-strong-on-emphasis",
+        "iconFg": "semantic/icon-info-on-emphasis"
+      },
+      {
+        "name": "Tone=Info, Emphasis=Emphasis, State=Disabled",
+        "size": "Default",
+        "bg": "concept/bg-disabled",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      }
+    ]
+  }
+}

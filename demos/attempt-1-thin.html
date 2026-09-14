@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  GUESSED (everything below was NOT stated in /tmp/eds-attempt-1/DESIGN.md and
+  had to be invented to ship a working button; kept honest and complete):
+
+  1. tone(3) axis values = neutral | accent | danger. The doc gives the count
+     (tone×3) and a color-family table (`bg-*-fill-emphasis-*`, `icon-*`, etc.)
+     but never names the 3 values. Inferred from the family naming convention
+     and the fact "danger" and "primary/accent" are the only two colored
+     semantics the doc actually ships hex for.
+  2. size(2) axis = default | icon-only. Never named. The doc *does* describe
+     an icon-only, round "ghost-icon" variant with "padding = inset when there
+     is no text" — I generalised that same icon-only geometry into a second
+     "size" step usable on primary/secondary/ghost too (square, rounded-md,
+     not pill — pill stays earned only by ghost-icon per the Shapes section).
+  3. Font size per density: compact 0.8125rem, comfortable 0.875rem (given),
+     relaxed 0.9375rem. The doc says sizes "come from a modular scale per
+     density" but never gives the scale or the compact/relaxed values.
+  4. Inter's cap-height ratio (~0.727 of font-size) used to reverse-engineer
+     the --_cap constants below from the doc's own height table (24/36/44px)
+     and the "height = inset×2 + cap" formula. Resulting constants: compact
+     cap=8px, comfortable cap=12px, relaxed cap=12px (comfortable and relaxed
+     land on the same cap because relaxed only grows the inset in this
+     reconstruction — the doc never confirms this).
+  5. Horizontal inset = one spacing step above the vertical inset per density
+     (xs→sm, sm→md, md→lg). Only the vertical inset is implied by the height
+     formula; the doc gives no horizontal padding rule at all.
+  6. Neutral "primary" (filled) button colors reuse colors.inverse/on-inverse
+     (#1d1d1d / #ffffff) as the neutral emphasis-fill. No neutral-fill-emphasis
+     hex exists in the doc (only tooltip cites inverse/on-inverse).
+  7. Text color on the danger-filled (primary + danger) button = on-primary
+     (#ffffff). No dedicated "on-danger" token is given.
+  8. Neutral "secondary" (outlined) border = text color at ~24% mix with
+     transparent. No neutral border token is given.
+  9. Ghost-ladder alpha steps invented as 0% / 4% / 8% / 12%; the doc names
+     the STEPS ("hover = step 3, active = step 4") but not the opacities.
+  10. Icon ink rendered at 75% opacity of the button's own text color as a
+      cheap stand-in for the doc's "icon ink is the SUBTLE step, APCA Lc60
+      not Lc90" — no separate subtle hex is given to compute a real Lc60 pair.
+  11. Disabled treatment for secondary / ghost / ghost-icon: the doc explicitly
+      says "the gated tokens change nothing" for these three, so I added a
+      uniform opacity(.5) as the only non-token affordance left to signal
+      disabled — an addition beyond what the doc specifies, needed so the
+      state remains perceivable at all.
+  12. Disabled fill/text for the primary (filled) variant = colors.disabled /
+      colors.text-subtle. No dedicated on-disabled text token is given.
+  13. Focus ring = 2px surface-colored gap + 2px colors.focus ring via
+      box-shadow. The doc says focus "replaces the border" and is the
+      platform's :focus-visible, but gives no ring width/offset.
+  14. The text-box-trim / optical-padding recipe is written in the doc only
+      for the tooltip message (codepen reference). Applied here by extension
+      to button labels for baseline alignment, gated behind @supports.
+  15. eds.button's state list in the doc reads "hover, focus, active, disabled,
+      disabled" (disabled twice). Treated as a documentation artifact and
+      collapsed to one disabled state — no second meaning could be derived.
+  16. The icon glyph itself (a generic plus, used for all icon-only buttons)
+      is invented; the doc names an icon-ink color family but ships no icon set.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDS — Button</title>
+<style>
+  /* ============ Tokens (frontmatter of DESIGN.md) ============ */
+  :root {
+    --eds-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --eds-color-primary: #206f77;
+    --eds-color-on-primary: #ffffff;
+    --eds-color-canvas: #f5f5f5;
+    --eds-color-surface: #ffffff;
+    --eds-color-floating: #ffffff;
+    --eds-color-inverse: #1d1d1d;
+    --eds-color-on-inverse: #ffffff;
+    --eds-color-text: #1d1d1d;
+    --eds-color-text-subtle: #585858;
+    --eds-color-danger: #bb002b;
+    --eds-color-focus: #6fb6e8;
+    --eds-color-disabled: #e1e1e1;
+
+    --eds-radius-none: 0px;
+    --eds-radius-md: 4px;
+    --eds-radius-pill: 1000px;
+
+    --eds-space-xs: 8px;
+    --eds-space-sm: 12px;
+    --eds-space-md: 16px;
+    --eds-space-lg: 24px;
+
+    /* GUESSED (#9): ghost-ladder alpha steps; doc only names step3/step4 */
+    --_ghost-hover: 8%;
+    --_ghost-active: 12%;
+
+    /* GUESSED: state-mix direction for filled (primary) hover/active */
+    --_hover-mix: 88%;
+    --_active-mix: 78%;
+    --_state-mix: black;
+  }
+
+  [data-color-scheme="dark"] {
+    --eds-color-primary: #8cd2da;
+    --eds-color-on-primary: #030303;
+    --eds-color-canvas: #060c13;
+    --eds-color-surface: #152332;
+    --eds-color-floating: #4b5d71;
+    --eds-color-inverse: #f9fcff;
+    --eds-color-on-inverse: #030303;
+    --eds-color-text: #f9fcff;
+    --eds-color-text-subtle: #d6e3ee;
+    --eds-color-danger: #ffaaa8;
+    --eds-color-focus: #2d8bc5;
+    --eds-color-disabled: #4b5d71;
+    --_state-mix: white; /* dark: hover/active lighten, not darken */
+  }
+
+  /* ============ Density (GUESSED #3/#4/#5 constants; formula per doc §Non-negotiables #1) ============ */
+  [data-density="comfortable"] {
+    --_inset-v: var(--eds-space-sm);
+    --_inset-h: var(--eds-space-md);
+    --_cap: 12px;
+    --_font-size: 0.875rem;
+  }
+  [data-density="compact"] {
+    --_inset-v: var(--eds-space-xs);
+    --_inset-h: var(--eds-space-sm);
+    --_cap: 8px;
+    --_font-size: 0.8125rem;
+  }
+  [data-density="relaxed"] {
+    --_inset-v: var(--eds-space-md);
+    --_inset-h: var(--eds-space-lg);
+    --_cap: 12px;
+    --_font-size: 0.9375rem;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--eds-color-canvas);
+    color: var(--eds-color-text);
+    font-family: var(--eds-font-family);
+    padding: 24px;
+    line-height: 1.429; /* typography.body lineHeight */
+  }
+  h1 { font-size: 1.25rem; margin: 0 0 4px; }
+  h2 { font-size: 1rem; margin: 32px 0 4px; }
+  p.lede { color: var(--eds-color-text-subtle); font-size: 0.875rem; margin: 0 0 16px; max-width: 62ch; }
+  p.note { color: var(--eds-color-text-subtle); font-size: 0.75rem; margin: 8px 0 0; max-width: 72ch; }
+  code { background: color-mix(in srgb, var(--eds-color-text) 8%, transparent); padding: 0 4px; border-radius: 4px; font-size: 0.85em; }
+
+  .panel {
+    background: var(--eds-color-surface);
+    border-radius: var(--eds-radius-md);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  header.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+  }
+  .control-group { display: flex; flex-direction: column; gap: 6px; }
+  .control-group span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--eds-color-text-subtle); }
+  .toggle-set { display: inline-flex; gap: 4px; }
+  .toggle-set button {
+    font-family: var(--eds-font-family);
+    font-size: 0.8125rem;
+    padding: 6px 10px;
+    border-radius: var(--eds-radius-md);
+    border: 1px solid color-mix(in srgb, var(--eds-color-text) 24%, transparent);
+    background: transparent;
+    color: var(--eds-color-text);
+    cursor: pointer;
+  }
+  .toggle-set button[aria-pressed="true"] {
+    background: var(--eds-color-primary);
+    color: var(--eds-color-on-primary);
+    border-color: var(--eds-color-primary);
+  }
+
+  /* ============ eds.button — the actual component under test ============ */
+  .eds-button {
+    appearance: none;
+    font-family: var(--eds-font-family);
+    font-size: var(--_font-size);
+    line-height: 1.1; /* compressed line-height per doc §Typography */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--eds-space-xs);
+    border: 1px solid var(--_border, transparent);
+    border-radius: var(--eds-radius-md);
+    padding-block: var(--_inset-v);
+    padding-inline: var(--_inset-h);
+    /* Non-negotiable #1: never author a height — it emerges. */
+    min-height: calc(var(--_inset-v) * 2 + var(--_cap));
+    background-color: var(--_bg, transparent);
+    color: var(--_fg, var(--eds-color-text));
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background-color .12s ease, border-color .12s ease, color .12s ease, box-shadow .12s ease;
+  }
+  /* GUESSED (#14): text-box-trim recipe, extended here from the tooltip-only
+     citation in DESIGN.md to button labels, for baseline alignment. */
+  @supports (text-box-trim: trim-both) {
+    .eds-button {
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+  }
+
+  .eds-button svg {
+    width: 1em;
+    height: 1em;
+    flex: none;
+    opacity: .75; /* GUESSED #10: stand-in for the "subtle" icon-ink step */
+  }
+
+  /* icon-only geometry: "padding = inset when there is no text" (doc, Shapes) */
+  .eds-button[data-size="icon"],
+  .eds-button[data-variant="ghost-icon"] {
+    padding-inline: var(--_inset-v);
+    aspect-ratio: 1 / 1;
+    gap: 0;
+  }
+  .eds-button[data-variant="ghost-icon"] { border-radius: var(--eds-radius-pill); } /* pill is earned here only */
+
+  /* ---- variant=primary (filled / emphasis tier) ---- */
+  [data-variant="primary"] { --_fg: var(--eds-color-on-primary); --_border: transparent; }
+  [data-variant="primary"][data-tone="neutral"] { --_bg: var(--eds-color-inverse); --_fg: var(--eds-color-on-inverse); }
+  [data-variant="primary"][data-tone="accent"]  { --_bg: var(--eds-color-primary); }
+  [data-variant="primary"][data-tone="danger"]  { --_bg: var(--eds-color-danger); }
+
+  [data-variant="primary"][data-tone="neutral"]:not(:disabled):hover,
+  [data-variant="primary"][data-tone="neutral"].demo-hover { --_bg: color-mix(in srgb, var(--eds-color-inverse) var(--_hover-mix), var(--_state-mix)); }
+  [data-variant="primary"][data-tone="neutral"]:not(:disabled):active,
+  [data-variant="primary"][data-tone="neutral"].demo-active { --_bg: color-mix(in srgb, var(--eds-color-inverse) var(--_active-mix), var(--_state-mix)); }
+
+  [data-variant="primary"][data-tone="accent"]:not(:disabled):hover,
+  [data-variant="primary"][data-tone="accent"].demo-hover { --_bg: color-mix(in srgb, var(--eds-color-primary) var(--_hover-mix), var(--_state-mix)); }
+  [data-variant="primary"][data-tone="accent"]:not(:disabled):active,
+  [data-variant="primary"][data-tone="accent"].demo-active { --_bg: color-mix(in srgb, var(--eds-color-primary) var(--_active-mix), var(--_state-mix)); }
+
+  [data-variant="primary"][data-tone="danger"]:not(:disabled):hover,
+  [data-variant="primary"][data-tone="danger"].demo-hover { --_bg: color-mix(in srgb, var(--eds-color-danger) var(--_hover-mix), var(--_state-mix)); }
+  [data-variant="primary"][data-tone="danger"]:not(:disabled):active,
+  [data-variant="primary"][data-tone="danger"].demo-active { --_bg: color-mix(in srgb, var(--eds-color-danger) var(--_active-mix), var(--_state-mix)); }
+
+  /* ---- variant=secondary (outlined) & variant=ghost (bare) ---- */
+  [data-variant="secondary"], [data-variant="ghost"] { --_bg: transparent; }
+  [data-variant="secondary"][data-tone="neutral"], [data-variant="ghost"][data-tone="neutral"] { --_fg: var(--eds-color-text); --_ink: var(--eds-color-text); }
+  [data-variant="secondary"][data-tone="accent"],  [data-variant="ghost"][data-tone="accent"]  { --_fg: var(--eds-color-primary); --_ink: var(--eds-color-primary); }
+  [data-variant="secondary"][data-tone="danger"],  [data-variant="ghost"][data-tone="danger"]  { --_fg: var(--eds-color-danger); --_ink: var(--eds-color-danger); }
+
+  [data-variant="secondary"][data-tone="neutral"] { --_border: color-mix(in srgb, var(--eds-color-text) 24%, transparent); }
+  [data-variant="secondary"][data-tone="accent"]  { --_border: var(--eds-color-primary); }
+  [data-variant="secondary"][data-tone="danger"]  { --_border: var(--eds-color-danger); }
+  [data-variant="ghost"] { --_border: transparent; }
+
+  [data-variant="secondary"]:not(:disabled):hover, [data-variant="secondary"].demo-hover,
+  [data-variant="ghost"]:not(:disabled):hover,     [data-variant="ghost"].demo-hover {
+    --_bg: color-mix(in srgb, var(--_ink) var(--_ghost-hover), transparent);
+  }
+  [data-variant="secondary"]:not(:disabled):active, [data-variant="secondary"].demo-active,
+  [data-variant="ghost"]:not(:disabled):active,     [data-variant="ghost"].demo-active {
+    --_bg: color-mix(in srgb, var(--_ink) var(--_ghost-active), transparent);
+  }
+
+  /* ---- variant=ghost-icon (icon-only, ghost, earned pill) ---- */
+  [data-variant="ghost-icon"] { --_bg: transparent; --_border: transparent; }
+  [data-variant="ghost-icon"][data-tone="neutral"] { --_fg: var(--eds-color-text); --_ink: var(--eds-color-text); }
+  [data-variant="ghost-icon"][data-tone="accent"]  { --_fg: var(--eds-color-primary); --_ink: var(--eds-color-primary); }
+  [data-variant="ghost-icon"][data-tone="danger"]  { --_fg: var(--eds-color-danger); --_ink: var(--eds-color-danger); }
+  [data-variant="ghost-icon"]:not(:disabled):hover, [data-variant="ghost-icon"].demo-hover { --_bg: color-mix(in srgb, var(--_ink) var(--_ghost-hover), transparent); }
+  [data-variant="ghost-icon"]:not(:disabled):active, [data-variant="ghost-icon"].demo-active { --_bg: color-mix(in srgb, var(--_ink) var(--_ghost-active), transparent); }
+
+  /* ---- focus: the platform's, not a designable state (doc, disposition ledger) ---- */
+  .eds-button:focus-visible,
+  .eds-button.demo-focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--eds-color-surface), 0 0 0 4px var(--eds-color-focus);
+  }
+
+  /* ---- disabled: "states change only what they declare" ----
+     Filled/primary has an explicit *-disabled binding (colors.disabled).
+     Secondary/ghost/ghost-icon do NOT (doc, disposition ledger, three times) —
+     opacity is the only affordance left (GUESSED #11). */
+  .eds-button:disabled { cursor: not-allowed; pointer-events: none; }
+  .eds-button[data-variant="primary"]:disabled {
+    background-color: var(--eds-color-disabled);
+    color: var(--eds-color-text-subtle);
+    border-color: transparent;
+  }
+  .eds-button:disabled:not([data-variant="primary"]) { opacity: .5; }
+
+  /* ============ Demo scaffolding (not part of the component) ============ */
+  .state-grid {
+    display: grid;
+    grid-template-columns: 84px repeat(5, 1fr);
+    align-items: center;
+    gap: 10px 8px;
+    margin-bottom: 20px;
+  }
+  .state-grid .col-head {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--eds-color-text-subtle);
+    text-align: center;
+  }
+  .state-grid .row-label {
+    font-size: 0.75rem;
+    color: var(--eds-color-text-subtle);
+  }
+  .state-grid .cell { display: flex; justify-content: center; }
+  .variant-title { font-size: 0.8125rem; font-weight: 600; margin: 0 0 10px; }
+  .variant-title code { font-weight: 400; }
+
+  .icon-grids { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+</style>
+</head>
+<body data-density="comfortable" data-color-scheme="light" id="stage">
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 1, thin-doc variant.</strong> The same request with a thin DESIGN.md instead of the verbose one: <strong>16 confessed guesses</strong>. Thickness buys values, not understanding.</span></aside>
+
+
+<h1>EDS — Button</h1>
+<p class="lede">
+  eds.button v0.8.0 — tone(3) × variant(4) × size(2), states: hover, focus,
+  active, disabled. Rendered from <code>/tmp/eds-attempt-1/DESIGN.md</code>
+  alone; see the GUESSED list in this file's head comment for everything the
+  document didn't specify.
+</p>
+
+<header class="controls panel">
+  <div class="control-group">
+    <span>Color scheme</span>
+    <div class="toggle-set" id="scheme-toggle">
+      <button type="button" data-set-scheme="light">Light</button>
+      <button type="button" data-set-scheme="dark">Dark</button>
+    </div>
+  </div>
+  <div class="control-group">
+    <span>Density</span>
+    <div class="toggle-set" id="density-toggle">
+      <button type="button" data-set-density="compact">Compact</button>
+      <button type="button" data-set-density="comfortable">Comfortable</button>
+      <button type="button" data-set-density="relaxed">Relaxed</button>
+    </div>
+  </div>
+</header>
+
+<h2>Text buttons</h2>
+<p class="lede">Rest / Hover / Active / Focus / Disabled, per tone, per variant. "Focus" and "Hover/Active" columns use forced classes so every state is visible at once; real <code>:hover</code>/<code>:active</code>/<code>:focus-visible</code> also work live. "Disabled" uses the real <code>disabled</code> attribute.</p>
+
+<div class="panel">
+  <p class="variant-title">variant=<code>primary</code> — filled / emphasis tier</p>
+  <div class="state-grid">
+    <div></div>
+    <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Disabled</div>
+
+    <div class="row-label">Neutral</div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="neutral" disabled>Label</button></div>
+
+    <div class="row-label">Accent</div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="accent" disabled>Label</button></div>
+
+    <div class="row-label">Danger</div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="primary" data-tone="danger" disabled>Label</button></div>
+  </div>
+
+  <p class="variant-title">variant=<code>secondary</code> — outlined</p>
+  <div class="state-grid">
+    <div></div>
+    <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Disabled</div>
+
+    <div class="row-label">Neutral</div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="neutral" disabled>Label</button></div>
+
+    <div class="row-label">Accent&nbsp;*</div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="accent" disabled>Label</button></div>
+
+    <div class="row-label">Danger</div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="danger" disabled>Label</button></div>
+  </div>
+
+  <p class="variant-title">variant=<code>ghost</code> — bare</p>
+  <div class="state-grid">
+    <div></div>
+    <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Disabled</div>
+
+    <div class="row-label">Neutral</div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="neutral">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="neutral" disabled>Label</button></div>
+
+    <div class="row-label">Accent&nbsp;*</div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="accent">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="accent" disabled>Label</button></div>
+
+    <div class="row-label">Danger</div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="danger">Label</button></div>
+    <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="danger" disabled>Label</button></div>
+  </div>
+  <p class="note">* Accent-toned secondary/ghost buttons are shown only for
+  axis completeness. Per the doc's non-negotiable #5, "accent is budgeted:
+  primary CTA, checked/selected state, focus ring — nothing else" — so this
+  combination is not expected to appear in real product usage.</p>
+</div>
+
+<h2>Icon-only buttons</h2>
+<p class="lede">size=<code>icon</code> (square, rounded-md) on primary/secondary/ghost, plus the dedicated <code>ghost-icon</code> variant (round — "pill is earned … where the circle falls out of the geometry").</p>
+
+<div class="panel icon-grids">
+  <div>
+    <p class="variant-title">variant=<code>primary</code> size=<code>icon</code></p>
+    <div class="state-grid" style="grid-template-columns:60px repeat(5,1fr)">
+      <div></div>
+      <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Dis.</div>
+      <div class="row-label">Neutral</div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="neutral" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Accent</div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="accent" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Danger</div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="primary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="primary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="primary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="primary" data-tone="danger" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+    </div>
+  </div>
+
+  <div>
+    <p class="variant-title">variant=<code>secondary</code> size=<code>icon</code></p>
+    <div class="state-grid" style="grid-template-columns:60px repeat(5,1fr)">
+      <div></div>
+      <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Dis.</div>
+      <div class="row-label">Neutral</div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="neutral" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Accent&nbsp;*</div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="accent" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Danger</div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="secondary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="secondary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="secondary" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="secondary" data-tone="danger" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+    </div>
+  </div>
+
+  <div>
+    <p class="variant-title">variant=<code>ghost</code> size=<code>icon</code></p>
+    <div class="state-grid" style="grid-template-columns:60px repeat(5,1fr)">
+      <div></div>
+      <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Dis.</div>
+      <div class="row-label">Neutral</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="neutral" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="neutral" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Accent&nbsp;*</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="accent" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="accent" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Danger</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost" data-tone="danger" data-size="icon" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost" data-tone="danger" data-size="icon" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+    </div>
+  </div>
+
+  <div>
+    <p class="variant-title">variant=<code>ghost-icon</code> — round, no size attr needed</p>
+    <div class="state-grid" style="grid-template-columns:60px repeat(5,1fr)">
+      <div></div>
+      <div class="col-head">Rest</div><div class="col-head">Hover</div><div class="col-head">Active</div><div class="col-head">Focus</div><div class="col-head">Dis.</div>
+      <div class="row-label">Neutral</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="neutral" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost-icon" data-tone="neutral" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost-icon" data-tone="neutral" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost-icon" data-tone="neutral" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="neutral" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Accent&nbsp;*</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="accent" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost-icon" data-tone="accent" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost-icon" data-tone="accent" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost-icon" data-tone="accent" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="accent" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+
+      <div class="row-label">Danger</div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="danger" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-hover" data-variant="ghost-icon" data-tone="danger" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-active" data-variant="ghost-icon" data-tone="danger" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button demo-focus" data-variant="ghost-icon" data-tone="danger" aria-label="Action"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+      <div class="cell"><button class="eds-button" data-variant="ghost-icon" data-tone="danger" aria-label="Action" disabled><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+    </div>
+  </div>
+</div>
+
+<p class="note">
+  Disabled ledger (verbatim from the doc): the gated tokens change nothing
+  for variant=secondary, variant=ghost and variant=ghost-icon — "the contract
+  refuses to invent a binding it does not have." Only the filled/primary
+  variant has a real disabled color swap; the others are only marked
+  non-interactive + dimmed (guess #11 above), same as their resting colors.
+</p>
+
+<script>
+  var stage = document.getElementById('stage');
+
+  function sync() {
+    document.querySelectorAll('#scheme-toggle button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.setScheme === stage.getAttribute('data-color-scheme')));
+    });
+    document.querySelectorAll('#density-toggle button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.setDensity === stage.getAttribute('data-density')));
+    });
+  }
+
+  document.querySelectorAll('#scheme-toggle button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      stage.setAttribute('data-color-scheme', b.dataset.setScheme);
+      sync();
+    });
+  });
+  document.querySelectorAll('#density-toggle button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      stage.setAttribute('data-density', b.dataset.setDensity);
+      sync();
+    });
+  });
+
+  sync();
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "component": "eds.label",
+  "requiredVariables": [
+    {
+      "name": "figma-only/baseline-pad-sm",
+      "collection": "density",
+      "values": {
+        "compact": 0,
+        "comfortable": -1,
+        "relaxed": 2
+      },
+      "codeSyntax": "FIGMA-ONLY — never read in code. CSS trims to ex and pads round(1cap, 4px) − 1ex live.",
+      "description": "eds.label: a leadingTrim text occupies Figma's pixel-rounded cap; this pad (cap-rounded-to-4px − cap-rounded-to-1px) lands it in the grid cell. FIGMA-ONLY: CSS reaches the same box from the ex line (round(1cap,4px) − 1ex), so this value must never be read in code."
+    }
+  ],
+  "componentSet": {
+    "name": "Label",
+    "description": "Label — the form caption, sitting ON the baseline grid. Typography only: no box, no inset, no background — the occupied box is exactly the cap cell (--eds-cap-rounded, 8/8/12 for sm across densities), baseline at the box bottom. Proves the smallest possible contract: one text part, one color, one grid fact.\n\nGenerated from eds.label v0.2.1 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Text",
+        "default": "Label",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "fixedWidth": 256,
+      "baselinePad": "figma-only/baseline-pad-sm"
+    },
+    "parts": [
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Label",
+        "fill": true,
+        "trim": true
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/sm",
+          "lineHeight": "typography/line-height/compressed/sm"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "",
+        "size": "Default",
+        "fg": "semantic/text-neutral-subtle"
+      }
+    ]
+  }
+}

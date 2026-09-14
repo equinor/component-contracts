@@ -1,0 +1,126 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.menu-item",
+  "version": "0.3.1",
+  "description": "Menu item — a ghost row inside a floating menu. Rests transparent, rides the neutral ghost ladder (hover step 3, active step 4), and SELECTED flips hue: the accent ghost-selected rung (accent step 4) + accent text — same lightness rung as active, different hue, so a hovered neighbour and the chosen item can never be confused (December's selected ≡ hover leak, closed by the selected rung, 2026-08-30). Height is never stated: inset × 2 + cap(label).",
+  "notes": "Selected styles :is([aria-selected='true'], [aria-checked='true']): aria-selected for option-in-listbox use, aria-checked for menuitemradio/menuitemcheckbox (aria-selected is INVALID on plain menuitem, axe aria-allowed-attr, caught by the 2026-09-08 accessibility sweep; v0.3.1 declares both so the emitter honours the platform's vocabulary). The styling hook stays an ARIA attribute, never a class. No selected-hover: a chosen item is state, not affordance. v0.2.0: Label ink nudged strong → SUBTLE (2026-09-05, Victor — 'will look better'): menu labels are SCANNED (md compressed), floor Lc 60; measured live via apca-w3: subtle at rest = 84.7 light / −86.1 dark on surface, −69.1 on the dark floating panel (the tightest real case, above the floor); hover 67/−69. Selected keeps text-accent-strong — the 60.4 corner never occurs. Accepted trade: label and icon now share step 12, flattening the strong-text/subtle-icon hierarchy for nav rows — quieter chrome, deliberate. v0.3.0 (2026-09-05, Victor): radius REMOVED — menu items are square, spanning the panel's full width edge to edge; the MENU owns the rounding (its corners + the bleed guard keep item fills clear of them). A rounded item inside a rounded panel was double-dressing.",
+  "props": [
+    {
+      "name": "label",
+      "description": "The item's text.",
+      "type": {
+        "text": true
+      },
+      "default": "Menu item",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "description": "Optional leading icon.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-icon-md-gap-horizontal}",
+        "align": "center"
+      },
+      "inset": {
+        "size": "sm",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-neutral-fill-ghost-default}"
+      }
+    },
+    "icon": {
+      "when": "icon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "property": "↳ Icon",
+        "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    },
+    "label": {
+      "typography": {
+        "label": "md",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-subtle}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-hover}"
+      }
+    },
+    {
+      "name": "active",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-active}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-accent-fill-ghost-selected}",
+        "label/color": "{color.semantic.text-accent-strong}",
+        "icon/color": "{color.semantic.icon-accent}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "label/color": "{color.concept.text-disabled}",
+        "icon/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "button",
+    "role": "menuitem",
+    "aria": {
+      "aria-selected": "reflects the chosen item when the role supports selection (option in a listbox)",
+      "aria-checked": "reflects the chosen item as menuitemradio/menuitemcheckbox — aria-selected is invalid on plain menuitem, so persistent choice inside role=menu uses the radio/checkbox roles"
+    }
+  }
+}

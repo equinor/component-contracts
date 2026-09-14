@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Well Insight — an LOB shell from the contracts</title>
+    <link
+      rel="stylesheet"
+      href="../../eds-tokens/build/css/index.css"
+    />
+    <link rel="stylesheet" href="../build/button.css" />
+    <link rel="stylesheet" href="../build/card.css" />
+    <link rel="stylesheet" href="../build/divider.css" />
+    <link rel="stylesheet" href="../build/label.css" />
+    <link rel="stylesheet" href="../build/input.css" />
+    <link rel="stylesheet" href="../build/text-field.css" />
+    <link rel="stylesheet" href="../build/banner.css" />
+    <link rel="stylesheet" href="../build/menu.css" />
+    <link rel="stylesheet" href="../build/menu-item.css" />
+    <link rel="stylesheet" href="../build/top-bar.css" />
+    <link rel="stylesheet" href="../build/side-bar.css" />
+    <link rel="stylesheet" href="../build/side-bar-item.css" />
+    <link rel="stylesheet" href="../build/side-bar-sub-item.css" />
+    <link rel="stylesheet" href="../build/table.css" />
+    <style>
+      /* demo chrome only — the app SHELL is the contracts' job; this file
+       * only arranges the three regions and writes the page content. */
+      body {
+        display: grid;
+
+        /* minmax(0, 1fr), not 1fr: a fr track refuses to shrink below its
+         * content's min-content size (the code pane's <pre> is greedy), and
+         * the shell must never outgrow the viewport */
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-columns: auto minmax(0, 1fr);
+        margin: 0;
+        block-size: 100dvh;
+        overflow: clip;
+        font-family: var(--eds-typography-ui-body-font-family);
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-neutral-strong);
+      }
+      body > .eds-top-bar {
+        grid-column: 1 / -1;
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 2;
+
+        /* app-shell pairing: the symbol's ink column aligns with the rail's
+         * icon ink column (the side-bar item is lg-squared, so the strip's
+         * start inset follows lg; both glyphs overflow their cap cells by
+         * the same margin, so the alignment holds at every density) */
+        padding-inline-start: var(--eds-spacing-inset-lg-horizontal);
+      }
+      body > .eds-side-bar {
+        grid-row: 2;
+      }
+      main {
+        grid-row: 2;
+        overflow: auto;
+        min-inline-size: 0;
+
+        /* the page tier of the spacing ladder: inset xl */
+        padding: var(--eds-spacing-inset-xl-vertical-squared)
+          var(--eds-spacing-inset-xl-horizontal);
+      }
+      /* page rhythm: sections gap like a page (xl), clusters inside gap md */
+      main > * + * {
+        margin-block-start: var(--eds-spacing-vertical-lg);
+      }
+      h1 {
+        margin: 0;
+        font: var(--eds-typography-header-3xl-font-weight-bolder)
+          var(--eds-typography-header-3xl-font-size) / 1.2
+          var(--eds-typography-header-font-family);
+      }
+      .cards {
+        display: flex;
+        gap: var(--eds-spacing-horizontal-md);
+        flex-wrap: wrap;
+      }
+      .cards .eds-card {
+        flex: 1 1 12rem;
+        text-decoration: none;
+        color: inherit;
+      }
+      .cards .kpi {
+        font: var(--eds-typography-header-4xl-font-weight-bolder)
+          var(--eds-typography-header-4xl-font-size) / 1
+          var(--eds-typography-header-font-family);
+      }
+      .actions-row {
+        display: flex;
+        gap: var(--eds-spacing-horizontal-md);
+        align-items: end;
+      }
+      .actions-row .eds-text-field {
+        inline-size: 256px;
+      }
+      .eds-table {
+        width: 100%;
+      }
+      /* interactions — same explicit loss rules as the preview:
+       * unlayered demo CSS beats layered component CSS AND [hidden] */
+      .eds-side-bar-item[aria-expanded='true'] .chevron {
+        rotate: 180deg;
+      }
+      .submenu {
+        display: flex;
+        flex-direction: column;
+      }
+      .submenu[hidden],
+      .eds-side-bar[data-collapsed='true'] .submenu {
+        display: none;
+      }
+      #wells-submenu-float {
+        position-anchor: --sidebar-wells;
+        position-area: inline-end span-block-end;
+        margin: 0 0 0 4px;
+        border: none;
+        min-inline-size: 200px;
+      }
+      .toggles {
+        position: fixed;
+        inset-block-end: 1rem;
+        inset-inline-end: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="eds-top-bar" role="banner">
+      <svg class="symbol" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 8h4V4H4v4Zm6 12h4v-4h-4v4Zm-6 0h4v-4H4v4Zm0-6h4v-4H4v4Zm6 0h4v-4h-4v4Zm6-10v4h4V4h-4Zm-6 4h4V4h-4v4Zm6 6h4v-4h-4v4Zm0 6h4v-4h-4v4Z"/></svg>
+      <span class="title">Well Insight</span>
+      <div class="eds-input">
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
+        <input class="value" type="search" placeholder="Search wells" aria-label="Search wells" />
+      </div>
+      <div class="actions">
+        <button class="eds-button" data-variant="ghost-icon" aria-label="Account"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 3a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm0 14.2a8 8 0 0 1-5.5-2.2c.02-1.99 3.67-3.08 5.5-3.08 1.83 0 5.48 1.09 5.5 3.08a8 8 0 0 1-5.5 2.2Z"/></svg></button>
+        <button class="eds-button" data-variant="ghost-icon" aria-label="Notifications"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm6-6v-5a6 6 0 0 0-4.5-5.8V4.5a1.5 1.5 0 0 0-3 0v.7A6 6 0 0 0 6 11v5l-2 2v1h16v-1l-2-2Z"/></svg></button>
+        <button class="eds-button" data-variant="ghost-icon" aria-label="Settings"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17v2h6v-2H3ZM3 5v2h10V5H3Zm10 16v-2h8v-2h-8v-2h-2v6h2ZM7 9v2H3v2h4v2h2V9H7Zm14 4v-2H11v2h10Zm-6-4h2V7h4V5h-4V3h-2v6Z"/></svg></button>
+      </div>
+    </header>
+
+    <nav class="eds-side-bar" id="lob-sidebar" aria-label="Main">
+      <a class="eds-side-bar-item" href="#" aria-label="Home"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8Z"/></svg><span class="label">Home</span></a>
+      <button class="eds-side-bar-item" type="button" data-has-menu aria-expanded="true" commandfor="wells-submenu" command="--toggle-submenu" style="anchor-name: --sidebar-wells" aria-label="Wells"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2s6 7.06 6 11.5A6 6 0 0 1 12 22a6 6 0 0 1-6-8.5C6 9.06 12 2 12 2Zm0 3.27C10.4 7.4 8 11.07 8 13.5A4 4 0 0 0 12 20a4 4 0 0 0 4-6.5c0-2.43-2.4-6.1-4-8.23Z"/></svg><span class="label">Wells</span><span class="chevron"></span></button>
+      <div class="submenu" id="wells-submenu">
+        <a class="eds-side-bar-sub-item" href="#" aria-current="page" aria-label="Gas"><span class="label">Gas</span></a>
+        <a class="eds-side-bar-sub-item" href="#" aria-label="Fields"><span class="label">Fields</span></a>
+      </div>
+      <a class="eds-side-bar-item" href="#" aria-label="Favourites"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.9-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.1-8.5 9-8.5 9Z"/></svg><span class="label">Favourites</span></a>
+      <button class="eds-side-bar-item" type="button" aria-label="Collapse" commandfor="lob-sidebar" command="--toggle-collapsed"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.4 16.6 13.8 12l4.6-4.6L17 6l-6 6 6 6 1.4-1.4ZM6 6h2v12H6V6Z"/></svg><span class="label">Collapse</span></button>
+    </nav>
+
+    <!-- the collapsed rail's floating submenu: popover + CSS anchor positioning -->
+    <div class="eds-menu" role="menu" popover id="wells-submenu-float">
+      <button class="eds-menu-item" role="menuitemradio" aria-checked="true">Gas</button>
+      <button class="eds-menu-item" role="menuitemradio" aria-checked="false">Fields</button>
+    </div>
+
+    <main>
+      <h1>Gas wells</h1>
+
+      <div class="eds-banner" data-tone="info" role="status">
+        <p>Scheduled maintenance on the Åsgard pipeline starts Monday 08:00 — expect delayed readings.</p>
+      </div>
+
+      <div class="cards">
+        <a class="eds-card" href="#">
+          <span class="kpi">128</span>
+          <strong>Active wells</strong>
+          Producing within expected range.
+        </a>
+        <a class="eds-card" href="#">
+          <span class="kpi">6</span>
+          <strong>Alerts</strong>
+          Pressure deviations in the last 24 h.
+        </a>
+        <a class="eds-card" href="#">
+          <span class="kpi">2</span>
+          <strong>Shut-ins</strong>
+          Planned, awaiting restart approval.
+        </a>
+      </div>
+
+      <table class="eds-table">
+        <thead>
+          <tr>
+            <th>Well</th>
+            <th>Field</th>
+            <th>Status</th>
+            <th>Last reading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr aria-selected="true">
+            <td>34/10-A-12</td>
+            <td>Gullfaks</td>
+            <td>Producing</td>
+            <td>2 min ago</td>
+          </tr>
+          <tr>
+            <td>34/10-A-15</td>
+            <td>Gullfaks</td>
+            <td>Producing</td>
+            <td>4 min ago</td>
+          </tr>
+          <tr>
+            <td>6507/8-C-3</td>
+            <td>Heidrun</td>
+            <td>Alert — pressure</td>
+            <td>1 min ago</td>
+          </tr>
+          <tr>
+            <td>6407/9-B-7</td>
+            <td>Draugen</td>
+            <td>Shut-in</td>
+            <td>3 h ago</td>
+          </tr>
+          <tr>
+            <td>31/2-D-21</td>
+            <td>Troll</td>
+            <td>Producing</td>
+            <td>2 min ago</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="actions-row">
+        <div class="eds-text-field">
+          <label class="eds-label" for="new-well">Well name</label>
+          <div class="eds-input">
+            <input id="new-well" placeholder="e.g. 34/10-A-16" />
+          </div>
+          <p class="eds-label">Block/field-installation format</p>
+        </div>
+        <button class="eds-button" type="button">Add well</button>
+        <button class="eds-button" data-variant="ghost" type="button">Cancel</button>
+      </div>
+    </main>
+
+    <div class="toggles">
+      <button onclick="document.documentElement.dataset.density = 'compact'">compact</button>
+      <button onclick="document.documentElement.dataset.density = 'comfortable'">comfortable</button>
+      <button onclick="document.documentElement.dataset.density = 'relaxed'">relaxed</button>
+      <button onclick="document.documentElement.dataset.colorScheme = document.documentElement.dataset.colorScheme === 'light' ? 'dark' : 'light'">scheme</button>
+    </div>
+
+    <script>
+      // invoker commands with a click fallback — same pattern as the preview
+      const sidebar = document.getElementById('lob-sidebar')
+      const wellsBtn = document.querySelector('[commandfor="wells-submenu"]')
+      const float = document.getElementById('wells-submenu-float')
+      const toggleSubmenu = () => {
+        if (sidebar.dataset.collapsed === 'true') {
+          float.togglePopover()
+          return
+        }
+        const menu = document.getElementById('wells-submenu')
+        menu.hidden = !menu.hidden
+        wellsBtn.setAttribute('aria-expanded', String(!menu.hidden))
+      }
+      const toggleCollapsed = () => {
+        const collapsed = sidebar.dataset.collapsed === 'true'
+        if (collapsed) delete sidebar.dataset.collapsed
+        else sidebar.dataset.collapsed = 'true'
+        if (float.matches(':popover-open')) float.hidePopover()
+      }
+      if ('CommandEvent' in window) {
+        sidebar.addEventListener('command', (e) => {
+          if (e.command === '--toggle-submenu') toggleSubmenu()
+          if (e.command === '--toggle-collapsed') toggleCollapsed()
+        })
+        document.getElementById('wells-submenu').addEventListener('command', (e) => {
+          if (e.command === '--toggle-submenu') toggleSubmenu()
+        })
+      } else {
+        wellsBtn.addEventListener('click', toggleSubmenu)
+        document.querySelector('[commandfor="lob-sidebar"]').addEventListener('click', toggleCollapsed)
+      }
+    </script>
+  </body>
+</html>

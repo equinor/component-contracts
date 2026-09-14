@@ -1,0 +1,59 @@
+{
+  "component": "eds.menu",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Menu",
+    "description": "Menu — the floating panel. bg-floating + elevation-low (in dark mode the panel rises a ladder step instead of casting a shadow — the flashlight principle), rounded, with the BLEED GUARD: the block ends pad by the panel's own radius (same token) so full-bleed item fills never clip the corners; the sides stay unpadded — items run edge to edge. The items area is a true SLOT seeded with three Menu-items: designers add as many as they want. Positioning the panel is the consumer's job (popover + CSS anchor positioning). Also the collapsed sidebar's floating submenu.\n\nGenerated from eds.menu v0.3.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "VERTICAL",
+      "align": "CENTER",
+      "radiusVar": "spacing/border-radius-rounded",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "bleedGuard": true
+    },
+    "parts": [
+      {
+        "kind": "slot",
+        "name": "items",
+        "seed": [
+          {
+            "component": "Menu-item"
+          },
+          {
+            "component": "Menu-item",
+            "overrides": {
+              "Label": "Second item"
+            }
+          },
+          {
+            "component": "Menu-item",
+            "overrides": {
+              "Label": "Third item"
+            }
+          }
+        ]
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "spacing/border-radius-rounded"
+      }
+    },
+    "variants": [
+      {
+        "name": "",
+        "size": "Default",
+        "bg": "concept/bg-floating",
+        "effect": "elevation/low"
+      }
+    ]
+  }
+}

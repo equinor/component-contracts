@@ -1,0 +1,122 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (6/10/12) and hug reproduces the height (24/36/44)."
+  },
+  {
+    "fact": "icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "trailing-icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "prop tone (neutral|accent|danger)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Tone variant axis."
+  },
+  {
+    "fact": "prop variant (primary|secondary|ghost|ghost-icon)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Variant variant axis."
+  },
+  {
+    "fact": "prop size (default|small)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Size variant axis."
+  },
+  {
+    "fact": "prop label (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop leadingIcon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "prop trailingIcon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "variant=ghost-icon is icon-only: padding = inset, a circle by construction",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "No text, so no half-leading to compensate — the optical correction drops out. CSS: the variant attribute zeroes --_half-leading and squares the insets; Figma: even inset binds, pill radius, only the icon part is built."
+  },
+  {
+    "fact": "variant=ghost-icon requires an accessible name",
+    "css": "RESOLVED",
+    "figma": "LOWERED",
+    "note": "No text child names the control. CSS: a zero-specificity guard paints any icon-only control missing aria-label/aria-labelledby with a dashed danger outline — the omission is visible, never silent. Figma: the component description carries the requirement."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state focus",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: :focus-visible — the ring is the PLATFORM's, not a designable state. A canvas has no keyboard; nobody instantiates State=Focus. Refused, not lowered (Marco Krenn's point, 2026-08-30)."
+  },
+  {
+    "fact": "state active",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :active; Figma: State variant."
+  },
+  {
+    "fact": "state disabled",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :disabled; Figma: State variant (no interactivity on canvas)."
+  },
+  {
+    "fact": "state disabled",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :disabled; Figma: State variant (no interactivity on canvas). Gated: only variant=primary."
+  },
+  {
+    "fact": "state disabled for variant=secondary",
+    "css": "REFUSED",
+    "figma": "REFUSED",
+    "note": "The gated tokens change nothing for variant=secondary — the contract refuses to invent a binding it does not have."
+  },
+  {
+    "fact": "state disabled for variant=ghost",
+    "css": "REFUSED",
+    "figma": "REFUSED",
+    "note": "The gated tokens change nothing for variant=ghost — the contract refuses to invent a binding it does not have."
+  },
+  {
+    "fact": "state disabled for variant=ghost-icon",
+    "css": "REFUSED",
+    "figma": "REFUSED",
+    "note": "The gated tokens change nothing for variant=ghost-icon — the contract refuses to invent a binding it does not have."
+  },
+  {
+    "fact": "semantics: <button>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

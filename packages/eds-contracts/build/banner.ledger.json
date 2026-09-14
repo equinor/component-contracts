@@ -1,0 +1,62 @@
+[
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (4/8/10) and hug reproduces the height (24/36/44)."
+  },
+  {
+    "fact": "read text is trimmed to the cap box (text-box)",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: text-box: trim-both ex alphabetic + padding-top round(1cap,4px)−1ex on the message (codepen VYmaowY) — the occupied box is exactly the ROUNDED cap and the BASELINE lands on the 4px grid; root padding = the raw inset (@supports-gated; the fallback keeps the half-leading subtraction — one switch flips all of it). Figma cannot trim — a recorded, bounded divergence: strip heights agree at every line count."
+  },
+  {
+    "fact": "icon is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "dismiss IS the Button — cap box on the corner, plate overflows like ink",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "Composition, not imitation: the instance brings its own hover plate, focus ring and accessible-name guard. CSS: align-self start + auto inline margin, negative margins = the declared overhang; Figma: absolute, top-right constraints (bounded divergence: absolute offsets are not variable-bindable)."
+  },
+  {
+    "fact": "dismiss is an instance of Button (composition-lite)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: a slot — the consumer places the component; Figma: an exposed instance of the generated set, so its own props stay reachable."
+  },
+  {
+    "fact": "prop tone (info|warning|danger|success)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Tone variant axis."
+  },
+  {
+    "fact": "prop message (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "prop icon (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "prop dismissible (boolean)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: presence of the slot; Figma: BOOLEAN property toggling layer visibility."
+  },
+  {
+    "fact": "semantics: <div> role=status",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

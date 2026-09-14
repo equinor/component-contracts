@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Review board — table</title>
+    <link rel="stylesheet" href="../../eds-tokens/build/css/index.css" />
+    <link rel="stylesheet" href="../build/table.css" />
+    <style>
+      /* board chrome only — not part of the system */
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: Inter, sans-serif;
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-strong);
+      }
+      h2 {
+        margin: 0 0 8px;
+        font: 500 11px/1.5 Inter, sans-serif;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .viewport {
+        height: 300px;
+        max-width: 600px;
+        overflow: hidden;
+        border-block-end: 1px dashed var(--eds-color-border-neutral-medium);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Table — fixed 300px viewport: flip density and count the rows</h2>
+    <div class="viewport">
+      <table class="eds-table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Well</th>
+              <th>Person</th>
+              <th>Position</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>tp020</td>
+              <td>Eskhil Normann</td>
+              <td>Environment manager</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp021</td>
+              <td>Ingrid Berge</td>
+              <td>Drilling engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp022</td>
+              <td>Jonas Vik</td>
+              <td>Geologist</td>
+              <td>Paused</td>
+            </tr>
+            <tr aria-selected="true">
+              <td>tp023</td>
+              <td>Maria Sund</td>
+              <td>Data engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp024</td>
+              <td>Ola Haugen</td>
+              <td>Reservoir engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp025</td>
+              <td>Kari Moen</td>
+              <td>Petrophysicist</td>
+              <td>Paused</td>
+            </tr>
+            <tr>
+              <td>tp026</td>
+              <td>Nils Dahl</td>
+              <td>HSE coordinator</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp027</td>
+              <td>Anna Lie</td>
+              <td>Production engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp028</td>
+              <td>Per Strand</td>
+              <td>Well integrity</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp029</td>
+              <td>Silje Berg</td>
+              <td>Geophysicist</td>
+              <td>Paused</td>
+            </tr>
+            <tr>
+              <td>tp030</td>
+              <td>Tor Vika</td>
+              <td>Subsea engineer</td>
+              <td>Active</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <script>
+      // board chrome only: #<scheme>[-<density>]
+      const [scheme, density] = location.hash.slice(1).split('-');
+      if (scheme) document.documentElement.dataset.colorScheme = scheme;
+      if (density) document.documentElement.dataset.density = density;
+    </script>
+  </body>
+</html>

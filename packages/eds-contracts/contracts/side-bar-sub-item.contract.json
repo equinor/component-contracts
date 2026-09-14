@@ -1,0 +1,95 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.side-bar-sub-item",
+  "version": "0.2.0",
+  "description": "SideBar sub-item — a submenu row inside the expanded sidebar. md-squared vertically (height 32/44/52), no icon, and the leading inset is DERIVED, not authored: the sub-item's label aligns with its parent item's label, so the indent = the parent's inset + the icon's cap cell + the icon gap (32/40/46 across densities). Same ghost ladder, same accent selected, same thin underline separator as the parent item.",
+  "notes": "v0.1.0 (2026-09-05, Victor's sidebar review): the early mock said 48 — but that mock's icon occupies its full glyph box in flow; ours occupies the cap cell, so the SAME alignment rule ('sub label aligns with parent label') measures 40 at comfortable. The indent is a resolved fact: it recomputes if the parent's inset, the cap, or the icon gap ever change. Collapsed sub-items do not exist — a collapsed sidebar's submenu is the floating Menu (composition). v0.2.0: Label ink nudged strong → SUBTLE (2026-09-05, Victor — 'will look better'): menu labels are SCANNED (md compressed), floor Lc 60; measured live via apca-w3: subtle at rest = 84.7 light / −86.1 dark on surface, −69.1 on the dark floating panel (the tightest real case, above the floor); hover 67/−69. Selected keeps text-accent-strong — the 60.4 corner never occurs. Accepted trade: label and icon now share step 12, flattening the strong-text/subtle-icon hierarchy for nav rows — quieter chrome, deliberate.",
+  "props": [
+    {
+      "name": "label",
+      "description": "The submenu label.",
+      "type": {
+        "text": true
+      },
+      "default": "Submenu item",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "width": 256,
+      "layout": {
+        "direction": "row",
+        "align": "center"
+      },
+      "inset": {
+        "size": "md",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "indent": {
+        "alignsWith": "eds.side-bar-item",
+        "why": "the sub-item's label left edge = the parent item's label left edge"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-neutral-fill-ghost-default}",
+        "border-bottom-color": "{color.semantic.border-neutral-subtle}"
+      },
+      "underline": "{spacing.sizing-stroke-thin}"
+    },
+    "label": {
+      "typography": {
+        "label": "md",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-subtle}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-hover}"
+      }
+    },
+    {
+      "name": "active",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-active}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-accent-fill-ghost-selected}",
+        "root/border-bottom-color": "{color.semantic.border-accent-strong}",
+        "label/color": "{color.semantic.text-accent-strong}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "a",
+    "role": "none",
+    "aria": {
+      "aria-current": "page on the selected sub-item"
+    }
+  }
+}

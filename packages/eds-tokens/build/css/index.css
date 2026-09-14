@@ -1,0 +1,16 @@
+/* EDS tokens — single entry point.
+ * Generated — do not edit.
+ *
+ *   @import '@equinor/eds-tokens/css';
+ *
+ * Two runtime axes:
+ *   [data-density='compact' | 'comfortable' | 'relaxed']   (default: comfortable)
+ *   [data-color-scheme='light' | 'dark']                   (default: light, follows OS if unset)
+ *
+ * Defaults are declared with `:where(:root)` so they carry zero specificity —
+ * an explicit attribute always wins regardless of source order, and consumers can
+ * override without a specificity fight.
+ */
+@import './font-faces.css';
+@import './typography.css';
+@import './color.css';

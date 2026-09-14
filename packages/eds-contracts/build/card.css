@@ -1,0 +1,55 @@
+/* Generated from contracts/card.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-card {
+      /* No variant axes — the channel variables live on the root. */
+      --_bg: var(--eds-color-bg-surface);
+      --_border: var(--eds-color-border-neutral-subtle);
+
+      /* Size-dependent parameters (single size). */
+      --_inset-v: var(--eds-spacing-inset-md-vertical-squared);
+      --_inset-h: var(--eds-spacing-inset-md-horizontal);
+      --_gap: var(--eds-spacing-vertical-md);
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--_gap);
+      align-items: start;
+
+      /* Plain (uncorrected) inset — no text to compensate for. */
+      box-sizing: border-box;
+      padding-block: var(--_inset-v);
+      padding-inline: var(--_inset-h);
+      border: none;
+      border-radius: var(--_radius, var(--eds-spacing-border-radius-rounded));
+
+      background-color: var(--_bg);
+      outline: var(--eds-sizing-stroke-thin) solid var(--_border, transparent);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+      /* Elevation lowers to an effect style in Figma, a shadow here. */
+      box-shadow: var(--_elevation, none);
+
+      /* interactivity is the MARKUP's fact: an <a> or <button> with the
+       * class affords, a <div> sits still — no attribute invented. */
+      &:is(a, button) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @layer states {
+    .eds-card:focus-visible {
+      outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thin);
+    }
+
+    .eds-card:is(a, button):not(:disabled):hover {
+      --_elevation: var(--eds-elevation-low);
+      --_border: var(--eds-color-border-neutral-medium);
+    }
+  }
+}

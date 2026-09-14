@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>EDS Component Storefront</title>
+    <link
+      rel="stylesheet"
+      href="packages/eds-tokens/build/css/index.css"
+    />
+    <link rel="stylesheet" href="packages/eds-contracts/build/button.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/chip.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/tab.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/card.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/divider.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/label.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/tooltip.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/input.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/text-field.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/checkbox.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/radio.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/switch.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/banner.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/menu.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/menu-item.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/top-bar.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/side-bar.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/side-bar-item.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/side-bar-sub-item.css" />
+    <link rel="stylesheet" href="packages/eds-contracts/build/table.css" />
+    <style>
+      /* catalog chrome — the SHELL is the system's own components; this file
+       * only arranges the regions and styles the documentation panes. */
+      body {
+        display: grid;
+
+        /* minmax(0, 1fr), not 1fr: a fr track refuses to shrink below its
+         * content's min-content size (the code pane's <pre> is greedy), and
+         * the shell must never outgrow the viewport */
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-columns: auto minmax(0, 1fr);
+        margin: 0;
+        block-size: 100dvh;
+        overflow: clip;
+        font-family: var(--eds-typography-ui-body-font-family);
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-neutral-strong);
+      }
+      body > .eds-top-bar {
+        grid-column: 1 / -1;
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 2;
+
+        /* app-shell pairing: the symbol's ink column aligns with the rail's
+         * icon ink column (the side-bar item is lg-squared, so the strip's
+         * start inset follows lg; both glyphs overflow their cap cells by
+         * the same margin, so the alignment holds at every density) */
+        padding-inline-start: var(--eds-spacing-inset-lg-horizontal);
+      }
+      body > .eds-side-bar {
+        grid-row: 2;
+        overflow-y: auto;
+      }
+      /* group submenus: same explicit loss rules as the preview.
+       * MOTION: hand-tuned here first; the duration/easing pair below is the
+       * candidate for real motion tokens in eds-tokens (polish queue). The
+       * height animation rides interpolate-size + allow-discrete display —
+       * no JS measurement, the platform interpolates to auto. */
+      :root {
+        interpolate-size: allow-keywords;
+        --sf-motion-duration: 250ms;
+        --sf-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+
+        /* APP tokens, deliberately not system tokens (Victor, 2026-09-06):
+         * the marker is brand Midnight Sun used as this app's visualization
+         * ink. Minting one lone visualization colour into the system would
+         * beg for the rest of a visualization palette; an app-local token
+         * with the app's prefix is the honest scope. Ink stays dark in
+         * light mode (a real marker never lightens the text; Lc 84.9,
+         * measured); dark mode keeps the system's ghost-selected step. */
+        --sf-color-bg-marker: #fbdd79;
+        --sf-color-text-on-marker: var(--eds-color-text-neutral-strong);
+      }
+      :root[data-color-scheme='dark'] {
+        --sf-color-bg-marker: var(--eds-color-bg-accent-fill-ghost-selected);
+        --sf-color-text-on-marker: var(--eds-color-text-accent-strong);
+      }
+      .eds-side-bar-item .chevron {
+        transition: rotate var(--sf-motion-duration) var(--sf-motion-ease);
+      }
+      .eds-side-bar-item[aria-expanded='true'] .chevron {
+        rotate: 180deg;
+      }
+      .submenu {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        block-size: auto;
+        transition:
+          block-size var(--sf-motion-duration) var(--sf-motion-ease),
+          display var(--sf-motion-duration) allow-discrete;
+      }
+      @starting-style {
+        .submenu {
+          block-size: 0;
+        }
+      }
+      .submenu[hidden],
+      .eds-side-bar[data-collapsed='true'] .submenu {
+        display: none;
+        block-size: 0;
+      }
+      /* the rail itself glides between 256 and the square edge */
+      body > .eds-side-bar {
+        transition: inline-size var(--sf-motion-duration) var(--sf-motion-ease);
+      }
+      /* the collapsed rail's floating submenu: popover + anchor positioning,
+       * the menu contract's named consumer mechanism (position-anchor is set
+       * per click from the group item's anchor-name) */
+      #nav-float,
+      .stage-float {
+        position-area: inline-end span-block-end;
+        margin: 0 0 0 4px;
+        border: none;
+        min-inline-size: 200px;
+      }
+      /* menu items here are anchors (they navigate) — the UA underline is
+       * link chrome the panel does not want */
+      :is(#nav-float, .stage-float) .eds-menu-item {
+        text-decoration: none;
+      }
+      /* the Collapse item stays seated while the rail scrolls — the list
+       * slides in BEHIND it (its own surface makes the pass-under read) */
+      #nav-collapse {
+        position: sticky;
+        inset-block-end: 0;
+        margin-block-start: auto;
+        background: var(--eds-color-bg-surface);
+      }
+      main {
+        grid-row: 2;
+        overflow: auto;
+        min-inline-size: 0;
+        padding: var(--eds-spacing-inset-xl-vertical-squared)
+          var(--eds-spacing-inset-xl-horizontal);
+      }
+      main > * + * {
+        margin-block-start: var(--eds-spacing-vertical-lg);
+      }
+      h1 {
+        margin: 0;
+        font: var(--eds-typography-header-3xl-font-weight-bolder)
+          var(--eds-typography-header-3xl-font-size) / 1.2
+          var(--eds-typography-header-font-family);
+      }
+      .meta {
+        color: var(--eds-color-text-neutral-subtle);
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+      }
+      .meta code,
+      .pane code {
+        font-family: var(--eds-typography-code-font-family);
+      }
+      .description {
+        max-inline-size: 72ch;
+        font-size: var(--eds-typography-ui-body-lg-font-size);
+        line-height: var(--eds-typography-ui-body-lg-line-height-default);
+      }
+      .workbench {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+        gap: var(--eds-spacing-horizontal-md);
+        align-items: start;
+      }
+      .pane {
+        border: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-neutral-subtle);
+        border-radius: var(--eds-spacing-border-radius-rounded);
+        background: var(--eds-color-bg-surface);
+      }
+      .pane > h2 {
+        /* the system's own law, not authored arithmetic: sm label in an
+         * sm-squared inset, vertical padding = inset − half-leading, so
+         * height = inset × 2 + cap = 32 at comfortable. */
+        margin: 0;
+        padding: calc(
+            var(--eds-spacing-inset-sm-vertical-squared) -
+              var(--eds-half-leading-sm)
+          )
+          var(--eds-spacing-inset-md-horizontal);
+        border-block-end: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-neutral-subtle);
+        font: var(--eds-font-weight-normal)
+          var(--eds-typography-ui-body-sm-font-size) /
+          var(--eds-typography-ui-body-sm-line-height-compressed)
+          var(--eds-typography-ui-body-font-family);
+        color: var(--eds-color-text-neutral-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .stage {
+        display: grid;
+        place-items: center;
+        min-block-size: 12rem;
+        padding: var(--eds-spacing-inset-md-vertical-squared)
+          var(--eds-spacing-inset-md-horizontal);
+      }
+      .stage.wide {
+        display: block;
+
+        /* place-items now reaches into BLOCK layout too (Chrome's
+         * alignment-in-block-containers), so the grid stage's centering
+         * must be undone, or block children shrink-wrap: a divider's
+         * intrinsic width is zero */
+        place-items: normal;
+      }
+      .controls {
+        display: flex;
+        flex-direction: column;
+        /* a container of control groups: gap md, per the container rule */
+        gap: var(--eds-spacing-vertical-md);
+        padding: var(--eds-spacing-inset-md-vertical-squared)
+          var(--eds-spacing-inset-md-horizontal);
+      }
+      .controls fieldset {
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: flex;
+        flex-wrap: wrap;
+        /* options are a cluster: sm between siblings, xs rows */
+        gap: var(--eds-spacing-vertical-xs) var(--eds-spacing-horizontal-sm);
+      }
+      .controls legend {
+        padding: 0;
+        margin-block-end: var(--eds-spacing-vertical-2xs);
+      }
+      .controls label:not(.eds-label) {
+        display: inline-flex;
+        align-items: center;
+        /* control-to-label air: the icon gap, same as glyph beside label */
+        gap: var(--eds-spacing-icon-sm-gap-horizontal);
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+      }
+      /* screen-reader-only text: names for cells whose meaning is visual */
+      .sr-only {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      /* the live code pane: the ACTUAL serialized DOM of the stage —
+       * watch data-* and aria-* flip as you interact. */
+      .code {
+        margin: 0;
+        padding: var(--eds-spacing-inset-md-vertical-squished)
+          var(--eds-spacing-inset-md-horizontal);
+        overflow: auto;
+        max-block-size: 24rem;
+        font: 400 0.75rem / 1.5 var(--eds-typography-code-font-family);
+        color: var(--eds-color-text-neutral-strong);
+        white-space: pre;
+        tab-size: 2;
+      }
+      .code .state {
+        /* the marker: a highlighter pen over the attributes that just
+         * changed (the app token above; see the note there) */
+        background: var(--sf-color-bg-marker);
+        color: var(--sf-color-text-on-marker);
+        border-radius: 2px;
+      }
+      .code .tag {
+        color: var(--eds-color-text-accent-strong);
+      }
+      .code .attr {
+        color: var(--eds-color-text-neutral-subtle);
+      }
+      .code.flash {
+        animation: codeflash 400ms;
+      }
+      @keyframes codeflash {
+        from {
+          background: var(--eds-color-bg-accent-fill-ghost-hover);
+        }
+      }
+      /* the props and ledger tables ARE the Table component — the catalog's
+       * own chrome is the system (rows land on the contract's 24/36/44). */
+      .pane .eds-table {
+        inline-size: 100%;
+      }
+      .ledger-table .d-CARRIED { color: var(--eds-color-text-success-strong); }
+      .ledger-table .d-LOWERED { color: var(--eds-color-text-warning-strong); }
+      .ledger-table .d-RESOLVED { color: var(--eds-color-text-accent-strong); }
+      .ledger-table .d-REFUSED { color: var(--eds-color-text-danger-strong); }
+      details.pane > summary {
+        padding: calc(
+            var(--eds-spacing-inset-sm-vertical-squared) -
+              var(--eds-half-leading-sm)
+          )
+          var(--eds-spacing-inset-md-horizontal);
+        cursor: pointer;
+        font: var(--eds-font-weight-normal)
+          var(--eds-typography-ui-body-sm-font-size) /
+          var(--eds-typography-ui-body-sm-line-height-compressed)
+          var(--eds-typography-ui-body-font-family);
+        color: var(--eds-color-text-neutral-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      details.pane[open] > summary {
+        border-block-end: var(--eds-sizing-stroke-thin) solid
+          var(--eds-color-border-neutral-subtle);
+      }
+      details.pane > :not(summary) {
+        margin: 0;
+      }
+      /* top-bar preview needs full width; tooltip fan needs room */
+      .fan {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--eds-spacing-horizontal-md);
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="eds-top-bar" role="banner">
+      <svg class="symbol" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 8h4V4H4v4Zm6 12h4v-4h-4v4Zm-6 0h4v-4H4v4Zm0-6h4v-4H4v4Zm6 0h4v-4h-4v4Zm6-10v4h4V4h-4Zm-6 4h4V4h-4v4Zm6 6h4v-4h-4v4Zm0 6h4v-4h-4v4Z"/></svg>
+      <span class="title">EDS Component Storefront</span>
+      <div class="eds-input">
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
+        <input class="value" id="filter" type="search" placeholder="Filter components" aria-label="Filter components" />
+      </div>
+      <div class="actions">
+        <button class="eds-button" data-tone="neutral" data-variant="ghost" data-density-pick="compact" type="button">compact</button>
+        <button class="eds-button" data-tone="neutral" data-variant="ghost" data-density-pick="comfortable" aria-pressed="true" type="button">comfortable</button>
+        <button class="eds-button" data-tone="neutral" data-variant="ghost" data-density-pick="relaxed" type="button">relaxed</button>
+        <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" id="scheme-toggle" aria-label="Toggle color scheme" type="button"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2v16a8 8 0 0 1 0-16Z"/></svg></button>
+      </div>
+    </header>
+
+    <nav class="eds-side-bar" id="catalog-nav" aria-label="Components"></nav>
+    <aside aria-label="Group shortcuts" style="display: contents">
+      <div class="eds-menu" role="menu" popover id="nav-float"></div>
+    </aside>
+
+    <main id="page"></main>
+
+    <script>
+      /* ---------- registry: id → contract + a curated story ---------- */
+      const glyph = (d) =>
+        `<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${d}"/></svg>`
+      const PLUS = 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z'
+      const CHEVRON = 'm7.41 8.295 4.59 4.58 4.59-4.58L18 9.705l-6 6-6-6z'
+      // tone glyphs = the banner's emitter-owned artwork, same shapes; the
+      // fallback is eds-icons' check. 16px cell (the chip's icon is sm).
+      const CHECK = 'm8.795 15.875-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z'
+      const TONE_ICONS = {
+        info: 'M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8',
+        warning: 'm1 21.5 11-19 11 19zm18.53-2L12 6.49 4.47 19.5zm-8.53-3v2h2v-2zm0-6h2v4h-2z',
+        danger: 'M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M13 13V7h-2v6zm0 4v-2h-2v2zm-9-5c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8-8 3.58-8 8',
+        success: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m-2-5.83 6.59-6.59L18 9l-8 8-4-4 1.41-1.41z',
+      }
+      const glyphSm = (d) =>
+        `<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="${d}"/></svg>`
+      const SEARCH = 'M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z'
+      const HOME = 'm12 3 9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8Z'
+      const EDIT = 'M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25ZM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z'
+      const HEART = 'M12 21s-7.5-4.9-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.1-8.5 9-8.5 9Z'
+      const COLLAPSE = 'M18.4 16.6 13.8 12l4.6-4.6L17 6l-6 6 6 6 1.4-1.4ZM6 6h2v12H6V6Z'
+
+      const enumCtl = (name, options, def) => ({ kind: 'enum', name, options, def })
+      const boolCtl = (name, def = false) => ({ kind: 'bool', name, def })
+      const textCtl = (name, def) => ({ kind: 'text', name, def })
+
+      // the groups mirror storybook.eds.equinor.com's taxonomy (Inputs /
+      // Data Display / Feedback / Navigation / Surface) — the audience's
+      // mental model transfers; even Button-under-Inputs is theirs
+      const GROUPS = [
+        { name: 'Inputs', ids: ['button', 'input', 'text-field', 'checkbox', 'radio', 'switch', 'label'] },
+        { name: 'Data Display', ids: ['chip', 'table', 'tooltip'] },
+        { name: 'Feedback', ids: ['banner'] },
+        { name: 'Navigation', ids: ['top-bar', 'side-bar', 'tab', 'menu'] },
+        { name: 'Surface', ids: ['card', 'divider'] },
+        // the building-the-button demo: real pages, not registry entries
+        { name: 'Demos', links: [
+          { label: 'Side by side', href: 'demos/index.html' },
+          { label: 'Attempt 1 · the document', href: 'demos/attempt-1.html' },
+          { label: 'Attempt 2 · the skills', href: 'demos/attempt-2.html' },
+          { label: 'Attempt 3 · the contract', href: 'demos/attempt-3.html' },
+          { label: 'Attempt 1 · thin doc', href: 'demos/attempt-1-thin.html' },
+          { label: 'Attempt 2 · thin doc', href: 'demos/attempt-2-thin.html' },
+        ] },
+      ]
+      // a group's items: registry entries (hash-routed) or plain links
+      const groupItems = (g) =>
+        g.ids
+          ? g.ids.map((id) => {
+              const e = REGISTRY.find((x) => x.id === id)
+              return { label: e.name, href: '#' + e.id, nav: e.id }
+            })
+          : g.links
+      const GROUP_GLYPHS = {
+        Demos: 'm4.8 12 4.6 4.6L8 18l-6-6 6-6 1.4 1.4zm14.4 0-4.6 4.6L16 18l6-6-6-6-1.4 1.4z',
+        Inputs: 'M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25ZM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z',
+        'Data Display': 'M3 5v14h18V5H3Zm2 2h14v3H5V7Zm0 5h14v5H5v-5Z',
+        Feedback: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1 5h2v6h-2V7Zm0 8h2v2h-2v-2Z',
+        Navigation: 'm12 3 9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8Z',
+        Surface: 'M12 2 2 7l10 5 10-5-10-5Zm0 9L2 16l10 5 10-5-10-5Z',
+      }
+      const REGISTRY = [
+        {
+          id: 'button', name: 'Button', contract: 'button',
+          controls: [
+            enumCtl('variant', ['primary', 'secondary', 'ghost', 'ghost-icon'], 'primary'),
+            enumCtl('tone', ['accent', 'neutral', 'danger'], 'accent'),
+            enumCtl('size', ['default', 'small'], 'default'),
+            boolCtl('leading icon'),
+            boolCtl('trailing icon'),
+            boolCtl('disabled'),
+            textCtl('label', 'Click me!'),
+          ],
+          render: (a) => a.variant === 'ghost-icon'
+            ? `<button class="eds-button" data-variant="ghost-icon"${attr('tone', a.tone, 'accent')}${attr('size', a.size, 'default')}${a.disabled ? ' disabled' : ''} aria-label="${esc(a.label)}">${glyph(PLUS)}</button>`
+            : `<button class="eds-button"${attr('variant', a.variant, 'primary')}${attr('tone', a.tone, 'accent')}${attr('size', a.size, 'default')}${a.disabled ? ' disabled' : ''}>${a['leading icon'] ? glyph(PLUS) : ''}${esc(a.label)}${a['trailing icon'] ? glyph(CHEVRON) : ''}</button>`,
+        },
+        {
+          id: 'chip', name: 'Chip', contract: 'chip',
+          controls: [
+            enumCtl('tone', ['neutral', 'accent', 'danger', 'warning', 'success', 'info'], 'neutral'),
+            enumCtl('emphasis', ['muted', 'emphasis'], 'muted'),
+            boolCtl('icon'),
+            boolCtl('selected'),
+            boolCtl('dismissible'),
+            textCtl('label', 'Category'),
+          ],
+          note: 'The icon follows the tone: info, success, warning and danger bring their own glyphs; the rest wear the check.',
+          render: (a) =>
+            `<button class="eds-chip"${attr('tone', a.tone, 'neutral')}${attr('emphasis', a.emphasis, 'muted')}${a.selected ? ' aria-pressed="true"' : ''}${a.dismissible ? ' data-dismissible' : ''}>${a.icon ? glyphSm(TONE_ICONS[a.tone] ?? CHECK) : ''}${esc(a.label)}${a.dismissible ? '<svg class="dismiss" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>' : ''}</button>`,
+        },
+        {
+          id: 'tab', name: 'Tab', contract: 'tab',
+          controls: [boolCtl('selected', true), boolCtl('disabled'), textCtl('label', 'Overview')],
+          render: (a) =>
+            `<div role="tablist" style="display:flex"><button class="eds-tab" role="tab" aria-selected="${a.selected}"${a.disabled ? ' disabled' : ''}>${esc(a.label)}</button><button class="eds-tab" role="tab" aria-selected="false">Wells</button><button class="eds-tab" role="tab" aria-selected="false">History</button></div>`,
+        },
+        {
+          id: 'banner', name: 'Banner', contract: 'banner', wide: true,
+          controls: [
+            enumCtl('tone', ['info', 'warning', 'danger', 'success'], 'info'),
+            boolCtl('icon', true),
+            boolCtl('dismissible'),
+            textCtl('message', 'Something happened that you should know about.'),
+          ],
+          render: (a) =>
+            `<div class="eds-banner"${attr('tone', a.tone, 'info')} role="status">${a.icon ? '<span class="icon"></span>' : ''}<p>${esc(a.message)}</p>${a.dismissible ? '<button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="icon"></span></button>' : ''}</div>`,
+        },
+        {
+          id: 'tooltip', name: 'Tooltip', contract: 'tooltip',
+          controls: [
+            enumCtl('placement', ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'], 'top'),
+            textCtl('label', 'Explains the control'),
+          ],
+          render: (a) =>
+            `<div class="eds-tooltip" data-placement="${a.placement}" role="tooltip">${esc(a.label)}</div>`,
+        },
+        {
+          id: 'card', name: 'Card', contract: 'card',
+          controls: [enumCtl('markup', ['static (div)', 'interactive (a)', 'action (button)'], 'static (div)'), textCtl('title', 'Card title')],
+          note: 'The markup IS the prop: a <div> sits still, an <a> or <button> hovers and rings.',
+          render: (a) => {
+            const inner = `<strong>${esc(a.title)}</strong> One container primitive; tones were deleted (a danger card was a banner in a costume).`
+            if (a.markup.startsWith('interactive')) return `<a class="eds-card" href="#" style="max-width:260px;text-decoration:none;color:inherit">${inner}</a>`
+            if (a.markup.startsWith('action')) return `<button class="eds-card" type="button" style="max-width:260px;text-align:start;font:inherit;color:inherit">${inner}</button>`
+            return `<div class="eds-card" style="max-width:260px">${inner}</div>`
+          },
+        },
+        {
+          id: 'divider', name: 'Divider', contract: 'divider', wide: true,
+          controls: [enumCtl('weight', ['subtle', 'medium'], 'medium')],
+          render: (a) => `<hr class="eds-divider"${attr('weight', a.weight, 'medium')} />`,
+        },
+        {
+          id: 'label', name: 'Label', contract: 'label',
+          controls: [textCtl('text', 'Well name')],
+          note: 'On the baseline grid: the box is the cap cell (trimmed where the engine can).',
+          render: (a) => `<label class="eds-label">${esc(a.text)}</label>`,
+        },
+        {
+          id: 'input', name: 'Input', contract: 'input',
+          controls: [boolCtl('leadingIcon'), boolCtl('trailingIcon'), boolCtl('disabled'), textCtl('placeholder', 'Placeholder')],
+          render: (a) =>
+            `<div class="eds-input" style="inline-size:256px">${a.leadingIcon ? glyph(SEARCH) : ''}<input class="value" placeholder="${esc(a.placeholder)}"${a.disabled ? ' disabled' : ''} />${a.trailingIcon ? `<svg class="trailing-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${PLUS}"/></svg>` : ''}</div>`,
+        },
+        {
+          id: 'text-field', name: 'TextField', contract: null,
+          composition: 'text-field',
+          controls: [textCtl('label', 'Well name'), textCtl('helper', 'Block/field-installation format'), boolCtl('invalid')],
+          note: 'A composition of Label, Input, and helper. The invalid state is the platform’s (:user-invalid; type and clear the email to see it).',
+          render: (a) =>
+            `<div class="eds-text-field" style="inline-size:256px"><label class="eds-label" for="cat-tf">${esc(a.label)}</label><div class="eds-input"><input id="cat-tf"${a.invalid ? ' type="email" required placeholder="name@equinor.com"' : ' placeholder="Placeholder"'} /></div><p class="eds-label">${esc(a.helper)}</p></div>`,
+        },
+        {
+          id: 'checkbox', name: 'Checkbox', contract: 'checkbox',
+          controls: [enumCtl('state', ['unchecked', 'checked', 'indeterminate'], 'checked'), boolCtl('disabled')],
+          interactive: (root, a) => {
+            const el = root.querySelector('input')
+            if (el && a.state === 'indeterminate') el.indeterminate = true
+          },
+          render: (a) =>
+            `<label style="display:inline-flex;gap:.5rem;align-items:center"><input class="eds-checkbox" type="checkbox"${a.state === 'checked' ? ' checked' : ''}${a.disabled ? ' disabled' : ''} /> <span>Option</span></label>`,
+        },
+        {
+          id: 'radio', name: 'Radio', contract: 'radio',
+          controls: [boolCtl('disabled')],
+          render: (a) =>
+            `<fieldset style="border:none;display:flex;gap:1rem;padding:0"><label style="display:inline-flex;gap:.5rem"><input class="eds-radio" type="radio" name="cat-r" checked${a.disabled ? ' disabled' : ''} /> One</label><label style="display:inline-flex;gap:.5rem"><input class="eds-radio" type="radio" name="cat-r"${a.disabled ? ' disabled' : ''} /> Two</label></fieldset>`,
+        },
+        {
+          id: 'switch', name: 'Switch', contract: 'switch',
+          controls: [boolCtl('checked', true), boolCtl('disabled')],
+          render: (a) =>
+            `<label style="display:inline-flex;gap:.5rem;align-items:center"><input class="eds-switch" type="checkbox" role="switch"${a.checked ? ' checked' : ''}${a.disabled ? ' disabled' : ''} /> <span>Notifications</span></label>`,
+        },
+        {
+          id: 'menu', name: 'Menu', contract: 'menu',
+          controls: [boolCtl('icons', true), boolCtl('divider', true)],
+          note: 'The floating panel; consumers position it with popover + CSS anchor positioning.',
+          render: (a) =>
+            `<div class="eds-menu" role="menu" style="min-inline-size:240px">` +
+            `<button class="eds-menu-item" role="menuitem">${a.icons ? glyph(PLUS) : ''}Open well</button>` +
+            `<button class="eds-menu-item" role="menuitem">${a.icons ? glyph(PLUS) : ''}Duplicate</button>` +
+            `<button class="eds-menu-item" role="menuitemradio" aria-checked="true">${a.icons ? glyph(PLUS) : ''}Selected item</button>` +
+            (a.divider ? '<hr class="eds-divider" data-weight="subtle" />' : '') +
+            `<button class="eds-menu-item" role="menuitem" disabled>Disabled item</button>` +
+            `</div>`,
+        },
+        {
+          id: 'table', name: 'Table', contract: 'table', wide: true,
+          controls: [enumCtl('size', ['default', 'compressed'], 'default'), boolCtl('selectedRow', true)],
+          note: 'Select rows with the checkboxes and watch aria-selected flip in the DOM pane: selection is an ARIA state, not a pseudo-class.',
+          interactive: (root) => {
+            for (const cb of root.querySelectorAll('[data-row-select]'))
+              cb.addEventListener('change', () => {
+                cb.closest('tr').setAttribute('aria-selected', String(cb.checked))
+              })
+          },
+          render: (a) => {
+            const rows = [
+              ['34/10-A-12', 'Gullfaks', 'Producing'],
+              ['34/10-A-15', 'Gullfaks', 'Producing'],
+              ['6507/8-C-3', 'Heidrun', 'Alert: pressure'],
+              ['31/2-D-21', 'Troll', 'Producing'],
+            ]
+            return `<table class="eds-table"${attr('size', a.size, 'default')} style="width:100%"><thead><tr><th><span class="sr-only">Select</span></th><th>Well</th><th>Field</th><th>Status</th></tr></thead><tbody>${rows
+              .map((r, i) => {
+                const sel = i === 0 && a.selectedRow
+                return `<tr${sel ? ' aria-selected="true"' : ''}><td><input class="eds-checkbox" type="checkbox" data-row-select aria-label="Select ${r[0]}"${sel ? ' checked' : ''} /></td><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`
+              })
+              .join('')}</tbody></table>`
+          },
+        },
+        {
+          id: 'top-bar', name: 'TopBar', contract: 'top-bar', wide: true,
+          controls: [textCtl('title', 'Application name'), boolCtl('search', true)],
+          render: (a) =>
+            `<header class="eds-top-bar"><svg class="symbol" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 8h4V4H4v4Zm6 12h4v-4h-4v4Zm-6 0h4v-4H4v4Zm0-6h4v-4H4v4Zm6 0h4v-4h-4v4Zm6-10v4h4V4h-4Zm-6 4h4V4h-4v4Zm6 6h4v-4h-4v4Zm0 6h4v-4h-4v4Z"/></svg><span class="title">${esc(a.title)}</span>${a.search ? `<div class="eds-input">${glyph(SEARCH)}<input class="value" type="search" placeholder="Search" aria-label="Search" /></div>` : ''}<div class="actions"><button class="eds-button" data-variant="ghost-icon" aria-label="Add">${glyph(PLUS)}</button><button class="eds-button" data-variant="ghost-icon" aria-label="Favourites">${glyph(HEART)}</button></div></header>`,
+        },
+        {
+          id: 'side-bar', name: 'SideBar', contract: 'side-bar', wide: true,
+          controls: [boolCtl('collapsed')],
+          note: 'ONE attribute collapses everything: data-collapsed on the nav cascades to every item (watch the code pane, then click Collapse INSIDE the preview; the platform state and the code stay in lockstep).',
+          interactive: (root) => {
+            const nav = root.querySelector('.eds-side-bar')
+            const collapse = root.querySelector('[data-collapse-btn]')
+            const edit = root.querySelector('[data-submenu-btn]')
+            // collapsed rail: the submenu floats — same popover + anchor
+            // mechanism as the catalog's own rail. The UA owns open/close
+            // through the invoker relation (popoverTargetElement), which
+            // survives the light-dismiss-then-click race a manual
+            // togglePopover loses.
+            let float = null
+            const syncFloat = () => {
+              if (!edit) return
+              if (nav.dataset.collapsed === 'true') {
+                if (!float) {
+                  float = document.createElement('div')
+                  float.className = 'eds-menu stage-float'
+                  float.setAttribute('role', 'menu')
+                  float.setAttribute('popover', '')
+                  float.innerHTML =
+                    '<a class="eds-menu-item" role="menuitem" href="#side-bar">Gas</a>' +
+                    '<a class="eds-menu-item" role="menuitem" href="#side-bar">Fields</a>'
+                  edit.style.anchorName = '--stage-submenu'
+                  float.style.positionAnchor = '--stage-submenu'
+                  root.appendChild(float)
+                }
+                edit.popoverTargetElement = float
+              } else {
+                edit.popoverTargetElement = null
+              }
+            }
+            syncFloat()
+            if (collapse)
+              collapse.addEventListener('click', () => {
+                const on = nav.dataset.collapsed === 'true'
+                if (on) delete nav.dataset.collapsed
+                else nav.dataset.collapsed = 'true'
+                syncFloat()
+              })
+            if (edit)
+              edit.addEventListener('click', () => {
+                if (nav.dataset.collapsed === 'true') return
+                const sub = root.querySelector('.submenu')
+                sub.hidden = !sub.hidden
+                edit.setAttribute('aria-expanded', String(!sub.hidden))
+              })
+          },
+          render: (a) =>
+            `<nav class="eds-side-bar"${a.collapsed ? ' data-collapsed="true"' : ''} style="block-size:360px" aria-label="Demo">` +
+            `<a class="eds-side-bar-item" href="#side-bar" aria-label="Home">${glyph(HOME)}<span class="label">Home</span></a>` +
+            `<button class="eds-side-bar-item" type="button" data-has-menu aria-expanded="true" data-submenu-btn aria-label="Edit">${glyph(EDIT)}<span class="label">Edit</span><span class="chevron"></span></button>` +
+            `<div class="submenu"><a class="eds-side-bar-sub-item" href="#side-bar" aria-current="page" aria-label="Gas"><span class="label">Gas</span></a><a class="eds-side-bar-sub-item" href="#side-bar" aria-label="Fields"><span class="label">Fields</span></a></div>` +
+            `<a class="eds-side-bar-item" href="#side-bar" aria-label="Favourites">${glyph(HEART)}<span class="label">Favourites</span></a>` +
+            `<button class="eds-side-bar-item" type="button" data-collapse-btn aria-label="Collapse">${glyph(COLLAPSE)}<span class="label">Collapse</span></button>` +
+            `</nav>`,
+        },
+      ]
+
+      /* ---------- helpers ---------- */
+      const esc = (s) =>
+        String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+      // defaults are attribute-absent (ADR-0006)
+      const attr = (name, value, fallback) =>
+        !value || value === fallback ? '' : ` data-${name}="${value}"`
+
+      /* the live code pane: serialize the stage's real DOM, truncating icon
+       * path data; data-* and aria-* light up so state changes are legible */
+      function serialize(el, indent = '') {
+        if (el.nodeType === Node.TEXT_NODE) {
+          const t = el.textContent.trim()
+          return t ? indent + esc(t) + '\n' : ''
+        }
+        if (el.nodeType !== Node.ELEMENT_NODE) return ''
+        const tag = el.tagName.toLowerCase()
+        let attrs = ''
+        for (const a of el.attributes) {
+          // an input's checked attribute is only the initial value; the live
+          // state is the property, serialized below so real clicks show up
+          if (tag === 'input' && a.name === 'checked') continue
+          let v = a.value
+          if (a.name === 'd' || v.length > 48) v = v.slice(0, 24) + '…'
+          const pair = v === '' ? a.name : `${a.name}="${esc(v)}"`
+          attrs +=
+            a.name.startsWith('data-') || a.name.startsWith('aria-') || ['disabled', 'checked', 'hidden', 'open'].includes(a.name)
+              ? ` <span class="state">${pair}</span>`
+              : ` <span class="attr">${pair}</span>`
+        }
+        if (tag === 'input' && el.checked) attrs += ` <span class="state">checked</span>`
+        if (tag === 'input' && el.indeterminate) attrs += ` <span class="state">indeterminate</span>`
+        const kids = [...el.childNodes].map((c) => serialize(c, indent + '  ')).join('')
+        const t = `<span class="tag">${tag}</span>`
+        if (!kids) return `${indent}&lt;${t}${attrs}${tag === 'input' || tag === 'hr' || tag === 'path' ? ' /' : `&gt;&lt;/${t}`}&gt;\n`
+        return `${indent}&lt;${t}${attrs}&gt;\n${kids}${indent}&lt;/${t}&gt;\n`
+      }
+
+      /* ---------- rendering ---------- */
+      const nav = document.getElementById('catalog-nav')
+      const page = document.getElementById('page')
+      const COMPONENT_GLYPH = 'M12 2 2 7l10 5 10-5-10-5Zm0 9L2 16l10 5 10-5-10-5Z'
+
+      function buildNav() {
+        nav.innerHTML =
+          GROUPS.map(
+            (g) =>
+              `<button class="eds-side-bar-item" type="button" data-has-menu data-group="${g.name}" aria-expanded="false" aria-label="${g.name}">${glyph(GROUP_GLYPHS[g.name])}<span class="label">${g.name}</span><span class="chevron"></span></button>` +
+              `<div class="submenu" hidden>${groupItems(g)
+                .map((it) => `<a class="eds-side-bar-sub-item" href="${it.href}"${it.nav ? ` data-nav="${it.nav}"` : ''} aria-label="${it.label}"><span class="label">${it.label}</span></a>`)
+                .join('')}</div>`,
+          ).join('') +
+          `<button class="eds-side-bar-item" type="button" id="nav-collapse" aria-label="Collapse">${glyph(COLLAPSE)}<span class="label">Collapse</span></button>`
+        const float = document.getElementById('nav-float')
+        // clicking the OPEN group's own button must close, not reopen: the
+        // pointerdown light-dismisses before the click fires, so remember
+        // which anchor just closed and swallow that click
+        let floatClosed = { at: 0, anchor: '' }
+        // beforetoggle, not toggle: toggle is queued and would land AFTER
+        // the click this guard needs to swallow
+        float.addEventListener('beforetoggle', (e) => {
+          if (e.newState === 'closed')
+            floatClosed = { at: Date.now(), anchor: float.style.positionAnchor }
+        })
+        nav.querySelectorAll('[data-group]').forEach((btn, i) => {
+          btn.style.anchorName = `--nav-group-${i}`
+          btn.addEventListener('click', () => {
+            // collapsed rail: the submenu floats (popover + anchor positioning)
+            if (nav.dataset.collapsed === 'true') {
+              if (Date.now() - floatClosed.at < 250 && floatClosed.anchor === `--nav-group-${i}`)
+                return
+              const g = GROUPS.find((x) => x.name === btn.dataset.group)
+              float.innerHTML = groupItems(g)
+                .map((it) => `<a class="eds-menu-item" role="menuitem" href="${it.href}">${it.label}</a>`)
+                .join('')
+              float.style.positionAnchor = `--nav-group-${i}`
+              float.togglePopover()
+              return
+            }
+            const sub = btn.nextElementSibling
+            const willOpen = sub.hidden
+            // accordion: the open submenu closes when another opens
+            if (willOpen)
+              for (const other of nav.querySelectorAll('[data-group]')) {
+                if (other === btn) continue
+                other.nextElementSibling.hidden = true
+                other.setAttribute('aria-expanded', 'false')
+              }
+            sub.hidden = !willOpen
+            btn.setAttribute('aria-expanded', String(willOpen))
+            syncActiveTrail()
+          })
+        })
+        document.getElementById('nav-collapse').addEventListener('click', () => {
+          if (nav.dataset.collapsed === 'true') delete nav.dataset.collapsed
+          else nav.dataset.collapsed = 'true'
+          if (float.matches(':popover-open')) float.hidePopover()
+          syncActiveTrail()
+        })
+      }
+      let activeId = null
+      function revealInNav(id) {
+        activeId = id
+        for (const g of GROUPS) {
+          const btn = nav.querySelector(`[data-group="${g.name}"]`)
+          const mine = g.ids?.includes(id) ?? false
+          btn.nextElementSibling.hidden = !mine
+          btn.setAttribute('aria-expanded', String(mine))
+        }
+        syncActiveTrail()
+      }
+      // the active TRAIL: when the current sub-item is not visible (rail
+      // collapsed, or its group accordioned shut), its group wears the
+      // current state instead, so the rail always shows where you are.
+      // aria-current, not aria-selected: navigation is CURRENT (valid on any
+      // element, omitted when not), selection belongs to composite widgets
+      function syncActiveTrail() {
+        const collapsed = nav.dataset.collapsed === 'true'
+        for (const g of GROUPS) {
+          const btn = nav.querySelector(`[data-group="${g.name}"]`)
+          const childActive = g.ids?.includes(activeId) ?? false
+          const childHidden = collapsed || btn.nextElementSibling.hidden
+          if (childActive && childHidden) btn.setAttribute('aria-current', 'true')
+          else btn.removeAttribute('aria-current')
+        }
+      }
+
+      async function show(id) {
+        const entry = REGISTRY.find((e) => e.id === id) ?? REGISTRY[0]
+        revealInNav(entry.id)
+        for (const a of nav.querySelectorAll('[data-nav]'))
+          if (a.dataset.nav === entry.id) a.setAttribute('aria-current', 'page')
+          else a.removeAttribute('aria-current')
+
+        const args = {}
+        for (const c of entry.controls) args[c.name] = c.def
+
+        let contract = null
+        let ledgerRows = null
+        if (entry.contract) {
+          try {
+            contract = await (await fetch(`packages/eds-contracts/contracts/${entry.contract}.contract.json`)).json()
+            ledgerRows = await (await fetch(`packages/eds-contracts/build/${entry.contract}.ledger.json`)).json()
+          } catch {}
+        } else if (entry.composition) {
+          try {
+            contract = await (await fetch(`packages/eds-contracts/compositions/${entry.composition}.json`)).json()
+          } catch {}
+        }
+
+        const controlsHtml = entry.controls
+          .map((c) => {
+            if (c.kind === 'enum')
+              return `<fieldset><legend class="eds-label">${c.name}</legend>${c.options
+                .map(
+                  (o) =>
+                    `<label><input class="eds-radio" type="radio" name="ctl-${c.name}" value="${esc(o)}"${o === c.def ? ' checked' : ''} /> ${esc(o)}</label>`,
+                )
+                .join('')}</fieldset>`
+            if (c.kind === 'bool')
+              return `<label><input class="eds-checkbox" type="checkbox" data-ctl="${c.name}"${c.def ? ' checked' : ''} /> <span class="eds-label">${c.name}</span></label>`
+            return `<div class="eds-text-field"><label class="eds-label" for="ctl-${c.name}">${c.name}</label><div class="eds-input"><input id="ctl-${c.name}" data-ctl-text="${c.name}" value="${esc(c.def)}" /></div></div>`
+          })
+          .join('')
+
+        const propsHtml = contract?.props
+          ? `<details class="pane"><summary>Props, read live from the contract</summary><table class="eds-table" data-size="compressed"><thead><tr><th>prop</th><th>type</th><th>default</th><th>description</th></tr></thead><tbody>${contract.props
+              .map(
+                (p) =>
+                  `<tr><td><code>${p.name}</code></td><td><code>${p.type.enum ? p.type.enum.join(' | ') : p.type.boolean ? 'boolean' : 'text'}</code></td><td><code>${esc(String(p.default))}</code></td><td>${esc(p.description ?? '')}</td></tr>`,
+              )
+              .join('')}</tbody></table></details>`
+          : ''
+
+        const ledgerHtml = ledgerRows
+          ? `<details class="pane"><summary>Ledger: what each surface confesses</summary><table class="eds-table ledger-table" data-size="compressed"><thead><tr><th>fact</th><th>CSS</th><th>Figma</th></tr></thead><tbody>${ledgerRows
+              .map(
+                (l) =>
+                  `<tr title="${esc(l.note)}"><td>${esc(l.fact)}</td><td class="d-${l.css}">${l.css}</td><td class="d-${l.figma}">${l.figma}</td></tr>`,
+              )
+              .join('')}</tbody></table></details>`
+          : ''
+
+        page.innerHTML =
+          `<h1>${entry.name}</h1>` +
+          `<p class="meta">${contract?.id ? `<code>${contract.id}</code> v${contract.version ?? ''} — ` : ''}rendered by <code>eds-contracts/build/${(entry.contract ?? entry.composition) + '.css'}</code>, generated from the contract. ${entry.note ? esc(entry.note) : ''}</p>` +
+          (contract?.description ? `<p class="description">${esc(contract.description)}</p>` : '') +
+          `<div class="workbench">` +
+          `<section class="pane"><h2>Preview</h2><div class="stage${entry.wide ? ' wide' : ''}" id="stage"></div></section>` +
+          `<section class="pane"><h2>Controls</h2><div class="controls" id="controls">${controlsHtml}</div></section>` +
+          `</div>` +
+          `<section class="pane"><h2 id="code-label">The actual DOM: data-* and aria-* live</h2><pre class="code" id="code" role="region" tabindex="0" aria-labelledby="code-label"></pre></section>` +
+          propsHtml +
+          ledgerHtml
+
+        const stage = document.getElementById('stage')
+        const code = document.getElementById('code')
+
+        const paint = () => {
+          stage.innerHTML = entry.render(args)
+          if (entry.interactive) entry.interactive(stage, args)
+          refreshCode()
+        }
+        const refreshCode = () => {
+          code.innerHTML = serialize(stage.firstElementChild)
+          code.classList.remove('flash')
+          void code.offsetWidth
+          code.classList.add('flash')
+        }
+        // interactions inside the stage (collapse, checkboxes, :user-invalid…)
+        // update the pane WITHOUT re-rendering — the DOM is the truth
+        new MutationObserver(refreshCode).observe(stage, {
+          subtree: true,
+          attributes: true,
+          childList: true,
+        })
+        stage.addEventListener('change', refreshCode)
+
+        document.getElementById('controls').addEventListener('change', (e) => {
+          const t = e.target
+          if (t.name?.startsWith('ctl-')) args[t.name.slice(4)] = t.value
+          else if (t.dataset.ctl) args[t.dataset.ctl] = t.checked
+          else return
+          paint()
+        })
+        document.getElementById('controls').addEventListener('input', (e) => {
+          const t = e.target
+          if (t.dataset.ctlText) {
+            args[t.dataset.ctlText] = t.value
+            paint()
+          }
+        })
+        paint()
+      }
+
+      /* ---------- chrome behaviour ---------- */
+      buildNav()
+      document.getElementById('filter').addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase()
+        for (const g of GROUPS) {
+          const btn = nav.querySelector(`[data-group="${g.name}"]`)
+          const sub = btn.nextElementSibling
+          let hits = 0
+          for (const a of sub.querySelectorAll('a')) {
+            const hit = !q || (a.dataset.nav ?? '').includes(q) || a.textContent.toLowerCase().includes(q)
+            a.style.display = hit ? '' : 'none'
+            if (hit) hits++
+          }
+          btn.style.display = q && hits === 0 ? 'none' : ''
+          if (q && hits > 0) {
+            sub.hidden = false
+            btn.setAttribute('aria-expanded', 'true')
+          }
+        }
+      })
+      for (const b of document.querySelectorAll('[data-density-pick]'))
+        b.addEventListener('click', () => {
+          document.documentElement.dataset.density = b.dataset.densityPick
+          for (const x of document.querySelectorAll('[data-density-pick]'))
+            x.toggleAttribute('aria-pressed', x === b)
+        })
+      document.getElementById('scheme-toggle').addEventListener('click', () => {
+        const h = document.documentElement
+        h.dataset.colorScheme = h.dataset.colorScheme === 'light' ? 'dark' : 'light'
+      })
+      addEventListener('hashchange', () => {
+        const float = document.getElementById('nav-float')
+        if (float.matches(':popover-open')) float.hidePopover()
+        show(location.hash.slice(1))
+      })
+      show(location.hash.slice(1) || 'button')
+    </script>
+  </body>
+</html>

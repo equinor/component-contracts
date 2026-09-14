@@ -1,0 +1,88 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.tab",
+  "version": "0.2.0",
+  "description": "Tab \u2014 a ghost selectable with a bottom border. md squared (Curtis: a tab is squared where a button is squished), so heights resolve to 32 / 44 / 52 across densities. Resting: transparent fill, subtle text, subtle underline. Selected: accent text and accent-medium underline \u2014 state, not affordance: no selected-hover (why re-click a selected tab?), but it stays focusable (the WAI-ARIA tabs pattern puts roving tabindex on the selected tab).",
+  "notes": "Colour pairings verified against the EDS Core colour usage file (node 8349:2422). The file's hover used bg-fill-muted-default because the ghost ladder did not exist yet \u2014 fill-ghost-hover is the same palette step, properly named. The file's disabled used an opacity variable (Interaction/Disabled); this contract uses disabled tokens instead, per our system and ADR-0016. Resting text is subtle per the usage file. v0.2.0 (2026-08-30, review walk): label md -> lg \u2014 the original tab is 16px (comfortable), compressed, in the md-squared box; heights re-derive to 36/44/52. The team\u2019s new 14px tab is a redesign we do not follow (their added badge is a good call for product needs \u2014 credit where due \u2014 but out of scope here). Resting text stays SUBTLE, confirmed: tabs are navigation, not content \u2014 you navigate, you are there; they must not get in the way.",
+  "props": [
+    {
+      "name": "label",
+      "description": "The tab's text.",
+      "type": {
+        "text": true
+      },
+      "default": "Tab",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "align": "center"
+      },
+      "inset": {
+        "size": "md",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-neutral-fill-ghost-default}",
+        "border-bottom-color": "{color.semantic.border-subtle}"
+      }
+    },
+    "label": {
+      "typography": {
+        "label": "lg",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-subtle}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-hover}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "root/border-bottom-color": "{color.semantic.border-accent-medium}",
+        "label/color": "{color.semantic.text-accent-strong}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "label/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "button",
+    "role": "tab",
+    "aria": {
+      "aria-selected": "the selected state; carried as [aria-selected] in CSS, lowered to the State=Selected variant in Figma"
+    }
+  }
+}

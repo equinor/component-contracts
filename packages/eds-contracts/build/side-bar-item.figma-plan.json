@@ -1,0 +1,190 @@
+{
+  "component": "eds.side-bar-item",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-lg-squared-md-label",
+      "collection": "density",
+      "values": {
+        "compact": 14,
+        "comfortable": 18,
+        "relaxed": 20
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-lg-vertical-squared) - var(--eds-half-leading-md))",
+      "description": "eds.side-bar-item: md label in the lg-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 40/52/60."
+    }
+  ],
+  "componentSet": {
+    "name": "Side-bar-item",
+    "description": "SideBar item — the navigation row. lg-squared inset around an md compressed label (heights 40/52/60; the inset absorbs the half-leading), a swappable leading icon in the md cap cell, ghost ladder at rest, accent when selected (fill + strong underline ink + accent glyph/label), and a thin subtle underline as the list separator — items stack with no gap, the borders are the rhythm. Collapsed: an icon-only square (width = height = inset×2 + cap) — the icon centres itself, because (height − glyph)/2 = inset − (glyph − cap)/2 is an identity of the optical system. Has Menu: a chevron trails when expanded; a small corner flag (bottom-right) marks the submenu when collapsed.\n\nGenerated from eds.side-bar-item v0.2.0 — edit the contract, not this component.",
+    "axes": {
+      "Collapsed": [
+        "False",
+        "True"
+      ],
+      "State": [
+        "Default",
+        "Hover",
+        "Active",
+        "Selected"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Menu item",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Has Menu",
+        "default": false,
+        "part": "chevron",
+        "parts": [
+          "chevron",
+          "flag"
+        ]
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "underlineVar": "sizing/stroke-thin",
+      "fixedWidth": 256
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swap": {
+          "property": "↳ Icon",
+          "componentKey": "9596d7b5e9122ea96509f9c0910c894185ab92a6"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Menu item",
+        "fill": true
+      },
+      {
+        "kind": "glyph",
+        "name": "chevron",
+        "swap": {
+          "componentKey": "ab33a936157d8b357adb26228c9147e6c530a3e9",
+          "icon": "chevron_down"
+        }
+      },
+      {
+        "kind": "flag",
+        "name": "flag",
+        "corner": "bottom-right"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          },
+          "chevron": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-lg-squared-md-label",
+        "paddingInline": "spacing/inset-lg-horizontal",
+        "insetVar": "spacing/inset-lg-vertical-squared",
+        "gap": "spacing/icon-md-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/compressed/md"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Collapsed=False, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "Collapsed=False, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "Collapsed=False, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "Collapsed=False, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-selected",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "borderBottom": "semantic/border-accent-strong",
+        "glyphFg": {
+          "chevron": "semantic/icon-neutral"
+        }
+      },
+      {
+        "name": "Collapsed=True, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle",
+        "collapsed": true,
+        "iconOnly": "icon"
+      },
+      {
+        "name": "Collapsed=True, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle",
+        "collapsed": true,
+        "iconOnly": "icon"
+      },
+      {
+        "name": "Collapsed=True, State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral",
+        "borderBottom": "semantic/border-neutral-subtle",
+        "collapsed": true,
+        "iconOnly": "icon"
+      },
+      {
+        "name": "Collapsed=True, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-selected",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent",
+        "borderBottom": "semantic/border-accent-strong",
+        "collapsed": true,
+        "iconOnly": "icon",
+        "glyphFg": {
+          "chevron": "semantic/icon-neutral"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<!--
+DERIVED (computed with skill scripts, not transcribed from DESIGN.md):
+- Control geometry for both button sizes, all 3 densities, via
+  `spacing-ladder/scripts/spacing.py control --size {md|sm} --proportion squished
+  --label {md|sm} [--icon {md|xs}] --density all`. This produced padding-block,
+  padding-inline, the vertical inset used in min-height, and heights 24/36/44
+  (md) and 20/24/36 (sm) at compact/comfortable/relaxed. The md heights match
+  DESIGN.md's own eds.button layout row (24/36/44) exactly, confirming the
+  document and the script agree here -- no mismatch found for md.
+- The glyph seat (icon size + negative margin so the icon's box is the label's
+  cap cell) via `spacing.py glyph --label {md|sm} --icon {md|xs} --density all`
+  and `control ... --icon ...`: md pairs a md label with a md icon (comfortable:
+  cap 12, glyph 20, margin -4px); sm pairs a sm label with an xs icon
+  (comfortable: cap 8, glyph 16, margin -4px) -- this sm/xs pairing and its
+  comfortable-density numbers (cap 8, glyph 16, margin -4) are the worked
+  example given verbatim in spacing-ladder/SKILL.md section 5, so the script
+  output reproduces the skill's own documented fixture.
+- The icon-only ("ghost-icon") square footprint via `spacing.py control --size
+  {md|sm} --label {md|sm} --icon-only --density all`: 24/36/44 (md) and
+  20/24/36 (sm), padding equal on all sides once half-leading correction drops
+  out. The sm icon-only comfortable value (24x24) matches DESIGN.md's
+  `sizing-selectable-sm` (24px) and the WCAG 2.5.8 target-size floor the
+  document calls out.
+- Font sizes and compressed line-heights per size/density via
+  `typography-scale/scripts/scale.py --format table --density all`: the sm
+  step (12/12/14px across densities) and md step (14/16px.../ etc.) reproduce
+  DESIGN.md's body-sm / body-md / body-xs / body-lg fontSize + compressed
+  lineHeight entries exactly (e.g. compact sm label = 10.5px = 0.65625rem =
+  DESIGN.md's body-xs fontSize) -- cross-checked, no mismatch.
+- Both scripts' own `check` subcommands were run and passed
+  (`spacing.py check`, `scale.py --check`) before any value below was used.
+- Icon-color vs label-color are bound to DIFFERENT tokens per colour-fill-tiers
+  (icon-* is the APCA Lc60 "subtle" step, text-*-strong/-on-emphasis is Lc90),
+  so the two are never simplified to one `currentColor`.
+- Disabled background: colour-fill-tiers states the emphasis tier alone gets a
+  grey PLATE (`bg-fill-emphasis-disabled`) on disabled, while ghost/secondary
+  keep their (already transparent) fill and only swap ink/border to the
+  disabled grey. DESIGN.md's own button recipe table leaves the
+  `root/background-color` disabled cells blank for every variant, which its
+  stated convention ("blank cells fall back to rest") would read as "primary
+  stays coloured when disabled" -- but its ledger explicitly refuses to invent
+  a disabled binding only for variant=secondary/ghost/ghost-icon, never for
+  primary, and the palette *does* carry a `bg-fill-emphasis-disabled` token
+  that exists for no other purpose. Read together, the blank cell in the
+  digest looks like an omission of the VERBOSE table rather than a real "no
+  change" instruction. This file follows colour-fill-tiers and gives primary
+  the grey-plate swap; flagged here as a resolved conflict, not a silent
+  guess.
+-->
+<!--
+GUESSED (no source states these; professional defaults, confessed in full):
+- Button label font-weight: 500 (medium). Neither DESIGN.md nor any skill
+  gives a button font-weight; Inter's default 400 read too light against the
+  filled primary tier in a quick visual check, so 500 was chosen.
+- Which tone/variant/size is the attribute-omitted "default" (ADR-0006: omit
+  the attribute for the default value). Density's default (comfortable) is
+  derivable from typography-scale's own constants (density multiplier 1). For
+  the others there is no equivalent evidence, so: tone defaults to `neutral`
+  (accent is explicitly "budgeted," danger is explicit opt-in), size defaults
+  to `md`, and variant defaults to `secondary` (a bordered, everyday action --
+  primary reads as "used sparingly, one per view" per DESIGN.md, so it is a
+  poor candidate for the silent default). The demo grid below still writes
+  every attribute explicitly for legibility; only the single bare button in
+  the "conventions" note relies on the omission.
+- The actual icon glyphs (plus / arrow / download / trash / settings /
+  bookmark). The sources fix icon SIZE and SEAT precisely but never an icon
+  library or glyph shapes, so these are generic hand-drawn line icons
+  (stroke=currentColor, 24x24 viewBox), standing in for whatever icon set EDS
+  actually ships.
+- Button label copy ("Save", "Delete account", ...) -- placeholder strings to
+  make the grid legible, not sourced.
+- Focus treatment: implemented as a 2px `outline` in `border-focus`/
+  `border-focus-dark` with a 2px offset on `:focus-visible`, rather than
+  swapping the drawn border, because DESIGN.md explicitly calls the ring
+  "the PLATFORM's, not a designable state" and ghost/primary variants have no
+  border to swap in the first place; an outline is the one mechanism that
+  applies uniformly to bordered and borderless variants alike.
+- Disabled `cursor` and removal of hover/active affordance on `:disabled` --
+  standard practice, not stated in any source.
+- The five states rendered per swatch are rest/hover/active/focus/disabled.
+  DESIGN.md's own component table lists eds.button's states as "hover, focus,
+  active, disabled, disabled" (disabled appears twice) -- read as a
+  documentation artefact of the VERBOSE digest generator, not a sixth state;
+  only one disabled column is built.
+- The "with icon" and "icon-only" sections cover every tone x variant (or
+  tone, for the single ghost-icon shape) x state x size combination; nothing
+  was pruned for scope, since the task asked for the full derivable set.
+- Density (compact/comfortable/relaxed) and color-scheme (light/dark) are
+  wired as global toggles rather than rendered simultaneously side-by-side,
+  because DESIGN.md's own Modes section says outright: "never mix densities
+  in one view" -- so a toggle is the spec-compliant way to show the axis, not
+  a shortcut. Size, by contrast, IS a component axis (tone(3) x variant(4) x
+  size(2)) meant to coexist in one view, so both sizes are rendered at once
+  in every grid below.
+-->
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDS -- Button</title>
+<style>
+  /* ============================================================
+     TOKENS -- color, per color-scheme (paired name / name-dark)
+     ============================================================ */
+  :root,
+  [data-color-scheme="light"] {
+    --eds-color-canvas: #f5f5f5;
+    --eds-color-surface: #ffffff;
+    --eds-color-text-strong: #1d1d1d;
+    --eds-color-text-subtle: #585858;
+    --eds-color-border-subtle: #d4d4d4;
+    --eds-color-border-focus: #6fb6e8;
+
+    --eds-color-bg-neutral-fill-emphasis-default: #636363;
+    --eds-color-bg-neutral-fill-emphasis-hover: #525252;
+    --eds-color-bg-neutral-fill-emphasis-active: #4d4d4d;
+    --eds-color-bg-fill-emphasis-disabled: #e1e1e1;
+    --eds-color-bg-neutral-fill-ghost-default: transparent;
+    --eds-color-bg-neutral-fill-ghost-hover: #e1e1e1;
+    --eds-color-bg-neutral-fill-ghost-active: #d4d4d4;
+    --eds-color-icon-neutral-on-emphasis: #dedede;
+    --eds-color-text-neutral-strong-on-emphasis: #ffffff;
+    --eds-color-icon-neutral: #585858;
+    --eds-color-text-neutral-strong: #1d1d1d;
+    --eds-color-border-neutral-strong: #696969;
+
+    --eds-color-bg-accent-fill-emphasis-default: #206f77;
+    --eds-color-bg-accent-fill-emphasis-hover: #1f5c63;
+    --eds-color-bg-accent-fill-emphasis-active: #20565c;
+    --eds-color-bg-accent-fill-ghost-default: transparent;
+    --eds-color-bg-accent-fill-ghost-hover: #d2e6e3;
+    --eds-color-bg-accent-fill-ghost-active: #c0dbd6;
+    --eds-color-icon-accent-on-emphasis: #cae4e7;
+    --eds-color-text-accent-strong-on-emphasis: #ffffff;
+    --eds-color-icon-accent: #206369;
+    --eds-color-text-accent-strong: #151f20;
+    --eds-color-border-accent-strong: #277678;
+
+    --eds-color-bg-danger-fill-emphasis-default: #bb002b;
+    --eds-color-bg-danger-fill-emphasis-hover: #9a1026;
+    --eds-color-bg-danger-fill-emphasis-active: #8e1525;
+    --eds-color-bg-danger-fill-ghost-default: transparent;
+    --eds-color-bg-danger-fill-ghost-hover: #ffd6d4;
+    --eds-color-bg-danger-fill-ghost-active: #ffc3c1;
+    --eds-color-icon-danger-on-emphasis: #ffd1cf;
+    --eds-color-text-danger-strong-on-emphasis: #ffffff;
+    --eds-color-icon-danger: #a50827;
+    --eds-color-text-danger-strong: #2e1414;
+    --eds-color-border-danger-strong: #c5002e;
+
+    --eds-color-text-disabled: #aeaeae;
+    --eds-color-border-disabled: #aeaeae;
+  }
+
+  [data-color-scheme="dark"] {
+    --eds-color-canvas: #060c13;
+    --eds-color-surface: #152332;
+    --eds-color-text-strong: #f9fcff;
+    --eds-color-text-subtle: #d6e3ee;
+    --eds-color-border-subtle: #4b5d71;
+    --eds-color-border-focus: #2d8bc5;
+
+    --eds-color-bg-neutral-fill-emphasis-default: #b4c7d6;
+    --eds-color-bg-neutral-fill-emphasis-hover: #cbdae6;
+    --eds-color-bg-neutral-fill-emphasis-active: #deeaf4;
+    --eds-color-bg-fill-emphasis-disabled: #4b5d71;
+    --eds-color-bg-neutral-fill-ghost-default: transparent;
+    --eds-color-bg-neutral-fill-ghost-hover: #4b5d71;
+    --eds-color-bg-neutral-fill-ghost-active: #536b87;
+    --eds-color-icon-neutral-on-emphasis: #323639;
+    --eds-color-text-neutral-strong-on-emphasis: #030303;
+    --eds-color-icon-neutral: #d6e3ee;
+    --eds-color-text-neutral-strong: #f9fcff;
+    --eds-color-border-neutral-strong: #99b5ce;
+
+    --eds-color-bg-accent-fill-emphasis-default: #8cd2da;
+    --eds-color-bg-accent-fill-emphasis-hover: #ace3e9;
+    --eds-color-bg-accent-fill-emphasis-active: #c7f1f6;
+    --eds-color-bg-accent-fill-ghost-default: transparent;
+    --eds-color-bg-accent-fill-ghost-hover: #42625d;
+    --eds-color-bg-accent-fill-ghost-active: #47726c;
+    --eds-color-icon-accent-on-emphasis: #2d3839;
+    --eds-color-text-accent-strong-on-emphasis: #030303;
+    --eds-color-icon-accent: #bcebf1;
+    --eds-color-text-accent-strong: #f4feff;
+    --eds-color-border-accent-strong: #73c0c3;
+
+    --eds-color-bg-danger-fill-emphasis-default: #ffaaa8;
+    --eds-color-bg-danger-fill-emphasis-hover: #ffc8c5;
+    --eds-color-bg-danger-fill-emphasis-active: #ffdfde;
+    --eds-color-bg-danger-fill-ghost-default: transparent;
+    --eds-color-bg-danger-fill-ghost-hover: #923a3d;
+    --eds-color-bg-danger-fill-ghost-active: #b03940;
+    --eds-color-icon-danger-on-emphasis: #492d2c;
+    --eds-color-text-danger-strong-on-emphasis: #030303;
+    --eds-color-icon-danger: #ffd6d4;
+    --eds-color-text-danger-strong: #fffbfa;
+    --eds-color-border-danger-strong: #ff8989;
+
+    --eds-color-text-disabled: #6886a5;
+    --eds-color-border-disabled: #6886a5;
+  }
+
+  /* ============================================================
+     TOKENS -- geometry, per density (comfortable is the default,
+     so it is also the unattributed :root case -- ADR-0006).
+     Values below are the DERIVED numbers from spacing.py / scale.py,
+     baked per density (the demo targets evergreen browsers and could
+     ship the live round()/pow() expressions instead -- see DESIGN.md
+     do/don't example -- baked values were chosen here only to keep
+     this static file's numbers pinned to the exact script run above).
+     ============================================================ */
+  :root,
+  [data-density="comfortable"] {
+    --_pad-b-md: 10px; --_pad-i-md: 16px; --_inset-v-md: 12px; --_cap-md: 12px;
+    --_font-md: 0.875rem; --_line-md: 16px; --_gap-md: 8px;
+    --_icon-md: 20px; --_icon-margin-md: -4px;
+
+    --_pad-b-sm: 6px; --_pad-i-sm: 12px; --_inset-v-sm: 8px; --_cap-sm: 8px;
+    --_font-sm: 0.75rem; --_line-sm: 12px; --_gap-sm: 8px;
+    --_icon-sm: 16px; --_icon-margin-sm: -4px;
+
+    --_pad-io-md: 12px;
+    --_pad-io-sm: 8px;
+  }
+
+  [data-density="compact"] {
+    --_pad-b-md: 6px; --_pad-i-md: 12px; --_inset-v-md: 8px; --_cap-md: 8px;
+    --_font-md: 0.75rem; --_line-md: 12px; --_gap-md: 8px;
+    --_icon-md: 18px; --_icon-margin-md: -5px;
+
+    --_pad-b-sm: 4px; --_pad-i-sm: 8px; --_inset-v-sm: 6px; --_cap-sm: 8px;
+    --_font-sm: 0.65625rem; --_line-sm: 12px; --_gap-sm: 6px;
+    --_icon-sm: 14px; --_icon-margin-sm: -3px;
+
+    --_pad-io-md: 8px;
+    --_pad-io-sm: 6px;
+  }
+
+  [data-density="relaxed"] {
+    --_pad-b-md: 12px; --_pad-i-md: 20px; --_inset-v-md: 16px; --_cap-md: 12px;
+    --_font-md: 1rem; --_line-md: 20px; --_gap-md: 10px;
+    --_icon-md: 24px; --_icon-margin-md: -6px;
+
+    --_pad-b-sm: 10px; --_pad-i-sm: 16px; --_inset-v-sm: 12px; --_cap-sm: 12px;
+    --_font-sm: 0.875rem; --_line-sm: 16px; --_gap-sm: 8px;
+    --_icon-sm: 18px; --_icon-margin-sm: -3px;
+
+    --_pad-io-md: 16px;
+    --_pad-io-sm: 12px;
+  }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--eds-color-canvas);
+    color: var(--eds-color-text-strong);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 0 4rem;
+  }
+
+  h1, h2, h3 { font-weight: 600; }
+
+  .eds-page-head {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--eds-color-surface);
+    border-bottom: 1px solid var(--eds-color-border-subtle);
+    padding: 16px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .eds-page-head h1 { font-size: 1.25rem; margin: 0; margin-right: auto; }
+
+  .eds-control { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; }
+  .eds-control label { color: var(--eds-color-text-subtle); }
+  .eds-control select,
+  .eds-control button.eds-toggle {
+    font: inherit;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--eds-color-border-subtle);
+    background: var(--eds-color-surface);
+    color: var(--eds-color-text-strong);
+    cursor: pointer;
+  }
+
+  main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+
+  section.eds-demo-section { margin-block: 40px; }
+  section.eds-demo-section > h2 {
+    font-size: 1.0625rem;
+    border-bottom: 1px solid var(--eds-color-border-subtle);
+    padding-bottom: 8px;
+  }
+  section.eds-demo-section > p.eds-note {
+    color: var(--eds-color-text-subtle);
+    font-size: 0.875rem;
+    max-width: 70ch;
+  }
+
+  .eds-demo-subhead {
+    font-size: 0.9375rem;
+    margin-top: 28px;
+    color: var(--eds-color-text-subtle);
+  }
+
+  table.eds-demo-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.8125rem;
+  }
+  table.eds-demo-table th,
+  table.eds-demo-table td {
+    border: 1px solid var(--eds-color-border-subtle);
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  table.eds-demo-table th[scope="col"] {
+    background: var(--eds-color-surface);
+    color: var(--eds-color-text-subtle);
+    font-weight: 500;
+  }
+  table.eds-demo-table th[scope="row"] {
+    background: var(--eds-color-surface);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  table.eds-demo-table--icon-only td { text-align: center; }
+
+  .eds-conventions {
+    font-size: 0.875rem;
+    background: var(--eds-color-surface);
+    border: 1px solid var(--eds-color-border-subtle);
+    border-radius: 4px;
+    padding: 16px 20px;
+  }
+  .eds-conventions code { background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 3px; }
+
+  /* ============================================================
+     THE BUTTON -- base rule is the omitted-attribute default:
+     neutral tone, secondary variant, md size, comfortable density.
+     ============================================================ */
+  .eds-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    font-family: inherit;
+    font-weight: 500; /* GUESSED -- no source states a button label weight */
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* {rounded.md} */
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    /* size: md (default, unattributed) */
+    padding-block: var(--_pad-b-md);
+    padding-inline: var(--_pad-i-md);
+    gap: var(--_gap-md);
+    font-size: var(--_font-md);
+    line-height: var(--_line-md);
+    /* height is never authored -- it emerges from inset x 2 + cap,
+       matching DESIGN.md's own DO example */
+    min-height: calc(var(--_inset-v-md) * 2 + var(--_cap-md));
+
+    /* tone: neutral, variant: secondary (default/omitted) */
+    --_bg-rest: var(--eds-color-bg-neutral-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-neutral-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-neutral-fill-ghost-active);
+    --_ink: var(--eds-color-text-neutral-strong);
+    --_icon-ink: var(--eds-color-icon-neutral);
+    --_border: var(--eds-color-border-neutral-strong);
+
+    background-color: var(--_bg-rest);
+    color: var(--_ink);
+    border-color: var(--_border);
+  }
+
+  .eds-button[data-size="sm"] {
+    padding-block: var(--_pad-b-sm);
+    padding-inline: var(--_pad-i-sm);
+    gap: var(--_gap-sm);
+    font-size: var(--_font-sm);
+    line-height: var(--_line-sm);
+    min-height: calc(var(--_inset-v-sm) * 2 + var(--_cap-sm));
+  }
+
+  /* ---- variant: primary (emphasis tier) ---- */
+  .eds-button[data-variant="primary"] {
+    border-color: transparent;
+  }
+  .eds-button[data-tone="neutral"][data-variant="primary"] {
+    --_bg-rest: var(--eds-color-bg-neutral-fill-emphasis-default);
+    --_bg-hover: var(--eds-color-bg-neutral-fill-emphasis-hover);
+    --_bg-active: var(--eds-color-bg-neutral-fill-emphasis-active);
+    --_ink: var(--eds-color-text-neutral-strong-on-emphasis);
+    --_icon-ink: var(--eds-color-icon-neutral-on-emphasis);
+  }
+  .eds-button[data-tone="accent"][data-variant="primary"] {
+    --_bg-rest: var(--eds-color-bg-accent-fill-emphasis-default);
+    --_bg-hover: var(--eds-color-bg-accent-fill-emphasis-hover);
+    --_bg-active: var(--eds-color-bg-accent-fill-emphasis-active);
+    --_ink: var(--eds-color-text-accent-strong-on-emphasis);
+    --_icon-ink: var(--eds-color-icon-accent-on-emphasis);
+  }
+  .eds-button[data-tone="danger"][data-variant="primary"] {
+    --_bg-rest: var(--eds-color-bg-danger-fill-emphasis-default);
+    --_bg-hover: var(--eds-color-bg-danger-fill-emphasis-hover);
+    --_bg-active: var(--eds-color-bg-danger-fill-emphasis-active);
+    --_ink: var(--eds-color-text-danger-strong-on-emphasis);
+    --_icon-ink: var(--eds-color-icon-danger-on-emphasis);
+  }
+
+  /* ---- variant: secondary (ghost fill ladder + a tone border) ---- */
+  .eds-button[data-tone="neutral"][data-variant="secondary"] {
+    --_bg-rest: var(--eds-color-bg-neutral-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-neutral-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-neutral-fill-ghost-active);
+    --_ink: var(--eds-color-text-neutral-strong);
+    --_icon-ink: var(--eds-color-icon-neutral);
+    --_border: var(--eds-color-border-neutral-strong);
+  }
+  .eds-button[data-tone="accent"][data-variant="secondary"] {
+    --_bg-rest: var(--eds-color-bg-accent-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-accent-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-accent-fill-ghost-active);
+    --_ink: var(--eds-color-text-accent-strong);
+    --_icon-ink: var(--eds-color-icon-accent);
+    --_border: var(--eds-color-border-accent-strong);
+  }
+  .eds-button[data-tone="danger"][data-variant="secondary"] {
+    --_bg-rest: var(--eds-color-bg-danger-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-danger-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-danger-fill-ghost-active);
+    --_ink: var(--eds-color-text-danger-strong);
+    --_icon-ink: var(--eds-color-icon-danger);
+    --_border: var(--eds-color-border-danger-strong);
+  }
+
+  /* ---- variant: ghost (same fill ladder, no border) ---- */
+  .eds-button[data-variant="ghost"],
+  .eds-button[data-variant="ghost-icon"] {
+    border-color: transparent;
+  }
+  .eds-button[data-tone="neutral"][data-variant="ghost"],
+  .eds-button[data-tone="neutral"][data-variant="ghost-icon"] {
+    --_bg-rest: var(--eds-color-bg-neutral-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-neutral-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-neutral-fill-ghost-active);
+    --_ink: var(--eds-color-text-neutral-strong);
+    --_icon-ink: var(--eds-color-icon-neutral);
+  }
+  .eds-button[data-tone="accent"][data-variant="ghost"],
+  .eds-button[data-tone="accent"][data-variant="ghost-icon"] {
+    --_bg-rest: var(--eds-color-bg-accent-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-accent-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-accent-fill-ghost-active);
+    --_ink: var(--eds-color-text-accent-strong);
+    --_icon-ink: var(--eds-color-icon-accent);
+  }
+  .eds-button[data-tone="danger"][data-variant="ghost"],
+  .eds-button[data-tone="danger"][data-variant="ghost-icon"] {
+    --_bg-rest: var(--eds-color-bg-danger-fill-ghost-default);
+    --_bg-hover: var(--eds-color-bg-danger-fill-ghost-hover);
+    --_bg-active: var(--eds-color-bg-danger-fill-ghost-active);
+    --_ink: var(--eds-color-text-danger-strong);
+    --_icon-ink: var(--eds-color-icon-danger);
+  }
+
+  /* ---- variant: ghost-icon (pill, icon-only square, no label) ---- */
+  .eds-button[data-variant="ghost-icon"] {
+    border-radius: 1000px; /* {rounded.pill} -- earned, not decorative: the
+                               circle falls out of the icon-only geometry */
+    padding: var(--_pad-io-md);
+    aspect-ratio: 1;
+    gap: 0;
+  }
+  .eds-button[data-variant="ghost-icon"][data-size="sm"] {
+    padding: var(--_pad-io-sm);
+  }
+
+  /* ---- icon ---- */
+  .eds-icon {
+    flex: none;
+    width: var(--_icon-md);
+    height: var(--_icon-md);
+    margin: var(--_icon-margin-md);
+    color: var(--_icon-ink);
+    stroke: currentColor;
+    fill: none;
+  }
+  .eds-button[data-size="sm"] .eds-icon {
+    width: var(--_icon-sm);
+    height: var(--_icon-sm);
+    margin: var(--_icon-margin-sm);
+  }
+
+  /* ---- states: hover / active change ONLY the fill, per
+     colour-fill-tiers ("a hover that also changes the border ...
+     is a second component wearing the first one's name") ---- */
+  .eds-button:not(:disabled):hover,
+  .eds-button[data-force-state="hover"] {
+    background-color: var(--_bg-hover);
+  }
+  .eds-button:not(:disabled):active,
+  .eds-button[data-force-state="active"] {
+    background-color: var(--_bg-active);
+  }
+
+  /* ---- focus: the platform's ring, bound to border-focus,
+     applied uniformly as an outline (see GUESSED above) ---- */
+  .eds-button:focus-visible,
+  .eds-button[data-force-state="focus"] {
+    outline: 2px solid var(--eds-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* ---- disabled: states change only what they declare.
+     Every variant: ink + border -> the disabled grey.
+     Primary only: background -> the emphasis-disabled grey plate
+     (DERIVED decision, see comment at top of file). ---- */
+  .eds-button:disabled,
+  .eds-button[data-force-state="disabled"] {
+    cursor: not-allowed;
+    color: var(--eds-color-text-disabled);
+    border-color: var(--eds-color-border-disabled);
+  }
+  .eds-button:disabled .eds-icon,
+  .eds-button[data-force-state="disabled"] .eds-icon {
+    color: var(--eds-color-text-disabled);
+  }
+  .eds-button[data-variant="primary"]:disabled,
+  .eds-button[data-variant="primary"][data-force-state="disabled"] {
+    background-color: var(--eds-color-bg-fill-emphasis-disabled);
+  }
+
+  .eds-sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+</head>
+<body>
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 2 of 3: the document plus five skills.</strong> Geometry is computed, not guessed: the agent ran spacing.py, derived 24/36/44 and both size rungs, and self-tested the scripts first. This is the re-run after the skills learnt the glyph seat: <strong>icons sit at 0px drift, measured</strong>. What remains guessed is interpretive (defaults, glyphs, copy); the first run confessed 5 guesses and seated icons 4px low (attempt-2-first.html).</span></aside>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 3h4M7 7l1 13h8l1-13M10 11v6M14 11v6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke-width="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3z" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="eds-page-head">
+  <h1>EDS -- Button (v0.8.0 digest)</h1>
+
+  <div class="eds-control">
+    <label for="density-select">Density</label>
+    <select id="density-select">
+      <option value="compact">Compact</option>
+      <option value="comfortable" selected>Comfortable (default)</option>
+      <option value="relaxed">Relaxed</option>
+    </select>
+  </div>
+
+  <div class="eds-control">
+    <button type="button" class="eds-toggle" id="scheme-toggle" aria-pressed="false">
+      Switch to dark
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="eds-demo-section">
+    <h2>Conventions</h2>
+    <div class="eds-conventions">
+      <p style="margin-top:0">
+        Variants are <code>data-*</code> attributes named after the axis
+        (ADR-0006); the default value's attribute is omitted. Below, the
+        default combination -- <code>data-tone="neutral"</code>,
+        <code>data-variant="secondary"</code>, no <code>data-size</code>
+        (= md) -- renders from a completely bare element:
+      </p>
+      <p><button class="eds-button">Bare default button</button></p>
+      <p style="margin-bottom:0">
+        Every other swatch below states its tone/variant/size explicitly for
+        legibility, even where that repeats the default.
+        States are the platform's, not classes: this file adds
+        <code>data-force-state</code> only so every state can be seen at once
+        without you having to hover/click/tab through 200+ buttons -- the real
+        <code>:hover</code>, <code>:active</code> and <code>:focus-visible</code>
+        rules are also live on every enabled button above, and
+        <code>disabled</code> swatches carry the real attribute.
+      </p>
+    </div>
+  </section>
+
+  <section class="eds-demo-section">
+    <h2>Label only</h2>
+    <p class="eds-note">tone(3) x variant(3: primary/secondary/ghost) x size(2) x state(5)</p>
+    <h3 class="eds-demo-subhead">Medium — md (default)</h3>
+<table class="eds-demo-table"><thead><tr><th scope="col">Tone / variant</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral · Primary</th><td><button class="eds-button" data-tone="neutral" data-variant="primary">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="hover">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="active">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="focus">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" disabled>Save</button></td></tr>
+<tr><th scope="row">Neutral · Secondary</th><td><button class="eds-button" data-tone="neutral" data-variant="secondary">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="hover">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="active">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="focus">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" disabled>Cancel</button></td></tr>
+<tr><th scope="row">Neutral · Ghost</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="hover">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="active">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="focus">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" disabled>Learn more</button></td></tr>
+<tr><th scope="row">Accent · Primary</th><td><button class="eds-button" data-tone="accent" data-variant="primary">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="hover">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="active">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="focus">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" disabled>Save changes</button></td></tr>
+<tr><th scope="row">Accent · Secondary</th><td><button class="eds-button" data-tone="accent" data-variant="secondary">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="hover">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="active">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="focus">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" disabled>Continue</button></td></tr>
+<tr><th scope="row">Accent · Ghost</th><td><button class="eds-button" data-tone="accent" data-variant="ghost">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="hover">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="active">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="focus">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" disabled>View details</button></td></tr>
+<tr><th scope="row">Danger · Primary</th><td><button class="eds-button" data-tone="danger" data-variant="primary">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="hover">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="active">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="focus">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" disabled>Delete account</button></td></tr>
+<tr><th scope="row">Danger · Secondary</th><td><button class="eds-button" data-tone="danger" data-variant="secondary">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="hover">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="active">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="focus">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" disabled>Remove item</button></td></tr>
+<tr><th scope="row">Danger · Ghost</th><td><button class="eds-button" data-tone="danger" data-variant="ghost">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="hover">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="active">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="focus">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" disabled>Discard</button></td></tr>
+</tbody></table>
+<h3 class="eds-demo-subhead">Small — sm</h3>
+<table class="eds-demo-table"><thead><tr><th scope="col">Tone / variant</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral · Primary</th><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="hover">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="active">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="focus">Save</button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" disabled>Save</button></td></tr>
+<tr><th scope="row">Neutral · Secondary</th><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="hover">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="active">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="focus">Cancel</button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" disabled>Cancel</button></td></tr>
+<tr><th scope="row">Neutral · Ghost</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="hover">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="active">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="focus">Learn more</button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" disabled>Learn more</button></td></tr>
+<tr><th scope="row">Accent · Primary</th><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="hover">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="active">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="focus">Save changes</button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" disabled>Save changes</button></td></tr>
+<tr><th scope="row">Accent · Secondary</th><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="hover">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="active">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="focus">Continue</button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" disabled>Continue</button></td></tr>
+<tr><th scope="row">Accent · Ghost</th><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="hover">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="active">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="focus">View details</button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" disabled>View details</button></td></tr>
+<tr><th scope="row">Danger · Primary</th><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="hover">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="active">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="focus">Delete account</button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" disabled>Delete account</button></td></tr>
+<tr><th scope="row">Danger · Secondary</th><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="hover">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="active">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="focus">Remove item</button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" disabled>Remove item</button></td></tr>
+<tr><th scope="row">Danger · Ghost</th><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="hover">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="active">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="focus">Discard</button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" disabled>Discard</button></td></tr>
+</tbody></table>
+  </section>
+
+  <section class="eds-demo-section">
+    <h2>Leading icon + label</h2>
+    <p class="eds-note">Same matrix, with a leading icon seated in the label's cap cell (spacing-ladder section 5). Danger tone always shows the trash icon regardless of variant.</p>
+    <h3 class="eds-demo-subhead">Medium — md (default)</h3>
+<table class="eds-demo-table"><thead><tr><th scope="col">Tone / variant</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral · Primary</th><td><button class="eds-button" data-tone="neutral" data-variant="primary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td></tr>
+<tr><th scope="row">Neutral · Secondary</th><td><button class="eds-button" data-tone="neutral" data-variant="secondary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td></tr>
+<tr><th scope="row">Neutral · Ghost</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td></tr>
+<tr><th scope="row">Accent · Primary</th><td><button class="eds-button" data-tone="accent" data-variant="primary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td></tr>
+<tr><th scope="row">Accent · Secondary</th><td><button class="eds-button" data-tone="accent" data-variant="secondary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td></tr>
+<tr><th scope="row">Accent · Ghost</th><td><button class="eds-button" data-tone="accent" data-variant="ghost"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td></tr>
+<tr><th scope="row">Danger · Primary</th><td><button class="eds-button" data-tone="danger" data-variant="primary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td></tr>
+<tr><th scope="row">Danger · Secondary</th><td><button class="eds-button" data-tone="danger" data-variant="secondary"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td></tr>
+<tr><th scope="row">Danger · Ghost</th><td><button class="eds-button" data-tone="danger" data-variant="ghost"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td></tr>
+</tbody></table>
+<h3 class="eds-demo-subhead">Small — sm</h3>
+<table class="eds-demo-table"><thead><tr><th scope="col">Tone / variant</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral · Primary</th><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="primary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save</span></button></td></tr>
+<tr><th scope="row">Neutral · Secondary</th><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Cancel</span></button></td></tr>
+<tr><th scope="row">Neutral · Ghost</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Learn more</span></button></td></tr>
+<tr><th scope="row">Accent · Primary</th><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="primary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-plus"></use></svg><span>Save changes</span></button></td></tr>
+<tr><th scope="row">Accent · Secondary</th><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="secondary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-arrow"></use></svg><span>Continue</span></button></td></tr>
+<tr><th scope="row">Accent · Ghost</th><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>View details</span></button></td></tr>
+<tr><th scope="row">Danger · Primary</th><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="primary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Delete account</span></button></td></tr>
+<tr><th scope="row">Danger · Secondary</th><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="secondary" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Remove item</span></button></td></tr>
+<tr><th scope="row">Danger · Ghost</th><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="hover"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="active"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" data-force-state="focus"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost" data-size="sm" disabled><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg><span>Discard</span></button></td></tr>
+</tbody></table>
+  </section>
+
+  <section class="eds-demo-section">
+    <h2>Icon only (variant = ghost-icon)</h2>
+    <p class="eds-note">The pill shape is earned: no label means no half-leading to correct for, so padding collapses to the raw inset on every side and the control is a square -- {rounded.pill} turns that square into a circle.</p>
+    <h3 class="eds-demo-subhead">Medium — md (default)</h3>
+<table class="eds-demo-table eds-demo-table--icon-only"><thead><tr><th scope="col">Tone</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-force-state="hover" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-force-state="active" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-force-state="focus" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" disabled aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td></tr>
+<tr><th scope="row">Accent</th><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-force-state="hover" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-force-state="active" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-force-state="focus" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" disabled aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td></tr>
+<tr><th scope="row">Danger</th><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-force-state="hover" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-force-state="active" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-force-state="focus" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" disabled aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td></tr>
+</tbody></table>
+<h3 class="eds-demo-subhead">Small — sm</h3>
+<table class="eds-demo-table eds-demo-table--icon-only"><thead><tr><th scope="col">Tone</th><th scope="col">Rest</th><th scope="col">Hover</th><th scope="col">Active</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody>
+<tr><th scope="row">Neutral</th><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="sm" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="sm" data-force-state="hover" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="sm" data-force-state="active" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="sm" data-force-state="focus" aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td><td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="sm" disabled aria-label="Settings"><svg class="eds-icon" aria-hidden="true"><use href="#icon-settings"></use></svg></button></td></tr>
+<tr><th scope="row">Accent</th><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="sm" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="sm" data-force-state="hover" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="sm" data-force-state="active" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="sm" data-force-state="focus" aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td><td><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="sm" disabled aria-label="Bookmark"><svg class="eds-icon" aria-hidden="true"><use href="#icon-bookmark"></use></svg></button></td></tr>
+<tr><th scope="row">Danger</th><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="sm" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="sm" data-force-state="hover" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="sm" data-force-state="active" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="sm" data-force-state="focus" aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td><td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="sm" disabled aria-label="Delete"><svg class="eds-icon" aria-hidden="true"><use href="#icon-trash"></use></svg></button></td></tr>
+</tbody></table>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var html = document.documentElement;
+  var densitySelect = document.getElementById('density-select');
+  var schemeToggle = document.getElementById('scheme-toggle');
+
+  densitySelect.addEventListener('change', function () {
+    html.setAttribute('data-density', densitySelect.value);
+  });
+
+  schemeToggle.addEventListener('click', function () {
+    var isDark = html.getAttribute('data-color-scheme') === 'dark';
+    var next = isDark ? 'light' : 'dark';
+    html.setAttribute('data-color-scheme', next);
+    schemeToggle.textContent = next === 'dark' ? 'Switch to light' : 'Switch to dark';
+    schemeToggle.setAttribute('aria-pressed', String(next === 'dark'));
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.chip",
+  "version": "0.5.0",
+  "description": "Chip \u2014 a compact selectable. The height is never stated: it is inset \u00d7 2 + cap(label), which resolves to 20 / 24 / 36 px across compact / comfortable / relaxed \u2014 EDS 1.0\u2019s 24px chip, on the shared rhythm. Two emphasis tiers across all six tones: muted (wash + tone border) and emphasis (filled + on-emphasis ink), per the Component Mocks review (outlined/filled, 2026-08-29).",
+  "notes": "OPEN DECISION (candidate decision 6): anatomy.label.typography.label = 'md' gives the 28px comfortable chip and matches upstream EDS next (14px label). Flip it to 'sm' and every surface re-derives the legacy 24px chip (12px label) \u2014 one line, reviewable, nothing else changes. The selectable ladder is untouched either way; it is the target-size floor, not a heights menu. ICON RULE (December model, recovered from the old-system reference button): the icon is a glyph \u2014 its layout footprint is the CAP BOX of the label it sits beside ({recipe.cap-rounded-<size>}), and its ink overflows that box the way ascenders and descenders do. This keeps the height invariant (cap box \u2264 line box), makes the optical margin fall out for free (~2.3px tighter to the edge than text at comfortable), and travels with the icon when it hides. CSS: negative margin = (cap \u2212 icon)/2; Figma: cap\u00d7cap container, glyph auto-centered, clip off. DISMISS SEMANTICS: the chip is ONE button \u2014 when dismissible, activation IS the dismissal and the \u2715 is the affordance, not a nested control (a button inside a button is invalid HTML; EDS 1.x delete chips behaved the same). The Selectable chip from the mocks is refused \u2014 selection is aria-pressed on the plain chip, not a separate component. SELECTED (v0.4.0, 2026-08-30): aria-pressed on the plain chip rides the muted-selected rung (step 5 - one above hover, the selected token added 2026-08-30). v0.5.0: the emphasis-selected rung now EXISTS (step 11, active\u2019s rung \u2014 same logic as muted; Victor 2026-08-30), so selected is ungated: both tiers ride {emphasis}-selected.",
+  "props": [
+    {
+      "name": "tone",
+      "description": "Color family the chip draws from.",
+      "type": {
+        "enum": ["neutral", "accent", "danger", "warning", "success", "info"]
+      },
+      "default": "neutral",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "emphasis",
+      "description": "Fill tier: muted (wash with a tone border) or emphasis (filled, on-emphasis ink).",
+      "type": {
+        "enum": ["muted", "emphasis"]
+      },
+      "default": "muted",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Emphasis"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The chip's text.",
+      "type": {
+        "text": true
+      },
+      "default": "Chip",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "description": "Optional leading icon.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "dismissible",
+      "description": "Trailing \u2715 affordance; activating the chip dismisses it.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Dismissible"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-icon-md-gap-horizontal}",
+        "align": "center"
+      },
+      "inset": {
+        "size": "xs",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "radius": "{spacing.spacing-border-radius-pill}",
+      "tokens": {
+        "background-color": "{color.semantic.bg-{tone}-fill-{emphasis}-default}"
+      }
+    },
+    "icon": {
+      "when": "icon",
+      "glyph": "{spacing.sizing-icon-sm}",
+      "footprint": "{recipe.cap-rounded-sm}",
+      "swap": {
+        "property": "\u21b3 Icon",
+        "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-{tone}}"
+      }
+    },
+    "label": {
+      "typography": {
+        "label": "sm",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-{tone}-strong}"
+      }
+    },
+    "dismiss": {
+      "when": "dismissible",
+      "glyph": "{spacing.sizing-icon-sm}",
+      "footprint": "{recipe.cap-rounded-sm}",
+      "swap": {
+        "property": "\u21b3 Dismiss Icon",
+        "componentKey": "3bd72d0a163f1d70993eb1b648540442f161567e"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-{tone}}"
+      }
+    }
+  },
+  "variants": [
+    {
+      "when": {
+        "emphasis": "muted"
+      },
+      "tokens": {
+        "root/border-color": "{color.semantic.border-{tone}-medium}",
+        "root/border-color:disabled": "{color.concept.border-disabled}"
+      }
+    },
+    {
+      "when": {
+        "emphasis": "emphasis"
+      },
+      "tokens": {
+        "label/color": "{color.semantic.text-{tone}-strong-on-emphasis}",
+        "icon/color": "{color.semantic.icon-{tone}-on-emphasis}",
+        "dismiss/color": "{color.semantic.icon-{tone}-on-emphasis}"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-{emphasis}-hover}"
+      }
+    },
+    {
+      "name": "active",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-{emphasis}-active}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-{emphasis}-selected}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "root/background-color": "{color.concept.bg-disabled}",
+        "label/color": "{color.concept.text-disabled}",
+        "icon/color": "{color.concept.text-disabled}",
+        "dismiss/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "button",
+    "aria": {
+      "aria-pressed": "reflects selection when the chip is used as a toggle"
+    }
+  }
+}

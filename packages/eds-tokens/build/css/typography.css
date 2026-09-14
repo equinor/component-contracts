@@ -1,0 +1,596 @@
+/* EDS typography — algorithmic scale
+ * Generated — do not edit. Source: src/formulas.ts
+ */
+
+[data-density='compact'] {
+  --_base: 0.875rem;
+
+  --eds-typography-ui-body-xs-font-size: round(calc(var(--_base) * pow(2, -3/5)), 0.03125rem);
+  --eds-typography-ui-body-sm-font-size: round(calc(var(--_base) * pow(2, -2/5)), 0.03125rem);
+  --eds-typography-ui-body-md-font-size: round(calc(var(--_base) * pow(2, -1/5)), 0.03125rem);
+  --eds-typography-ui-body-lg-font-size: var(--_base);
+  --eds-typography-ui-body-xl-font-size: round(calc(var(--_base) * pow(2, 1/5)), 0.03125rem);
+  --eds-typography-ui-body-2xl-font-size: round(calc(var(--_base) * pow(2, 2/5)), 0.03125rem);
+  --eds-typography-ui-body-3xl-font-size: round(calc(var(--_base) * pow(2, 3/5)), 0.03125rem);
+  --eds-typography-ui-body-4xl-font-size: round(calc(var(--_base) * pow(2, 4/5)), 0.03125rem);
+  --eds-typography-ui-body-5xl-font-size: round(calc(var(--_base) * pow(2, 5/5)), 0.03125rem);
+  --eds-typography-ui-body-6xl-font-size: round(calc(var(--_base) * pow(2, 6/5)), 0.03125rem);
+
+  /* Header sizes — the ui size corrected for x-height, snapped to 0.5px.
+   * Baked, not `size-adjust`: Figma has no equivalent and React Native never
+   * parses @font-face, so both would render the uncorrected size. */
+  --eds-typography-header-xs-font-size: 0.625rem;
+  --eds-typography-header-sm-font-size: 0.75rem;
+  --eds-typography-header-md-font-size: 0.84375rem;
+  --eds-typography-header-lg-font-size: 1rem;
+  --eds-typography-header-xl-font-size: 1.125rem;
+  --eds-typography-header-2xl-font-size: 1.3125rem;
+  --eds-typography-header-3xl-font-size: 1.5rem;
+  --eds-typography-header-4xl-font-size: 1.75rem;
+  --eds-typography-header-5xl-font-size: 2rem;
+  --eds-typography-header-6xl-font-size: 2.28125rem;
+
+  /* Header (Equinor) weights — MATCHED to the Inter tier at the same
+   * perceived size (measured stem widths; src/weight-match.json). A
+   * function of the step's px, so density moves it. Inter needs no
+   * table: font-optical-sizing: auto is the browser-side equivalent. */
+  --eds-typography-header-xs-font-weight-lighter: 376.2;
+  --eds-typography-header-xs-font-weight-normal: 458.5;
+  --eds-typography-header-xs-font-weight-bolder: 552.7;
+  --eds-typography-header-sm-font-weight-lighter: 376.2;
+  --eds-typography-header-sm-font-weight-normal: 458.5;
+  --eds-typography-header-sm-font-weight-bolder: 552.7;
+  --eds-typography-header-md-font-weight-lighter: 376.2;
+  --eds-typography-header-md-font-weight-normal: 458.5;
+  --eds-typography-header-md-font-weight-bolder: 552.7;
+  --eds-typography-header-lg-font-weight-lighter: 376.2;
+  --eds-typography-header-lg-font-weight-normal: 458.5;
+  --eds-typography-header-lg-font-weight-bolder: 552.7;
+  --eds-typography-header-xl-font-weight-lighter: 375.1;
+  --eds-typography-header-xl-font-weight-normal: 456.2;
+  --eds-typography-header-xl-font-weight-bolder: 550.2;
+  --eds-typography-header-2xl-font-weight-lighter: 373.8;
+  --eds-typography-header-2xl-font-weight-normal: 453.4;
+  --eds-typography-header-2xl-font-weight-bolder: 547;
+  --eds-typography-header-3xl-font-weight-lighter: 372.4;
+  --eds-typography-header-3xl-font-weight-normal: 450.5;
+  --eds-typography-header-3xl-font-weight-bolder: 543.8;
+  --eds-typography-header-4xl-font-weight-lighter: 370.5;
+  --eds-typography-header-4xl-font-weight-normal: 446.6;
+  --eds-typography-header-4xl-font-weight-bolder: 539.3;
+  --eds-typography-header-5xl-font-weight-lighter: 368.5;
+  --eds-typography-header-5xl-font-weight-normal: 442.6;
+  --eds-typography-header-5xl-font-weight-bolder: 534.9;
+  --eds-typography-header-6xl-font-weight-lighter: 366.3;
+  --eds-typography-header-6xl-font-weight-normal: 438;
+  --eds-typography-header-6xl-font-weight-bolder: 529.8;
+
+  /* line-height: default */
+  --eds-typography-ui-body-xs-line-height-default: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.39 - pow(0/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-sm-line-height-default: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.39 - pow(1/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-md-line-height-default: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.39 - pow(2/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-lg-line-height-default: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.39 - pow(3/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-xl-line-height-default: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.39 - pow(4/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-2xl-line-height-default: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.39 - pow(5/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-3xl-line-height-default: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.39 - pow(6/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-4xl-line-height-default: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.39 - pow(7/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-5xl-line-height-default: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.39 - pow(8/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-6xl-line-height-default: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.39 - pow(9/9, 3) * 0.29)), 4px);
+
+  /* line-height: compressed */
+  --eds-typography-ui-body-xs-line-height-compressed: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.13 - pow(0/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-sm-line-height-compressed: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.13 - pow(1/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-md-line-height-compressed: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.13 - pow(2/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-lg-line-height-compressed: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.13 - pow(3/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.13 - pow(4/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-2xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.13 - pow(5/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-3xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.13 - pow(6/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-4xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.13 - pow(7/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-5xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.13 - pow(8/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-6xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.13 - pow(9/9, 3) * 0.13)), 4px);
+
+  /* spacing, sizing and radius — ladder lookups at this density */
+  --eds-spacing-horizontal-4xs: 1px;
+  --eds-spacing-vertical-4xs: 1px;
+  --eds-spacing-horizontal-3xs: 2px;
+  --eds-spacing-vertical-3xs: 2px;
+  --eds-spacing-horizontal-2xs: 4px;
+  --eds-spacing-vertical-2xs: 4px;
+  --eds-spacing-horizontal-xs: 6px;
+  --eds-spacing-vertical-xs: 6px;
+  --eds-spacing-horizontal-sm: 8px;
+  --eds-spacing-vertical-sm: 8px;
+  --eds-spacing-horizontal-md: 12px;
+  --eds-spacing-vertical-md: 12px;
+  --eds-spacing-horizontal-lg: 16px;
+  --eds-spacing-vertical-lg: 16px;
+  --eds-spacing-horizontal-xl: 20px;
+  --eds-spacing-vertical-xl: 20px;
+  --eds-spacing-horizontal-2xl: 24px;
+  --eds-spacing-vertical-2xl: 24px;
+  --eds-spacing-horizontal-3xl: 28px;
+  --eds-spacing-vertical-3xl: 28px;
+  --eds-sizing-icon-xs: 14px;
+  --eds-sizing-icon-sm: 16px;
+  --eds-sizing-icon-md: 18px;
+  --eds-sizing-icon-lg: 20px;
+  --eds-sizing-icon-xl: 24px;
+  --eds-sizing-icon-2xl: 28px;
+  --eds-sizing-icon-3xl: 32px;
+  --eds-sizing-icon-4xl: 37px;
+  --eds-sizing-icon-5xl: 42px;
+  --eds-sizing-icon-6xl: 48px;
+  --eds-sizing-selectable-xs: 16px;
+  --eds-sizing-selectable-sm: 20px;
+  --eds-sizing-selectable-md: 24px;
+  --eds-sizing-selectable-lg: 36px;
+  --eds-sizing-selectable-xl: 44px;
+  --eds-sizing-selectable-2xl: 52px;
+  --eds-spacing-border-radius-rounded: 3px;
+}
+
+:where(:root),
+[data-density='comfortable'] {
+  --_base: 1rem;
+
+  --eds-typography-ui-body-xs-font-size: round(calc(var(--_base) * pow(2, -3/5)), 0.03125rem);
+  --eds-typography-ui-body-sm-font-size: round(calc(var(--_base) * pow(2, -2/5)), 0.03125rem);
+  --eds-typography-ui-body-md-font-size: round(calc(var(--_base) * pow(2, -1/5)), 0.03125rem);
+  --eds-typography-ui-body-lg-font-size: var(--_base);
+  --eds-typography-ui-body-xl-font-size: round(calc(var(--_base) * pow(2, 1/5)), 0.03125rem);
+  --eds-typography-ui-body-2xl-font-size: round(calc(var(--_base) * pow(2, 2/5)), 0.03125rem);
+  --eds-typography-ui-body-3xl-font-size: round(calc(var(--_base) * pow(2, 3/5)), 0.03125rem);
+  --eds-typography-ui-body-4xl-font-size: round(calc(var(--_base) * pow(2, 4/5)), 0.03125rem);
+  --eds-typography-ui-body-5xl-font-size: round(calc(var(--_base) * pow(2, 5/5)), 0.03125rem);
+  --eds-typography-ui-body-6xl-font-size: round(calc(var(--_base) * pow(2, 6/5)), 0.03125rem);
+
+  /* Header sizes — the ui size corrected for x-height, snapped to 0.5px.
+   * Baked, not `size-adjust`: Figma has no equivalent and React Native never
+   * parses @font-face, so both would render the uncorrected size. */
+  --eds-typography-header-xs-font-size: 0.75rem;
+  --eds-typography-header-sm-font-size: 0.84375rem;
+  --eds-typography-header-md-font-size: 1rem;
+  --eds-typography-header-lg-font-size: 1.125rem;
+  --eds-typography-header-xl-font-size: 1.3125rem;
+  --eds-typography-header-2xl-font-size: 1.5rem;
+  --eds-typography-header-3xl-font-size: 1.75rem;
+  --eds-typography-header-4xl-font-size: 2rem;
+  --eds-typography-header-5xl-font-size: 2.28125rem;
+  --eds-typography-header-6xl-font-size: 2.625rem;
+
+  /* Header (Equinor) weights — MATCHED to the Inter tier at the same
+   * perceived size (measured stem widths; src/weight-match.json). A
+   * function of the step's px, so density moves it. Inter needs no
+   * table: font-optical-sizing: auto is the browser-side equivalent. */
+  --eds-typography-header-xs-font-weight-lighter: 376.2;
+  --eds-typography-header-xs-font-weight-normal: 458.5;
+  --eds-typography-header-xs-font-weight-bolder: 552.7;
+  --eds-typography-header-sm-font-weight-lighter: 376.2;
+  --eds-typography-header-sm-font-weight-normal: 458.5;
+  --eds-typography-header-sm-font-weight-bolder: 552.7;
+  --eds-typography-header-md-font-weight-lighter: 376.2;
+  --eds-typography-header-md-font-weight-normal: 458.5;
+  --eds-typography-header-md-font-weight-bolder: 552.7;
+  --eds-typography-header-lg-font-weight-lighter: 375.1;
+  --eds-typography-header-lg-font-weight-normal: 456.2;
+  --eds-typography-header-lg-font-weight-bolder: 550.2;
+  --eds-typography-header-xl-font-weight-lighter: 373.8;
+  --eds-typography-header-xl-font-weight-normal: 453.4;
+  --eds-typography-header-xl-font-weight-bolder: 547;
+  --eds-typography-header-2xl-font-weight-lighter: 372.4;
+  --eds-typography-header-2xl-font-weight-normal: 450.5;
+  --eds-typography-header-2xl-font-weight-bolder: 543.8;
+  --eds-typography-header-3xl-font-weight-lighter: 370.5;
+  --eds-typography-header-3xl-font-weight-normal: 446.6;
+  --eds-typography-header-3xl-font-weight-bolder: 539.3;
+  --eds-typography-header-4xl-font-weight-lighter: 368.5;
+  --eds-typography-header-4xl-font-weight-normal: 442.6;
+  --eds-typography-header-4xl-font-weight-bolder: 534.9;
+  --eds-typography-header-5xl-font-weight-lighter: 366.3;
+  --eds-typography-header-5xl-font-weight-normal: 438;
+  --eds-typography-header-5xl-font-weight-bolder: 529.8;
+  --eds-typography-header-6xl-font-weight-lighter: 366.3;
+  --eds-typography-header-6xl-font-weight-normal: 438;
+  --eds-typography-header-6xl-font-weight-bolder: 529.8;
+
+  /* line-height: default */
+  --eds-typography-ui-body-xs-line-height-default: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.39 - pow(0/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-sm-line-height-default: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.39 - pow(1/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-md-line-height-default: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.39 - pow(2/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-lg-line-height-default: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.39 - pow(3/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-xl-line-height-default: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.39 - pow(4/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-2xl-line-height-default: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.39 - pow(5/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-3xl-line-height-default: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.39 - pow(6/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-4xl-line-height-default: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.39 - pow(7/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-5xl-line-height-default: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.39 - pow(8/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-6xl-line-height-default: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.39 - pow(9/9, 3) * 0.29)), 4px);
+
+  /* line-height: compressed */
+  --eds-typography-ui-body-xs-line-height-compressed: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.13 - pow(0/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-sm-line-height-compressed: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.13 - pow(1/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-md-line-height-compressed: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.13 - pow(2/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-lg-line-height-compressed: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.13 - pow(3/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.13 - pow(4/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-2xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.13 - pow(5/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-3xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.13 - pow(6/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-4xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.13 - pow(7/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-5xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.13 - pow(8/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-6xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.13 - pow(9/9, 3) * 0.13)), 4px);
+
+  /* spacing, sizing and radius — ladder lookups at this density */
+  --eds-spacing-horizontal-4xs: 2px;
+  --eds-spacing-vertical-4xs: 2px;
+  --eds-spacing-horizontal-3xs: 4px;
+  --eds-spacing-vertical-3xs: 4px;
+  --eds-spacing-horizontal-2xs: 6px;
+  --eds-spacing-vertical-2xs: 6px;
+  --eds-spacing-horizontal-xs: 8px;
+  --eds-spacing-vertical-xs: 8px;
+  --eds-spacing-horizontal-sm: 12px;
+  --eds-spacing-vertical-sm: 12px;
+  --eds-spacing-horizontal-md: 16px;
+  --eds-spacing-vertical-md: 16px;
+  --eds-spacing-horizontal-lg: 20px;
+  --eds-spacing-vertical-lg: 20px;
+  --eds-spacing-horizontal-xl: 24px;
+  --eds-spacing-vertical-xl: 24px;
+  --eds-spacing-horizontal-2xl: 28px;
+  --eds-spacing-vertical-2xl: 28px;
+  --eds-spacing-horizontal-3xl: 32px;
+  --eds-spacing-vertical-3xl: 32px;
+  --eds-sizing-icon-xs: 16px;
+  --eds-sizing-icon-sm: 18px;
+  --eds-sizing-icon-md: 20px;
+  --eds-sizing-icon-lg: 24px;
+  --eds-sizing-icon-xl: 28px;
+  --eds-sizing-icon-2xl: 32px;
+  --eds-sizing-icon-3xl: 37px;
+  --eds-sizing-icon-4xl: 42px;
+  --eds-sizing-icon-5xl: 48px;
+  --eds-sizing-icon-6xl: 56px;
+  --eds-sizing-selectable-xs: 20px;
+  --eds-sizing-selectable-sm: 24px;
+  --eds-sizing-selectable-md: 36px;
+  --eds-sizing-selectable-lg: 44px;
+  --eds-sizing-selectable-xl: 52px;
+  --eds-sizing-selectable-2xl: 60px;
+  --eds-spacing-border-radius-rounded: 4px;
+}
+
+[data-density='relaxed'] {
+  --_base: 1.15625rem;
+
+  --eds-typography-ui-body-xs-font-size: round(calc(var(--_base) * pow(2, -3/5)), 0.03125rem);
+  --eds-typography-ui-body-sm-font-size: round(calc(var(--_base) * pow(2, -2/5)), 0.03125rem);
+  --eds-typography-ui-body-md-font-size: round(calc(var(--_base) * pow(2, -1/5)), 0.03125rem);
+  --eds-typography-ui-body-lg-font-size: var(--_base);
+  --eds-typography-ui-body-xl-font-size: round(calc(var(--_base) * pow(2, 1/5)), 0.03125rem);
+  --eds-typography-ui-body-2xl-font-size: round(calc(var(--_base) * pow(2, 2/5)), 0.03125rem);
+  --eds-typography-ui-body-3xl-font-size: round(calc(var(--_base) * pow(2, 3/5)), 0.03125rem);
+  --eds-typography-ui-body-4xl-font-size: round(calc(var(--_base) * pow(2, 4/5)), 0.03125rem);
+  --eds-typography-ui-body-5xl-font-size: round(calc(var(--_base) * pow(2, 5/5)), 0.03125rem);
+  --eds-typography-ui-body-6xl-font-size: round(calc(var(--_base) * pow(2, 6/5)), 0.03125rem);
+
+  /* Header sizes — the ui size corrected for x-height, snapped to 0.5px.
+   * Baked, not `size-adjust`: Figma has no equivalent and React Native never
+   * parses @font-face, so both would render the uncorrected size. */
+  --eds-typography-header-xs-font-size: 0.84375rem;
+  --eds-typography-header-sm-font-size: 1rem;
+  --eds-typography-header-md-font-size: 1.125rem;
+  --eds-typography-header-lg-font-size: 1.3125rem;
+  --eds-typography-header-xl-font-size: 1.53125rem;
+  --eds-typography-header-2xl-font-size: 1.75rem;
+  --eds-typography-header-3xl-font-size: 2rem;
+  --eds-typography-header-4xl-font-size: 2.28125rem;
+  --eds-typography-header-5xl-font-size: 2.625rem;
+  --eds-typography-header-6xl-font-size: 3.03125rem;
+
+  /* Header (Equinor) weights — MATCHED to the Inter tier at the same
+   * perceived size (measured stem widths; src/weight-match.json). A
+   * function of the step's px, so density moves it. Inter needs no
+   * table: font-optical-sizing: auto is the browser-side equivalent. */
+  --eds-typography-header-xs-font-weight-lighter: 376.2;
+  --eds-typography-header-xs-font-weight-normal: 458.5;
+  --eds-typography-header-xs-font-weight-bolder: 552.7;
+  --eds-typography-header-sm-font-weight-lighter: 376.2;
+  --eds-typography-header-sm-font-weight-normal: 458.5;
+  --eds-typography-header-sm-font-weight-bolder: 552.7;
+  --eds-typography-header-md-font-weight-lighter: 375.1;
+  --eds-typography-header-md-font-weight-normal: 456.2;
+  --eds-typography-header-md-font-weight-bolder: 550.2;
+  --eds-typography-header-lg-font-weight-lighter: 373.8;
+  --eds-typography-header-lg-font-weight-normal: 453.4;
+  --eds-typography-header-lg-font-weight-bolder: 547;
+  --eds-typography-header-xl-font-weight-lighter: 372.1;
+  --eds-typography-header-xl-font-weight-normal: 449.9;
+  --eds-typography-header-xl-font-weight-bolder: 543.2;
+  --eds-typography-header-2xl-font-weight-lighter: 370.5;
+  --eds-typography-header-2xl-font-weight-normal: 446.6;
+  --eds-typography-header-2xl-font-weight-bolder: 539.3;
+  --eds-typography-header-3xl-font-weight-lighter: 368.5;
+  --eds-typography-header-3xl-font-weight-normal: 442.6;
+  --eds-typography-header-3xl-font-weight-bolder: 534.9;
+  --eds-typography-header-4xl-font-weight-lighter: 366.3;
+  --eds-typography-header-4xl-font-weight-normal: 438;
+  --eds-typography-header-4xl-font-weight-bolder: 529.8;
+  --eds-typography-header-5xl-font-weight-lighter: 366.3;
+  --eds-typography-header-5xl-font-weight-normal: 438;
+  --eds-typography-header-5xl-font-weight-bolder: 529.8;
+  --eds-typography-header-6xl-font-weight-lighter: 366.3;
+  --eds-typography-header-6xl-font-weight-normal: 438;
+  --eds-typography-header-6xl-font-weight-bolder: 529.8;
+
+  /* line-height: default */
+  --eds-typography-ui-body-xs-line-height-default: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.39 - pow(0/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-sm-line-height-default: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.39 - pow(1/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-md-line-height-default: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.39 - pow(2/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-lg-line-height-default: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.39 - pow(3/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-xl-line-height-default: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.39 - pow(4/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-2xl-line-height-default: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.39 - pow(5/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-3xl-line-height-default: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.39 - pow(6/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-4xl-line-height-default: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.39 - pow(7/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-5xl-line-height-default: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.39 - pow(8/9, 3) * 0.29)), 4px);
+  --eds-typography-ui-body-6xl-line-height-default: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.39 - pow(9/9, 3) * 0.29)), 4px);
+
+  /* line-height: compressed */
+  --eds-typography-ui-body-xs-line-height-compressed: round(calc(var(--eds-typography-ui-body-xs-font-size) * (1.13 - pow(0/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-sm-line-height-compressed: round(calc(var(--eds-typography-ui-body-sm-font-size) * (1.13 - pow(1/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-md-line-height-compressed: round(calc(var(--eds-typography-ui-body-md-font-size) * (1.13 - pow(2/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-lg-line-height-compressed: round(calc(var(--eds-typography-ui-body-lg-font-size) * (1.13 - pow(3/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-xl-font-size) * (1.13 - pow(4/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-2xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-2xl-font-size) * (1.13 - pow(5/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-3xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-3xl-font-size) * (1.13 - pow(6/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-4xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-4xl-font-size) * (1.13 - pow(7/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-5xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-5xl-font-size) * (1.13 - pow(8/9, 3) * 0.13)), 4px);
+  --eds-typography-ui-body-6xl-line-height-compressed: round(calc(var(--eds-typography-ui-body-6xl-font-size) * (1.13 - pow(9/9, 3) * 0.13)), 4px);
+
+  /* spacing, sizing and radius — ladder lookups at this density */
+  --eds-spacing-horizontal-4xs: 4px;
+  --eds-spacing-vertical-4xs: 4px;
+  --eds-spacing-horizontal-3xs: 6px;
+  --eds-spacing-vertical-3xs: 6px;
+  --eds-spacing-horizontal-2xs: 8px;
+  --eds-spacing-vertical-2xs: 8px;
+  --eds-spacing-horizontal-xs: 12px;
+  --eds-spacing-vertical-xs: 12px;
+  --eds-spacing-horizontal-sm: 16px;
+  --eds-spacing-vertical-sm: 16px;
+  --eds-spacing-horizontal-md: 20px;
+  --eds-spacing-vertical-md: 20px;
+  --eds-spacing-horizontal-lg: 24px;
+  --eds-spacing-vertical-lg: 24px;
+  --eds-spacing-horizontal-xl: 28px;
+  --eds-spacing-vertical-xl: 28px;
+  --eds-spacing-horizontal-2xl: 32px;
+  --eds-spacing-vertical-2xl: 32px;
+  --eds-spacing-horizontal-3xl: 36px;  /* extrapolated */
+  --eds-spacing-vertical-3xl: 36px;  /* extrapolated */
+  --eds-sizing-icon-xs: 18px;
+  --eds-sizing-icon-sm: 20px;
+  --eds-sizing-icon-md: 24px;
+  --eds-sizing-icon-lg: 28px;
+  --eds-sizing-icon-xl: 32px;
+  --eds-sizing-icon-2xl: 37px;
+  --eds-sizing-icon-3xl: 42px;
+  --eds-sizing-icon-4xl: 48px;
+  --eds-sizing-icon-5xl: 56px;
+  --eds-sizing-icon-6xl: 64px;  /* extrapolated */
+  --eds-sizing-selectable-xs: 24px;
+  --eds-sizing-selectable-sm: 36px;
+  --eds-sizing-selectable-md: 44px;
+  --eds-sizing-selectable-lg: 52px;
+  --eds-sizing-selectable-xl: 60px;
+  --eds-sizing-selectable-2xl: 68px;  /* extrapolated */
+  --eds-spacing-border-radius-rounded: 5px;  /* extrapolated */
+}
+/* Density-independent relationships.
+ * These reference tokens that shift with density, so they follow automatically
+ * rather than being re-emitted per density.
+ */
+:where(:root) {
+  /* Insets are the spacing ladder. Proportion is an index shift, so
+   * these are references, not values — they follow density for free. */
+  --eds-spacing-inset-xs-horizontal: var(--eds-spacing-horizontal-xs);
+  --eds-spacing-inset-xs-vertical-squished: var(--eds-spacing-vertical-2xs);
+  --eds-spacing-inset-xs-vertical-squared: var(--eds-spacing-vertical-xs);
+  --eds-spacing-inset-xs-vertical-stretched: var(--eds-spacing-vertical-sm);
+  --eds-spacing-inset-sm-horizontal: var(--eds-spacing-horizontal-sm);
+  --eds-spacing-inset-sm-vertical-squished: var(--eds-spacing-vertical-xs);
+  --eds-spacing-inset-sm-vertical-squared: var(--eds-spacing-vertical-sm);
+  --eds-spacing-inset-sm-vertical-stretched: var(--eds-spacing-vertical-md);
+  --eds-spacing-inset-md-horizontal: var(--eds-spacing-horizontal-md);
+  --eds-spacing-inset-md-vertical-squished: var(--eds-spacing-vertical-sm);
+  --eds-spacing-inset-md-vertical-squared: var(--eds-spacing-vertical-md);
+  --eds-spacing-inset-md-vertical-stretched: var(--eds-spacing-vertical-lg);
+  --eds-spacing-inset-lg-horizontal: var(--eds-spacing-horizontal-lg);
+  --eds-spacing-inset-lg-vertical-squished: var(--eds-spacing-vertical-md);
+  --eds-spacing-inset-lg-vertical-squared: var(--eds-spacing-vertical-lg);
+  --eds-spacing-inset-lg-vertical-stretched: var(--eds-spacing-vertical-xl);
+  --eds-spacing-inset-xl-horizontal: var(--eds-spacing-horizontal-xl);
+  --eds-spacing-inset-xl-vertical-squished: var(--eds-spacing-vertical-lg);
+  --eds-spacing-inset-xl-vertical-squared: var(--eds-spacing-vertical-xl);
+  --eds-spacing-inset-xl-vertical-stretched: var(--eds-spacing-vertical-2xl);
+
+  /* Icon-to-text gap: golden ratio of the active font size. */
+  --eds-spacing-icon-xs-gap-horizontal: round(calc(var(--eds-typography-ui-body-xs-font-size) * 0.618), 2px);
+  --eds-spacing-icon-xs-gap-vertical: round(calc(var(--eds-typography-ui-body-xs-font-size) * 0.618), 2px);
+  --eds-spacing-icon-sm-gap-horizontal: round(calc(var(--eds-typography-ui-body-sm-font-size) * 0.618), 2px);
+  --eds-spacing-icon-sm-gap-vertical: round(calc(var(--eds-typography-ui-body-sm-font-size) * 0.618), 2px);
+  --eds-spacing-icon-md-gap-horizontal: round(calc(var(--eds-typography-ui-body-md-font-size) * 0.618), 2px);
+  --eds-spacing-icon-md-gap-vertical: round(calc(var(--eds-typography-ui-body-md-font-size) * 0.618), 2px);
+  --eds-spacing-icon-lg-gap-horizontal: round(calc(var(--eds-typography-ui-body-lg-font-size) * 0.618), 2px);
+  --eds-spacing-icon-lg-gap-vertical: round(calc(var(--eds-typography-ui-body-lg-font-size) * 0.618), 2px);
+  --eds-spacing-icon-xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-xl-gap-vertical: round(calc(var(--eds-typography-ui-body-xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-2xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-2xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-2xl-gap-vertical: round(calc(var(--eds-typography-ui-body-2xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-3xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-3xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-3xl-gap-vertical: round(calc(var(--eds-typography-ui-body-3xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-4xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-4xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-4xl-gap-vertical: round(calc(var(--eds-typography-ui-body-4xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-5xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-5xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-5xl-gap-vertical: round(calc(var(--eds-typography-ui-body-5xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-6xl-gap-horizontal: round(calc(var(--eds-typography-ui-body-6xl-font-size) * 0.618), 2px);
+  --eds-spacing-icon-6xl-gap-vertical: round(calc(var(--eds-typography-ui-body-6xl-font-size) * 0.618), 2px);
+
+  /* Constants — do not move with density. */
+  --eds-spacing-horizontal-none: 0px;
+  --eds-spacing-vertical-none: 0px;
+  --eds-spacing-border-radius-none: 0px;
+  --eds-spacing-border-radius-pill: 1000px;
+  --eds-sizing-stroke-none: 0px;
+  --eds-sizing-stroke-thin: 1px;
+  --eds-sizing-stroke-thick: 2px;
+}
+/* Scalars — weight, family, border width. */
+:where(:root) {
+  /* Weight — flat across every size and both families. */
+  --eds-font-weight-lighter: 300;
+  --eds-font-weight-normal: 400;
+  --eds-font-weight-bolder: 500;
+
+  /* Family. `size-adjust` handles x-height alignment; see font-faces.css. */
+  --eds-typography-ui-body-font-family: Inter, sans-serif;
+  --eds-typography-header-font-family: Equinor, serif;
+  --eds-typography-code-font-family: CommitMono, monospace;
+
+  /* Border width — alias, kept so component CSS keeps resolving. */
+  --eds-border-width-default: var(--eds-sizing-stroke-thin);
+
+  /* Per-size UI weight aliases. Carry no information beyond the three
+   * above (Inter self-adjusts via opsz); they exist so existing component
+   * CSS resolves without edits. The HEADER weights are NOT aliases any
+   * more — they are matched per size and density (see typography.css
+   * density blocks). */
+  --eds-typography-ui-body-xs-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-xs-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-xs-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-sm-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-sm-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-sm-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-md-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-md-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-md-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-lg-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-lg-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-lg-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-xl-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-2xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-2xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-2xl-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-3xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-3xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-3xl-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-4xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-4xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-4xl-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-5xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-5xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-5xl-font-weight-bolder: var(--eds-font-weight-bolder);
+  --eds-typography-ui-body-6xl-font-weight-lighter: var(--eds-font-weight-lighter);
+  --eds-typography-ui-body-6xl-font-weight-normal: var(--eds-font-weight-normal);
+  --eds-typography-ui-body-6xl-font-weight-bolder: var(--eds-font-weight-bolder);
+}
+/* Elevation — low: tooltips, menus, popovers, snackbars. high: dialogs, drawers. */
+:where(:root) {
+  --eds-elevation-low:
+    0px 1px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 4px 8px 3px rgba(0, 0, 0, 0.12);
+  --eds-elevation-high:
+    0px 4px 12px 0px rgba(0, 0, 0, 0.2),
+    0px 12px 16px 6px rgba(0, 0, 0, 0.12);
+}
+/* Cap height drives single-line control heights.
+ * 1cap resolves per font at the point of use, so this cannot be a token value.
+ * Fallback: 1ex is universally supported and close enough to keep layout intact.
+ */
+:where(:root) {
+  --eds-cap-rounded: round(1ex, 4px);
+  --eds-padding-top-baseline: calc(round(1ex, 0.25rem) - 1ex);
+  --eds-padding-bottom-baseline: 0px;
+}
+
+@supports (height: 1cap) {
+  :where(:root) {
+  /* Cap height, snapped to the grid. Resolves per font at the point of use. */
+  --eds-cap-rounded: round(1cap, 4px);
+
+  /* Per-size cap boxes — icon container dimensions, keyed by label size. */
+  --eds-cap-rounded-xs: round(calc(var(--eds-typography-ui-body-xs-font-size) * 0.727539), 4px);
+  --eds-cap-rounded-sm: round(calc(var(--eds-typography-ui-body-sm-font-size) * 0.727539), 4px);
+  --eds-cap-rounded-md: round(calc(var(--eds-typography-ui-body-md-font-size) * 0.727539), 4px);
+  --eds-cap-rounded-lg: round(calc(var(--eds-typography-ui-body-lg-font-size) * 0.727539), 4px);
+  --eds-cap-rounded-xl: round(calc(var(--eds-typography-ui-body-xl-font-size) * 0.727539), 4px);
+
+  /* Half-leading, keyed by LABEL size. Subtract from any inset. */
+  --eds-half-leading-xs: calc((var(--eds-typography-ui-body-xs-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-sm: calc((var(--eds-typography-ui-body-sm-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-md: calc((var(--eds-typography-ui-body-md-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-lg: calc((var(--eds-typography-ui-body-lg-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-xl: calc((var(--eds-typography-ui-body-xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-2xl: calc((var(--eds-typography-ui-body-2xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-3xl: calc((var(--eds-typography-ui-body-3xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-4xl: calc((var(--eds-typography-ui-body-4xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-5xl: calc((var(--eds-typography-ui-body-5xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-6xl: calc((var(--eds-typography-ui-body-6xl-line-height-compressed) - var(--eds-cap-rounded)) / 2);
+
+  /* Read text (default leading) — same subtraction, taller line box.
+   * Created on demand: only the sizes a component actually reads at. */
+  --eds-half-leading-sm-default: calc((var(--eds-typography-ui-body-sm-line-height-default) - var(--eds-cap-rounded)) / 2);
+  --eds-half-leading-md-default: calc((var(--eds-typography-ui-body-md-line-height-default) - var(--eds-cap-rounded)) / 2);
+
+  /* Height — inset and cap only. Independent of line-height. */
+  --eds-optical-height-xs-squished: calc(var(--eds-spacing-inset-xs-vertical-squished) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-xs-squared: calc(var(--eds-spacing-inset-xs-vertical-squared) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-xs-stretched: calc(var(--eds-spacing-inset-xs-vertical-stretched) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-sm-squished: calc(var(--eds-spacing-inset-sm-vertical-squished) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-sm-squared: calc(var(--eds-spacing-inset-sm-vertical-squared) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-sm-stretched: calc(var(--eds-spacing-inset-sm-vertical-stretched) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-md-squished: calc(var(--eds-spacing-inset-md-vertical-squished) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-md-squared: calc(var(--eds-spacing-inset-md-vertical-squared) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-md-stretched: calc(var(--eds-spacing-inset-md-vertical-stretched) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-lg-squished: calc(var(--eds-spacing-inset-lg-vertical-squished) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-lg-squared: calc(var(--eds-spacing-inset-lg-vertical-squared) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-lg-stretched: calc(var(--eds-spacing-inset-lg-vertical-stretched) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-xl-squished: calc(var(--eds-spacing-inset-xl-vertical-squished) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-xl-squared: calc(var(--eds-spacing-inset-xl-vertical-squared) * 2 + var(--eds-cap-rounded));
+  --eds-optical-height-xl-stretched: calc(var(--eds-spacing-inset-xl-vertical-stretched) * 2 + var(--eds-cap-rounded));
+
+  /* Padding for the common case where label size == inset size.
+   * If they differ, compose it yourself:
+   *   calc(var(--eds-spacing-inset-<inset>-vertical-<prop>)
+   *        - var(--eds-half-leading-<label>))
+   * Deliberately off the 4px ladder. Do not round it back. */
+  --eds-optical-padding-xs-squished: calc(var(--eds-spacing-inset-xs-vertical-squished) - var(--eds-half-leading-xs));
+  --eds-optical-padding-xs-squared: calc(var(--eds-spacing-inset-xs-vertical-squared) - var(--eds-half-leading-xs));
+  --eds-optical-padding-xs-stretched: calc(var(--eds-spacing-inset-xs-vertical-stretched) - var(--eds-half-leading-xs));
+  --eds-optical-padding-sm-squished: calc(var(--eds-spacing-inset-sm-vertical-squished) - var(--eds-half-leading-sm));
+  --eds-optical-padding-sm-squared: calc(var(--eds-spacing-inset-sm-vertical-squared) - var(--eds-half-leading-sm));
+  --eds-optical-padding-sm-stretched: calc(var(--eds-spacing-inset-sm-vertical-stretched) - var(--eds-half-leading-sm));
+  --eds-optical-padding-md-squished: calc(var(--eds-spacing-inset-md-vertical-squished) - var(--eds-half-leading-md));
+  --eds-optical-padding-md-squared: calc(var(--eds-spacing-inset-md-vertical-squared) - var(--eds-half-leading-md));
+  --eds-optical-padding-md-stretched: calc(var(--eds-spacing-inset-md-vertical-stretched) - var(--eds-half-leading-md));
+  --eds-optical-padding-lg-squished: calc(var(--eds-spacing-inset-lg-vertical-squished) - var(--eds-half-leading-lg));
+  --eds-optical-padding-lg-squared: calc(var(--eds-spacing-inset-lg-vertical-squared) - var(--eds-half-leading-lg));
+  --eds-optical-padding-lg-stretched: calc(var(--eds-spacing-inset-lg-vertical-stretched) - var(--eds-half-leading-lg));
+  --eds-optical-padding-xl-squished: calc(var(--eds-spacing-inset-xl-vertical-squished) - var(--eds-half-leading-xl));
+  --eds-optical-padding-xl-squared: calc(var(--eds-spacing-inset-xl-vertical-squared) - var(--eds-half-leading-xl));
+  --eds-optical-padding-xl-stretched: calc(var(--eds-spacing-inset-xl-vertical-stretched) - var(--eds-half-leading-xl));
+    --eds-padding-top-baseline: calc(round(1cap, 0.25rem) - 1ex);
+  }
+}
+
+/* Read text only. Scanned text uses the half-leading calc instead —
+ * see PLAN.md "Scanned vs read". Ex, not cap — and always paired with
+ * --eds-padding-top-baseline (round(1cap, 4px) − 1ex): the pair makes the
+ * occupied text box exactly --eds-cap-rounded, the same box every glyph
+ * footprint and height formula uses, AND lands the baseline itself on the
+ * 4px grid. A raw cap trim would give the UNROUNDED cap and miss the grid.
+ * (Victor's reference: codepen VYmaowY.) */
+@supports (text-box: trim-both ex alphabetic) {
+  :root {
+    --eds-text-box: trim-both ex alphabetic;
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.banner",
+  "version": "0.4.0",
+  "description": "Banner — a tone strip announcing something about the whole view. A tone surface with a subtle tone border (the EDS 2.0 mock, refined), the tone's own icon seated on the first line, a message set for READING and trimmed to the cap box, and an optional dismiss that IS the ghost icon-button, its cap box on the corner. Height is never stated: it emerges from the recipe and grows with a wrapping message.",
+  "notes": "v0.4.0 (Victor 2026-08-31): STATIC = SURFACE TIER — the strip sits on bg-{tone}-surface (step 2), NOT the interactive muted rung (step 3): Victor found the ghost hover lands on the same step as a muted-default strip (the dismiss IS a ghost button on the banner), so the interactive ladder needs the room above a static tint; the new team minted 'non-interactive' at step 1, which nearly vanishes in dark — surface is the same idea one step safer, and it already exists. Plus the team's nice touch: a SUBTLE TONE BORDER (border-{tone}-subtle, stroke-thin, drawn as an inset outline so geometry is untouched). v0.3.0: READING TEXT SITS ON THE BASELINE GRID — the message rides text-box: trim-both ex alphabetic PLUS padding-top round(1cap,4px)−1ex (Victor's codepen VYmaowY): the occupied box is exactly the ROUNDED cap and the baseline lands on the 4px grid at the box bottom (@supports-gated --eds-text-box/--eds-padding-top-baseline; the fallback keeps the half-leading subtraction — the --_trim-lead/--_baseline-pad pair switches the padding and every glyph seat together). Figma cannot trim: a recorded, bounded divergence — strip heights AGREE at every line count by construction (trim removes exactly the 2×half-leading the padding gains). ICON seats on the FIRST LINE (root align start): with trim, icon cap box top = text cap top = the inset, exactly; Figma mirrors by sizing the icon container to the first LINE BOX (line-height, not cap) and top-aligning. DISMISS IS THE GHOST ICON-BUTTON (composition, not imitation): its own hover plate, focus ring and accessible-name guard come with it; the banner only seats the button's CAP BOX on the upper-right corner — the plate overflows like ink (you only see the circle on hover anyway; Victor). The overhang is the Button's own inset, declared, not assumed. GAP: 16px (spacing-horizontal-md), NOT the icon gap — the icon-label gap is for glyphs beside their label inside an atom; the banner is a CONTAINER (Victor's taxonomy: selectable atoms / containers pad md-16 and gap the same / pages pad xl-24). MESSAGE INK is text-{tone}-strong — almost black, a hint of the tone. Icons stay tone-owned (swapByProp; Icon boolean = visibility only). role=status: banners announce; alert semantics (assertive) are the consumer's call for danger uses.",
+  "props": [
+    {
+      "name": "tone",
+      "description": "What the banner announces. The tone owns its icon and tints its ink.",
+      "type": {
+        "enum": ["info", "warning", "danger", "success"]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "message",
+      "description": "The announcement — text meant to be read, not scanned. Code: a <p> child (the trim needs a block container).",
+      "type": {
+        "text": true
+      },
+      "default": "Something happened that you should know about.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Message"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "description": "Shows the tone's icon. Visibility only — the glyph is the tone's and cannot be changed.",
+      "type": {
+        "boolean": true
+      },
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "dismissible",
+      "description": "The ghost icon-button with the close glyph, cap box on the upper right corner (same prop as the chip's).",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Dismissible"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-horizontal-md}",
+        "align": "start"
+      },
+      "inset": {
+        "size": "md",
+        "proportion": "squished",
+        "opticalLabel": "message"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-{tone}-surface}",
+        "border-color": "{color.semantic.border-{tone}-subtle}"
+      }
+    },
+    "icon": {
+      "when": "icon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swapByProp": {
+        "prop": "tone",
+        "glyphs": {
+          "info": {
+            "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874",
+            "icon": "info_circle"
+          },
+          "warning": {
+            "componentKey": "e64c0cf5114185fee9676e7b695d947081bbab77",
+            "icon": "warning_outlined"
+          },
+          "danger": {
+            "componentKey": "c01ecb263ad4c0516f712fbf419a84601e2b5411",
+            "icon": "error_outlined"
+          },
+          "success": {
+            "componentKey": "050ceb37d839afb67598ed064579564b158ee708",
+            "icon": "check_circle_outlined"
+          }
+        }
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-{tone}}"
+      }
+    },
+    "message": {
+      "typography": {
+        "label": "md",
+        "variant": "default",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-{tone}-strong}"
+      }
+    },
+    "dismiss": {
+      "when": "dismissible",
+      "corner": true,
+      "overhang": "{spacing.spacing-inset-md-vertical-squished}",
+      "instance": {
+        "component": "Button",
+        "icon": "close",
+        "overrides": {
+          "Variant": "Ghost-icon",
+          "Tone": "Neutral",
+          "↳ Leading Icon": "key:3bd72d0a163f1d70993eb1b648540442f161567e"
+        }
+      }
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "div",
+    "role": "status",
+    "aria": {
+      "role": "status announces politely; use alert at the consumer level for interruptive danger banners",
+      "dismiss": "the dismiss is a Button ghost-icon — it brings its own focus ring and aria-label guard"
+    }
+  }
+}

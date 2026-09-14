@@ -1,0 +1,52 @@
+{
+  "component": "eds.card",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Card",
+    "description": "Card — THE CONTAINER PRIMITIVE, one card, everything else is assembly (EDS 1.0's philosophy, and the team's own architecture: their showcase cards all compose a bare _Card Container). Neutral surface with a subtle outline; interactivity is the MARKUP's fact, not a prop — an <a> or <button> card affords, a <div> card sits still. Plain (uncorrected) inset: no text to compensate for.\n\nGenerated from eds.card v0.2.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default",
+        "Hover"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "VERTICAL",
+      "align": "MIN",
+      "radiusVar": "spacing/border-radius-rounded",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "slot",
+        "name": "content"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "spacing/inset-md-vertical-squared",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "insetVar": "spacing/inset-md-vertical-squared",
+        "gap": "spacing/vertical-md"
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "border": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "effect": "elevation/low",
+        "border": "semantic/border-neutral-medium"
+      }
+    ]
+  }
+}

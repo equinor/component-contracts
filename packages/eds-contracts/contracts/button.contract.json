@@ -1,0 +1,269 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.button",
+  "version": "0.8.0",
+  "description": "Button \u2014 the selectable. Height is never stated: inset \u00d7 2 + cap(label) resolves per size and density (default: 24/36/44, small: 20/24/36), with or without an icon. Primary fills; Secondary, Ghost and Ghost-icon rest transparent and bind the ghost ladder. Ghost-icon is EDS 1.x's ghost_icon: icon-only, round \u2014 with no text there is no half-leading to compensate, so padding = inset on all sides and the button is a circle by construction.",
+  "notes": "Single size (md) in v0.1 \u2014 a size axis needs size-parameterized anatomy, deferred until the schema earns it. The icon follows the glyph/footprint rule (cap box, ink overflows) recovered from the December reference button (Figma node 36:772). Emphasis is the fill tier: emphasis = filled call-to-action, muted = quiet fill; the on-emphasis text colors cannot be expressed by interpolation (there is no *-on-muted token), which is what the variants override section exists for. Icon-only exists ONLY as the round ghost (EDS 1.x ghost_icon); the square icon-only button is a team invention outside this system's scope \u2014 refused, not deferred. DISABLED SPLIT (v0.8.0, 2026-08-30, per EDS 1.0 source ghost.ts/outlined.ts): the gray plate (bg-disabled) belongs to variant=primary alone; secondary keeps its structure with border-disabled + disabled inks, ghost and ghost-icon stay transparent with disabled inks. Focus is no longer a Figma variant: refused on canvas (Marco Krenn, 2026-08-30) \u2014 the ring is the platform state, CSS-only.",
+  "props": [
+    {
+      "name": "tone",
+      "description": "Color family the button draws from.",
+      "type": {
+        "enum": ["neutral", "accent", "danger"]
+      },
+      "default": "accent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "Visual style: primary (emphasis fill), secondary (transparent + border), ghost (transparent), ghost-icon (icon-only, round \u2014 the EDS 1.x ghost_icon).",
+      "type": {
+        "enum": ["primary", "secondary", "ghost", "ghost-icon"]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "Component size \u2014 orthogonal to density (density is an application-level user choice; size is a per-component knob).",
+      "type": {
+        "enum": ["default", "small"]
+      },
+      "default": "default",
+      "anatomy": {
+        "default": {
+          "inset": "md",
+          "label": "md",
+          "icon": "md"
+        },
+        "small": {
+          "inset": "sm",
+          "label": "sm",
+          "icon": "xs"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "The button's text.",
+      "type": {
+        "text": true
+      },
+      "default": "Click me!",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "leadingIcon",
+      "description": "Optional leading icon.",
+      "type": {
+        "boolean": true
+      },
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Leading Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "trailingIcon",
+      "description": "Optional trailing icon.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Trailing Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-icon-md-gap-horizontal}",
+        "align": "center"
+      },
+      "inset": {
+        "size": "md",
+        "proportion": "squished",
+        "opticalLabel": "label"
+      },
+      "radius": "{spacing.spacing-border-radius-rounded}",
+      "tokens": {
+        "background-color": "{color.semantic.bg-{tone}-fill-emphasis-default}"
+      }
+    },
+    "icon": {
+      "when": "leadingIcon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "tokens": {
+        "color": "{color.semantic.icon-{tone}}"
+      },
+      "swap": {
+        "property": "\u21b3 Leading Icon",
+        "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+      }
+    },
+    "label": {
+      "typography": {
+        "label": "md",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "bolder"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-{tone}-strong}"
+      }
+    },
+    "trailing-icon": {
+      "when": "trailingIcon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "property": "\u21b3 Trailing Icon",
+        "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-{tone}}"
+      }
+    }
+  },
+  "variants": [
+    {
+      "when": {
+        "variant": "primary"
+      },
+      "tokens": {
+        "label/color": "{color.semantic.text-{tone}-strong-on-emphasis}",
+        "icon/color": "{color.semantic.icon-{tone}-on-emphasis}",
+        "trailing-icon/color": "{color.semantic.icon-{tone}-on-emphasis}"
+      }
+    },
+    {
+      "when": {
+        "variant": "secondary"
+      },
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-ghost-default}",
+        "root/background-color:hover": "{color.semantic.bg-{tone}-fill-ghost-hover}",
+        "root/background-color:active": "{color.semantic.bg-{tone}-fill-ghost-active}",
+        "root/border-color": "{color.semantic.border-{tone}-strong}",
+        "root/border-color:disabled": "{color.concept.border-disabled}"
+      }
+    },
+    {
+      "when": {
+        "variant": "ghost"
+      },
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-ghost-default}",
+        "root/background-color:hover": "{color.semantic.bg-{tone}-fill-ghost-hover}",
+        "root/background-color:active": "{color.semantic.bg-{tone}-fill-ghost-active}"
+      }
+    },
+    {
+      "when": {
+        "variant": "ghost-icon"
+      },
+      "structure": {
+        "iconOnly": "icon",
+        "inset": "even",
+        "radius": "{spacing.spacing-border-radius-pill}"
+      },
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-ghost-default}",
+        "root/background-color:hover": "{color.semantic.bg-{tone}-fill-ghost-hover}",
+        "root/background-color:active": "{color.semantic.bg-{tone}-fill-ghost-active}"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-emphasis-hover}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "active",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-emphasis-active}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "label/color": "{color.concept.text-disabled}",
+        "icon/color": "{color.concept.text-disabled}",
+        "trailing-icon/color": "{color.concept.text-disabled}",
+        "root/border-color": "{color.concept.border-disabled}"
+      }
+    },
+    {
+      "name": "disabled",
+      "when": {
+        "variant": "primary"
+      },
+      "tokens": {
+        "root/background-color": "{color.concept.bg-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "button",
+    "aria": {
+      "aria-disabled": "reflects the disabled state when the button must stay focusable"
+    }
+  }
+}

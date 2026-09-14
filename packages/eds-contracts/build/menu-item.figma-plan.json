@@ -1,0 +1,120 @@
+{
+  "component": "eds.menu-item",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-sm-squared-md-label",
+      "collection": "density",
+      "values": {
+        "compact": 6,
+        "comfortable": 10,
+        "relaxed": 12
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-sm-vertical-squared) - var(--eds-half-leading-md))",
+      "description": "eds.menu-item: md label in the sm-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 24/36/44."
+    }
+  ],
+  "componentSet": {
+    "name": "Menu-item",
+    "description": "Menu item — a ghost row inside a floating menu. Rests transparent, rides the neutral ghost ladder (hover step 3, active step 4), and SELECTED flips hue: the accent ghost-selected rung (accent step 4) + accent text — same lightness rung as active, different hue, so a hovered neighbour and the chosen item can never be confused (December's selected ≡ hover leak, closed by the selected rung, 2026-08-30). Height is never stated: inset × 2 + cap(label).\n\nGenerated from eds.menu-item v0.3.1 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default",
+        "Hover",
+        "Active",
+        "Selected",
+        "Disabled"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Menu item",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [
+      {
+        "property": "Has Icon",
+        "default": false,
+        "part": "icon"
+      }
+    ],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "icon",
+        "swap": {
+          "property": "↳ Icon",
+          "componentKey": "9fd93824c3b0d41f7e1eed3b16fa433589b91874"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Menu item"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "icon": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-md"
+          }
+        },
+        "paddingBlock": "recipe/optical-padding-sm-squared-md-label",
+        "paddingInline": "spacing/inset-sm-horizontal",
+        "insetVar": "spacing/inset-sm-vertical-squared",
+        "gap": "spacing/icon-md-gap-horizontal",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/compressed/md"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-hover",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "State=Active",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-active",
+        "fg": "semantic/text-neutral-subtle",
+        "iconFg": "semantic/icon-neutral"
+      },
+      {
+        "name": "State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-accent-fill-ghost-selected",
+        "fg": "semantic/text-accent-strong",
+        "iconFg": "semantic/icon-accent"
+      },
+      {
+        "name": "State=Disabled",
+        "size": "Default",
+        "bg": "semantic/bg-neutral-fill-ghost-default",
+        "fg": "concept/text-disabled",
+        "iconFg": "concept/text-disabled"
+      }
+    ]
+  }
+}
