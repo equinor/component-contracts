@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "eds \u2014 a thin CLI lens over the EDS contracts and token build. Answers are generated from the same source of truth that generates the components; nothing is recalled that can be computed.",
+  "description": "PROOF OF CONCEPT: a thin, read-only CLI lens over the EDS contracts and token build. Answers are generated from the same source of truth that generates the components; nothing is recalled that can be computed.",
   "engines": {
     "node": ">=24"
   },

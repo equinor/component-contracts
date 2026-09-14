@@ -14,7 +14,7 @@ system" (Into Design Systems, Oslo, September 2026).
 | --- | --- |
 | `packages/eds-contracts` | The contracts, the emitters (CSS, Figma plan, Figma builder, ledger, DESIGN.md), and the parity harness |
 | `packages/eds-tokens` | The token build: DTCG sources, formulas, CSS output, Figma variable payload |
-| `packages/eds-cli` | `eds` — a read-only CLI lens; answers are computed live from the contracts and tokens, with provenance |
+| `packages/eds-cli` | `eds` — a read-only CLI lens (proof of concept); answers are computed live from the contracts and tokens, with provenance |
 | `apps/storefront` | The Component Storefront, a component browser built from the components themselves |
 | `apps/demos/building-the-button` | One request, three attempts: a document, the skills, the contract |
 | `DESIGN.md` / `DESIGN.verbose.md` | The fourth renderer's output: the system described for agents, thin and in full |
