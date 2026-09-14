@@ -1,0 +1,11 @@
+/* Generated from compositions/text-field.json — do not edit. */
+
+@layer eds-components {
+  /* A composition owns layout only — the parts style themselves. */
+  .eds-text-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-vertical-xs);
+    align-items: stretch;
+  }
+}

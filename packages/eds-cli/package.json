@@ -1,0 +1,21 @@
+{
+  "name": "@equinor/eds-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "eds \u2014 a thin CLI lens over the EDS contracts and token build. Answers are generated from the same source of truth that generates the components; nothing is recalled that can be computed.",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "eds": "./bin/eds.js"
+  },
+  "scripts": {
+    "test": "node test/check.ts"
+  },
+  "dependencies": {
+    "apca-w3": "^0.1.9",
+    "@equinor/eds-contracts": "workspace:*",
+    "@equinor/eds-tokens": "workspace:*"
+  }
+}

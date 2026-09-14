@@ -1,0 +1,126 @@
+{
+  "component": "eds.checkbox",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Checkbox",
+    "description": "Checkbox — the control, and only the control. The glyph IS an icon from the EDS set (as EDS 1.x rendered it), rendered as a MASK on the native input itself (appearance: none; background-color is the ink - the CSS twin of the Figma mask+tint) and swapped by the platform's own :checked. One element, no wrapper, native focus/keyboard/forms behaviour. Interactive green in both states (EDS 1.0 — Victor, 2026-08-29). Labelled rows are COMPOSITION.\n\nGenerated from eds.checkbox v0.2.0 — edit the contract, not this component.",
+    "axes": {
+      "Checked": [
+        "Unchecked",
+        "Checked",
+        "Indeterminate"
+      ],
+      "State": [
+        "Default",
+        "Disabled"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "glyph-off",
+        "swap": {
+          "componentKey": "3bf42d16a564f7fde691d9d3b1ed571b602f9847",
+          "icon": "checkbox_outline"
+        }
+      },
+      {
+        "kind": "glyph",
+        "name": "glyph-on",
+        "swap": {
+          "componentKey": "a1f7377fab99a8626d301f08d4e1f15baebdd8db",
+          "icon": "checkbox"
+        }
+      },
+      {
+        "kind": "glyph",
+        "name": "glyph-mixed",
+        "swap": {
+          "componentKey": "21ce44ce2ab9e5934605f958295b5279e904b148",
+          "icon": "checkbox_indeterminate"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "glyph-off": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-lg"
+          },
+          "glyph-on": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-lg"
+          },
+          "glyph-mixed": {
+            "containerVar": "recipe/cap-rounded-md",
+            "glyphVar": "sizing/icon-lg"
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Checked=Unchecked, State=Default",
+        "size": "Default",
+        "iconFg": "semantic/icon-accent",
+        "hideParts": [
+          "glyph-on",
+          "glyph-mixed"
+        ]
+      },
+      {
+        "name": "Checked=Unchecked, State=Disabled",
+        "size": "Default",
+        "iconFg": "concept/text-disabled",
+        "hideParts": [
+          "glyph-on",
+          "glyph-mixed"
+        ]
+      },
+      {
+        "name": "Checked=Checked, State=Default",
+        "size": "Default",
+        "iconFg": "semantic/icon-accent",
+        "hideParts": [
+          "glyph-off",
+          "glyph-mixed"
+        ]
+      },
+      {
+        "name": "Checked=Checked, State=Disabled",
+        "size": "Default",
+        "iconFg": "concept/text-disabled",
+        "hideParts": [
+          "glyph-off",
+          "glyph-mixed"
+        ]
+      },
+      {
+        "name": "Checked=Indeterminate, State=Default",
+        "size": "Default",
+        "iconFg": "semantic/icon-accent",
+        "hideParts": [
+          "glyph-off",
+          "glyph-on"
+        ]
+      },
+      {
+        "name": "Checked=Indeterminate, State=Disabled",
+        "size": "Default",
+        "iconFg": "concept/text-disabled",
+        "hideParts": [
+          "glyph-off",
+          "glyph-on"
+        ]
+      }
+    ]
+  }
+}

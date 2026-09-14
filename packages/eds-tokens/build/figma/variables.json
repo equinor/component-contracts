@@ -1,0 +1,5936 @@
+{
+  "collections": [
+    {
+      "name": "density",
+      "modes": [
+        "compact",
+        "comfortable",
+        "relaxed"
+      ],
+      "variables": [
+        {
+          "name": "density/base",
+          "type": "FLOAT",
+          "scopes": [],
+          "values": {
+            "compact": 14,
+            "comfortable": 16,
+            "relaxed": 18.5
+          }
+        },
+        {
+          "name": "spacing/horizontal-4xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-4xs)",
+          "values": {
+            "compact": 1,
+            "comfortable": 2,
+            "relaxed": 4
+          }
+        },
+        {
+          "name": "spacing/vertical-4xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-4xs)",
+          "values": {
+            "compact": 1,
+            "comfortable": 2,
+            "relaxed": 4
+          }
+        },
+        {
+          "name": "spacing/horizontal-3xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-3xs)",
+          "values": {
+            "compact": 2,
+            "comfortable": 4,
+            "relaxed": 6
+          }
+        },
+        {
+          "name": "spacing/vertical-3xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-3xs)",
+          "values": {
+            "compact": 2,
+            "comfortable": 4,
+            "relaxed": 6
+          }
+        },
+        {
+          "name": "spacing/horizontal-2xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-2xs)",
+          "values": {
+            "compact": 4,
+            "comfortable": 6,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/vertical-2xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-2xs)",
+          "values": {
+            "compact": 4,
+            "comfortable": 6,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/horizontal-xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-xs)",
+          "values": {
+            "compact": 6,
+            "comfortable": 8,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "spacing/vertical-xs",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-xs)",
+          "values": {
+            "compact": 6,
+            "comfortable": 8,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "spacing/horizontal-sm",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-sm)",
+          "values": {
+            "compact": 8,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "spacing/vertical-sm",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-sm)",
+          "values": {
+            "compact": 8,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "spacing/horizontal-md",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-md)",
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "spacing/vertical-md",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-md)",
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "spacing/horizontal-lg",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-lg)",
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "spacing/vertical-lg",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-lg)",
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "spacing/horizontal-xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-xl)",
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "spacing/vertical-xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-xl)",
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "spacing/horizontal-2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-2xl)",
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "spacing/vertical-2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-2xl)",
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "spacing/horizontal-3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-3xl)",
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 36
+          }
+        },
+        {
+          "name": "spacing/vertical-3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-3xl)",
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 36
+          }
+        },
+        {
+          "name": "sizing/icon-xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-xs)",
+          "values": {
+            "compact": 14,
+            "comfortable": 16,
+            "relaxed": 18
+          }
+        },
+        {
+          "name": "sizing/icon-sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-sm)",
+          "values": {
+            "compact": 16,
+            "comfortable": 18,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "sizing/icon-md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-md)",
+          "values": {
+            "compact": 18,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "sizing/icon-lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-lg)",
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "sizing/icon-xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-xl)",
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "sizing/icon-2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-2xl)",
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 37
+          }
+        },
+        {
+          "name": "sizing/icon-3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-3xl)",
+          "values": {
+            "compact": 32,
+            "comfortable": 37,
+            "relaxed": 42
+          }
+        },
+        {
+          "name": "sizing/icon-4xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-4xl)",
+          "values": {
+            "compact": 37,
+            "comfortable": 42,
+            "relaxed": 48
+          }
+        },
+        {
+          "name": "sizing/icon-5xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-5xl)",
+          "values": {
+            "compact": 42,
+            "comfortable": 48,
+            "relaxed": 56
+          }
+        },
+        {
+          "name": "sizing/icon-6xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-icon-6xl)",
+          "values": {
+            "compact": 48,
+            "comfortable": 56,
+            "relaxed": 64
+          }
+        },
+        {
+          "name": "sizing/selectable-xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-xs)",
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "sizing/selectable-sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-sm)",
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 36
+          }
+        },
+        {
+          "name": "sizing/selectable-md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-md)",
+          "values": {
+            "compact": 24,
+            "comfortable": 36,
+            "relaxed": 44
+          }
+        },
+        {
+          "name": "sizing/selectable-lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-lg)",
+          "values": {
+            "compact": 36,
+            "comfortable": 44,
+            "relaxed": 52
+          }
+        },
+        {
+          "name": "sizing/selectable-xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-xl)",
+          "values": {
+            "compact": 44,
+            "comfortable": 52,
+            "relaxed": 60
+          }
+        },
+        {
+          "name": "sizing/selectable-2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-sizing-selectable-2xl)",
+          "values": {
+            "compact": 52,
+            "comfortable": 60,
+            "relaxed": 68
+          }
+        },
+        {
+          "name": "spacing/border-radius-rounded",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--eds-spacing-border-radius-rounded)",
+          "values": {
+            "compact": 3,
+            "comfortable": 4,
+            "relaxed": 5
+          }
+        },
+        {
+          "name": "typography/font-size/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 9,
+            "comfortable": 10.5,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "typography/font-size/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 10.5,
+            "comfortable": 12,
+            "relaxed": 14
+          }
+        },
+        {
+          "name": "typography/font-size/md",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 14,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "typography/font-size/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 14,
+            "comfortable": 16,
+            "relaxed": 18.5
+          }
+        },
+        {
+          "name": "typography/font-size/xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 18.5,
+            "relaxed": 21.5
+          }
+        },
+        {
+          "name": "typography/font-size/2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 18.5,
+            "comfortable": 21,
+            "relaxed": 24.5
+          }
+        },
+        {
+          "name": "typography/font-size/3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 21,
+            "comfortable": 24.5,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "typography/font-size/4xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 24.5,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "typography/font-size/5xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 37
+          }
+        },
+        {
+          "name": "typography/font-size/6xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 32,
+            "comfortable": 37,
+            "relaxed": 42.5
+          }
+        },
+        {
+          "name": "typography/header-font-size/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 10,
+            "comfortable": 12,
+            "relaxed": 13.5
+          }
+        },
+        {
+          "name": "typography/header-font-size/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 13.5,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "typography/header-font-size/md",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 13.5,
+            "comfortable": 16,
+            "relaxed": 18
+          }
+        },
+        {
+          "name": "typography/header-font-size/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 18,
+            "relaxed": 21
+          }
+        },
+        {
+          "name": "typography/header-font-size/xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 18,
+            "comfortable": 21,
+            "relaxed": 24.5
+          }
+        },
+        {
+          "name": "typography/header-font-size/2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 21,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "typography/header-font-size/3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "typography/header-font-size/4xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 36.5
+          }
+        },
+        {
+          "name": "typography/header-font-size/5xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 32,
+            "comfortable": 36.5,
+            "relaxed": 42
+          }
+        },
+        {
+          "name": "typography/header-font-size/6xl",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "values": {
+            "compact": 36.5,
+            "comfortable": 42,
+            "relaxed": 48.5
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xs/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 376.2,
+            "comfortable": 376.2,
+            "relaxed": 376.2
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xs/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 458.5,
+            "comfortable": 458.5,
+            "relaxed": 458.5
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xs/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 552.7,
+            "comfortable": 552.7,
+            "relaxed": 552.7
+          }
+        },
+        {
+          "name": "typography/header-font-weight/sm/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 376.2,
+            "comfortable": 376.2,
+            "relaxed": 376.2
+          }
+        },
+        {
+          "name": "typography/header-font-weight/sm/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 458.5,
+            "comfortable": 458.5,
+            "relaxed": 458.5
+          }
+        },
+        {
+          "name": "typography/header-font-weight/sm/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 552.7,
+            "comfortable": 552.7,
+            "relaxed": 552.7
+          }
+        },
+        {
+          "name": "typography/header-font-weight/md/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 376.2,
+            "comfortable": 376.2,
+            "relaxed": 375.1
+          }
+        },
+        {
+          "name": "typography/header-font-weight/md/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 458.5,
+            "comfortable": 458.5,
+            "relaxed": 456.2
+          }
+        },
+        {
+          "name": "typography/header-font-weight/md/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 552.7,
+            "comfortable": 552.7,
+            "relaxed": 550.2
+          }
+        },
+        {
+          "name": "typography/header-font-weight/lg/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 376.2,
+            "comfortable": 375.1,
+            "relaxed": 373.8
+          }
+        },
+        {
+          "name": "typography/header-font-weight/lg/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 458.5,
+            "comfortable": 456.2,
+            "relaxed": 453.4
+          }
+        },
+        {
+          "name": "typography/header-font-weight/lg/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 552.7,
+            "comfortable": 550.2,
+            "relaxed": 547
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 375.1,
+            "comfortable": 373.8,
+            "relaxed": 372.1
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 456.2,
+            "comfortable": 453.4,
+            "relaxed": 449.9
+          }
+        },
+        {
+          "name": "typography/header-font-weight/xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 550.2,
+            "comfortable": 547,
+            "relaxed": 543.2
+          }
+        },
+        {
+          "name": "typography/header-font-weight/2xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 373.8,
+            "comfortable": 372.4,
+            "relaxed": 370.5
+          }
+        },
+        {
+          "name": "typography/header-font-weight/2xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 453.4,
+            "comfortable": 450.5,
+            "relaxed": 446.6
+          }
+        },
+        {
+          "name": "typography/header-font-weight/2xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 547,
+            "comfortable": 543.8,
+            "relaxed": 539.3
+          }
+        },
+        {
+          "name": "typography/header-font-weight/3xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 372.4,
+            "comfortable": 370.5,
+            "relaxed": 368.5
+          }
+        },
+        {
+          "name": "typography/header-font-weight/3xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 450.5,
+            "comfortable": 446.6,
+            "relaxed": 442.6
+          }
+        },
+        {
+          "name": "typography/header-font-weight/3xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 543.8,
+            "comfortable": 539.3,
+            "relaxed": 534.9
+          }
+        },
+        {
+          "name": "typography/header-font-weight/4xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 370.5,
+            "comfortable": 368.5,
+            "relaxed": 366.3
+          }
+        },
+        {
+          "name": "typography/header-font-weight/4xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 446.6,
+            "comfortable": 442.6,
+            "relaxed": 438
+          }
+        },
+        {
+          "name": "typography/header-font-weight/4xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 539.3,
+            "comfortable": 534.9,
+            "relaxed": 529.8
+          }
+        },
+        {
+          "name": "typography/header-font-weight/5xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 368.5,
+            "comfortable": 366.3,
+            "relaxed": 366.3
+          }
+        },
+        {
+          "name": "typography/header-font-weight/5xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 442.6,
+            "comfortable": 438,
+            "relaxed": 438
+          }
+        },
+        {
+          "name": "typography/header-font-weight/5xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 534.9,
+            "comfortable": 529.8,
+            "relaxed": 529.8
+          }
+        },
+        {
+          "name": "typography/header-font-weight/6xl/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 366.3,
+            "comfortable": 366.3,
+            "relaxed": 366.3
+          }
+        },
+        {
+          "name": "typography/header-font-weight/6xl/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 438,
+            "comfortable": 438,
+            "relaxed": 438
+          }
+        },
+        {
+          "name": "typography/header-font-weight/6xl/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "compact": 529.8,
+            "comfortable": 529.8,
+            "relaxed": 529.8
+          }
+        },
+        {
+          "name": "typography/line-height/default/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "typography/line-height/default/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 16,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "typography/line-height/default/md",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "typography/line-height/default/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "typography/line-height/default/xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "typography/line-height/default/2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "typography/line-height/default/3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 36
+          }
+        },
+        {
+          "name": "typography/line-height/default/4xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 32,
+            "comfortable": 36,
+            "relaxed": 40
+          }
+        },
+        {
+          "name": "typography/line-height/default/5xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 32,
+            "comfortable": 36,
+            "relaxed": 44
+          }
+        },
+        {
+          "name": "typography/line-height/default/6xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 36,
+            "comfortable": 40,
+            "relaxed": 48
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/xs",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/sm",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/md",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/lg",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 16,
+            "comfortable": 20,
+            "relaxed": 24
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/2xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 20,
+            "comfortable": 24,
+            "relaxed": 28
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/3xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 24,
+            "comfortable": 28,
+            "relaxed": 32
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/4xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 28,
+            "comfortable": 28,
+            "relaxed": 36
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/5xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 28,
+            "comfortable": 32,
+            "relaxed": 40
+          }
+        },
+        {
+          "name": "typography/line-height/compressed/6xl",
+          "type": "FLOAT",
+          "scopes": [
+            "LINE_HEIGHT",
+            "WIDTH_HEIGHT"
+          ],
+          "values": {
+            "compact": 32,
+            "comfortable": 36,
+            "relaxed": 44
+          }
+        },
+        {
+          "name": "recipe/cap-rounded-xs",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-cap-rounded-xs)",
+          "values": {
+            "compact": 8,
+            "comfortable": 8,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "recipe/cap-rounded-sm",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-cap-rounded-sm)",
+          "values": {
+            "compact": 8,
+            "comfortable": 8,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "recipe/cap-rounded-md",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-cap-rounded-md)",
+          "values": {
+            "compact": 8,
+            "comfortable": 12,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "recipe/cap-rounded-lg",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-cap-rounded-lg)",
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "recipe/cap-rounded-xl",
+          "type": "FLOAT",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": "var(--eds-cap-rounded-xl)",
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "spacing/icon-xs-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-xs-gap-horizontal)",
+          "values": {
+            "compact": 6,
+            "comfortable": 6,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/icon-xs-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-xs-gap-vertical)",
+          "values": {
+            "compact": 6,
+            "comfortable": 6,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/icon-sm-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-sm-gap-horizontal)",
+          "values": {
+            "compact": 6,
+            "comfortable": 8,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/icon-sm-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-sm-gap-vertical)",
+          "values": {
+            "compact": 6,
+            "comfortable": 8,
+            "relaxed": 8
+          }
+        },
+        {
+          "name": "spacing/icon-md-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-md-gap-horizontal)",
+          "values": {
+            "compact": 8,
+            "comfortable": 8,
+            "relaxed": 10
+          }
+        },
+        {
+          "name": "spacing/icon-md-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-md-gap-vertical)",
+          "values": {
+            "compact": 8,
+            "comfortable": 8,
+            "relaxed": 10
+          }
+        },
+        {
+          "name": "spacing/icon-lg-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-lg-gap-horizontal)",
+          "values": {
+            "compact": 8,
+            "comfortable": 10,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "spacing/icon-lg-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-lg-gap-vertical)",
+          "values": {
+            "compact": 8,
+            "comfortable": 10,
+            "relaxed": 12
+          }
+        },
+        {
+          "name": "spacing/icon-xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-xl-gap-horizontal)",
+          "values": {
+            "compact": 10,
+            "comfortable": 12,
+            "relaxed": 14
+          }
+        },
+        {
+          "name": "spacing/icon-xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-xl-gap-vertical)",
+          "values": {
+            "compact": 10,
+            "comfortable": 12,
+            "relaxed": 14
+          }
+        },
+        {
+          "name": "spacing/icon-2xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-2xl-gap-horizontal)",
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "spacing/icon-2xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-2xl-gap-vertical)",
+          "values": {
+            "compact": 12,
+            "comfortable": 12,
+            "relaxed": 16
+          }
+        },
+        {
+          "name": "spacing/icon-3xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-3xl-gap-horizontal)",
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 18
+          }
+        },
+        {
+          "name": "spacing/icon-3xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-3xl-gap-vertical)",
+          "values": {
+            "compact": 12,
+            "comfortable": 16,
+            "relaxed": 18
+          }
+        },
+        {
+          "name": "spacing/icon-4xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-4xl-gap-horizontal)",
+          "values": {
+            "compact": 16,
+            "comfortable": 18,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "spacing/icon-4xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-4xl-gap-vertical)",
+          "values": {
+            "compact": 16,
+            "comfortable": 18,
+            "relaxed": 20
+          }
+        },
+        {
+          "name": "spacing/icon-5xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-5xl-gap-horizontal)",
+          "values": {
+            "compact": 18,
+            "comfortable": 20,
+            "relaxed": 22
+          }
+        },
+        {
+          "name": "spacing/icon-5xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-5xl-gap-vertical)",
+          "values": {
+            "compact": 18,
+            "comfortable": 20,
+            "relaxed": 22
+          }
+        },
+        {
+          "name": "spacing/icon-6xl-gap-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-6xl-gap-horizontal)",
+          "values": {
+            "compact": 20,
+            "comfortable": 22,
+            "relaxed": 26
+          }
+        },
+        {
+          "name": "spacing/icon-6xl-gap-vertical",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-icon-6xl-gap-vertical)",
+          "values": {
+            "compact": 20,
+            "comfortable": 22,
+            "relaxed": 26
+          }
+        }
+      ]
+    },
+    {
+      "name": "color-scheme",
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "variables": [
+        {
+          "name": "concept/bg-floating",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-floating)",
+          "values": {
+            "light": {
+              "alias": "palette/neutral/2"
+            },
+            "dark": {
+              "alias": "palette/neutral/3"
+            }
+          }
+        },
+        {
+          "name": "palette/accent/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-1)",
+          "values": {
+            "light": {
+              "r": 0.9254901960784314,
+              "g": 0.9725490196078431,
+              "b": 0.9647058823529412,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.0392156862745098,
+              "g": 0.043137254901960784,
+              "b": 0.043137254901960784,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-2)",
+          "values": {
+            "light": {
+              "r": 0.996078431372549,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.12156862745098039,
+              "g": 0.13725490196078433,
+              "b": 0.13333333333333333,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-3)",
+          "values": {
+            "light": {
+              "r": 0.8235294117647058,
+              "g": 0.9019607843137255,
+              "b": 0.8901960784313725,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.25882352941176473,
+              "g": 0.3843137254901961,
+              "b": 0.36470588235294116,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-4)",
+          "values": {
+            "light": {
+              "r": 0.7529411764705882,
+              "g": 0.8588235294117647,
+              "b": 0.8392156862745098,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2784313725490196,
+              "g": 0.4470588235294118,
+              "b": 0.4235294117647059,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-5)",
+          "values": {
+            "light": {
+              "r": 0.6588235294117647,
+              "g": 0.803921568627451,
+              "b": 0.7803921568627451,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3058823529411765,
+              "g": 0.5254901960784314,
+              "b": 0.4980392156862745,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-6)",
+          "values": {
+            "light": {
+              "r": 0.7529411764705882,
+              "g": 0.8588235294117647,
+              "b": 0.8392156862745098,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.25882352941176473,
+              "g": 0.3843137254901961,
+              "b": 0.36470588235294116,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-7)",
+          "values": {
+            "light": {
+              "r": 0.5137254901960784,
+              "g": 0.7294117647058823,
+              "b": 0.7176470588235294,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2980392156862745,
+              "g": 0.5686274509803921,
+              "b": 0.5529411764705883,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-8)",
+          "values": {
+            "light": {
+              "r": 0.15294117647058825,
+              "g": 0.4627450980392157,
+              "b": 0.47058823529411764,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.45098039215686275,
+              "g": 0.7529411764705882,
+              "b": 0.7647058823529411,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-9)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.43529411764705883,
+              "b": 0.4666666666666667,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5490196078431373,
+              "g": 0.8235294117647058,
+              "b": 0.8549019607843137,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-10)",
+          "values": {
+            "light": {
+              "r": 0.12156862745098039,
+              "g": 0.3607843137254902,
+              "b": 0.38823529411764707,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6745098039215687,
+              "g": 0.8901960784313725,
+              "b": 0.9137254901960784,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-11)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.33725490196078434,
+              "b": 0.3607843137254902,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7803921568627451,
+              "g": 0.9450980392156862,
+              "b": 0.9647058823529412,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-12)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.38823529411764707,
+              "b": 0.4117647058823529,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7372549019607844,
+              "g": 0.9215686274509803,
+              "b": 0.9450980392156862,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-13)",
+          "values": {
+            "light": {
+              "r": 0.08235294117647059,
+              "g": 0.12156862745098039,
+              "b": 0.12549019607843137,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9568627450980393,
+              "g": 0.996078431372549,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-14)",
+          "values": {
+            "light": {
+              "r": 0.792156862745098,
+              "g": 0.8941176470588236,
+              "b": 0.9058823529411765,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.17647058823529413,
+              "g": 0.2196078431372549,
+              "b": 0.2235294117647059,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/accent/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-accent-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.011764705882352941,
+              "g": 0.011764705882352941,
+              "b": 0.011764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-1)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.9450980392156862,
+              "b": 0.9450980392156862,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.050980392156862744,
+              "g": 0.0392156862745098,
+              "b": 0.0392156862745098,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-2)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.16470588235294117,
+              "g": 0.11764705882352941,
+              "b": 0.11764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-3)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.8392156862745098,
+              "b": 0.8313725490196079,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5725490196078431,
+              "g": 0.22745098039215686,
+              "b": 0.23921568627450981,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-4)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.7647058823529411,
+              "b": 0.7568627450980392,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6901960784313725,
+              "g": 0.2235294117647059,
+              "b": 0.25098039215686274,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-5)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.6666666666666666,
+              "b": 0.6588235294117647,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8313725490196079,
+              "g": 0.21568627450980393,
+              "b": 0.27058823529411763,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-6)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.7647058823529411,
+              "b": 0.7568627450980392,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5725490196078431,
+              "g": 0.22745098039215686,
+              "b": 0.23921568627450981,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-7)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.5137254901960784,
+              "b": 0.5176470588235295,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8980392156862745,
+              "g": 0.21568627450980393,
+              "b": 0.2823529411764706,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-8)",
+          "values": {
+            "light": {
+              "r": 0.7725490196078432,
+              "g": 0,
+              "b": 0.1803921568627451,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.5372549019607843,
+              "b": 0.5372549019607843,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-9)",
+          "values": {
+            "light": {
+              "r": 0.7333333333333333,
+              "g": 0,
+              "b": 0.16862745098039217,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.6666666666666666,
+              "b": 0.6588235294117647,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-10)",
+          "values": {
+            "light": {
+              "r": 0.6039215686274509,
+              "g": 0.06274509803921569,
+              "b": 0.14901960784313725,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.7843137254901961,
+              "b": 0.7725490196078432,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-11)",
+          "values": {
+            "light": {
+              "r": 0.5568627450980392,
+              "g": 0.08235294117647059,
+              "b": 0.1450980392156863,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.8745098039215686,
+              "b": 0.8705882352941177,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-12)",
+          "values": {
+            "light": {
+              "r": 0.6470588235294118,
+              "g": 0.03137254901960784,
+              "b": 0.15294117647058825,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.8392156862745098,
+              "b": 0.8313725490196079,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-13)",
+          "values": {
+            "light": {
+              "r": 0.1803921568627451,
+              "g": 0.0784313725490196,
+              "b": 0.0784313725490196,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.984313725490196,
+              "b": 0.9803921568627451,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-14)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.8196078431372549,
+              "b": 0.8117647058823529,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.28627450980392155,
+              "g": 0.17647058823529413,
+              "b": 0.17254901960784313,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/danger/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-danger-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.01568627450980392,
+              "g": 0.011764705882352941,
+              "b": 0.011764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-1)",
+          "values": {
+            "light": {
+              "r": 0.9254901960784314,
+              "g": 0.9686274509803922,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.0392156862745098,
+              "g": 0.043137254901960784,
+              "b": 0.047058823529411764,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-2)",
+          "values": {
+            "light": {
+              "r": 0.996078431372549,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.11372549019607843,
+              "g": 0.13333333333333333,
+              "b": 0.14901960784313725,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-3)",
+          "values": {
+            "light": {
+              "r": 0.792156862745098,
+              "g": 0.9019607843137255,
+              "b": 0.984313725490196,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2,
+              "g": 0.3764705882352941,
+              "b": 0.49411764705882355,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-4)",
+          "values": {
+            "light": {
+              "r": 0.7098039215686275,
+              "g": 0.8549019607843137,
+              "b": 0.9647058823529412,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.19215686274509805,
+              "g": 0.43529411764705883,
+              "b": 0.596078431372549,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-5)",
+          "values": {
+            "light": {
+              "r": 0.6,
+              "g": 0.796078431372549,
+              "b": 0.9411764705882353,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1803921568627451,
+              "g": 0.5098039215686274,
+              "b": 0.7137254901960784,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-6)",
+          "values": {
+            "light": {
+              "r": 0.7098039215686275,
+              "g": 0.8549019607843137,
+              "b": 0.9647058823529412,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2,
+              "g": 0.3764705882352941,
+              "b": 0.49411764705882355,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-7)",
+          "values": {
+            "light": {
+              "r": 0.43529411764705883,
+              "g": 0.7137254901960784,
+              "b": 0.9098039215686274,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.17647058823529413,
+              "g": 0.5450980392156862,
+              "b": 0.7725490196078432,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-8)",
+          "values": {
+            "light": {
+              "r": 0,
+              "g": 0.4392156862745098,
+              "b": 0.6549019607843137,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.35294117647058826,
+              "g": 0.7333333333333333,
+              "b": 0.984313725490196,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-9)",
+          "values": {
+            "light": {
+              "r": 0,
+              "g": 0.41568627450980394,
+              "b": 0.6196078431372549,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5294117647058824,
+              "g": 0.803921568627451,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-10)",
+          "values": {
+            "light": {
+              "r": 0.027450980392156862,
+              "g": 0.34509803921568627,
+              "b": 0.5137254901960784,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6941176470588235,
+              "g": 0.8705882352941177,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-11)",
+          "values": {
+            "light": {
+              "r": 0.050980392156862744,
+              "g": 0.3215686274509804,
+              "b": 0.47843137254901963,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8274509803921568,
+              "g": 0.9254901960784314,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-12)",
+          "values": {
+            "light": {
+              "r": 0.00784313725490196,
+              "g": 0.3686274509803922,
+              "b": 0.5529411764705883,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7764705882352941,
+              "g": 0.9019607843137255,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-13)",
+          "values": {
+            "light": {
+              "r": 0.07058823529411765,
+              "g": 0.12156862745098039,
+              "b": 0.1568627450980392,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9764705882352941,
+              "g": 0.9882352941176471,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-14)",
+          "values": {
+            "light": {
+              "r": 0.7725490196078432,
+              "g": 0.8901960784313725,
+              "b": 0.9764705882352941,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.16470588235294117,
+              "g": 0.21568627450980393,
+              "b": 0.2549019607843137,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/info/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-info-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.011764705882352941,
+              "g": 0.011764705882352941,
+              "b": 0.01568627450980392,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-1)",
+          "values": {
+            "light": {
+              "r": 0.9607843137254902,
+              "g": 0.9607843137254902,
+              "b": 0.9607843137254902,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.023529411764705882,
+              "g": 0.047058823529411764,
+              "b": 0.07450980392156863,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-2)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.08235294117647059,
+              "g": 0.13725490196078433,
+              "b": 0.19607843137254902,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-3)",
+          "values": {
+            "light": {
+              "r": 0.8823529411764706,
+              "g": 0.8823529411764706,
+              "b": 0.8823529411764706,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.29411764705882354,
+              "g": 0.36470588235294116,
+              "b": 0.44313725490196076,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-4)",
+          "values": {
+            "light": {
+              "r": 0.8313725490196079,
+              "g": 0.8313725490196079,
+              "b": 0.8313725490196079,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3254901960784314,
+              "g": 0.4196078431372549,
+              "b": 0.5294117647058824,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-5)",
+          "values": {
+            "light": {
+              "r": 0.7686274509803922,
+              "g": 0.7686274509803922,
+              "b": 0.7686274509803922,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3686274509803922,
+              "g": 0.49019607843137253,
+              "b": 0.6274509803921569,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-6)",
+          "values": {
+            "light": {
+              "r": 0.8313725490196079,
+              "g": 0.8313725490196079,
+              "b": 0.8313725490196079,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.29411764705882354,
+              "g": 0.36470588235294116,
+              "b": 0.44313725490196076,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-7)",
+          "values": {
+            "light": {
+              "r": 0.6823529411764706,
+              "g": 0.6823529411764706,
+              "b": 0.6823529411764706,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.40784313725490196,
+              "g": 0.5254901960784314,
+              "b": 0.6470588235294118,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-8)",
+          "values": {
+            "light": {
+              "r": 0.4117647058823529,
+              "g": 0.4117647058823529,
+              "b": 0.4117647058823529,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6,
+              "g": 0.7098039215686275,
+              "b": 0.807843137254902,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-9)",
+          "values": {
+            "light": {
+              "r": 0.38823529411764707,
+              "g": 0.38823529411764707,
+              "b": 0.38823529411764707,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7058823529411765,
+              "g": 0.7803921568627451,
+              "b": 0.8392156862745098,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-10)",
+          "values": {
+            "light": {
+              "r": 0.3215686274509804,
+              "g": 0.3215686274509804,
+              "b": 0.3215686274509804,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.796078431372549,
+              "g": 0.8549019607843137,
+              "b": 0.9019607843137255,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-11)",
+          "values": {
+            "light": {
+              "r": 0.30196078431372547,
+              "g": 0.30196078431372547,
+              "b": 0.30196078431372547,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8705882352941177,
+              "g": 0.9176470588235294,
+              "b": 0.9568627450980393,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-12)",
+          "values": {
+            "light": {
+              "r": 0.34509803921568627,
+              "g": 0.34509803921568627,
+              "b": 0.34509803921568627,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8392156862745098,
+              "g": 0.8901960784313725,
+              "b": 0.9333333333333333,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-13)",
+          "values": {
+            "light": {
+              "r": 0.11372549019607843,
+              "g": 0.11372549019607843,
+              "b": 0.11372549019607843,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9764705882352941,
+              "g": 0.9882352941176471,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-14)",
+          "values": {
+            "light": {
+              "r": 0.8705882352941177,
+              "g": 0.8705882352941177,
+              "b": 0.8705882352941177,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.19607843137254902,
+              "g": 0.21176470588235294,
+              "b": 0.2235294117647059,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/neutral/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-neutral-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.011764705882352941,
+              "g": 0.011764705882352941,
+              "b": 0.011764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-1)",
+          "values": {
+            "light": {
+              "r": 0.9176470588235294,
+              "g": 0.984313725490196,
+              "b": 0.9098039215686274,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.0392156862745098,
+              "g": 0.047058823529411764,
+              "b": 0.0392156862745098,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-2)",
+          "values": {
+            "light": {
+              "r": 0.996078431372549,
+              "g": 1,
+              "b": 0.996078431372549,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.11764705882352941,
+              "g": 0.13725490196078433,
+              "b": 0.11764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-3)",
+          "values": {
+            "light": {
+              "r": 0.8117647058823529,
+              "g": 0.9176470588235294,
+              "b": 0.8,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.23529411764705882,
+              "g": 0.403921568627451,
+              "b": 0.22745098039215686,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-4)",
+          "values": {
+            "light": {
+              "r": 0.7333333333333333,
+              "g": 0.8784313725490196,
+              "b": 0.7215686274509804,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.24313725490196078,
+              "g": 0.4745098039215686,
+              "b": 0.23529411764705882,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-5)",
+          "values": {
+            "light": {
+              "r": 0.6352941176470588,
+              "g": 0.8313725490196079,
+              "b": 0.6196078431372549,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2549019607843137,
+              "g": 0.5568627450980392,
+              "b": 0.24313725490196078,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-6)",
+          "values": {
+            "light": {
+              "r": 0.7333333333333333,
+              "g": 0.8784313725490196,
+              "b": 0.7215686274509804,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.23529411764705882,
+              "g": 0.403921568627451,
+              "b": 0.22745098039215686,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-7)",
+          "values": {
+            "light": {
+              "r": 0.49019607843137253,
+              "g": 0.7607843137254902,
+              "b": 0.4745098039215686,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2627450980392157,
+              "g": 0.6,
+              "b": 0.2549019607843137,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-8)",
+          "values": {
+            "light": {
+              "r": 0.13333333333333333,
+              "g": 0.49411764705882355,
+              "b": 0.13333333333333333,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.43137254901960786,
+              "g": 0.792156862745098,
+              "b": 0.41568627450980394,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-9)",
+          "values": {
+            "light": {
+              "r": 0.12941176470588237,
+              "g": 0.4666666666666667,
+              "b": 0.12941176470588237,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5490196078431373,
+              "g": 0.8588235294117647,
+              "b": 0.5294117647058824,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-10)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.3843137254901961,
+              "b": 0.12549019607843137,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6745098039215687,
+              "g": 0.9215686274509803,
+              "b": 0.6588235294117647,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-11)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.3607843137254902,
+              "b": 0.12156862745098039,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7803921568627451,
+              "g": 0.9686274509803922,
+              "b": 0.7647058823529411,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-12)",
+          "values": {
+            "light": {
+              "r": 0.12549019607843137,
+              "g": 0.4117647058823529,
+              "b": 0.12156862745098039,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7372549019607844,
+              "g": 0.9490196078431372,
+              "b": 0.7215686274509804,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-13)",
+          "values": {
+            "light": {
+              "r": 0.0784313725490196,
+              "g": 0.12941176470588237,
+              "b": 0.0784313725490196,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9607843137254902,
+              "g": 1,
+              "b": 0.9607843137254902,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-14)",
+          "values": {
+            "light": {
+              "r": 0.792156862745098,
+              "g": 0.9098039215686274,
+              "b": 0.7803921568627451,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.17254901960784313,
+              "g": 0.2235294117647059,
+              "b": 0.16862745098039217,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/success/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-success-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.011764705882352941,
+              "g": 0.011764705882352941,
+              "b": 0.011764705882352941,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/1",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-1)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 0.9529411764705882,
+              "b": 0.9137254901960784,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.047058823529411764,
+              "g": 0.043137254901960784,
+              "b": 0.03529411764705882,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/2",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-2)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 0.996078431372549,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.15294117647058825,
+              "g": 0.12549019607843137,
+              "b": 0.10980392156862745,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/3",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-3)",
+          "values": {
+            "light": {
+              "r": 0.9882352941176471,
+              "g": 0.8549019607843137,
+              "b": 0.7568627450980392,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.49411764705882355,
+              "g": 0.3058823529411765,
+              "b": 0.1450980392156863,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/4",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-4)",
+          "values": {
+            "light": {
+              "r": 0.9647058823529412,
+              "g": 0.792156862745098,
+              "b": 0.6666666666666666,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.592156862745098,
+              "g": 0.3411764705882353,
+              "b": 0.10588235294117647,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/5",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-5)",
+          "values": {
+            "light": {
+              "r": 0.9411764705882353,
+              "g": 0.7137254901960784,
+              "b": 0.5372549019607843,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7058823529411765,
+              "g": 0.3843137254901961,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/6",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-6)",
+          "values": {
+            "light": {
+              "r": 0.9647058823529412,
+              "g": 0.792156862745098,
+              "b": 0.6666666666666666,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.49411764705882355,
+              "g": 0.3058823529411765,
+              "b": 0.1450980392156863,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/7",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-7)",
+          "values": {
+            "light": {
+              "r": 0.9098039215686274,
+              "g": 0.6,
+              "b": 0.34901960784313724,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7568627450980392,
+              "g": 0.4117647058823529,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/8",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-8)",
+          "values": {
+            "light": {
+              "r": 0.611764705882353,
+              "g": 0.32941176470588235,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9764705882352941,
+              "g": 0.5843137254901961,
+              "b": 0.2235294117647059,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/9",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-9)",
+          "values": {
+            "light": {
+              "r": 0.5803921568627451,
+              "g": 0.30980392156862746,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.6901960784313725,
+              "b": 0.4392156862745098,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/10",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-10)",
+          "values": {
+            "light": {
+              "r": 0.48627450980392156,
+              "g": 0.2549019607843137,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.8,
+              "b": 0.6470588235294118,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/11",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-11)",
+          "values": {
+            "light": {
+              "r": 0.4549019607843137,
+              "g": 0.23921568627450981,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.8862745098039215,
+              "b": 0.8,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/12",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-12)",
+          "values": {
+            "light": {
+              "r": 0.5176470588235295,
+              "g": 0.27450980392156865,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.8509803921568627,
+              "b": 0.7411764705882353,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/13",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-13)",
+          "values": {
+            "light": {
+              "r": 0.15294117647058825,
+              "g": 0.09803921568627451,
+              "b": 0.054901960784313725,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 0.984313725490196,
+              "b": 0.9725490196078431,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/14",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-14)",
+          "values": {
+            "light": {
+              "r": 0.9803921568627451,
+              "g": 0.8392156862745098,
+              "b": 0.7372549019607844,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2549019607843137,
+              "g": 0.19607843137254902,
+              "b": 0.14901960784313725,
+              "a": 1
+            }
+          }
+        },
+        {
+          "name": "palette/warning/15",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-warning-15)",
+          "values": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.01568627450980392,
+              "g": 0.011764705882352941,
+              "b": 0.011764705882352941,
+              "a": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "semantic-color",
+      "modes": [
+        "default"
+      ],
+      "variables": [
+        {
+          "name": "semantic/bg-accent-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/1"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/11"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/9"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/10"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/11"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-ghost-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-ghost-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/4"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-ghost-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-ghost-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/3"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-ghost-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-ghost-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/4"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/5"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/3"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/4"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/5"
+          }
+        },
+        {
+          "name": "semantic/bg-accent-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/2"
+          }
+        },
+        {
+          "name": "semantic/bg-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/1"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/1"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/11"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/9"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/10"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/11"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-ghost-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-ghost-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/4"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-ghost-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-ghost-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/3"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-ghost-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-ghost-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/4"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/5"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/3"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/4"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/5"
+          }
+        },
+        {
+          "name": "semantic/bg-danger-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/2"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/11"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/9"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-emphasis-disabled",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-emphasis-disabled)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/10"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/5"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-muted-disabled",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-muted-disabled)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "semantic/bg-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/4"
+          }
+        },
+        {
+          "name": "semantic/bg-info-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/1"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/11"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/9"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/10"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/11"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/5"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/3"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/4"
+          }
+        },
+        {
+          "name": "semantic/bg-info-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/5"
+          }
+        },
+        {
+          "name": "semantic/bg-info-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-info-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/2"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/1"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/11"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/9"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/10"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/11"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-ghost-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-ghost-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/4"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-ghost-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-ghost-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-ghost-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-ghost-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/4"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/5"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/4"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/5"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/2"
+          }
+        },
+        {
+          "name": "semantic/bg-success-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/1"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/11"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/9"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/10"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/11"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/5"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/3"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/4"
+          }
+        },
+        {
+          "name": "semantic/bg-success-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/5"
+          }
+        },
+        {
+          "name": "semantic/bg-success-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-success-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/2"
+          }
+        },
+        {
+          "name": "semantic/bg-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/2"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-canvas",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-canvas)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/1"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-emphasis-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-emphasis-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/11"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-emphasis-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-emphasis-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/9"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-emphasis-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-emphasis-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/10"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-emphasis-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-emphasis-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/11"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-muted-active",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-muted-active)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/5"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-muted-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-muted-default)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/3"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-muted-hover",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-muted-hover)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/4"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-fill-muted-selected",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-fill-muted-selected)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/5"
+          }
+        },
+        {
+          "name": "semantic/bg-warning-surface",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-warning-surface)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/2"
+          }
+        },
+        {
+          "name": "semantic/border-accent-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-accent-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/7"
+          }
+        },
+        {
+          "name": "semantic/border-accent-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-accent-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/8"
+          }
+        },
+        {
+          "name": "semantic/border-accent-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-accent-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/6"
+          }
+        },
+        {
+          "name": "semantic/border-danger-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-danger-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/7"
+          }
+        },
+        {
+          "name": "semantic/border-danger-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-danger-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/8"
+          }
+        },
+        {
+          "name": "semantic/border-danger-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-danger-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/6"
+          }
+        },
+        {
+          "name": "semantic/border-info-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-info-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/7"
+          }
+        },
+        {
+          "name": "semantic/border-info-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-info-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/8"
+          }
+        },
+        {
+          "name": "semantic/border-info-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-info-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/6"
+          }
+        },
+        {
+          "name": "semantic/border-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "semantic/border-neutral-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-neutral-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "semantic/border-neutral-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-neutral-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/8"
+          }
+        },
+        {
+          "name": "semantic/border-neutral-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-neutral-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/6"
+          }
+        },
+        {
+          "name": "semantic/border-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/8"
+          }
+        },
+        {
+          "name": "semantic/border-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/6"
+          }
+        },
+        {
+          "name": "semantic/border-success-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-success-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/7"
+          }
+        },
+        {
+          "name": "semantic/border-success-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-success-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/8"
+          }
+        },
+        {
+          "name": "semantic/border-success-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-success-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/6"
+          }
+        },
+        {
+          "name": "semantic/border-warning-medium",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-warning-medium)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/7"
+          }
+        },
+        {
+          "name": "semantic/border-warning-strong",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-warning-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/8"
+          }
+        },
+        {
+          "name": "semantic/border-warning-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-warning-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/6"
+          }
+        },
+        {
+          "name": "semantic/icon-accent",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-accent)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/12"
+          }
+        },
+        {
+          "name": "semantic/icon-accent-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-accent-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/14"
+          }
+        },
+        {
+          "name": "semantic/icon-danger",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-danger)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/12"
+          }
+        },
+        {
+          "name": "semantic/icon-danger-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-danger-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/14"
+          }
+        },
+        {
+          "name": "semantic/icon-info",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-info)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/12"
+          }
+        },
+        {
+          "name": "semantic/icon-info-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-info-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/14"
+          }
+        },
+        {
+          "name": "semantic/icon-neutral",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-neutral)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/12"
+          }
+        },
+        {
+          "name": "semantic/icon-neutral-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-neutral-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/14"
+          }
+        },
+        {
+          "name": "semantic/icon-success",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-success)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/12"
+          }
+        },
+        {
+          "name": "semantic/icon-success-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-success-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/14"
+          }
+        },
+        {
+          "name": "semantic/icon-warning",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-warning)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/12"
+          }
+        },
+        {
+          "name": "semantic/icon-warning-on-emphasis",
+          "type": "COLOR",
+          "scopes": [],
+          "codeSyntax": "var(--eds-color-icon-warning-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/14"
+          }
+        },
+        {
+          "name": "semantic/text-accent-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-accent-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/13"
+          }
+        },
+        {
+          "name": "semantic/text-accent-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-accent-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/15"
+          }
+        },
+        {
+          "name": "semantic/text-accent-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-accent-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/12"
+          }
+        },
+        {
+          "name": "semantic/text-accent-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-accent-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/accent/14"
+          }
+        },
+        {
+          "name": "semantic/text-danger-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-danger-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/13"
+          }
+        },
+        {
+          "name": "semantic/text-danger-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-danger-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/15"
+          }
+        },
+        {
+          "name": "semantic/text-danger-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-danger-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/12"
+          }
+        },
+        {
+          "name": "semantic/text-danger-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-danger-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/danger/14"
+          }
+        },
+        {
+          "name": "semantic/text-info-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-info-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/13"
+          }
+        },
+        {
+          "name": "semantic/text-info-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-info-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/15"
+          }
+        },
+        {
+          "name": "semantic/text-info-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-info-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/12"
+          }
+        },
+        {
+          "name": "semantic/text-info-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-info-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/14"
+          }
+        },
+        {
+          "name": "semantic/text-neutral-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-neutral-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/13"
+          }
+        },
+        {
+          "name": "semantic/text-neutral-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-neutral-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/15"
+          }
+        },
+        {
+          "name": "semantic/text-neutral-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-neutral-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/12"
+          }
+        },
+        {
+          "name": "semantic/text-neutral-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-neutral-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/14"
+          }
+        },
+        {
+          "name": "semantic/text-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/13"
+          }
+        },
+        {
+          "name": "semantic/text-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/15"
+          }
+        },
+        {
+          "name": "semantic/text-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/12"
+          }
+        },
+        {
+          "name": "semantic/text-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/14"
+          }
+        },
+        {
+          "name": "semantic/text-success-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-success-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/13"
+          }
+        },
+        {
+          "name": "semantic/text-success-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-success-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/15"
+          }
+        },
+        {
+          "name": "semantic/text-success-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-success-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/12"
+          }
+        },
+        {
+          "name": "semantic/text-success-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-success-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/success/14"
+          }
+        },
+        {
+          "name": "semantic/text-warning-strong",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-warning-strong)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/13"
+          }
+        },
+        {
+          "name": "semantic/text-warning-strong-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-warning-strong-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/15"
+          }
+        },
+        {
+          "name": "semantic/text-warning-subtle",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-warning-subtle)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/12"
+          }
+        },
+        {
+          "name": "semantic/text-warning-subtle-on-emphasis",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-warning-subtle-on-emphasis)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/warning/14"
+          }
+        },
+        {
+          "name": "semantic/bg-neutral-fill-ghost-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-neutral-fill-ghost-default)",
+          "description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+          "values": {
+            "default": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 0
+            }
+          }
+        },
+        {
+          "name": "semantic/bg-accent-fill-ghost-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-accent-fill-ghost-default)",
+          "description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+          "values": {
+            "default": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 0
+            }
+          }
+        },
+        {
+          "name": "semantic/bg-danger-fill-ghost-default",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-danger-fill-ghost-default)",
+          "description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+          "values": {
+            "default": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 0
+            }
+          }
+        },
+        {
+          "name": "concept/bg-backdrop",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-backdrop)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "concept/bg-disabled",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-disabled)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/3"
+          }
+        },
+        {
+          "name": "concept/bg-input",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-input)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/1"
+          }
+        },
+        {
+          "name": "concept/bg-inverse",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-inverse)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/13"
+          }
+        },
+        {
+          "name": "concept/border-disabled",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-disabled)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "concept/border-focus",
+          "type": "COLOR",
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": "var(--eds-color-border-focus)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/7"
+          }
+        },
+        {
+          "name": "concept/text-disabled",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-disabled)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "concept/text-link",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-link)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/info/8"
+          }
+        },
+        {
+          "name": "concept/text-on-inverse",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-on-inverse)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/15"
+          }
+        },
+        {
+          "name": "concept/text-placeholder",
+          "type": "COLOR",
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-text-placeholder)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "palette/neutral/7"
+          }
+        },
+        {
+          "name": "concept/bg-floating",
+          "type": "COLOR",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": "var(--eds-color-bg-floating)",
+          "alias": {
+            "collection": "color-scheme",
+            "name": "concept/bg-floating"
+          }
+        }
+      ]
+    },
+    {
+      "name": "primitives",
+      "modes": [
+        "default"
+      ],
+      "variables": [
+        {
+          "name": "typography/font-family/ui",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "description": "ui-body — SIL OFL 1.1",
+          "values": {
+            "default": "Inter"
+          }
+        },
+        {
+          "name": "typography/font-family/header",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "description": "header — Proprietary — Equinor ASA. Do not vendor or redistribute.",
+          "values": {
+            "default": "Equinor"
+          }
+        },
+        {
+          "name": "typography/font-family/code",
+          "type": "STRING",
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "description": "code — SIL OFL 1.1",
+          "values": {
+            "default": "CommitMono"
+          }
+        },
+        {
+          "name": "font-weight/lighter",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "default": 300
+          }
+        },
+        {
+          "name": "font-weight/normal",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "default": 400
+          }
+        },
+        {
+          "name": "font-weight/bolder",
+          "type": "FLOAT",
+          "scopes": [
+            "FONT_WEIGHT"
+          ],
+          "values": {
+            "default": 500
+          }
+        },
+        {
+          "name": "spacing/inset-xs-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xs-horizontal)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/horizontal-xs"
+          }
+        },
+        {
+          "name": "spacing/inset-xs-vertical-squished",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xs-vertical-squished)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-2xs"
+          }
+        },
+        {
+          "name": "spacing/inset-xs-vertical-squared",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xs-vertical-squared)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-xs"
+          }
+        },
+        {
+          "name": "spacing/inset-xs-vertical-stretched",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xs-vertical-stretched)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-sm"
+          }
+        },
+        {
+          "name": "spacing/inset-sm-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-sm-horizontal)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/horizontal-sm"
+          }
+        },
+        {
+          "name": "spacing/inset-sm-vertical-squished",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-sm-vertical-squished)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-xs"
+          }
+        },
+        {
+          "name": "spacing/inset-sm-vertical-squared",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-sm-vertical-squared)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-sm"
+          }
+        },
+        {
+          "name": "spacing/inset-sm-vertical-stretched",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-sm-vertical-stretched)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-md"
+          }
+        },
+        {
+          "name": "spacing/inset-md-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-md-horizontal)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/horizontal-md"
+          }
+        },
+        {
+          "name": "spacing/inset-md-vertical-squished",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-md-vertical-squished)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-sm"
+          }
+        },
+        {
+          "name": "spacing/inset-md-vertical-squared",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-md-vertical-squared)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-md"
+          }
+        },
+        {
+          "name": "spacing/inset-md-vertical-stretched",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-md-vertical-stretched)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-lg"
+          }
+        },
+        {
+          "name": "spacing/inset-lg-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-lg-horizontal)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/horizontal-lg"
+          }
+        },
+        {
+          "name": "spacing/inset-lg-vertical-squished",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-lg-vertical-squished)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-md"
+          }
+        },
+        {
+          "name": "spacing/inset-lg-vertical-squared",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-lg-vertical-squared)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-lg"
+          }
+        },
+        {
+          "name": "spacing/inset-lg-vertical-stretched",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-lg-vertical-stretched)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-xl"
+          }
+        },
+        {
+          "name": "spacing/inset-xl-horizontal",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xl-horizontal)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/horizontal-xl"
+          }
+        },
+        {
+          "name": "spacing/inset-xl-vertical-squished",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xl-vertical-squished)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-lg"
+          }
+        },
+        {
+          "name": "spacing/inset-xl-vertical-squared",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xl-vertical-squared)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-xl"
+          }
+        },
+        {
+          "name": "spacing/inset-xl-vertical-stretched",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-inset-xl-vertical-stretched)",
+          "alias": {
+            "collection": "density",
+            "name": "spacing/vertical-2xl"
+          }
+        },
+        {
+          "name": "spacing/horizontal-none",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-horizontal-none)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 0
+          }
+        },
+        {
+          "name": "spacing/vertical-none",
+          "type": "FLOAT",
+          "scopes": [
+            "GAP"
+          ],
+          "codeSyntax": "var(--eds-spacing-vertical-none)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 0
+          }
+        },
+        {
+          "name": "spacing/border-radius-none",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--eds-spacing-border-radius-none)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 0
+          }
+        },
+        {
+          "name": "spacing/border-radius-pill",
+          "type": "FLOAT",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": "var(--eds-spacing-border-radius-pill)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 1000
+          }
+        },
+        {
+          "name": "sizing/stroke-none",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--eds-sizing-stroke-none)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 0
+          }
+        },
+        {
+          "name": "sizing/stroke-thin",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--eds-sizing-stroke-thin)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 1
+          }
+        },
+        {
+          "name": "sizing/stroke-thick",
+          "type": "FLOAT",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": "var(--eds-sizing-stroke-thick)",
+          "description": "Does not move with density.",
+          "values": {
+            "default": 2
+          }
+        },
+        {
+          "name": "grid/base",
+          "type": "FLOAT",
+          "scopes": [],
+          "description": "Layout grid. The invariant that line-heights snap to — the resulting ratio curve is derived from it and is deliberately non-monotonic.",
+          "values": {
+            "default": 4
+          }
+        }
+      ]
+    }
+  ],
+  "effectStyles": [
+    {
+      "name": "elevation/low",
+      "description": "Tooltips, menus, popovers, autocomplete lists, snackbars.",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.2
+          },
+          "offset": {
+            "x": 0,
+            "y": 1
+          },
+          "radius": 8,
+          "spread": 0,
+          "visible": true,
+          "blendMode": "NORMAL"
+        },
+        {
+          "type": "DROP_SHADOW",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.12
+          },
+          "offset": {
+            "x": 0,
+            "y": 4
+          },
+          "radius": 8,
+          "spread": 3,
+          "visible": true,
+          "blendMode": "NORMAL"
+        }
+      ]
+    },
+    {
+      "name": "elevation/high",
+      "description": "Dialogs, modals, drawers.",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.2
+          },
+          "offset": {
+            "x": 0,
+            "y": 4
+          },
+          "radius": 12,
+          "spread": 0,
+          "visible": true,
+          "blendMode": "NORMAL"
+        },
+        {
+          "type": "DROP_SHADOW",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.12
+          },
+          "offset": {
+            "x": 0,
+            "y": 12
+          },
+          "radius": 16,
+          "spread": 6,
+          "visible": true,
+          "blendMode": "NORMAL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "fact": "size axis (default/compressed) — rows recompute per cell",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: the data-size attribute repoints the five size channels and every height recomputes (24/36/44 default, 20/24/36 compressed). Figma: the canvas table ships the Default size only until the table builder learns per-variant cell bindings (queued in SCOPE)."
+  },
+  {
+    "fact": "height = inset × 2 + cap(label) — never authored",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "CSS keeps the calc; Figma gets baked padding (4/8/10) and hug reproduces the height (24/36/44)."
+  },
+  {
+    "fact": "read text is trimmed to the cap box (text-box)",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "CSS: text-box: trim-both ex alphabetic + padding-top round(1cap,4px)−1ex on the message (codepen VYmaowY) — the occupied box is exactly the ROUNDED cap and the BASELINE lands on the 4px grid; root padding = the raw inset (@supports-gated; the fallback keeps the half-leading subtraction — one switch flips all of it). Figma cannot trim — a recorded, bounded divergence: strip heights agree at every line count."
+  },
+  {
+    "fact": "row styles <tr> — rows and cells, not classes",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: nested element rules (rows/cells cannot be classed per instance); Figma: the generated grid demo, column-major so columns align. Density means MORE ROWS, not narrower tables."
+  },
+  {
+    "fact": "header-cell styles <th> — rows and cells, not classes",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: nested element rules (rows/cells cannot be classed per instance); Figma: the generated grid demo, column-major so columns align. Density means MORE ROWS, not narrower tables."
+  },
+  {
+    "fact": "cell styles <td> — rows and cells, not classes",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: nested element rules (rows/cells cannot be classed per instance); Figma: the generated grid demo, column-major so columns align. Density means MORE ROWS, not narrower tables."
+  },
+  {
+    "fact": "prop size (default|compressed)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Size variant axis."
+  },
+  {
+    "fact": "state hover",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: :hover; Figma: State variant."
+  },
+  {
+    "fact": "state selected",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [aria-selected='true'] — an ARIA state, not a pseudo-class; Figma: State variant."
+  },
+  {
+    "fact": "semantics: <table>",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

@@ -1,0 +1,2218 @@
+{
+  "$extensions": {
+    "com.equinor.eds.context": {
+      "modifier": "density",
+      "context": "compact"
+    }
+  },
+  "density": {
+    "base": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      },
+      "$description": "The only value density changes. Every size and line-height derives from it."
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "spacing-horizontal-4xs": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-4xs"
+        }
+      }
+    },
+    "spacing-vertical-4xs": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-4xs"
+        }
+      }
+    },
+    "spacing-horizontal-3xs": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-3xs"
+        }
+      }
+    },
+    "spacing-vertical-3xs": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-3xs"
+        }
+      }
+    },
+    "spacing-horizontal-2xs": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 2
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-2xs"
+        }
+      }
+    },
+    "spacing-vertical-2xs": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 2
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-2xs"
+        }
+      }
+    },
+    "spacing-horizontal-xs": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 3
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-xs"
+        }
+      }
+    },
+    "spacing-vertical-xs": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 3
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-xs"
+        }
+      }
+    },
+    "spacing-horizontal-sm": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 4
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-sm"
+        }
+      }
+    },
+    "spacing-vertical-sm": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 4
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-sm"
+        }
+      }
+    },
+    "spacing-horizontal-md": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 5
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-md"
+        }
+      }
+    },
+    "spacing-vertical-md": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 5
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-md"
+        }
+      }
+    },
+    "spacing-horizontal-lg": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 6
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-lg"
+        }
+      }
+    },
+    "spacing-vertical-lg": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 6
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-lg"
+        }
+      }
+    },
+    "spacing-horizontal-xl": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 7
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-xl"
+        }
+      }
+    },
+    "spacing-vertical-xl": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 7
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-xl"
+        }
+      }
+    },
+    "spacing-horizontal-2xl": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 8
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-2xl"
+        }
+      }
+    },
+    "spacing-vertical-2xl": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 8
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-2xl"
+        }
+      }
+    },
+    "spacing-horizontal-3xl": {
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 9
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-3xl"
+        }
+      }
+    },
+    "spacing-vertical-3xl": {
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "spacing",
+            "index": 9
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-3xl"
+        }
+      }
+    },
+    "sizing-icon-xs": {
+      "$value": {
+        "value": 14,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-xs"
+        }
+      }
+    },
+    "sizing-icon-sm": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-sm"
+        }
+      }
+    },
+    "sizing-icon-md": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 2
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-md"
+        }
+      }
+    },
+    "sizing-icon-lg": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 3
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-lg"
+        }
+      }
+    },
+    "sizing-icon-xl": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 4
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-xl"
+        }
+      }
+    },
+    "sizing-icon-2xl": {
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 5
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-2xl"
+        }
+      }
+    },
+    "sizing-icon-3xl": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 6
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-3xl"
+        }
+      }
+    },
+    "sizing-icon-4xl": {
+      "$value": {
+        "value": 37,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 7
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-4xl"
+        }
+      }
+    },
+    "sizing-icon-5xl": {
+      "$value": {
+        "value": 42,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 8
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-5xl"
+        }
+      }
+    },
+    "sizing-icon-6xl": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "icon",
+            "index": 9
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-icon-6xl"
+        }
+      }
+    },
+    "sizing-selectable-xs": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-xs"
+        }
+      }
+    },
+    "sizing-selectable-sm": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-sm"
+        }
+      }
+    },
+    "sizing-selectable-md": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 2
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-md"
+        }
+      }
+    },
+    "sizing-selectable-lg": {
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 3
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-lg"
+        }
+      }
+    },
+    "sizing-selectable-xl": {
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 4
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-xl"
+        }
+      }
+    },
+    "sizing-selectable-2xl": {
+      "$value": {
+        "value": 52,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "selectable",
+            "index": 5
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-selectable-2xl"
+        }
+      }
+    },
+    "spacing-border-radius-rounded": {
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      },
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "ladder[labelIndex + densityOffset + 1]",
+          "inputs": {
+            "ladder": "radius",
+            "index": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-border-radius-rounded"
+        }
+      }
+    }
+  },
+  "typography": {
+    "font-size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": {
+          "value": 0.5625,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": -3
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.65625,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": -2
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": -1
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 0
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 1
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1.15625,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 2
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "3xl": {
+        "$value": {
+          "value": 1.3125,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 3
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "4xl": {
+        "$value": {
+          "value": 1.53125,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 4
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "5xl": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 5
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "6xl": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(base * pow(2, step / 5), 0.03125rem)",
+            "inputs": {
+              "base": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "step": 6
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      }
+    },
+    "header-font-size": {
+      "$type": "dimension",
+      "$description": "The ui size corrected for x-height and snapped to half a pixel. Baked rather than delivered via CSS size-adjust, so one number serves CSS, Figma and React Native. Line-height is NOT corrected — both faces share the line box at a given step.",
+      "xs": {
+        "$value": {
+          "value": 0.625,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.xs}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.sm}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 0.84375,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.md}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.lg}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1.125,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1.3125,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.2xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "3xl": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.3xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "4xl": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.4xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "5xl": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.5xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "6xl": {
+        "$value": {
+          "value": 2.28125,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "com.equinor.eds.derived": {
+            "expression": "round(uiFontSize * xHeightCorrection, 0.5px)",
+            "inputs": {
+              "uiFontSize": "{typography.font-size.6xl}",
+              "xHeightCorrection": 1.137288,
+              "reference": "{typography.font-family.ui}"
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "expression"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      }
+    },
+    "header-font-weight": {
+      "$type": "fontWeight",
+      "$description": "Equinor's weight matched to Inter's tier at the same perceived size — stem widths, measured (see src/weight-match.json). One tier definition across both families (Option B, 2026-09-06): header bolder ≙ Inter 500. A function of the step's px, so density changes it; Inter itself needs no table — font-optical-sizing: auto does this in the browser.",
+      "xs": {
+        "lighter": {
+          "$value": 376.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xs}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 458.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xs}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 552.7,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xs}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "sm": {
+        "lighter": {
+          "$value": 376.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.sm}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 458.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.sm}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 552.7,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.sm}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "md": {
+        "lighter": {
+          "$value": 376.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.md}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 458.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.md}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 552.7,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.md}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "lg": {
+        "lighter": {
+          "$value": 376.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.lg}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 458.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.lg}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 552.7,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.lg}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "xl": {
+        "lighter": {
+          "$value": 375.1,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 456.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 550.2,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "2xl": {
+        "lighter": {
+          "$value": 373.8,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.2xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 453.4,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.2xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 547,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.2xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "3xl": {
+        "lighter": {
+          "$value": 372.4,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.3xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 450.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.3xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 543.8,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.3xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "4xl": {
+        "lighter": {
+          "$value": 370.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.4xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 446.6,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.4xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 539.3,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.4xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "5xl": {
+        "lighter": {
+          "$value": 368.5,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.5xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 442.6,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.5xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 534.9,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.5xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "6xl": {
+        "lighter": {
+          "$value": 366.3,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.6xl}",
+                "tier": "lighter",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "normal": {
+          "$value": 438,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.6xl}",
+                "tier": "normal",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "bolder": {
+          "$value": 529.8,
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "matchedWeight(uiPx, tier) — measured stem-match curve, linear between points, opsz-clamped 14–32",
+              "inputs": {
+                "uiPx": "{typography.font-size.6xl}",
+                "tier": "bolder",
+                "source": "src/weight-match.json (issue #42, Option B: bolder = Inter 500)"
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      }
+    },
+    "line-height": {
+      "$type": "dimension",
+      "$description": "default = read (prose). compressed = scanned (UI labels). The variant also determines the vertical metric: compressed pairs with calc() half-leading, default pairs with text-box trim.",
+      "default": {
+        "xs": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.xs}",
+                "n": 0,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "sm": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.sm}",
+                "n": 1,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.md}",
+                "n": 2,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.lg}",
+                "n": 3,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.xl}",
+                "n": 4,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "2xl": {
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.2xl}",
+                "n": 5,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "3xl": {
+          "$value": {
+            "value": 28,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.3xl}",
+                "n": 6,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "4xl": {
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.4xl}",
+                "n": 7,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "5xl": {
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.5xl}",
+                "n": 8,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "6xl": {
+          "$value": {
+            "value": 36,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.6xl}",
+                "n": 9,
+                "max": 1.39,
+                "drop": 0.29
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      },
+      "compressed": {
+        "xs": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.xs}",
+                "n": 0,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "sm": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.sm}",
+                "n": 1,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.md}",
+                "n": 2,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.lg}",
+                "n": 3,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.xl}",
+                "n": 4,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "2xl": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.2xl}",
+                "n": 5,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "3xl": {
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.3xl}",
+                "n": 6,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "4xl": {
+          "$value": {
+            "value": 28,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.4xl}",
+                "n": 7,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "5xl": {
+          "$value": {
+            "value": 28,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.5xl}",
+                "n": 8,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        },
+        "6xl": {
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$extensions": {
+            "com.equinor.eds.derived": {
+              "expression": "round(fontSize * (max - pow(n / 9, 3) * drop), 4px)",
+              "inputs": {
+                "fontSize": "{typography.font-size.6xl}",
+                "n": 9,
+                "max": 1.13,
+                "drop": 0.13
+              }
+            },
+            "com.equinor.eds.css": {
+              "emit": "expression"
+            },
+            "com.equinor.eds.figma": {
+              "emit": "value"
+            }
+          }
+        }
+      }
+    }
+  }
+}

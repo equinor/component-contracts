@@ -1,0 +1,43 @@
+/* Generated from contracts/label.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-label {
+      /* No variant axes — the channel variables live on the root. */
+      --_fg: var(--eds-color-text-neutral-subtle);
+
+      /* Size-dependent parameters (single size). */
+      --_font-size: var(--eds-typography-ui-body-sm-font-size);
+      --_line-height: var(--eds-typography-ui-body-sm-line-height-compressed);
+      --_baseline-pad: 0px;
+
+      display: inline-block;
+
+      /* the caption sits ON the baseline grid (codepen VYmaowY): trim to
+       * ex over alphabetic, then pad the top by round(1cap,4px) − 1ex —
+       * the occupied box is exactly the cap cell (--eds-cap-rounded) and
+       * the baseline is the box bottom. Both declarations self-gate:
+       * the tokens only exist under @supports, so engines without
+       * text-box keep the untrimmed line box. */
+      margin: 0;
+      padding-block: var(--_baseline-pad) 0;
+
+      text-box: var(--eds-text-box);
+
+      border: none;
+
+      font: var(--eds-font-weight-normal) var(--_font-size) / var(--_line-height) var(--eds-typography-ui-body-font-family);
+      color: var(--_fg);
+    }
+
+    /* Trim on: the occupied box becomes the cap cell, baseline at
+     * the bottom edge — form text measures from real glyph boxes. */
+    @supports (text-box: trim-both ex alphabetic) {
+      .eds-label {
+        --_baseline-pad: var(--eds-padding-top-baseline);
+      }
+    }
+  }
+}

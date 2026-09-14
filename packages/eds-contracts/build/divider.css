@@ -1,0 +1,31 @@
+/* Generated from contracts/divider.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-divider {
+      display: block;
+
+      /* A rule: the thickness is the sizing token, the ink is --_bg. The
+       * UA margin is zeroed for the same reason gutters were refused —
+       * spacing belongs to the parent (and <hr>'s auto inline margins
+       * shrink-wrap it to zero width in flex and grid parents). */
+      block-size: var(--eds-sizing-stroke-thin);
+      margin: 0;
+      border: none;
+
+      background-color: var(--_bg);
+    }
+  }
+
+  @layer variants {
+    .eds-divider[data-weight='subtle'] {
+      --_bg: var(--eds-color-border-neutral-subtle);
+    }
+
+    .eds-divider:is([data-weight='medium'], :not([data-weight])) {
+      --_bg: var(--eds-color-border-neutral-medium);
+    }
+  }
+}

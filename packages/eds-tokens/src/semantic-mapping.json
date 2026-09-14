@@ -1,0 +1,74 @@
+{
+  "figmaProjectFoundationId": "GnovDpL3UV6X51Ot7Kv6Im",
+  "figmaProjectStaticId": "OWxw2XogDLUt1aCvcDFXPw",
+  "figmaProjectDynamicId": "nyPaQ3QnI1UAcxKW4a0d2c",
+  "schemeTokensPrefix": "\ud83c\udf17 Color Scheme",
+  "variablePrefix": "eds",
+  "colorSchemeConfig": {
+    "Accent": {
+      "Light": "Moss Green",
+      "Dark": "Moss Green"
+    },
+    "Neutral": {
+      "Light": "Gray",
+      "Dark": "North sea"
+    },
+    "Info": {
+      "Light": "Blue",
+      "Dark": "Blue"
+    },
+    "Success": {
+      "Light": "Green",
+      "Dark": "Green"
+    },
+    "Warning": {
+      "Light": "Orange",
+      "Dark": "Orange"
+    },
+    "Danger": {
+      "Light": "Red",
+      "Dark": "Red"
+    }
+  },
+  "conceptColorGroups": {
+    "bg-floating": {
+      "Light": "{Light.Gray.2}",
+      "Dark": "{Dark.North sea.2}"
+    },
+    "bg-backdrop": {
+      "Light": "{Light.Gray.7}",
+      "Dark": "{Dark.North sea.7}"
+    },
+    "bg-input": {
+      "Light": "{Light.Gray.1}",
+      "Dark": "{Dark.North sea.1}"
+    },
+    "border-focus": {
+      "Light": "{Light.Blue.7}",
+      "Dark": "{Dark.Blue.7}"
+    },
+    "text-link": {
+      "Light": "{Light.Blue.8}",
+      "Dark": "{Dark.Blue.8}"
+    },
+    "bg-disabled": {
+      "Light": "{Neutral.3}",
+      "Dark": "{Neutral.3}"
+    },
+    "border-disabled": {
+      "Light": "{Neutral.7}",
+      "Dark": "{Neutral.7}"
+    },
+    "text-disabled": {
+      "Light": "{Neutral.7}",
+      "Dark": "{Neutral.7}"
+    }
+  },
+  "$comment": [
+    "Vendored from packages/eds-tokens/token-config.json, 2026-08-25.",
+    "Only colorSchemeConfig and conceptColorGroups are used here: they define which source",
+    "palette backs each semantic family per scheme (Accent -> Moss Green, Neutral -> Gray",
+    "in light and North sea in dark), and which tokens are cross-cutting concepts.",
+    "The figmaProject* ids are retained for provenance but unused."
+  ]
+}

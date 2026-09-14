@@ -1,0 +1,96 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.checkbox",
+  "version": "0.2.0",
+  "description": "Checkbox \u2014 the control, and only the control. The glyph IS an icon from the EDS set (as EDS 1.x rendered it), rendered as a MASK on the native input itself (appearance: none; background-color is the ink - the CSS twin of the Figma mask+tint) and swapped by the platform's own :checked. One element, no wrapper, native focus/keyboard/forms behaviour. Interactive green in both states (EDS 1.0 \u2014 Victor, 2026-08-29). Labelled rows are COMPOSITION.",
+  "notes": "Selection-control colour history (Victor, 2026-08-29): EDS 2.0 planned neutral-at-rest -> accent-when-checked to reduce accent usage; EDS 1.0 is green in both states \u2014 going with 1.0 for now, one token flip per state to revisit. The control glyph footprint is the md cap box, so a control beside an md label sits on the text's cap like any other glyph. REFUSED for now: the EDS 1.x radial hover halo. Indeterminate PROMOTED from refusal (v0.2.0, 2026-08-30 polish): a third pseudo-bound enum value \u2014 the platform pseudo :indeterminate swaps the mask to checkbox_indeterminate; it is JS-set and may coexist with :checked, so it is emitted last and wins the cascade. The focus ring is a 4-way drop-shadow filter: a mask clips the outline (measured in Chrome, 2026-08-29), and filters apply AFTER masking - the ring hugs the glyph.",
+  "props": [
+    {
+      "name": "checked",
+      "description": "The platform's own state \u2014 :checked / :indeterminate in CSS, a variant axis in Figma. Indeterminate is JS-set (no HTML attribute) and can coexist with checkedness; the CSS emits it last so it wins.",
+      "type": {
+        "enum": ["unchecked", "checked", "indeterminate"]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked"
+        },
+        "code": {
+          "pseudo": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {},
+    "glyph-off": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "unchecked"
+      },
+      "glyph": "{spacing.sizing-icon-lg}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "3bf42d16a564f7fde691d9d3b1ed571b602f9847",
+        "icon": "checkbox_outline"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    },
+    "glyph-on": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "checked"
+      },
+      "glyph": "{spacing.sizing-icon-lg}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "a1f7377fab99a8626d301f08d4e1f15baebdd8db",
+        "icon": "checkbox"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    },
+    "glyph-mixed": {
+      "whenValue": {
+        "prop": "checked",
+        "value": "indeterminate"
+      },
+      "glyph": "{spacing.sizing-icon-lg}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "21ce44ce2ab9e5934605f958295b5279e904b148",
+        "icon": "checkbox_indeterminate"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-accent}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "glyph-off/color": "{color.concept.text-disabled}",
+        "glyph-on/color": "{color.concept.text-disabled}",
+        "glyph-mixed/color": "{color.concept.text-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "input",
+    "aria": {
+      "type": "the control is <input type=\"checkbox\">; checkedness is the platform's, reflected by :checked"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "fact": "symbol is a glyph: footprint = cap box, ink overflows",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: margin = (footprint − glyph)/2, negative, travels with the element; Figma: footprint-sized auto-layout container, glyph in flow, centered, clip off."
+  },
+  {
+    "fact": "search is an instance of Input (composition-lite)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: a slot — the consumer places the component; Figma: an exposed instance of the generated set, so its own props stay reachable."
+  },
+  {
+    "fact": "prop title (text)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: element content; Figma: TEXT component property."
+  },
+  {
+    "fact": "actions: a true SLOT — designers add as many children as they want",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "Slots GA'd June 2026. CSS: the root's children ARE the content; Figma: a SLOT node seeded with 3 representative instances (demo content, freely replaced per instance)."
+  },
+  {
+    "fact": "seated container: vertical inset = the seat rung (xs), raw",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "The spacing taxonomy, one relation per rung: page xl → container md → cluster sm → seat xs. Controls carry no half-leading, so nothing is compensated (the icon-only precedent). Height = tallest seated control + 2×seat, emergent on both surfaces (CSS content box, Figma hug)."
+  },
+  {
+    "fact": "cluster 'actions' (actions): within-group gap = the sm rung",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "One rung below the container gap — grouping must read tighter than separation (Gestalt), and boxes that bring their own inset need less air added (the optical argument). CSS: a consumer-marked wrapper element; Figma: an auto-layout frame, gap bound to sm."
+  },
+  {
+    "fact": "semantics: <header> role=banner",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

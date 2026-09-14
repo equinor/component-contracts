@@ -1,0 +1,114 @@
+{
+  "component": "eds.top-bar",
+  "requiredVariables": [],
+  "componentSet": {
+    "name": "Top-bar",
+    "description": "TopBar — the application header. A surface strip (white in light, a raised North Sea panel in dark — canvas sits below surface in both schemes) with a thick subtle underline (the SideBar's right border is the same rule, rotated). Identity leads: a swappable application symbol and the lg application name. Search and ghost-icon action Buttons trail — user settings, notifications, density. No tabs in the top bar: the tutorial showed that pattern, and it is retired.\n\nGenerated from eds.top-bar v0.6.0 — edit the contract, not this component.",
+    "axes": {
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Title",
+        "default": "Application name",
+        "part": "title"
+      }
+    ],
+    "booleanProps": [],
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "fixedWidth": 1200
+    },
+    "parts": [
+      {
+        "kind": "glyph",
+        "name": "symbol",
+        "swap": {
+          "property": "Symbol",
+          "componentKey": "c34cd7ce05a7b4dfee9f28421a7cf83597fde0ed"
+        }
+      },
+      {
+        "kind": "text",
+        "name": "title",
+        "defaultText": "Application name",
+        "fill": true
+      },
+      {
+        "kind": "instance",
+        "name": "search",
+        "component": "Input",
+        "overrides": {
+          "Value": "Search",
+          "Has Leading Icon": "true",
+          "↳ Leading Icon": "key:50bc558cebb0c9f98064afb18f448ca670519d9c"
+        },
+        "width": 256
+      },
+      {
+        "kind": "slot",
+        "name": "actions",
+        "cluster": "actions",
+        "seed": [
+          {
+            "component": "Button",
+            "overrides": {
+              "Variant": "Ghost-icon",
+              "Tone": "Neutral",
+              "↳ Leading Icon": "key:df75e4665f6aad158631af1a9a358ea97e85748e"
+            }
+          },
+          {
+            "component": "Button",
+            "overrides": {
+              "Variant": "Ghost-icon",
+              "Tone": "Neutral",
+              "↳ Leading Icon": "key:9be4f30d79fd86c1aa76dcc5ec941a7fb676d75e"
+            }
+          },
+          {
+            "component": "Button",
+            "overrides": {
+              "Variant": "Ghost-icon",
+              "Tone": "Neutral",
+              "↳ Leading Icon": "key:4393cf2fde14ebefeb1350a7455a02cd3351a667"
+            }
+          }
+        ]
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {
+          "symbol": {
+            "containerVar": "recipe/cap-rounded-lg",
+            "glyphVar": "sizing/icon-md"
+          }
+        },
+        "paddingBlock": "spacing/vertical-xs",
+        "paddingInline": "spacing/inset-md-horizontal",
+        "insetVar": "spacing/vertical-xs",
+        "gap": "spacing/horizontal-md",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/bolder",
+          "fontSize": "typography/font-size/lg",
+          "lineHeight": "typography/line-height/compressed/lg"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong",
+        "borderBottom": "semantic/border-neutral-subtle"
+      }
+    ]
+  }
+}

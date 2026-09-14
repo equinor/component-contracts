@@ -1,0 +1,46 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.menu",
+  "version": "0.3.0",
+  "description": "Menu — the floating panel. bg-floating + elevation-low (in dark mode the panel rises a ladder step instead of casting a shadow — the flashlight principle), rounded, with the BLEED GUARD: the block ends pad by the panel's own radius (same token) so full-bleed item fills never clip the corners; the sides stay unpadded — items run edge to edge. The items area is a true SLOT seeded with three Menu-items: designers add as many as they want. Positioning the panel is the consumer's job (popover + CSS anchor positioning). Also the collapsed sidebar's floating submenu.",
+  "notes": "The three item parts are demo content — designers duplicate or hide items inside instances; developers place any number of eds-menu-item buttons. The first bg-floating consumer: dark mode gets the elevated surface for free. v0.2.0 (2026-09-05, Victor's sidebar review): the BLEED GUARD — the panel pads its block ends by ITS OWN RADIUS (same token, 4px), sides unpadded, so full-bleed item fills can never clip the rounded corners. The three hard-coded items became a true SLOT (Slots GA'd June 2026), seeded with three Menu-items: designers add as many as they want. This panel is also the collapsed sidebar's floating submenu — composition. v0.3.0 (2026-09-05): layout.align removed — column children stretch by default, so items span the panel's full width without consumer styling.",
+  "props": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "column"
+      },
+      "radius": "{spacing.spacing-border-radius-rounded}",
+      "tokens": {
+        "background-color": "{color.concept.bg-floating}",
+        "elevation": "{elevation.low}"
+      },
+      "bleedGuard": true
+    },
+    "items": {
+      "figmaSlot": true,
+      "seed": [
+        {
+          "component": "Menu-item"
+        },
+        {
+          "component": "Menu-item",
+          "overrides": {
+            "Label": "Second item"
+          }
+        },
+        {
+          "component": "Menu-item",
+          "overrides": {
+            "Label": "Third item"
+          }
+        }
+      ]
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "div",
+    "role": "menu"
+  }
+}

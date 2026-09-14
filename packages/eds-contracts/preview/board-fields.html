@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Review board — fields</title>
+    <link rel="stylesheet" href="../../eds-tokens/build/css/index.css" />
+    <link rel="stylesheet" href="../build/label.css" />
+    <link rel="stylesheet" href="../build/input.css" />
+    <link rel="stylesheet" href="../build/text-field.css" />
+    <link rel="stylesheet" href="../build/checkbox.css" />
+    <link rel="stylesheet" href="../build/radio.css" />
+    <link rel="stylesheet" href="../build/switch.css" />
+    <style>
+      /* board chrome only — not part of the system */
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: Inter, sans-serif;
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-strong);
+      }
+      section { margin-block-end: 28px; }
+      h2 {
+        margin: 0 0 8px;
+        font: 500 11px/1.5 Inter, sans-serif;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .row { display: flex; gap: 20px; align-items: start; flex-wrap: wrap; }
+      svg.eds-icon { display: inline-block; }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h2>TextField — label + input + helper</h2>
+      <div class="row">
+        <div class="eds-text-field">
+          <label class="eds-label" for="f1">Well name</label>
+          <div class="eds-input"><input id="f1" placeholder="Value" /></div>
+          <p class="eds-label">Helper text</p>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="f2">With icon + value</label>
+          <div class="eds-input">
+            <svg class="eds-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" />
+            </svg>
+            <input id="f2" value="tp023" />
+          </div>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="f3">Invalid (blurred empty required)</label>
+          <div class="eds-input">
+            <input id="f3" type="email" required value="not-an-email" />
+          </div>
+          <p class="eds-label">The state is the platform's</p>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="f4">Disabled</label>
+          <div class="eds-input"><input id="f4" disabled value="Read only-ish" /></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>Checkbox / Radio / Switch — the element IS the control</h2>
+      <div class="row" style="align-items: center">
+        <input class="eds-checkbox" type="checkbox" />
+        <input class="eds-checkbox" type="checkbox" checked />
+        <input class="eds-checkbox" type="checkbox" id="indet" />
+        <input class="eds-checkbox" type="checkbox" checked disabled />
+        <input class="eds-radio" type="radio" name="r" />
+        <input class="eds-radio" type="radio" name="r" checked />
+        <input class="eds-radio" type="radio" name="r2" checked disabled />
+        <input class="eds-switch" type="checkbox" role="switch" />
+        <input class="eds-switch" type="checkbox" role="switch" checked />
+        <input class="eds-switch" type="checkbox" role="switch" checked disabled />
+      </div>
+    </section>
+    <script>
+      // indeterminate has no HTML attribute — the platform state is JS-set
+      document.getElementById('indet').indeterminate = true;
+      const scheme = location.hash.slice(1);
+      if (scheme) document.documentElement.dataset.colorScheme = scheme;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+# Generated output — the emitters are the formatters; a prettier --write
+# would be reverted by the next build anyway
+eds-tokens-reworked/tokens/
+eds-tokens-reworked/build/
+eds-contracts/build/
+*.mdx
+README.md
+eds-tokens-reworked/src/palette-generator-export.css

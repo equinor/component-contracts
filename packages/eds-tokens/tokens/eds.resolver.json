@@ -1,0 +1,65 @@
+{
+  "name": "eds-tokens",
+  "version": "2025.10",
+  "description": "Two runtime axes: density and colour-scheme. Everything else is semantic.",
+  "sets": {
+    "core": {
+      "sources": [
+        {
+          "$ref": "primitives.tokens.json"
+        },
+        {
+          "$ref": "semantic-color.tokens.json"
+        }
+      ]
+    }
+  },
+  "modifiers": {
+    "density": {
+      "contexts": {
+        "compact": [
+          {
+            "$ref": "density/compact.tokens.json"
+          }
+        ],
+        "comfortable": [
+          {
+            "$ref": "density/comfortable.tokens.json"
+          }
+        ],
+        "relaxed": [
+          {
+            "$ref": "density/relaxed.tokens.json"
+          }
+        ]
+      },
+      "default": "comfortable"
+    },
+    "color-scheme": {
+      "contexts": {
+        "light": [
+          {
+            "$ref": "color-scheme/light.tokens.json"
+          }
+        ],
+        "dark": [
+          {
+            "$ref": "color-scheme/dark.tokens.json"
+          }
+        ]
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/core"
+    },
+    {
+      "$ref": "#/modifiers/density"
+    },
+    {
+      "$ref": "#/modifiers/color-scheme"
+    }
+  ]
+}

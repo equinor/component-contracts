@@ -1,0 +1,1492 @@
+{
+  "color": {
+    "semantic": {
+      "bg-accent-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.accent.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-canvas"
+          }
+        }
+      },
+      "bg-accent-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.accent.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-accent-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.accent.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-accent-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.accent.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-accent-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.accent.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-accent-fill-ghost-active": {
+        "$type": "color",
+        "$value": "{color.palette.accent.4}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-ghost-active"
+          }
+        }
+      },
+      "bg-accent-fill-ghost-hover": {
+        "$type": "color",
+        "$value": "{color.palette.accent.3}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-ghost-hover"
+          }
+        }
+      },
+      "bg-accent-fill-ghost-selected": {
+        "$type": "color",
+        "$value": "{color.palette.accent.4}",
+        "$description": "The selected rung: one above hover, sharing the ACTIVE step value under its own name — active is the split-second press, selected is the persistent state. Bound by selected menu items and toggled controls. Added 2026-08-30.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-ghost-selected"
+          }
+        }
+      },
+      "bg-accent-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.accent.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-muted-active"
+          }
+        }
+      },
+      "bg-accent-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.accent.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-muted-default"
+          }
+        }
+      },
+      "bg-accent-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.accent.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-muted-hover"
+          }
+        }
+      },
+      "bg-accent-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.accent.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-muted-selected"
+          }
+        }
+      },
+      "bg-accent-surface": {
+        "$type": "color",
+        "$value": "{color.palette.accent.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-surface"
+          }
+        }
+      },
+      "bg-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-canvas"
+          }
+        }
+      },
+      "bg-danger-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.danger.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-canvas"
+          }
+        }
+      },
+      "bg-danger-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.danger.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-danger-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.danger.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-danger-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.danger.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-danger-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.danger.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-danger-fill-ghost-active": {
+        "$type": "color",
+        "$value": "{color.palette.danger.4}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-ghost-active"
+          }
+        }
+      },
+      "bg-danger-fill-ghost-hover": {
+        "$type": "color",
+        "$value": "{color.palette.danger.3}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-ghost-hover"
+          }
+        }
+      },
+      "bg-danger-fill-ghost-selected": {
+        "$type": "color",
+        "$value": "{color.palette.danger.4}",
+        "$description": "The selected rung: one above hover, sharing the ACTIVE step value under its own name — active is the split-second press, selected is the persistent state. Bound by selected menu items and toggled controls. Added 2026-08-30.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-ghost-selected"
+          }
+        }
+      },
+      "bg-danger-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.danger.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-muted-active"
+          }
+        }
+      },
+      "bg-danger-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.danger.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-muted-default"
+          }
+        }
+      },
+      "bg-danger-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.danger.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-muted-hover"
+          }
+        }
+      },
+      "bg-danger-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.danger.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-muted-selected"
+          }
+        }
+      },
+      "bg-danger-surface": {
+        "$type": "color",
+        "$value": "{color.palette.danger.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-surface"
+          }
+        }
+      },
+      "bg-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-fill-emphasis-disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-emphasis-disabled"
+          }
+        }
+      },
+      "bg-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-muted-active"
+          }
+        }
+      },
+      "bg-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-muted-default"
+          }
+        }
+      },
+      "bg-fill-muted-disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-muted-disabled"
+          }
+        }
+      },
+      "bg-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-fill-muted-hover"
+          }
+        }
+      },
+      "bg-info-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.info.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-canvas"
+          }
+        }
+      },
+      "bg-info-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.info.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-info-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.info.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-info-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.info.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-info-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.info.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-info-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.info.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-muted-active"
+          }
+        }
+      },
+      "bg-info-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.info.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-muted-default"
+          }
+        }
+      },
+      "bg-info-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.info.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-muted-hover"
+          }
+        }
+      },
+      "bg-info-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.info.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-fill-muted-selected"
+          }
+        }
+      },
+      "bg-info-surface": {
+        "$type": "color",
+        "$value": "{color.palette.info.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-info-surface"
+          }
+        }
+      },
+      "bg-neutral-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-canvas"
+          }
+        }
+      },
+      "bg-neutral-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-neutral-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-neutral-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-neutral-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-neutral-fill-ghost-active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.4}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-ghost-active"
+          }
+        }
+      },
+      "bg-neutral-fill-ghost-hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$description": "Ghost ladder: hover = step 3, active = step 4 — one step below muted, because the resting fill is transparent (see bg-*-fill-ghost-default). Bound by transparent-resting components: eds.button Secondary/Ghost, tabs, menu items.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-ghost-hover"
+          }
+        }
+      },
+      "bg-neutral-fill-ghost-selected": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.4}",
+        "$description": "The selected rung: one above hover, sharing the ACTIVE step value under its own name — active is the split-second press, selected is the persistent state. Bound by selected menu items and toggled controls. Added 2026-08-30.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-ghost-selected"
+          }
+        }
+      },
+      "bg-neutral-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-muted-active"
+          }
+        }
+      },
+      "bg-neutral-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-muted-default"
+          }
+        }
+      },
+      "bg-neutral-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-muted-hover"
+          }
+        }
+      },
+      "bg-neutral-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-muted-selected"
+          }
+        }
+      },
+      "bg-neutral-surface": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-surface"
+          }
+        }
+      },
+      "bg-success-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.success.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-canvas"
+          }
+        }
+      },
+      "bg-success-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.success.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-success-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.success.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-success-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.success.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-success-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.success.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-success-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.success.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-muted-active"
+          }
+        }
+      },
+      "bg-success-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.success.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-muted-default"
+          }
+        }
+      },
+      "bg-success-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.success.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-muted-hover"
+          }
+        }
+      },
+      "bg-success-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.success.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-fill-muted-selected"
+          }
+        }
+      },
+      "bg-success-surface": {
+        "$type": "color",
+        "$value": "{color.palette.success.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-success-surface"
+          }
+        }
+      },
+      "bg-surface": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-surface"
+          }
+        }
+      },
+      "bg-warning-canvas": {
+        "$type": "color",
+        "$value": "{color.palette.warning.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-canvas"
+          }
+        }
+      },
+      "bg-warning-fill-emphasis-active": {
+        "$type": "color",
+        "$value": "{color.palette.warning.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-emphasis-active"
+          }
+        }
+      },
+      "bg-warning-fill-emphasis-default": {
+        "$type": "color",
+        "$value": "{color.palette.warning.9}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-emphasis-default"
+          }
+        }
+      },
+      "bg-warning-fill-emphasis-hover": {
+        "$type": "color",
+        "$value": "{color.palette.warning.10}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-emphasis-hover"
+          }
+        }
+      },
+      "bg-warning-fill-emphasis-selected": {
+        "$type": "color",
+        "$value": "{color.palette.warning.11}",
+        "$description": "The filled call-to-action tier: buttons and form controls. Foregrounds invert via the on-emphasis text/icon tokens. Usage intent lives in the contracts that bind it (eds.button Primary binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-emphasis-selected"
+          }
+        }
+      },
+      "bg-warning-fill-muted-active": {
+        "$type": "color",
+        "$value": "{color.palette.warning.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-muted-active"
+          }
+        }
+      },
+      "bg-warning-fill-muted-default": {
+        "$type": "color",
+        "$value": "{color.palette.warning.3}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-muted-default"
+          }
+        }
+      },
+      "bg-warning-fill-muted-hover": {
+        "$type": "color",
+        "$value": "{color.palette.warning.4}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-muted-hover"
+          }
+        }
+      },
+      "bg-warning-fill-muted-selected": {
+        "$type": "color",
+        "$value": "{color.palette.warning.5}",
+        "$description": "The quiet opaque fill tier: chips, toggles, selected rows. Named for its appearance — a recorded finding; usage intent lives in the contracts that bind it (eds.chip binds this tier).",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-fill-muted-selected"
+          }
+        }
+      },
+      "bg-warning-surface": {
+        "$type": "color",
+        "$value": "{color.palette.warning.2}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-warning-surface"
+          }
+        }
+      },
+      "border-accent-medium": {
+        "$type": "color",
+        "$value": "{color.palette.accent.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-accent-medium"
+          }
+        }
+      },
+      "border-accent-strong": {
+        "$type": "color",
+        "$value": "{color.palette.accent.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-accent-strong"
+          }
+        }
+      },
+      "border-accent-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.accent.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-accent-subtle"
+          }
+        }
+      },
+      "border-danger-medium": {
+        "$type": "color",
+        "$value": "{color.palette.danger.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-danger-medium"
+          }
+        }
+      },
+      "border-danger-strong": {
+        "$type": "color",
+        "$value": "{color.palette.danger.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-danger-strong"
+          }
+        }
+      },
+      "border-danger-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.danger.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-danger-subtle"
+          }
+        }
+      },
+      "border-info-medium": {
+        "$type": "color",
+        "$value": "{color.palette.info.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-info-medium"
+          }
+        }
+      },
+      "border-info-strong": {
+        "$type": "color",
+        "$value": "{color.palette.info.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-info-strong"
+          }
+        }
+      },
+      "border-info-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.info.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-info-subtle"
+          }
+        }
+      },
+      "border-medium": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-medium"
+          }
+        }
+      },
+      "border-neutral-medium": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-neutral-medium"
+          }
+        }
+      },
+      "border-neutral-strong": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-neutral-strong"
+          }
+        }
+      },
+      "border-neutral-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-neutral-subtle"
+          }
+        }
+      },
+      "border-strong": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-strong"
+          }
+        }
+      },
+      "border-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-subtle"
+          }
+        }
+      },
+      "border-success-medium": {
+        "$type": "color",
+        "$value": "{color.palette.success.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-success-medium"
+          }
+        }
+      },
+      "border-success-strong": {
+        "$type": "color",
+        "$value": "{color.palette.success.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-success-strong"
+          }
+        }
+      },
+      "border-success-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.success.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-success-subtle"
+          }
+        }
+      },
+      "border-warning-medium": {
+        "$type": "color",
+        "$value": "{color.palette.warning.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-warning-medium"
+          }
+        }
+      },
+      "border-warning-strong": {
+        "$type": "color",
+        "$value": "{color.palette.warning.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-warning-strong"
+          }
+        }
+      },
+      "border-warning-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.warning.6}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-warning-subtle"
+          }
+        }
+      },
+      "icon-accent": {
+        "$type": "color",
+        "$value": "{color.palette.accent.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-accent"
+          }
+        }
+      },
+      "icon-accent-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.accent.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-accent-on-emphasis"
+          }
+        }
+      },
+      "icon-danger": {
+        "$type": "color",
+        "$value": "{color.palette.danger.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-danger"
+          }
+        }
+      },
+      "icon-danger-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.danger.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-danger-on-emphasis"
+          }
+        }
+      },
+      "icon-info": {
+        "$type": "color",
+        "$value": "{color.palette.info.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-info"
+          }
+        }
+      },
+      "icon-info-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.info.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-info-on-emphasis"
+          }
+        }
+      },
+      "icon-neutral": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-neutral"
+          }
+        }
+      },
+      "icon-neutral-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-neutral-on-emphasis"
+          }
+        }
+      },
+      "icon-success": {
+        "$type": "color",
+        "$value": "{color.palette.success.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-success"
+          }
+        }
+      },
+      "icon-success-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.success.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-success-on-emphasis"
+          }
+        }
+      },
+      "icon-warning": {
+        "$type": "color",
+        "$value": "{color.palette.warning.12}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-warning"
+          }
+        }
+      },
+      "icon-warning-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.warning.14}",
+        "$description": "Icon ink: the SUBTLE text step — icons are graphical objects (WCAG 1.4.11 / APCA Lc60), they do not need text-level contrast. Strong text, subtle icon. Restored original EDS 2.0 intent.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-icon-warning-on-emphasis"
+          }
+        }
+      },
+      "text-accent-strong": {
+        "$type": "color",
+        "$value": "{color.palette.accent.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-accent-strong"
+          }
+        }
+      },
+      "text-accent-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.accent.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-accent-strong-on-emphasis"
+          }
+        }
+      },
+      "text-accent-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.accent.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-accent-subtle"
+          }
+        }
+      },
+      "text-accent-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.accent.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-accent-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-danger-strong": {
+        "$type": "color",
+        "$value": "{color.palette.danger.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-danger-strong"
+          }
+        }
+      },
+      "text-danger-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.danger.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-danger-strong-on-emphasis"
+          }
+        }
+      },
+      "text-danger-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.danger.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-danger-subtle"
+          }
+        }
+      },
+      "text-danger-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.danger.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-danger-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-info-strong": {
+        "$type": "color",
+        "$value": "{color.palette.info.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-info-strong"
+          }
+        }
+      },
+      "text-info-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.info.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-info-strong-on-emphasis"
+          }
+        }
+      },
+      "text-info-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.info.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-info-subtle"
+          }
+        }
+      },
+      "text-info-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.info.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-info-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-neutral-strong": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-neutral-strong"
+          }
+        }
+      },
+      "text-neutral-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-neutral-strong-on-emphasis"
+          }
+        }
+      },
+      "text-neutral-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-neutral-subtle"
+          }
+        }
+      },
+      "text-neutral-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-neutral-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-strong": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-strong"
+          }
+        }
+      },
+      "text-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-strong-on-emphasis"
+          }
+        }
+      },
+      "text-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-subtle"
+          }
+        }
+      },
+      "text-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-success-strong": {
+        "$type": "color",
+        "$value": "{color.palette.success.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-success-strong"
+          }
+        }
+      },
+      "text-success-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.success.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-success-strong-on-emphasis"
+          }
+        }
+      },
+      "text-success-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.success.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-success-subtle"
+          }
+        }
+      },
+      "text-success-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.success.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-success-subtle-on-emphasis"
+          }
+        }
+      },
+      "text-warning-strong": {
+        "$type": "color",
+        "$value": "{color.palette.warning.13}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-warning-strong"
+          }
+        }
+      },
+      "text-warning-strong-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.warning.15}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-warning-strong-on-emphasis"
+          }
+        }
+      },
+      "text-warning-subtle": {
+        "$type": "color",
+        "$value": "{color.palette.warning.12}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-warning-subtle"
+          }
+        }
+      },
+      "text-warning-subtle-on-emphasis": {
+        "$type": "color",
+        "$value": "{color.palette.warning.14}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-warning-subtle-on-emphasis"
+          }
+        }
+      },
+      "bg-neutral-fill-ghost-default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0
+        },
+        "$description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-neutral-fill-ghost-default"
+          }
+        }
+      },
+      "bg-accent-fill-ghost-default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0
+        },
+        "$description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-accent-fill-ghost-default"
+          }
+        }
+      },
+      "bg-danger-fill-ghost-default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0
+        },
+        "$description": "Resting fill of ghost interactive surfaces (ghost/secondary buttons, tabs, menu items). Transparent, not white, so it composes on any surface. The ladder anchors one step below muted: transparent -> step 3 (hover) -> step 4 (active), because the jump from nothing to the muted hover step is too large.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-danger-fill-ghost-default"
+          }
+        }
+      }
+    },
+    "concept": {
+      "bg-backdrop": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-backdrop"
+          }
+        }
+      },
+      "bg-disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.3}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-disabled"
+          }
+        }
+      },
+      "bg-input": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.1}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-input"
+          }
+        }
+      },
+      "bg-inverse": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.13}",
+        "$description": "The inverse surface: a negative panel on either scheme (near-black on light, near-white on dark). bg-inverse = palette step 13, text-on-inverse = step 15. Bound by eds.tooltip; additive, 2026-08-29.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-inverse"
+          }
+        }
+      },
+      "border-disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-disabled"
+          }
+        }
+      },
+      "border-focus": {
+        "$type": "color",
+        "$value": "{color.palette.info.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-border-focus"
+          }
+        }
+      },
+      "text-disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-disabled"
+          }
+        }
+      },
+      "text-link": {
+        "$type": "color",
+        "$value": "{color.palette.info.8}",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-link"
+          }
+        }
+      },
+      "text-on-inverse": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.15}",
+        "$description": "The inverse surface: a negative panel on either scheme (near-black on light, near-white on dark). bg-inverse = palette step 13, text-on-inverse = step 15. Bound by eds.tooltip; additive, 2026-08-29.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-on-inverse"
+          }
+        }
+      },
+      "text-placeholder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.7}",
+        "$description": "Placeholder text: an affordance hint, not an unavailable control — never bind text-disabled here. Disabled’s rung today (step 7); Lc 30 floor against bg-input, only beside an icon carrying the affordance. Bound by eds.input; additive, 2026-09-04.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-text-placeholder"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "component": "eds.tooltip",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-xs-squared-sm-label",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 6,
+        "relaxed": 10
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-xs-vertical-squared) - var(--eds-half-leading-sm))",
+      "description": "eds.tooltip: sm label in the xs-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 20/24/36."
+    },
+    {
+      "name": "recipe/pointer-sm",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 4,
+        "relaxed": 6
+      },
+      "codeSyntax": "calc(var(--eds-cap-rounded-sm) / 2)",
+      "description": "eds.tooltip: the bubble pointer's protrusion — half the sm cap box, so the arrow scales with density like everything else. Resolved because Figma cannot calc; CSS composes it live."
+    }
+  ],
+  "componentSet": {
+    "name": "Tooltip",
+    "description": "Tooltip — the floating hint, NEGATIVE: an inverse panel (near-black on light, near-white on dark) via the bg-inverse/text-on-inverse concept tokens, as EDS 1.x had it. Height emerges from the recipe: xs inset × 2 + cap(sm label). Twelve placements (side × start/center/end) — the full EDS 1.0 arrow fan, kept because product teams use all of it. PLACEMENT names where the TOOLTIP sits relative to its ANCHOR — the arrow points back at the anchor (Placement=Top: bubble above the target, arrow on the bubble's bottom edge). Same convention as Floating UI, CSS anchor positioning and EDS 1.0 (Popper). On a bare canvas this reads inverted; snap an instance to its target and it is right.\n\nGenerated from eds.tooltip v0.3.0 — edit the contract, not this component.",
+    "axes": {
+      "Side": [
+        "Top",
+        "Bottom",
+        "Left",
+        "Right"
+      ],
+      "Align": [
+        "Start",
+        "Center",
+        "End"
+      ],
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Tooltip",
+        "part": "label"
+      }
+    ],
+    "booleanProps": [],
+    "pointer": {
+      "prop": "placement",
+      "widthVar": "recipe/cap-rounded-sm",
+      "heightVar": "recipe/pointer-sm"
+    },
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "radiusVar": "spacing/border-radius-rounded",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "text",
+        "name": "label",
+        "defaultText": "Tooltip"
+      },
+      {
+        "kind": "pointer",
+        "name": "arrow"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "recipe/optical-padding-xs-squared-sm-label",
+        "paddingInline": "spacing/inset-xs-horizontal",
+        "insetVar": "spacing/inset-xs-vertical-squared",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/sm",
+          "lineHeight": "typography/line-height/compressed/sm"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Side=Top, Align=Start",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "top",
+          "align": "start"
+        }
+      },
+      {
+        "name": "Side=Top, Align=Center",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "top",
+          "align": "center"
+        }
+      },
+      {
+        "name": "Side=Top, Align=End",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "top",
+          "align": "end"
+        }
+      },
+      {
+        "name": "Side=Bottom, Align=Start",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "bottom",
+          "align": "start"
+        }
+      },
+      {
+        "name": "Side=Bottom, Align=Center",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "bottom",
+          "align": "center"
+        }
+      },
+      {
+        "name": "Side=Bottom, Align=End",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "bottom",
+          "align": "end"
+        }
+      },
+      {
+        "name": "Side=Left, Align=Start",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "left",
+          "align": "start"
+        }
+      },
+      {
+        "name": "Side=Left, Align=Center",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "left",
+          "align": "center"
+        }
+      },
+      {
+        "name": "Side=Left, Align=End",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "left",
+          "align": "end"
+        }
+      },
+      {
+        "name": "Side=Right, Align=Start",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "right",
+          "align": "start"
+        }
+      },
+      {
+        "name": "Side=Right, Align=Center",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "right",
+          "align": "center"
+        }
+      },
+      {
+        "name": "Side=Right, Align=End",
+        "size": "Default",
+        "bg": "concept/bg-inverse",
+        "fg": "concept/text-on-inverse",
+        "effect": "elevation/low",
+        "pointer": {
+          "side": "right",
+          "align": "end"
+        }
+      }
+    ]
+  }
+}

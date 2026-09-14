@@ -1,0 +1,76 @@
+# Stylelint for the CSS this repo actually writes — the generated component
+# sheets in eds-contracts/build/*.css (`pnpm run lint:css` from the repo root).
+#
+# The emitter is the formatter: generated CSS must pass AS BORN, so nothing
+# here may demand a reformat. Every custom rule below encodes a convention
+# from eds-contracts/AGENTS.md ("Rules"), which in turn follows ADR-0006
+# rule 3 in equinor/design-system (variants are data-* attributes, never
+# modifier classes; Accepted 2026-06-29, adopted here 2026-08-30). The
+# earlier BEM `selector-class-pattern` this file was copied with came from
+# equinor/design-system and mis-cited ADR-0016 (the colour ADR) — it is gone.
+#
+# What each custom rule encodes:
+#
+# - selector-class-pattern — ONE flat `eds-`-prefixed class per COMPONENT,
+#   plus SIMPLE UNPREFIXED part classes where the element is ambiguous
+#   (`.icon`, `.trailing-icon`, `.dismiss`) — ADR-0006's own convention,
+#   adopted 2026-09-05: the earlier eds-prefixed parts shared the component
+#   namespace, and `.eds-label` on a sidebar part collided with the Label
+#   COMPONENT (sm font leaked in). Disjoint namespaces, collisions
+#   impossible. BEM syntax is REJECTED —
+#   no `__element` (that is an element selector's job: `& th`,
+#   `& > :is(input, select, textarea)`) and no `--modifier` (that is a
+#   `data-*` axis: `[data-tone='danger']`, `[data-size='small']`, or a
+#   valueless boolean like `[data-dismissible]`).
+#
+# - custom-property-pattern — the channel-variable convention: component
+#   internals are pseudo-private `--_*` (`--_bg`, `--_half-leading`; states
+#   override the VARIABLE, never the property). Everything a component reads
+#   from the token layer is `--eds-*`. Declared properties may take only
+#   those two shapes; today the build declares `--_*` exclusively, and the
+#   harness owns that stricter reading (see test/check.ts).
+#
+# - selector-disallowed-list — the token layer's ancestor mode scopes
+#   (`[data-density]`, `[data-color-scheme]`) must never appear in component
+#   CSS. Density is expressed through the variables, not through a component
+#   selector. test/check.ts asserts the same thing per component.
+#
+# - selector-max-id — selectors are classes, `data-*`/`aria-*` attributes,
+#   pseudo-classes and semantic element selectors. Never an id.
+#
+# Deliberately NOT constrained: modern selector syntax the emitter relies on —
+# nesting with `&`, `:has()`, `:is()`, `:where()`, list-form `:not(a, b)`,
+# `::placeholder`, `[aria-*]` state selectors — and `@layer eds-components`
+# with its `base, variants, states` sub-layer statement.
+extends:
+  - 'stylelint-config-standard'
+  - 'stylelint-config-clean-order'
+rules:
+  declaration-block-no-duplicate-properties:
+    - true
+    - ignore: ['consecutive-duplicates-with-different-syntaxes']
+  custom-property-pattern:
+    - '^(_|eds-)[a-z0-9]+(-[a-z0-9]+)*$'
+    - message: "Expected custom property '%s' to be a pseudo-private channel variable (--_kebab-case) or a token (--eds-kebab-case) (custom-property-pattern)"
+  property-no-vendor-prefix:
+    - true
+    - ignoreProperties: ['/^(column[s-]?)([a-z]*)$/']
+  comment-empty-line-before:
+    - always
+    - except: [first-nested]
+      ignore: [after-comment, stylelint-commands]
+  import-notation: string
+  selector-class-pattern:
+    - '^(eds-)?[a-z0-9]+(-[a-z0-9]+)*$'
+    - message: "Expected class '%s' to be flat kebab (eds- prefix = component, unprefixed = part). No BEM: __element is an element selector, --modifier is a data-* attribute (ADR-0006 rule 3) (selector-class-pattern)"
+  selector-disallowed-list:
+    - ['/\[data-density/', '/\[data-color-scheme/']
+    - message: 'The ancestor mode scopes data-density / data-color-scheme belong to the token layer, never to component CSS (selector-disallowed-list)'
+  selector-max-id: 0
+  number-max-precision: 5
+  declaration-property-value-no-unknown:
+    - true
+    - ignoreProperties:
+        '/.*/':
+          - '/round/'
+          - '/--[\w-]+\(\)/'

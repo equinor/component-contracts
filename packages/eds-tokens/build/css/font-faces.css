@@ -1,0 +1,49 @@
+/* EDS font faces — x-height alignment
+ * Generated — do not edit. Source: src/formulas.ts
+ */
+
+/* The x-height correction (x1.137288) is baked into the header font-size
+ * tokens, NOT applied here as size-adjust. size-adjust is a CSS-only descriptor:
+ * Figma has no equivalent and React Native never parses @font-face, so both would
+ * render the uncorrected size. Baking also keeps headers on the 0.5px grid.
+ * See DECISIONS.md 5. */
+
+/* Reference family — x-heights are aligned to this one. */
+@font-face {
+  font-family: Inter;
+  src:
+    local('Inter'),
+    url(../../fonts/InterVariable.woff2) format("woff2-variations"),
+    url(https://cdn.eds.equinor.com/font/InterVariable.woff2) format("woff2-variations"),
+    url(https://cdn.eds.equinor.com/font/Inter-Regular.woff) format("woff");
+  font-style: normal;
+  font-weight: 1 999;
+  font-display: fallback;
+}
+
+/* No size-adjust. The x-height correction is baked into the header font-size
+ * tokens instead, so Figma and React Native get the same number CSS does. */
+@font-face {
+  font-family: Equinor;
+  src:
+    local('Equinor'),
+    url(https://cdn.eds.equinor.com/font/EquinorVariable-VF.woff2) format("woff2-variations"),
+    url(https://cdn.eds.equinor.com/font/EquinorVariable-VF.woff) format("woff-variations"),
+    url(https://cdn.eds.equinor.com/font/Equinor-Regular.woff) format("woff");
+  font-style: normal;
+  font-weight: 1 999;
+  font-display: fallback;
+}
+
+/* No size-adjust. The x-height correction is baked into the header font-size
+ * tokens instead, so Figma and React Native get the same number CSS does. */
+@font-face {
+  font-family: CommitMono;
+  src:
+    local('CommitMono'),
+    url(../../fonts/CommitMonoV143-VF.woff2) format("woff2-variations"),
+    url(https://cdn.eds.equinor.com/font/CommitMonoV143-VF.woff2) format("woff2-variations");
+  font-style: normal;
+  font-weight: 1 999;
+  font-display: fallback;
+}

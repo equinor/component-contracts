@@ -1,0 +1,84 @@
+/* Generated from contracts/menu-item.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-menu-item {
+      /* No variant axes — the channel variables live on the root. */
+      --_bg: var(--eds-color-bg-neutral-fill-ghost-default);
+      --_fg: var(--eds-color-text-neutral-subtle);
+      --_icon-fg: var(--eds-color-icon-neutral);
+
+      /* Size-dependent parameters (single size). */
+      --_font-size: var(--eds-typography-ui-body-md-font-size);
+      --_line-height: var(--eds-typography-ui-body-md-line-height-compressed);
+      --_half-leading: var(--eds-half-leading-md);
+      --_inset-v: var(--eds-spacing-inset-sm-vertical-squared);
+      --_inset-h: var(--eds-spacing-inset-sm-horizontal);
+      --_gap: var(--eds-spacing-icon-md-gap-horizontal);
+      --_glyph: var(--eds-sizing-icon-md);
+      --_cap: var(--eds-cap-rounded-md);
+
+      cursor: var(--_cursor, pointer);
+
+      display: inline-flex;
+      gap: var(--_gap);
+      align-items: center;
+
+      /* The contract's invariant, kept as a mechanism: height = inset × 2 + cap(label).
+       * Resolves to 24 / 36 / 44 px across densities (default size). Do not bake, do not round.
+       * border-box so min-height measures the BOX — buttons get this from the UA
+       * stylesheet, a <div> pays its padding twice without it. */
+      box-sizing: border-box;
+      min-height: calc(var(--_inset-v) * 2 + var(--eds-cap-rounded));
+      padding-block: calc(var(--_inset-v) - var(--_half-leading));
+      padding-inline: var(--_inset-h);
+      border: none;
+
+      font: var(--eds-font-weight-normal) var(--_font-size) / var(--_line-height) var(--eds-typography-ui-body-font-family);
+      color: var(--_fg);
+
+      background-color: var(--_bg);
+      outline: var(--eds-sizing-stroke-thin) solid var(--_border, transparent);
+      outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+
+      & .icon {
+        inline-size: var(--_glyph);
+        block-size: var(--_glyph);
+
+        /* a glyph part: its footprint is the label's cap box; the ink
+         * overflows it like ascenders and descenders. Negative by construction. */
+        margin: calc((var(--_cap) - var(--_glyph)) / 2);
+        color: var(--_icon-fg, var(--_fg));
+      }
+    }
+  }
+
+  @layer states {
+    .eds-menu-item:disabled {
+      --_cursor: not-allowed;
+      --_fg: var(--eds-color-text-disabled);
+      --_icon-fg: var(--eds-color-text-disabled);
+    }
+
+    .eds-menu-item:focus-visible {
+      outline: var(--eds-sizing-stroke-thick) solid var(--eds-color-border-focus);
+      outline-offset: var(--eds-sizing-stroke-thin);
+    }
+
+    .eds-menu-item:not(:disabled, :is([aria-selected='true'], [aria-checked='true'])):hover {
+      --_bg: var(--eds-color-bg-neutral-fill-ghost-hover);
+    }
+
+    .eds-menu-item:not(:disabled, :is([aria-selected='true'], [aria-checked='true'])):active {
+      --_bg: var(--eds-color-bg-neutral-fill-ghost-active);
+    }
+
+    .eds-menu-item:is([aria-selected='true'], [aria-checked='true']):not(:disabled) {
+      --_bg: var(--eds-color-bg-accent-fill-ghost-selected);
+      --_fg: var(--eds-color-text-accent-strong);
+      --_icon-fg: var(--eds-color-icon-accent);
+    }
+  }
+}

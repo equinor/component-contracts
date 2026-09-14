@@ -1,0 +1,102 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.side-bar",
+  "version": "0.4.0",
+  "description": "SideBar — the navigation rail. A surface column on the canvas (the classic chrome split, both schemes) with a thick subtle inline-end border — the top bar's underline, rotated. Items stack with no gap (their underlines are the rhythm) in a true SLOT: designers add as many as they want. The Collapse item pins to the bottom. Expanded width 256 (authored, constant across densities); collapsed width DERIVES from the item's square edge (40/52/60) — so the rail is exactly as wide as its squares are tall. The collapsed submenu is the floating Menu: composition, not new anatomy. NOTE — collapsing an instance with edited items: slot content is the instance's own (that's the point of slots), so it does not follow the rail's Collapsed automatically. Multi-select the items and flip their Collapsed with the rail's; sub-items simply leave (their submenu floats). Fresh instances mirror automatically. In code this cascades: one data-collapsed on the nav.",
+  "notes": "v0.2.0 (2026-09-05, Victor's sidebar review; v0.1.0 was a sketch of Menu-item instances). The items area is a real SLOT (Slots GA'd June 2026 — probe-verified in this file) seeded with three representative items. The accordion open-state is an interaction fact, recorded not built (polish). Seeded and instanced items MIRROR the rail's Collapsed axis (the builder matches shared variant axes by name). v0.3.0 (2026-09-05): the seed shows the OPEN submenu — Gas (selected) and Fields under Edit, labels aligned by the derived indent. Sub-items cannot mirror the Collapsed axis (they have none — a collapsed sidebar's submenu is the floating Menu), so the builder HIDES seeded instances that cannot follow a non-default axis value: collapse the rail and the sub-items leave, as the design says. v0.4.0 (2026-09-06, Victor): the Collapse control's icon flip is BUILT — collapsedOverrides on the collapse instance swap first_page for last_page (key 8d2cf7772cf7eb6efea11b909e8142ec3ec96396) in Collapsed variants; CSS carries the same flip as a mirror (scale: -1 1 on the pinned item's icon under data-collapsed), because the two glyphs are horizontal mirror twins: one svg in consumer markup, both directions.",
+  "props": [
+    {
+      "name": "collapsed",
+      "description": "The rail state: 256 wide with labels, or the icon square rail. Mirrored onto every item.",
+      "type": {
+        "enum": [
+          "false",
+          "true"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Collapsed"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "width": 256,
+      "height": 640,
+      "collapsedWidth": {
+        "matches": "eds.side-bar-item"
+      },
+      "layout": {
+        "direction": "column"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-surface}",
+        "border-right-color": "{color.semantic.border-neutral-subtle}"
+      },
+      "endline": "{spacing.sizing-stroke-thick}"
+    },
+    "items": {
+      "figmaSlot": true,
+      "fill": true,
+      "seed": [
+        {
+          "component": "Side-bar-item",
+          "overrides": {
+            "Label": "Home"
+          }
+        },
+        {
+          "component": "Side-bar-item",
+          "overrides": {
+            "Label": "Edit",
+            "Has Menu": "true"
+          }
+        },
+        {
+          "component": "Side-bar-sub-item",
+          "overrides": {
+            "Label": "Gas",
+            "State": "Selected"
+          }
+        },
+        {
+          "component": "Side-bar-sub-item",
+          "overrides": {
+            "Label": "Fields"
+          }
+        },
+        {
+          "component": "Side-bar-item",
+          "overrides": {
+            "Label": "Favourites"
+          }
+        }
+      ]
+    },
+    "collapse": {
+      "instance": {
+        "component": "Side-bar-item",
+        "icon": "first_page",
+        "overrides": {
+          "Label": "Collapse",
+          "↳ Icon": "key:2e82bdda5b791fa2c647da522dfa289d6876d138"
+        },
+        "collapsedOverrides": {
+          "↳ Icon": "key:8d2cf7772cf7eb6efea11b909e8142ec3ec96396"
+        }
+      }
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "nav",
+    "role": "navigation"
+  }
+}

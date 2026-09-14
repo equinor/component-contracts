@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Attempt 3: the contract</title>
+    <link
+      rel="stylesheet"
+      href="../../../packages/eds-tokens/build/css/index.css"
+    />
+    <link rel="stylesheet" href="../../../packages/eds-contracts/build/button.css" />
+    <style>
+      /* demo chrome only. Every button below is the EMITTED component,
+       * untouched: generated from contracts/button.contract.json and
+       * parity-verified against the generated Figma set. */
+      body {
+        margin: 0;
+        padding: var(--eds-spacing-inset-md-vertical-squared)
+          var(--eds-spacing-inset-md-horizontal);
+        font-family: var(--eds-typography-ui-body-font-family);
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-neutral-strong);
+      }
+      .toggles {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-block-end: var(--eds-spacing-vertical-md);
+        font-family: var(--eds-typography-code-font-family);
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+      }
+      .readout {
+        margin-inline-start: auto;
+        color: var(--eds-color-text-neutral-subtle);
+      }
+      .readout b {
+        color: var(--eds-color-text-accent-strong);
+      }
+      section {
+        margin-block-end: var(--eds-spacing-vertical-lg);
+      }
+      h2 {
+        margin: 0 0 var(--eds-spacing-vertical-2xs);
+        font: var(--eds-font-weight-normal)
+          var(--eds-typography-ui-body-sm-font-size) /
+          var(--eds-typography-ui-body-sm-line-height-compressed)
+          var(--eds-typography-ui-body-font-family);
+        color: var(--eds-color-text-neutral-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .caption {
+        margin: 0 0 var(--eds-spacing-vertical-sm);
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        line-height: var(--eds-typography-ui-body-sm-line-height-default);
+        color: var(--eds-color-text-neutral-subtle);
+        max-inline-size: 64ch;
+      }
+      /* a TABLE, not a grid: cells shrink-wrap, so buttons keep their own
+       * shape (a grid track would stretch the ghost-icon circle into a
+       * pill — Victor's catch) */
+      .perm {
+        border-collapse: collapse;
+      }
+      .perm :is(th, td) {
+        padding: calc(var(--eds-spacing-vertical-sm) / 2)
+          calc(var(--eds-spacing-horizontal-md) / 2);
+        text-align: start;
+      }
+      .perm th {
+        font-size: var(--eds-typography-ui-body-sm-font-size);
+        font-weight: var(--eds-font-weight-normal);
+        color: var(--eds-color-text-neutral-subtle);
+        white-space: nowrap;
+      }
+      .row {
+        display: flex;
+        gap: var(--eds-spacing-horizontal-md);
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .sr-only {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 3 of 3: the contract.</strong> Every button below is the emitted component, generated from button.contract.json and parity-verified against the generated Figma set by 1,800+ checks. <strong>Zero guesses</strong>: the first two attempts guess better and better; the contract does not guess at all.</span></aside>
+
+    <main>
+    <h1 class="sr-only">Attempt 3: the contract</h1>
+    <div class="toggles">
+      <button onclick="document.documentElement.dataset.density = 'compact'">compact</button>
+      <button onclick="document.documentElement.dataset.density = 'comfortable'">comfortable</button>
+      <button onclick="document.documentElement.dataset.density = 'relaxed'">relaxed</button>
+      <button onclick="document.documentElement.dataset.colorScheme = document.documentElement.dataset.colorScheme === 'light' ? 'dark' : 'light'">scheme</button>
+      <span class="readout">height, read back live: <b id="h">–</b> (nobody typed it)</span>
+    </div>
+
+    <section>
+      <h2>Every tone, every variant, every state</h2>
+      <p class="caption">The hover and active columns use the component's own convention against itself: states override the channel variable, never the property, so each cell sets the same <code>--_bg</code> the pseudo-class rules set. Hover any rest cell for the real thing; tab through for the focus ring (the ring is the platform's, and this demo refuses to fake it). Disabled is the real attribute.</p>
+      <table class="perm" id="perm"></table>
+    </section>
+
+    <section>
+      <h2>Icons seat on the cap cell</h2>
+      <p class="caption">The glyph's footprint is the label's cap box; the ink overflows it like ascenders and descenders (margin = (cap − glyph) / 2, negative by construction). No wrapper: the svg is its own cell.</p>
+      <div class="row">
+        <button class="eds-button"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"/></svg>Add well</button>
+        <button class="eds-button" data-variant="secondary"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>Search</button>
+        <button class="eds-button" data-variant="ghost">Favourites<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.9-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.1-8.5 9-8.5 9Z"/></svg></button>
+        <button class="eds-button" data-tone="danger"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12ZM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4Z"/></svg>Delete well</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Two sizes, one law</h2>
+      <p class="caption">Default lands 24/36/44 across densities, small lands 20/24/36: the same formula (inset × 2 + cap), two rungs. Flip the density toggle and watch the readout.</p>
+      <div class="row">
+        <button class="eds-button">Default</button>
+        <button class="eds-button" data-size="small">Small</button>
+        <button class="eds-button" data-size="small" data-variant="secondary">Small secondary</button>
+        <button class="eds-button" data-size="small" data-variant="ghost-icon" aria-label="Add"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"/></svg></button>
+      </div>
+    </section>
+    </main>
+
+
+    <script>
+      // the permutation table: 3 tones x 4 variants x 4 columns, every
+      // button the emitted component, state cells re-pointing --_bg to the
+      // exact token the pseudo-class rules bind
+      const PLUS = 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z'
+      const TONES = ['accent', 'neutral', 'danger']
+      const VARIANTS = ['primary', 'secondary', 'ghost', 'ghost-icon']
+      const STATES = ['rest', 'hover', 'active', 'disabled']
+      const mk = (tone, variant, state) => {
+        const btn = document.createElement('button')
+        btn.className = 'eds-button'
+        btn.type = 'button'
+        if (tone !== 'accent') btn.dataset.tone = tone
+        if (variant !== 'primary') btn.dataset.variant = variant
+        if (variant === 'ghost-icon') {
+          btn.setAttribute('aria-label', 'Add')
+          btn.innerHTML = `<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${PLUS}"/></svg>`
+        } else {
+          btn.textContent = tone === 'danger' ? 'Delete' : 'Click me!'
+        }
+        if (state === 'disabled') btn.disabled = true
+        if (state === 'hover' || state === 'active') {
+          const tier = variant === 'primary' ? 'emphasis' : 'ghost'
+          btn.style.setProperty('--_bg', `var(--eds-color-bg-${tone}-fill-${tier}-${state})`)
+        }
+        return btn
+      }
+      const table = document.getElementById('perm')
+      table.innerHTML = `<thead><tr><th><span class="sr-only">tone and variant</span></th>${STATES.map((st) => `<th>${st}</th>`).join('')}</tr></thead>`
+      const tbody = document.createElement('tbody')
+      for (const tone of TONES)
+        for (const variant of VARIANTS) {
+          const tr = document.createElement('tr')
+          const th = document.createElement('th')
+          th.textContent = `${tone} ${variant}`
+          tr.appendChild(th)
+          for (const st of STATES) {
+            const td = document.createElement('td')
+            td.appendChild(mk(tone, variant, st))
+            tr.appendChild(td)
+          }
+          tbody.appendChild(tr)
+        }
+      table.appendChild(tbody)
+      const first = table.querySelector('.eds-button')
+      first.id = 'measure-me'
+
+      // never author a height: read it back (the attempt-2 agent's idea,
+      // honoured here against the real component)
+      const h = document.getElementById('h')
+      const target = document.getElementById('measure-me')
+      const update = () => { h.textContent = target.getBoundingClientRect().height + 'px' }
+      new ResizeObserver(update).observe(target)
+      update()
+    </script>
+  </body>
+</html>

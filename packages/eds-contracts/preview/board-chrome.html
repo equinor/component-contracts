@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>Review board — chrome ensemble</title>
+    <link
+      rel="stylesheet"
+      href="../../eds-tokens/build/css/index.css"
+    />
+    <link rel="stylesheet" href="../build/button.css" />
+    <link rel="stylesheet" href="../build/banner.css" />
+    <link rel="stylesheet" href="../build/menu.css" />
+    <link rel="stylesheet" href="../build/menu-item.css" />
+    <link rel="stylesheet" href="../build/top-bar.css" />
+    <link rel="stylesheet" href="../build/side-bar.css" />
+    <style>
+      /* board chrome only — not part of the system */
+      body {
+        margin: 0;
+        font-family: Inter, sans-serif;
+      }
+      .pane {
+        flex: 1;
+        padding: 24px;
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-strong);
+      }
+      .pane > section {
+        margin-block-end: 24px;
+      }
+      h2 {
+        margin: 0 0 8px;
+        font:
+          500 11px/1.5 Inter,
+          sans-serif;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      svg.eds-icon {
+        display: inline-block;
+      }
+      .banners {
+        display: grid;
+        gap: 12px;
+        max-width: 520px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pane">
+      <section>
+        <h2>Banner</h2>
+      <div class="banners" style="display: grid; gap: 0.75rem; max-width: 560px">
+        <!-- icon and dismiss are EMITTER-OWNED masks; the message is a <p> (the trim's block container) -->
+        <div class="eds-banner" role="status">
+          <span class="eds-icon"></span>
+          <p>Something happened that you should know about.</p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="eds-icon"></span></button>
+        </div>
+        <div class="eds-banner" data-tone="warning" role="status">
+          <span class="eds-icon"></span>
+          <p>
+            Certification expires in 14 days. This message is meant to be read,
+            not scanned — wrap it to two lines and the reading line-height earns
+            its keep.
+          </p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="eds-icon"></span></button>
+        </div>
+        <div class="eds-banner" data-tone="danger" role="status">
+          <span class="eds-icon"></span>
+          <p>The connection was lost.</p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="eds-icon"></span></button>
+        </div>
+        <!-- icon toggled off: omit the span -->
+        <div class="eds-banner" data-tone="success" role="status">
+          <p>All checks passed.</p>
+        </div>
+      </div>
+      </section>
+
+      <section>
+        <h2>Top bar + side bar</h2>
+        <header class="eds-top-bar" role="banner" style="width: 100%; max-width: 520px">
+          Application name
+          <span style="margin-inline-start: auto; display: inline-flex; gap: inherit">
+            <button class="eds-button" data-variant="ghost-icon" aria-label="Add">
+              <svg class="eds-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" />
+              </svg>
+            </button>
+            <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Account">
+              <svg class="eds-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 3a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm0 14.2a8 8 0 0 1-5.5-2.2c.02-1.99 3.67-3.08 5.5-3.08 1.83 0 5.48 1.09 5.5 3.08a8 8 0 0 1-5.5 2.2Z" />
+              </svg>
+            </button>
+          </span>
+        </header>
+        <nav class="eds-side-bar" style="width: 200px; margin-block-start: 12px">
+          <button class="eds-menu-item" role="menuitem" style="align-self: stretch">Overview</button>
+          <button class="eds-menu-item" role="menuitem" aria-selected="true" style="align-self: stretch">Wells</button>
+          <button class="eds-menu-item" role="menuitem" style="align-self: stretch">Reports</button>
+          <button class="eds-menu-item" role="menuitem" style="align-self: stretch">Settings</button>
+        </nav>
+      </section>
+
+      <section>
+        <h2>Menu</h2>
+        <div class="eds-menu" role="menu" style="max-width: 240px">
+          <button class="eds-menu-item" role="menuitem" style="align-self: stretch">
+            <svg class="eds-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" />
+            </svg>
+            Menu item
+          </button>
+          <button class="eds-menu-item" role="menuitem" aria-selected="true" style="align-self: stretch">Second item (selected)</button>
+          <button class="eds-menu-item" role="menuitem" style="align-self: stretch">Third item</button>
+          <button class="eds-menu-item" role="menuitem" disabled style="align-self: stretch">Disabled item</button>
+        </div>
+      </section>
+    </div>
+    <script>
+      // board chrome only: pick scheme from the URL hash (#dark)
+      const scheme = location.hash.slice(1);
+      if (scheme) document.documentElement.dataset.colorScheme = scheme;
+    </script>
+  </body>
+</html>

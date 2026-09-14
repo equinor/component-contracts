@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light" data-density="comfortable">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDS — Button (derived build)</title>
+<!--
+  EDS Button — a single self-contained file, built ONLY from
+  /tmp/eds-attempt-2/DESIGN.md and /tmp/eds-attempt-2/skills/*.
+
+  ============================== GUESSED ==============================
+  Nothing below is stated in DESIGN.md or computed by a skill script.
+  Every one is a professional placeholder an implementer would need to
+  replace with the real token once eds-tokens-reworked ships it.
+
+  1. Tone "neutral"'s emphasis (filled) colour has no token in the
+     digest, so it borrows the inverse plate: bg = colors.inverse,
+     ink = colors.on-inverse (a dark/near-black filled button).
+  2. "on-danger" ink has no token either; reused colors.on-primary
+     (white) — plausible against #bb002b / #ffaaa8 but unverified.
+  3. text-{tone}-strong (the ghost/muted ink) is not in the digest as
+     a distinct step. Reused the tone's own emphasis-fill hex as its
+     "strong" ink (accent -> primary, danger -> danger, neutral ->
+     text). The real palette almost certainly has a separate, better-
+     tuned "strong" step per family.
+  4. icon-{tone} (the SUBTLE ink step) is not in the digest for the
+     accent/danger families. Approximated as text-{tone}-strong at
+     78% opacity. icon-neutral did NOT need a guess — it reuses
+     colors.text-subtle directly (see DERIVED).
+  5. Disabled ink (text + icon on the disabled emphasis plate) has no
+     dedicated hex in the digest — only one "disabled" fill token
+     exists. Reused colors.text-subtle as the disabled ink.
+  6. Muted (secondary) fill/border washes: no literal step given, so
+     rest/hover/active are guessed as the tone colour at 12%/20%/26%
+     opacity over surface, with a 30%-opacity tone border.
+  7. Ghost hover/active washes: guessed as the tone colour at 10%/18%
+     opacity (no literal ghost-hover/-active hex in the digest).
+  8. Emphasis hover/active: guessed as the resting fill darkened via
+     brightness(0.92) / brightness(0.85). No literal step given, and
+     the same multiplier was used in both colour schemes for honesty
+     about not having a real answer, even though dark-mode elevation
+     elsewhere in the system lightens rather than darkens.
+  9. The icon glyph itself (a generic "plus" glyph) and its footprint
+     size (cap-height + 4px, i.e. 12px or 16px here) are both guessed;
+     DESIGN.md specifies the OVERFLOW MECHANISM (margin = (cap -
+     glyph)/2) but not a concrete glyph or its size.
+  10. Button label font-weight: 500. Not specified anywhere in scope;
+      typography-weight-matching does not apply here (it matches a
+      SECOND paired family against Inter, and EDS's button is single-
+      family Inter-only), so this is a plain guess.
+  11. Secondary/ghost text variants use rounded.md (4px), the same
+      radius as button-primary. DESIGN.md states 4px explicitly only
+      for button-primary; assumed shared for the rest of the text
+      variants (Shapes section implies md is the default everywhere
+      pill isn't earned).
+
+  ============================== DERIVED ==============================
+  Computed by running the skills' scripts, or read verbatim from a
+  source and cross-checked against a script/fixture — not guessed.
+
+  - Control geometry for BOTH button sizes, all three densities, via
+    skills/spacing-ladder/scripts/spacing.py:
+      size=md (default): `control --size md --proportion squished --label md --density {compact,comfortable,relaxed}`
+        -> height 24 / 36 / 44 px  (MATCHES DESIGN.md's own eds.button
+           height row exactly — used as the cross-check)
+      size=sm (second size axis value): `control --size sm --proportion squished --label sm --density {compact,comfortable,relaxed}`
+        -> height 20 / 24 / 36 px
+      `spacing.py check` confirms "button 24/36/44" against the fixture.
+    Every padding/height/icon-gap/cap-height number in the CSS below
+    (font-size, line-height, padding-block, padding-inline, min-height,
+    icon-gap, cap-height, glyph footprint driven off cap-height) is one
+    of that script's fields, not typed by hand.
+  - CONFLICT, resolved per the rule "follow the skill, note it": the
+    DESIGN.md front-matter only lists a "body" line-height of 1.429 —
+    the READ curve. spacing-ladder's SKILL.md states controls use the
+    COMPRESSED curve instead, and only the compressed line-height
+    (16px at comfortable/md, not 1.429 x 14 = 20.03px) reproduces the
+    padding-block the skill's own worked example gives (10px) and the
+    36px height DESIGN.md's layout table lists. Followed the skill;
+    DESIGN.md's digest simply doesn't surface the compressed value.
+  - Border radius: rounded.md = 4px (text variants), rounded.pill =
+    1000px (the ghost-icon circle) — quoted directly from DESIGN.md's
+    `rounded` table and confirmed by the Shapes section ("the round
+    ghost-icon button, where the circle falls out of the geometry").
+  - Accent/primary colours (bg #206f77/#8cd2da, on-primary
+    #ffffff/#030303) — quoted verbatim from DESIGN.md
+    `components.button-primary` + `colors`.
+  - Danger and focus colour pairs — quoted verbatim from DESIGN.md
+    `colors` (danger/danger-dark, focus/focus-dark).
+  - icon-neutral = colors.text-subtle (#585858/#d6e3ee) — the ONE
+    icon-ink value the digest actually states outright, per the
+    colour table's "icon-* ... the SUBTLE step" row.
+  - Ink-follows-tier rule (emphasis flips both text+icon to the
+    on-emphasis ink; muted/ghost keep text-strong + icon-subtle) —
+    quoted from colour-fill-tiers/SKILL.md section 2, matched against
+    DESIGN.md's colour usage table.
+  - Disabled asymmetry: ONLY the primary (emphasis) variant gets a
+    disabled visual change (grey plate, disabled ink); secondary,
+    ghost and ghost-icon render IDENTICALLY at rest and disabled,
+    because "the gated tokens change nothing... the contract refuses
+    to invent a binding it does not have" — quoted verbatim from
+    DESIGN.md's disposition ledger for exactly these three variants.
+  - Focus state = native `:focus-visible`, ring colour = border-focus/
+    border-focus-dark, replacing rather than adding a border — quoted
+    from DESIGN.md's colour table + disposition ledger + its Do/Don't
+    CSS sample.
+  - Font stack names Inter first, no network fetch, system-ui
+    fallback — quoted from DESIGN.md `typography.body.fontFamily`.
+  - Ghost is the default interactive tier and gains exactly one step
+    on hover, one more on active (never a filled look at rest) —
+    quoted from colour-fill-tiers/SKILL.md.
+  - Energy Red is never bound to the primary/accent tone — quoted
+    from colour-fill-tiers/SKILL.md section 4 ("Energy Red" rule);
+    the danger tone exists as an explicit opt-in only.
+-->
+<style>
+  :root {
+    color-scheme: light;
+
+    /* ---- semantic colours, quoted from DESIGN.md `colors` (light) ---- */
+    --eds-color-primary: #206f77;
+    --eds-color-on-primary: #ffffff;
+    --eds-color-canvas: #f5f5f5;
+    --eds-color-surface: #ffffff;
+    --eds-color-floating: #ffffff;
+    --eds-color-inverse: #1d1d1d;
+    --eds-color-on-inverse: #ffffff;
+    --eds-color-text: #1d1d1d;
+    --eds-color-text-subtle: #585858;
+    --eds-color-danger: #bb002b;
+    --eds-color-focus: #6fb6e8;
+    --eds-color-disabled: #e1e1e1;
+
+    /* ---- GUESSED tone/ink steps not present in the digest ---- */
+    --eds-color-on-danger: var(--eds-color-on-primary);
+    --eds-color-on-neutral: var(--eds-color-on-inverse);
+    --eds-color-text-accent-strong: var(--eds-color-primary);
+    --eds-color-text-neutral-strong: var(--eds-color-text);
+    --eds-color-text-danger-strong: var(--eds-color-danger);
+    --eds-color-icon-accent: color-mix(in srgb, var(--eds-color-primary) 78%, transparent);
+    --eds-color-icon-neutral: var(--eds-color-text-subtle); /* DERIVED, not guessed */
+    --eds-color-icon-danger: color-mix(in srgb, var(--eds-color-danger) 78%, transparent);
+    --eds-color-disabled-ink: var(--eds-color-text-subtle);
+
+    /* ---- shapes, quoted from DESIGN.md `rounded` ---- */
+    --eds-radius-md: 4px;
+    --eds-radius-pill: 1000px;
+
+    /* ================= density = comfortable (default) =================
+       DERIVED via spacing.py control --size {sm|md} --proportion squished
+       --label {sm|md} --density comfortable                              */
+    --_font-sm: 12px;   --_lh-sm: 12px;  --_cap-sm: 8px;
+    --_inset-h-sm: 12px; --_inset-v-sm: 8px;
+    --_pad-v-sm: 6px;   --_pad-h-sm: 12px; --_height-sm: 24px;
+    --_icon-gap-sm: 8px; --_glyph-sm: 12px; /* guess: cap(8) + 4 */
+
+    --_font-md: 14px;   --_lh-md: 16px;  --_cap-md: 12px;
+    --_inset-h-md: 16px; --_inset-v-md: 12px;
+    --_pad-v-md: 10px;  --_pad-h-md: 16px; --_height-md: 36px;
+    --_icon-gap-md: 8px; --_glyph-md: 16px; /* guess: cap(12) + 4 */
+  }
+
+  [data-color-scheme="dark"] {
+    color-scheme: dark;
+    --eds-color-primary: #8cd2da;
+    --eds-color-on-primary: #030303;
+    --eds-color-canvas: #060c13;
+    --eds-color-surface: #152332;
+    --eds-color-floating: #4b5d71;
+    --eds-color-inverse: #f9fcff;
+    --eds-color-on-inverse: #030303;
+    --eds-color-text: #f9fcff;
+    --eds-color-text-subtle: #d6e3ee;
+    --eds-color-danger: #ffaaa8;
+    --eds-color-focus: #2d8bc5;
+    --eds-color-disabled: #4b5d71;
+  }
+
+  /* ================= density = compact =================
+     DERIVED via spacing.py control ... --density compact   */
+  [data-density="compact"] {
+    --_font-sm: 10.5px; --_lh-sm: 12px; --_cap-sm: 8px;
+    --_inset-h-sm: 8px; --_inset-v-sm: 6px;
+    --_pad-v-sm: 4px;  --_pad-h-sm: 8px; --_height-sm: 20px;
+    --_icon-gap-sm: 6px; --_glyph-sm: 12px;
+
+    --_font-md: 12px;  --_lh-md: 12px; --_cap-md: 8px;
+    --_inset-h-md: 12px; --_inset-v-md: 8px;
+    --_pad-v-md: 6px; --_pad-h-md: 12px; --_height-md: 24px;
+    --_icon-gap-md: 8px; --_glyph-md: 12px;
+  }
+
+  /* ================= density = relaxed =================
+     DERIVED via spacing.py control ... --density relaxed   */
+  [data-density="relaxed"] {
+    --_font-sm: 14px; --_lh-sm: 16px; --_cap-sm: 12px;
+    --_inset-h-sm: 16px; --_inset-v-sm: 12px;
+    --_pad-v-sm: 10px; --_pad-h-sm: 16px; --_height-sm: 36px;
+    --_icon-gap-sm: 8px; --_glyph-sm: 16px;
+
+    --_font-md: 16px; --_lh-md: 20px; --_cap-md: 12px;
+    --_inset-h-md: 20px; --_inset-v-md: 16px;
+    --_pad-v-md: 12px; --_pad-h-md: 20px; --_height-md: 44px;
+    --_icon-gap-md: 10px; --_glyph-md: 16px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--eds-color-canvas);
+    color: var(--eds-color-text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 24px;
+  }
+
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 15px; margin: 32px 0 4px; border-bottom: 1px solid var(--eds-color-disabled); padding-bottom: 6px; }
+  p.lede { color: var(--eds-color-text-subtle); font-size: 13px; margin: 0 0 16px; max-width: 62ch; }
+  .note { color: var(--eds-color-text-subtle); font-size: 12px; margin: 4px 0 0; }
+  code { background: var(--eds-color-surface); border: 1px solid var(--eds-color-disabled); border-radius: 3px; padding: 0 3px; }
+
+  /* ---------------------------- toggle bar ---------------------------- */
+  .toolbar {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    background: var(--eds-color-surface);
+    border: 1px solid var(--eds-color-disabled);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    position: sticky; top: 8px; z-index: 10;
+  }
+  .toolbar fieldset { border: none; margin: 0; padding: 0; display: flex; gap: 6px; align-items: center; }
+  .toolbar legend { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--eds-color-text-subtle); padding: 0 6px 0 0; float: left; }
+  .toolbar label { font-size: 13px; display: flex; gap: 4px; align-items: center; cursor: pointer; }
+
+  /* ------------------------------ grid --------------------------------- */
+  .tone-block { background: var(--eds-color-surface); border: 1px solid var(--eds-color-disabled); border-radius: 4px; padding: 16px; margin-bottom: 16px; overflow-x: auto; }
+  table.grid { border-collapse: collapse; width: 100%; }
+  table.grid th, table.grid td { text-align: left; vertical-align: middle; padding: 10px 14px; }
+  table.grid thead th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--eds-color-text-subtle); border-bottom: 1px solid var(--eds-color-disabled); }
+  table.grid tbody th { font-size: 12px; color: var(--eds-color-text-subtle); white-space: nowrap; font-weight: 500; }
+  table.grid tbody tr + tr th, table.grid tbody tr + tr td { border-top: 1px solid color-mix(in srgb, var(--eds-color-disabled) 60%, transparent); }
+  td.disabled-note { font-size: 11px; color: var(--eds-color-text-subtle); max-width: 120px; }
+
+  .size-row { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+  .size-row figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .size-row figcaption { font-size: 11px; color: var(--eds-color-text-subtle); }
+
+  /* =============================================================
+     THE COMPONENT
+     ============================================================= */
+  .eds-button {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: var(--eds-radius-md);
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-weight: 500; /* GUESSED, see header */
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .12s ease, color .12s ease, border-color .12s ease, filter .12s ease;
+  }
+
+  /* ---- size axis: default = md, [data-size="sm"] = second value ---- */
+  .eds-button,
+  .eds-button[data-size="md"] {
+    --_font: var(--_font-md); --_lh: var(--_lh-md); --_cap: var(--_cap-md);
+    --_inset-v: var(--_inset-v-md);
+    --_pad-v: var(--_pad-v-md); --_pad-h: var(--_pad-h-md);
+    --_height: var(--_height-md); --_gap: var(--_icon-gap-md); --_glyph: var(--_glyph-md);
+  }
+  .eds-button[data-size="sm"] {
+    --_font: var(--_font-sm); --_lh: var(--_lh-sm); --_cap: var(--_cap-sm);
+    --_inset-v: var(--_inset-v-sm);
+    --_pad-v: var(--_pad-v-sm); --_pad-h: var(--_pad-h-sm);
+    --_height: var(--_height-sm); --_gap: var(--_icon-gap-sm); --_glyph: var(--_glyph-sm);
+  }
+  .eds-button {
+    font-size: var(--_font);
+    line-height: var(--_lh);
+    min-height: var(--_height); /* emergent: inset x 2 + cap, never authored */
+    padding-block: var(--_pad-v);
+    padding-inline: var(--_pad-h);
+    gap: var(--_gap);
+  }
+
+  /* ---- tone axis: default = accent, then neutral / danger ---- */
+  .eds-button,
+  .eds-button[data-tone="accent"] {
+    --_tone-fill: var(--eds-color-primary);
+    --_tone-on: var(--eds-color-on-primary);
+    --_tone-strong: var(--eds-color-text-accent-strong);
+    --_tone-icon: var(--eds-color-icon-accent);
+  }
+  .eds-button[data-tone="neutral"] {
+    --_tone-fill: var(--eds-color-inverse);
+    --_tone-on: var(--eds-color-on-neutral);
+    --_tone-strong: var(--eds-color-text-neutral-strong);
+    --_tone-icon: var(--eds-color-icon-neutral);
+  }
+  .eds-button[data-tone="danger"] {
+    --_tone-fill: var(--eds-color-danger);
+    --_tone-on: var(--eds-color-on-danger);
+    --_tone-strong: var(--eds-color-text-danger-strong);
+    --_tone-icon: var(--eds-color-icon-danger);
+  }
+
+  /* ---- variant axis: default = primary (emphasis tier) ---- */
+  .eds-button,
+  .eds-button[data-variant="primary"] {
+    --_bg: var(--_tone-fill);
+    --_ink: var(--_tone-on);
+    --_icon-color: var(--_tone-on);
+    border-color: transparent;
+  }
+  .eds-button[data-variant="secondary"] {
+    --_bg: color-mix(in srgb, var(--_tone-fill) 12%, var(--eds-color-surface));
+    --_ink: var(--_tone-strong);
+    --_icon-color: var(--_tone-icon);
+    border-color: color-mix(in srgb, var(--_tone-fill) 30%, transparent);
+  }
+  .eds-button[data-variant="ghost"] {
+    --_bg: transparent;
+    --_ink: var(--_tone-strong);
+    --_icon-color: var(--_tone-icon);
+    border-color: transparent;
+  }
+  .eds-button[data-variant="ghost-icon"] {
+    --_bg: transparent;
+    --_ink: var(--_tone-strong);
+    --_icon-color: var(--_tone-icon);
+    border-color: transparent;
+    border-radius: var(--eds-radius-pill); /* earned: circle falls out of the geometry */
+    width: var(--_height);
+    min-width: var(--_height);
+    padding: var(--_inset-v);
+    gap: 0;
+  }
+
+  .eds-button {
+    background-color: var(--_bg);
+    color: var(--_ink);
+  }
+
+  /* ---- states: platform-driven (:hover/:active/:focus-visible/:disabled)
+     paired 1:1 with [data-preview-state] so every state can be shown at
+     once in the grid below without faking a real interaction model. The
+     preview attribute is a DEMO-ONLY authoring aid — nothing a real
+     consumer would ship; :disabled is the one real platform attribute
+     used even in the preview, since it IS the platform mechanism.       */
+
+  /* emphasis (primary): hover/active darken the fill — GUESSED amounts */
+  .eds-button[data-variant="primary"]:not(:disabled):hover,
+  .eds-button:not([data-variant]):not(:disabled):hover,
+  .eds-button[data-variant="primary"][data-preview-state="hover"],
+  .eds-button:not([data-variant])[data-preview-state="hover"] {
+    filter: brightness(0.92);
+  }
+  .eds-button[data-variant="primary"]:not(:disabled):active,
+  .eds-button:not([data-variant]):not(:disabled):active,
+  .eds-button[data-variant="primary"][data-preview-state="active"],
+  .eds-button:not([data-variant])[data-preview-state="active"] {
+    filter: brightness(0.85);
+  }
+
+  /* muted (secondary): ghost-ladder-style wash steps up — GUESSED alphas */
+  .eds-button[data-variant="secondary"]:not(:disabled):hover,
+  .eds-button[data-variant="secondary"][data-preview-state="hover"] {
+    --_bg: color-mix(in srgb, var(--_tone-fill) 20%, var(--eds-color-surface));
+  }
+  .eds-button[data-variant="secondary"]:not(:disabled):active,
+  .eds-button[data-variant="secondary"][data-preview-state="active"] {
+    --_bg: color-mix(in srgb, var(--_tone-fill) 26%, var(--eds-color-surface));
+  }
+
+  /* ghost / ghost-icon: transparent -> step3 (hover) -> step4 (active) — GUESSED alphas */
+  .eds-button[data-variant="ghost"]:not(:disabled):hover,
+  .eds-button[data-variant="ghost-icon"]:not(:disabled):hover,
+  .eds-button[data-variant="ghost"][data-preview-state="hover"],
+  .eds-button[data-variant="ghost-icon"][data-preview-state="hover"] {
+    --_bg: color-mix(in srgb, var(--_tone-fill) 10%, transparent);
+  }
+  .eds-button[data-variant="ghost"]:not(:disabled):active,
+  .eds-button[data-variant="ghost-icon"]:not(:disabled):active,
+  .eds-button[data-variant="ghost"][data-preview-state="active"],
+  .eds-button[data-variant="ghost-icon"][data-preview-state="active"] {
+    --_bg: color-mix(in srgb, var(--_tone-fill) 18%, transparent);
+  }
+
+  /* focus: the platform's ring, border-focus token, replaces the border */
+  .eds-button:focus-visible,
+  .eds-button[data-preview-state="focus"] {
+    outline: 2px solid var(--eds-color-focus);
+    outline-offset: 2px;
+  }
+
+  /* disabled — primary/emphasis is the ONLY variant with a real binding */
+  .eds-button:not([data-variant]):disabled,
+  .eds-button[data-variant="primary"]:disabled {
+    --_bg: var(--eds-color-disabled);
+    --_ink: var(--eds-color-disabled-ink);
+    --_icon-color: var(--eds-color-disabled-ink);
+    cursor: not-allowed;
+    filter: none;
+  }
+  /* secondary/ghost/ghost-icon disabled: DESIGN.md's ledger says the gated
+     tokens change nothing for these variants — so nothing changes here
+     beyond removing interactivity. This is not a bug in this file. */
+  .eds-button[data-variant="secondary"]:disabled,
+  .eds-button[data-variant="ghost"]:disabled,
+  .eds-button[data-variant="ghost-icon"]:disabled {
+    cursor: not-allowed;
+  }
+
+  .eds-icon {
+    display: inline-flex;
+    color: var(--_icon-color);
+    width: var(--_glyph);
+    height: var(--_glyph);
+    margin: calc((var(--_cap) - var(--_glyph)) / 2); /* negative by construction */
+    flex: none;
+  }
+  .eds-icon svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+</style>
+</head>
+<body>
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 2, thin-doc variant.</strong> The five skills with the thin document: <strong>11 confessed guesses</strong>. The skills recover the geometry; the document still owes the intent.</span></aside>
+
+
+<h1>EDS — Button</h1>
+<p class="lede">
+  Generated from <code>DESIGN.md</code> + the five skills only. Heights, paddings,
+  icon gaps and the button's second size step are computed, not typed — see the
+  DERIVED/GUESSED comment at the top of this file's source for the full ledger.
+  Toggle colour scheme and density; nothing below is a hard-coded pixel per mode.
+</p>
+
+<div class="toolbar">
+  <fieldset>
+    <legend>Colour scheme</legend>
+    <label><input type="radio" name="scheme" value="light" checked> light</label>
+    <label><input type="radio" name="scheme" value="dark"> dark</label>
+  </fieldset>
+  <fieldset>
+    <legend>Density</legend>
+    <label><input type="radio" name="density" value="compact"> compact</label>
+    <label><input type="radio" name="density" value="comfortable" checked> comfortable</label>
+    <label><input type="radio" name="density" value="relaxed"> relaxed</label>
+  </fieldset>
+</div>
+
+<!-- ============================ TONE x VARIANT x STATE ============================ -->
+
+<h2>Accent tone (default) — size md, all variants x states</h2>
+<div class="tone-block">
+<table class="grid">
+<thead><tr><th>variant</th><th>rest</th><th>hover</th><th>active</th><th>focus</th><th>disabled</th></tr></thead>
+<tbody>
+  <tr>
+    <th>primary</th>
+    <td><button class="eds-button">Save</button></td>
+    <td><button class="eds-button" data-preview-state="hover">Save</button></td>
+    <td><button class="eds-button" data-preview-state="active">Save</button></td>
+    <td><button class="eds-button" data-preview-state="focus">Save</button></td>
+    <td><button class="eds-button" disabled>Save</button></td>
+  </tr>
+  <tr>
+    <th>secondary</th>
+    <td><button class="eds-button" data-variant="secondary">Save</button></td>
+    <td><button class="eds-button" data-variant="secondary" data-preview-state="hover">Save</button></td>
+    <td><button class="eds-button" data-variant="secondary" data-preview-state="active">Save</button></td>
+    <td><button class="eds-button" data-variant="secondary" data-preview-state="focus">Save</button></td>
+    <td>
+      <button class="eds-button" data-variant="secondary" disabled>Save</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost</th>
+    <td><button class="eds-button" data-variant="ghost">Cancel</button></td>
+    <td><button class="eds-button" data-variant="ghost" data-preview-state="hover">Cancel</button></td>
+    <td><button class="eds-button" data-variant="ghost" data-preview-state="active">Cancel</button></td>
+    <td><button class="eds-button" data-variant="ghost" data-preview-state="focus">Cancel</button></td>
+    <td>
+      <button class="eds-button" data-variant="ghost" disabled>Cancel</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost-icon</th>
+    <td><button class="eds-button" data-variant="ghost-icon" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-variant="ghost-icon" data-preview-state="hover" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-variant="ghost-icon" data-preview-state="active" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-variant="ghost-icon" data-preview-state="focus" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td>
+      <button class="eds-button" data-variant="ghost-icon" disabled aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<h2>Neutral tone — size md, all variants x states</h2>
+<div class="tone-block">
+<table class="grid">
+<thead><tr><th>variant</th><th>rest</th><th>hover</th><th>active</th><th>focus</th><th>disabled</th></tr></thead>
+<tbody>
+  <tr>
+    <th>primary</th>
+    <td><button class="eds-button" data-tone="neutral">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-preview-state="hover">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-preview-state="active">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-preview-state="focus">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" disabled>Archive</button></td>
+  </tr>
+  <tr>
+    <th>secondary</th>
+    <td><button class="eds-button" data-tone="neutral" data-variant="secondary">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-preview-state="hover">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-preview-state="active">Archive</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="secondary" data-preview-state="focus">Archive</button></td>
+    <td>
+      <button class="eds-button" data-tone="neutral" data-variant="secondary" disabled>Archive</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost</th>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost">Close</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-preview-state="hover">Close</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-preview-state="active">Close</button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost" data-preview-state="focus">Close</button></td>
+    <td>
+      <button class="eds-button" data-tone="neutral" data-variant="ghost" disabled>Close</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost-icon</th>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="More"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-preview-state="hover" aria-label="More"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-preview-state="active" aria-label="More"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-preview-state="focus" aria-label="More"><span class="eds-icon">PLUS_SVG</span></button></td>
+    <td>
+      <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" disabled aria-label="More"><span class="eds-icon">PLUS_SVG</span></button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<h2>Danger tone — size md, all variants x states</h2>
+<div class="tone-block">
+<table class="grid">
+<thead><tr><th>variant</th><th>rest</th><th>hover</th><th>active</th><th>focus</th><th>disabled</th></tr></thead>
+<tbody>
+  <tr>
+    <th>primary</th>
+    <td><button class="eds-button" data-tone="danger">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-preview-state="hover">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-preview-state="active">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-preview-state="focus">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" disabled>Delete</button></td>
+  </tr>
+  <tr>
+    <th>secondary</th>
+    <td><button class="eds-button" data-tone="danger" data-variant="secondary">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="secondary" data-preview-state="hover">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="secondary" data-preview-state="active">Delete</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="secondary" data-preview-state="focus">Delete</button></td>
+    <td>
+      <button class="eds-button" data-tone="danger" data-variant="secondary" disabled>Delete</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost</th>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost">Remove</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost" data-preview-state="hover">Remove</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost" data-preview-state="active">Remove</button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost" data-preview-state="focus">Remove</button></td>
+    <td>
+      <button class="eds-button" data-tone="danger" data-variant="ghost" disabled>Remove</button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+  <tr>
+    <th>ghost-icon</th>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" aria-label="Delete"><span class="eds-icon">TRASH_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-preview-state="hover" aria-label="Delete"><span class="eds-icon">TRASH_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-preview-state="active" aria-label="Delete"><span class="eds-icon">TRASH_SVG</span></button></td>
+    <td><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-preview-state="focus" aria-label="Delete"><span class="eds-icon">TRASH_SVG</span></button></td>
+    <td>
+      <button class="eds-button" data-tone="danger" data-variant="ghost-icon" disabled aria-label="Delete"><span class="eds-icon">TRASH_SVG</span></button>
+      <div class="note" style="margin-top:6px">identical to rest — no binding</div>
+    </td>
+  </tr>
+</tbody>
+</table>
+<p class="note">Note the primary row is never red-by-default anywhere in this file: danger is an explicit <code>data-tone="danger"</code> opt-in, never the accent default — the Energy Red rule from colour-fill-tiers/SKILL.md §4.</p>
+</div>
+
+<!-- ============================ SIZE AXIS ============================ -->
+
+<h2>Size axis (the button's second axis) — rest state, current density</h2>
+<div class="tone-block">
+  <div class="size-row">
+    <figure>
+      <button class="eds-button" data-size="sm">Small</button>
+      <figcaption>data-size="sm"</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-size="md">Medium (default)</button>
+      <figcaption>data-size="md" / no attribute</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-size="sm" data-variant="secondary">Small</button>
+      <figcaption>secondary, sm</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-size="md" data-variant="secondary">Medium</button>
+      <figcaption>secondary, md</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-size="sm" data-variant="ghost-icon" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button>
+      <figcaption>ghost-icon, sm</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-size="md" data-variant="ghost-icon" aria-label="Add"><span class="eds-icon">PLUS_SVG</span></button>
+      <figcaption>ghost-icon, md</figcaption>
+    </figure>
+  </div>
+  <p class="note">Heights are never authored: they emerge from <code>inset x 2 + cap</code> per size and density. At comfortable density: sm = 24px, md = 36px — one density step apart, same recipe. Switch the density toggle above to watch every number here recompute (compact: 20/24, relaxed: 36/44).</p>
+</div>
+
+<!-- ============================ ICON + LABEL ============================ -->
+
+<h2>Leading icon + label (icon-gap and icon ink together)</h2>
+<div class="tone-block">
+  <div class="size-row">
+    <figure>
+      <button class="eds-button"><span class="eds-icon">PLUS_SVG</span>New item</button>
+      <figcaption>primary, icon ink = on-accent (full contrast)</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-variant="secondary"><span class="eds-icon">PLUS_SVG</span>New item</button>
+      <figcaption>secondary, icon ink = icon-accent (subtle)</figcaption>
+    </figure>
+    <figure>
+      <button class="eds-button" data-variant="ghost"><span class="eds-icon">PLUS_SVG</span>New item</button>
+      <figcaption>ghost, icon ink = icon-accent (subtle)</figcaption>
+    </figure>
+  </div>
+  <p class="note">Icon gap is derived from the label, never the ladder: <code>round(fontSize x 0.618, 2px)</code> — 8px here at comfortable/md. The glyph's footprint is the label's cap box; its ink overflows via a negative margin, exactly like an ascender.</p>
+</div>
+
+<p class="note" style="margin-top:24px">
+  Font stack: <code>Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif</code> —
+  Inter named first per <code>DESIGN.md typography.body.fontFamily</code>, no network fetch, system fallback if Inter isn't installed locally.
+</p>
+
+<script>
+  // Inline only — no external assets, no network fetch.
+  var html = document.documentElement;
+  document.querySelectorAll('input[name="scheme"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      html.setAttribute('data-color-scheme', this.value);
+    });
+  });
+  document.querySelectorAll('input[name="density"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      html.setAttribute('data-density', this.value);
+    });
+  });
+
+  // Two tiny inline glyphs (plus / trash), swapped in for the PLUS_SVG /
+  // TRASH_SVG placeholders above so the markup stays readable. GUESSED —
+  // no icon asset is specified anywhere in scope; picked generic glyphs
+  // to demonstrate the ghost-icon variant and the icon+label gap.
+  var PLUS_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v9h9v2h-9v9h-2v-9H2v-2h9V2z"/></svg>';
+  var TRASH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6l1 2h5v2H3V4h5l1-2zm-3 6h12l-1 14H7L6 8zm4 2v10h1V10h-1zm4 0v10h1V10h-1z"/></svg>';
+  document.querySelectorAll('.eds-icon').forEach(function (el) {
+    if (el.textContent.trim() === 'PLUS_SVG') el.innerHTML = PLUS_SVG;
+    if (el.textContent.trim() === 'TRASH_SVG') el.innerHTML = TRASH_SVG;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en" data-density="comfortable" data-color-scheme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>EDS contracts — code preview</title>
+    <link
+      rel="stylesheet"
+      href="../../eds-tokens/build/css/index.css"
+    />
+    <link rel="stylesheet" href="../build/button.css" />
+    <link rel="stylesheet" href="../build/chip.css" />
+    <link rel="stylesheet" href="../build/tab.css" />
+    <link rel="stylesheet" href="../build/card.css" />
+    <link rel="stylesheet" href="../build/divider.css" />
+    <link rel="stylesheet" href="../build/label.css" />
+    <link rel="stylesheet" href="../build/tooltip.css" />
+    <link rel="stylesheet" href="../build/input.css" />
+    <link rel="stylesheet" href="../build/text-field.css" />
+    <link rel="stylesheet" href="../build/checkbox.css" />
+    <link rel="stylesheet" href="../build/radio.css" />
+    <link rel="stylesheet" href="../build/switch.css" />
+    <link rel="stylesheet" href="../build/banner.css" />
+    <link rel="stylesheet" href="../build/menu.css" />
+    <link rel="stylesheet" href="../build/menu-item.css" />
+    <link rel="stylesheet" href="../build/top-bar.css" />
+    <link rel="stylesheet" href="../build/side-bar.css" />
+    <link rel="stylesheet" href="../build/side-bar-item.css" />
+    <link rel="stylesheet" href="../build/side-bar-sub-item.css" />
+    <link rel="stylesheet" href="../build/table.css" />
+    <style>
+      /* preview chrome only — not part of the system */
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: Inter, sans-serif;
+        background: var(--eds-color-bg-canvas);
+        color: var(--eds-color-text-strong);
+        transition: background-color 150ms;
+      }
+      section {
+        margin-block: 2rem;
+      }
+      .row {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .tabs {
+        display: flex;
+        gap: 0;
+      }
+      h2 {
+        font:
+          500 0.875rem/1.5 Inter,
+          sans-serif;
+        opacity: 0.6;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .toggles {
+        display: flex;
+        gap: 0.5rem;
+        position: sticky;
+        top: 0;
+        padding: 0.75rem 0;
+        background: var(--eds-color-bg-canvas);
+      }
+      .toggles button {
+        font: 500 12px/1 Inter;
+        padding: 6px 10px;
+        border: 1px solid var(--eds-color-border-medium);
+        background: var(--eds-color-bg-surface);
+        color: var(--eds-color-text-strong);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      svg.icon {
+        display: inline-block;
+      }
+    
+      /* preview-only interaction dressing: the chevron flips with the
+         accordion; the floating submenu anchors to the Edit item (consumer
+         mechanics per the menu contract — popover + anchor positioning) */
+      .eds-side-bar-item[aria-expanded='true'] .chevron {
+        rotate: 180deg;
+      }
+      /* unlayered demo CSS beats layered component CSS AND the UA's
+         [hidden] — so state the losses explicitly */
+      .submenu {
+        display: flex;
+        flex-direction: column;
+      }
+      .submenu[hidden],
+      .eds-side-bar[data-collapsed='true'] .submenu {
+        display: none;
+      }
+      #edit-submenu-float {
+        position-anchor: --sidebar-edit;
+        position-area: inline-end span-block-end;
+        margin: 0 0 0 4px;
+        border: none;
+        min-inline-size: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toggles">
+      <button onclick="document.documentElement.dataset.density = 'compact'">
+        compact
+      </button>
+      <button
+        onclick="document.documentElement.dataset.density = 'comfortable'"
+      >
+        comfortable
+      </button>
+      <button onclick="document.documentElement.dataset.density = 'relaxed'">
+        relaxed
+      </button>
+      <button
+        onclick="
+          document.documentElement.dataset.colorScheme =
+            document.documentElement.dataset.colorScheme === 'light'
+              ? 'dark'
+              : 'light'
+        "
+      >
+        light/dark
+      </button>
+    </div>
+
+    <section>
+      <h2>Tabs — eds.tab v0.2.0</h2>
+      <div class="tabs" role="tablist">
+        <button class="eds-tab" role="tab" aria-selected="true">
+          Overview
+        </button>
+        <button class="eds-tab" role="tab" aria-selected="false">
+          Details
+        </button>
+        <button class="eds-tab" role="tab" aria-selected="false">
+          History
+        </button>
+        <button class="eds-tab" role="tab" aria-selected="false" disabled>
+          Admin
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Buttons — eds.button v0.8.0</h2>
+      <div class="row">
+        <button class="eds-button">
+          <svg
+            class="icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+          Click me!
+        </button>
+        <button class="eds-button" data-variant="secondary">Click me!</button>
+        <button class="eds-button" data-variant="ghost">Click me!</button>
+        <button class="eds-button" data-tone="danger">Delete</button>
+        <button class="eds-button" data-size="small">Small</button>
+        <button class="eds-button" disabled>Disabled</button>
+      </div>
+      <div class="row">
+        <!-- ghost-icon: EDS 1.x ghost_icon — icon-only, a circle by construction -->
+        <button class="eds-button" data-variant="ghost-icon" aria-label="Add">
+          <svg
+            class="icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+        </button>
+        <button
+          class="eds-button"
+          data-tone="neutral"
+          data-variant="ghost-icon"
+          aria-label="Add"
+        >
+          <svg
+            class="icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+        </button>
+        <button
+          class="eds-button"
+          data-tone="danger"
+          data-variant="ghost-icon"
+          aria-label="Add"
+        >
+          <svg
+            class="icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+        </button>
+        <button
+          class="eds-button"
+          data-variant="ghost-icon"
+          data-size="small"
+          aria-label="Add"
+        >
+          <svg
+            class="icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+        </button>
+        <button
+          class="eds-button"
+          data-variant="ghost-icon"
+          disabled
+          aria-label="Add"
+        >
+          <svg
+            class="icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Chips — eds.chip v0.5.0</h2>
+      <div class="row">
+        <button class="eds-chip">Neutral</button>
+        <button class="eds-chip" data-tone="accent">Accent</button>
+        <button class="eds-chip" data-tone="danger">Danger</button>
+        <button class="eds-chip" data-tone="warning">Warning</button>
+        <button class="eds-chip" data-tone="success">Success</button>
+        <button class="eds-chip" data-tone="info">Info</button>
+        <button class="eds-chip" data-tone="accent" aria-pressed="true">
+          Selected
+        </button>
+        <button
+          class="eds-chip"
+          data-tone="accent"
+          data-emphasis="emphasis"
+          aria-pressed="true"
+        >
+          Selected
+        </button>
+        <button class="eds-chip" disabled>Disabled</button>
+      </div>
+      <div class="row">
+        <button class="eds-chip" data-emphasis="emphasis">Neutral</button>
+        <button class="eds-chip" data-tone="accent" data-emphasis="emphasis">
+          Accent
+        </button>
+        <button class="eds-chip" data-tone="danger" data-emphasis="emphasis">
+          Danger
+        </button>
+        <button class="eds-chip" data-tone="warning" data-emphasis="emphasis">
+          Warning
+        </button>
+        <button class="eds-chip" data-tone="success" data-emphasis="emphasis">
+          Success
+        </button>
+        <button class="eds-chip" data-tone="info" data-emphasis="emphasis">
+          Info
+        </button>
+        <!-- dismissible: the chip IS the dismiss button; the ✕ is affordance, not a nested control -->
+        <button
+          class="eds-chip"
+          data-tone="info"
+          data-emphasis="emphasis"
+          aria-label="Remove filter: Dismiss me"
+        >
+          Dismiss me
+          <svg
+            class="dismiss"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M18.3 5.71 12 12l6.3 6.29-1.42 1.42L10.6 13.4l-6.3 6.3-1.4-1.42L9.17 12 2.9 5.71 4.3 4.3l6.3 6.29 6.28-6.3 1.42 1.42Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Banner — eds.banner v0.4.0</h2>
+      <div class="banners" style="display: grid; gap: 0.75rem; max-width: 560px">
+        <!-- icon and dismiss are EMITTER-OWNED masks; the message is a <p> (the trim's block container) -->
+        <div class="eds-banner" role="status">
+          <span class="icon"></span>
+          <p>Something happened that you should know about.</p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="icon"></span></button>
+        </div>
+        <div class="eds-banner" data-tone="warning" role="status">
+          <span class="icon"></span>
+          <p>
+            Certification expires in 14 days. This message is meant to be read,
+            not scanned — wrap it to two lines and the reading line-height earns
+            its keep.
+          </p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="icon"></span></button>
+        </div>
+        <div class="eds-banner" data-tone="danger" role="status">
+          <span class="icon"></span>
+          <p>The connection was lost.</p>
+          <button class="eds-button" data-tone="neutral" data-variant="ghost-icon" aria-label="Dismiss"><span class="icon"></span></button>
+        </div>
+        <!-- icon toggled off: omit the span -->
+        <div class="eds-banner" data-tone="success" role="status">
+          <p>All checks passed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>App chrome — eds.top-bar v0.6.0 / eds.side-bar v0.3.0</h2>
+      <header class="eds-top-bar" role="banner" style="width: 100%; max-width: 880px">
+        <svg class="symbol" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 8h4V4H4v4Zm6 12h4v-4h-4v4Zm-6 0h4v-4H4v4Zm0-6h4v-4H4v4Zm6 0h4v-4h-4v4Zm6-10v4h4V4h-4Zm-6 4h4V4h-4v4Zm6 6h4v-4h-4v4Zm0 6h4v-4h-4v4Z"/></svg>
+        <span class="title">Application name</span>
+        <div class="eds-input">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
+          <input class="value" type="search" placeholder="Search" aria-label="Search" />
+        </div>
+        <div class="actions">
+          <button class="eds-button" data-variant="ghost-icon" aria-label="Account"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 3a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm0 14.2a8 8 0 0 1-5.5-2.2c.02-1.99 3.67-3.08 5.5-3.08 1.83 0 5.48 1.09 5.5 3.08a8 8 0 0 1-5.5 2.2Z"/></svg></button>
+          <button class="eds-button" data-variant="ghost-icon" aria-label="Notifications"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm6-6v-5a6 6 0 0 0-4.5-5.8V4.5a1.5 1.5 0 0 0-3 0v.7A6 6 0 0 0 6 11v5l-2 2v1h16v-1l-2-2Z"/></svg></button>
+          <button class="eds-button" data-variant="ghost-icon" aria-label="Density"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17v2h6v-2H3ZM3 5v2h10V5H3Zm10 16v-2h8v-2h-8v-2h-2v6h2ZM7 9v2H3v2h4v2h2V9H7Zm14 4v-2H11v2h10Zm-6-4h2V7h4V5h-4V3h-2v6Z"/></svg></button>
+        </div>
+      </header>
+      <div class="row" style="align-items: stretch; margin-block-start: 0.75rem">
+        <nav class="eds-side-bar" id="sidebar-demo" style="block-size: 420px" aria-label="Expanded">
+        <a class="eds-side-bar-item" href="#" aria-label="Home"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8Z"/></svg><span class="label">Home</span></a>
+        <button class="eds-side-bar-item" type="button" data-has-menu aria-expanded="true" commandfor="submenu-edit" command="--toggle-submenu" style="anchor-name: --sidebar-edit" aria-label="Edit"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25ZM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z"/></svg><span class="label">Edit</span><span class="chevron"></span></button>
+        <div class="submenu" id="submenu-edit">
+<a class="eds-side-bar-sub-item" href="#" aria-selected="true" aria-label="Gas"><span class="label">Gas</span></a>
+        <a class="eds-side-bar-sub-item" href="#" aria-label="Fields"><span class="label">Fields</span></a>
+</div>
+        <a class="eds-side-bar-item" href="#" aria-label="Favourites"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.9-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.1-8.5 9-8.5 9Z"/></svg><span class="label">Favourites</span></a>
+        <button class="eds-side-bar-item" type="button" aria-label="Collapse" commandfor="sidebar-demo" command="--toggle-collapsed"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.4 16.6 13.8 12l4.6-4.6L17 6l-6 6 6 6 1.4-1.4ZM6 6h2v12H6V6Z"/></svg><span class="label">Collapse</span></button>
+        </nav>
+        <!-- the collapsed rail's floating submenu: the Menu panel, positioned
+             by the CONSUMER via popover + CSS anchor positioning (the exact
+             mechanism the menu contract names) -->
+        <div class="eds-menu" role="menu" popover id="edit-submenu-float">
+          <button class="eds-menu-item" role="menuitem" aria-selected="true">Gas</button>
+          <button class="eds-menu-item" role="menuitem">Fields</button>
+        </div>
+
+        <!-- the cascade: ONE attribute on the nav collapses every item;
+             sub-items leave (their submenu is the floating Menu) -->
+        <nav class="eds-side-bar" data-collapsed="true" style="block-size: 420px" aria-label="Collapsed">
+        <a class="eds-side-bar-item" href="#" aria-label="Home"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8Z"/></svg><span class="label">Home</span></a>
+        <a class="eds-side-bar-item" href="#" aria-label="Edit" data-has-menu><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25ZM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z"/></svg><span class="label">Edit</span><span class="chevron"></span></a>
+        <a class="eds-side-bar-sub-item" href="#" aria-selected="true" aria-label="Gas"><span class="label">Gas</span></a>
+        <a class="eds-side-bar-sub-item" href="#" aria-label="Fields"><span class="label">Fields</span></a>
+        <a class="eds-side-bar-item" href="#" aria-label="Favourites"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.9-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.1-8.5 9-8.5 9Z"/></svg><span class="label">Favourites</span></a>
+        <a class="eds-side-bar-item" href="#" aria-label="Collapse"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.4 16.6 13.8 12l4.6-4.6L17 6l-6 6 6 6 1.4-1.4ZM6 6h2v12H6V6Z"/></svg><span class="label">Collapse</span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        Table — eds.table v0.1.0 (fixed viewport: flip density and count the
+        rows)
+      </h2>
+      <div
+        style="
+          height: 300px;
+          max-width: 640px;
+          overflow: hidden;
+          border-block-end: 1px dashed var(--eds-color-border-neutral-medium);
+        "
+      >
+        <table class="eds-table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Well</th>
+              <th>Person</th>
+              <th>Position</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>tp020</td>
+              <td>Eskhil Normann</td>
+              <td>Environment manager</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp021</td>
+              <td>Ingrid Berge</td>
+              <td>Drilling engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp022</td>
+              <td>Jonas Vik</td>
+              <td>Geologist</td>
+              <td>Paused</td>
+            </tr>
+            <tr aria-selected="true">
+              <td>tp023</td>
+              <td>Maria Sund</td>
+              <td>Data engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp024</td>
+              <td>Ola Haugen</td>
+              <td>Reservoir engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp025</td>
+              <td>Kari Moen</td>
+              <td>Petrophysicist</td>
+              <td>Paused</td>
+            </tr>
+            <tr>
+              <td>tp026</td>
+              <td>Nils Dahl</td>
+              <td>HSE coordinator</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp027</td>
+              <td>Anna Lie</td>
+              <td>Production engineer</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp028</td>
+              <td>Per Strand</td>
+              <td>Well integrity</td>
+              <td>Active</td>
+            </tr>
+            <tr>
+              <td>tp029</td>
+              <td>Silje Berg</td>
+              <td>Geophysicist</td>
+              <td>Paused</td>
+            </tr>
+            <tr>
+              <td>tp030</td>
+              <td>Tor Vika</td>
+              <td>Subsea engineer</td>
+              <td>Active</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Menu — eds.menu v0.2.0 (bleed guard: block padding = its own radius) / eds.menu-item v0.2.0 (subtle labels)</h2>
+      <div class="eds-menu" role="menu" style="inline-size: max-content; min-inline-size: 240px">
+        <button class="eds-menu-item" role="menuitem">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+          Open well
+        </button>
+        <button class="eds-menu-item" role="menuitem">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+          Duplicate
+        </button>
+        <button class="eds-menu-item" role="menuitem" aria-selected="true">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+          Selected item
+        </button>
+        <hr class="eds-divider" data-weight="subtle" />
+        <button class="eds-menu-item" role="menuitem">
+          No icon, after a divider
+        </button>
+        <button class="eds-menu-item" role="menuitem" disabled>
+          Disabled item
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cards — eds.card v0.2.0 (the container primitive)</h2>
+      <div class="row" style="align-items: stretch">
+        <div class="eds-card" style="max-width: 220px">
+          <strong>Static card</strong>
+          A plain div: no cursor, no hover, no ring.
+        </div>
+        <a class="eds-card" href="#" style="max-width: 220px; text-decoration: none; color: inherit">
+          <strong>Interactive card</strong>
+          An anchor: hover lifts it, focus rings it — the markup is the prop.
+        </a>
+        <button class="eds-card" type="button" style="max-width: 220px; text-align: start; font: inherit; color: inherit">
+          <strong>Button card</strong>
+          One action per card; no nested controls.
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>TextField — eds.input v0.6.0 (the classic field) + eds.label v0.2.0 (on the baseline grid)</h2>
+      <div class="row" style="align-items: start">
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-plain">Well name</label>
+          <div class="eds-input">
+            <input id="tf-plain" placeholder="Placeholder" />
+          </div>
+          <p class="eds-label">Helper text</p>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-lead">Leading icon</label>
+          <div class="eds-input">
+            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+            <input id="tf-lead" value="tp023" />
+          </div>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-both">Both icons</label>
+          <div class="eds-input">
+            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+            <input id="tf-both" value="Search term" />
+            <svg class="trailing-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3v4H7v2h4v4h2v-4h4v-2h-4V7h-2Z" /></svg>
+          </div>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-invalid">Email (blur empty to see :user-invalid)</label>
+          <div class="eds-input">
+            <input id="tf-invalid" type="email" required placeholder="name@equinor.com" />
+          </div>
+          <p class="eds-label">The invalid state is the platform's</p>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-disabled">Disabled</label>
+          <div class="eds-input">
+            <input id="tf-disabled" disabled value="Read only-ish" />
+          </div>
+        </div>
+        <div class="eds-text-field">
+          <label class="eds-label" for="tf-select">A select is a field too</label>
+          <div class="eds-input">
+            <select id="tf-select">
+              <option>Drilling</option>
+              <option>Production</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        Selection controls — eds.checkbox v0.2.0 / eds.radio v0.1.0 / eds.switch v0.1.0 (one
+        native element each)
+      </h2>
+      <div class="row">
+        <input class="eds-checkbox" type="checkbox" />
+        <input class="eds-checkbox" type="checkbox" checked />
+        <input class="eds-radio" type="radio" name="preview-radio" />
+        <input class="eds-radio" type="radio" name="preview-radio" checked />
+        <input class="eds-switch" type="checkbox" role="switch" />
+        <input class="eds-switch" type="checkbox" role="switch" checked />
+        <input class="eds-checkbox" type="checkbox" id="preview-indet" />
+        <input class="eds-checkbox" type="checkbox" checked disabled />
+      </div>
+    </section>
+
+    <section>
+      <h2>Divider — eds.divider v0.1.0</h2>
+      <hr class="eds-divider" data-weight="subtle" />
+      <hr class="eds-divider" />
+    </section>
+
+    <section>
+      <h2>Label + Tooltip — eds.label v0.1.0 / eds.tooltip v0.3.0 (xs-squared, Side × Align)</h2>
+      <div class="row" style="gap: 2.5rem">
+        <label class="eds-label">Well name</label>
+        <div class="eds-tooltip" data-placement="top" role="tooltip">top</div>
+        <div class="eds-tooltip" data-placement="top-start" role="tooltip">top-start</div>
+        <div class="eds-tooltip" data-placement="top-end" role="tooltip">top-end</div>
+        <div class="eds-tooltip" data-placement="bottom" role="tooltip">bottom</div>
+        <div class="eds-tooltip" data-placement="bottom-start" role="tooltip">bottom-start</div>
+        <div class="eds-tooltip" data-placement="bottom-end" role="tooltip">bottom-end</div>
+        <div class="eds-tooltip" data-placement="left" role="tooltip">left</div>
+        <div class="eds-tooltip" data-placement="left-start" role="tooltip">left-start</div>
+        <div class="eds-tooltip" data-placement="right" role="tooltip">right</div>
+        <div class="eds-tooltip" data-placement="right-end" role="tooltip">right-end</div>
+      </div>
+      <p style="opacity: 0.6; font-size: 0.8rem">
+        Placement names where the tooltip sits relative to its anchor — the
+        arrow points back at the anchor.
+      </p>
+    </section>
+    <script>
+      // indeterminate has no HTML attribute — the platform state is JS-set
+      document.getElementById('preview-indet').indeterminate = true
+    </script>
+      <script>
+      // Invoker Commands: the Collapse button declares its target and intent
+      // in markup (commandfor + command); the custom command needs one
+      // listener — the toggle is a single attribute, and the CSS cascade
+      // does the rest. Click fallback where CommandEvent is unsupported.
+      const rail = document.getElementById('sidebar-demo');
+      if ('command' in HTMLButtonElement.prototype) {
+        rail.addEventListener('command', (e) => {
+          if (e.command === '--toggle-collapsed') {
+            rail.dataset.collapsed = rail.dataset.collapsed === 'true' ? 'false' : 'true';
+          }
+        });
+        // the submenu: inline accordion when expanded; the floating Menu
+        // (popover, anchor-positioned) when the rail is collapsed
+        const group = document.getElementById('submenu-edit');
+        const toggleSubmenu = (source) => {
+          if (rail.dataset.collapsed === 'true') {
+            document.getElementById('edit-submenu-float').togglePopover();
+          } else {
+            group.hidden = !group.hidden;
+            source.setAttribute('aria-expanded', String(!group.hidden));
+          }
+        };
+        if ('command' in HTMLButtonElement.prototype) {
+          group.addEventListener('command', (e) => {
+            if (e.command === '--toggle-submenu') toggleSubmenu(e.source);
+          });
+        } else {
+          const editBtn = document.querySelector('[command="--toggle-submenu"]');
+          editBtn.addEventListener('click', () => toggleSubmenu(editBtn));
+        }
+      } else {
+        rail.querySelector('[command]').addEventListener('click', () => {
+          rail.dataset.collapsed = rail.dataset.collapsed === 'true' ? 'false' : 'true';
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2452 @@
+{
+  "$extensions": {
+    "com.equinor.eds.context": {
+      "modifier": "color-scheme",
+      "context": "dark"
+    }
+  },
+  "color": {
+    "concept": {
+      "bg-floating": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.47,
+            0.04,
+            252.5
+          ],
+          "hex": "#4b5d71"
+        },
+        "$description": "The ELEVATED surface: menus, popovers, dialogs. White in light mode; one ladder step ABOVE surface in dark mode, because in dark mode elevation is lightness, not shadow. Follows neutral-2 (light) / neutral-3 (dark). Restored unreleased December intent, 2026-08-29.",
+        "$extensions": {
+          "com.equinor.eds.css": {
+            "variable": "--eds-color-bg-floating",
+            "tiers": {
+              "srgb": "#4b5d71",
+              "p3": "oklch(0.47 0.04 252.5)"
+            }
+          },
+          "com.equinor.eds.figma": {
+            "alias": "palette/neutral/3"
+          },
+          "com.equinor.eds.source": {
+            "follows": "neutral-3 (dark)",
+            "file": "src/build/color.ts FLOATING_STEP"
+          }
+        }
+      }
+    },
+    "palette": {
+      "accent": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.002,
+              184.6
+            ],
+            "hex": "#0a0b0b"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-1",
+              "tiers": {
+                "srgb": "#0a0b0b",
+                "p3": "oklch(0.15 0.002 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.006,
+              184.6
+            ],
+            "hex": "#1f2322"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-2",
+              "tiers": {
+                "srgb": "#1f2322",
+                "p3": "oklch(0.25 0.006 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.038,
+              184.6
+            ],
+            "hex": "#42625d"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-3",
+              "tiers": {
+                "srgb": "#42625d",
+                "p3": "oklch(0.47 0.038 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.049,
+              184.6
+            ],
+            "hex": "#47726c"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-4",
+              "tiers": {
+                "srgb": "#47726c",
+                "p3": "oklch(0.52 0.049 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.061,
+              184.6
+            ],
+            "hex": "#4e867f"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-5",
+              "tiers": {
+                "srgb": "#4e867f",
+                "p3": "oklch(0.58 0.061 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-5",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.038,
+              184.6
+            ],
+            "hex": "#42625d"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-6",
+              "tiers": {
+                "srgb": "#42625d",
+                "p3": "oklch(0.47 0.038 184.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.07,
+              191.3
+            ],
+            "hex": "#4c918d"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-7",
+              "tiers": {
+                "srgb": "#4c918d",
+                "p3": "oklch(0.61 0.07 191.3)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-7",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.077,
+              197.9
+            ],
+            "hex": "#73c0c3"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-8",
+              "tiers": {
+                "srgb": "#73c0c3",
+                "p3": "oklch(0.76 0.077 197.9)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-8",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.071,
+              204.6
+            ],
+            "hex": "#8cd2da"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-9",
+              "tiers": {
+                "srgb": "#8cd2da",
+                "p3": "oklch(0.82 0.071 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-9",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.057,
+              204.6
+            ],
+            "hex": "#ace3e9"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-10",
+              "tiers": {
+                "srgb": "#ace3e9",
+                "p3": "oklch(0.88 0.057 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-10",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.044,
+              204.6
+            ],
+            "hex": "#c7f1f6"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-11",
+              "tiers": {
+                "srgb": "#c7f1f6",
+                "p3": "oklch(0.93 0.044 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-11",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.049,
+              204.6
+            ],
+            "hex": "#bcebf1"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-12",
+              "tiers": {
+                "srgb": "#bcebf1",
+                "p3": "oklch(0.91 0.049 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-12",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.03,
+              204.6
+            ],
+            "hex": "#f4feff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-13",
+              "tiers": {
+                "srgb": "#f4feff",
+                "p3": "oklch(0.99 0.03 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#f4feff",
+              "lightnessDrift": 3.8180956285494005e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.015,
+              204.6
+            ],
+            "hex": "#2d3839"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-14",
+              "tiers": {
+                "srgb": "#2d3839",
+                "p3": "oklch(0.33 0.015 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.001,
+              204.6
+            ],
+            "hex": "#030303"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-accent-15",
+              "tiers": {
+                "srgb": "#030303",
+                "p3": "oklch(0.1 0.001 204.6)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "moss-green-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      },
+      "danger": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.005,
+              21.1
+            ],
+            "hex": "#0d0a0a"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-1",
+              "tiers": {
+                "srgb": "#0d0a0a",
+                "p3": "oklch(0.15 0.005 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.018,
+              21.1
+            ],
+            "hex": "#2a1e1e"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-2",
+              "tiers": {
+                "srgb": "#2a1e1e",
+                "p3": "oklch(0.25 0.018 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.119,
+              21.1
+            ],
+            "hex": "#923a3d"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-3",
+              "tiers": {
+                "srgb": "#923a3d",
+                "p3": "oklch(0.47 0.119 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.154,
+              21.1
+            ],
+            "hex": "#b03940"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-4",
+              "tiers": {
+                "srgb": "#b03940",
+                "p3": "oklch(0.52 0.154 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.193,
+              21.1
+            ],
+            "hex": "#d43745"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-5",
+              "tiers": {
+                "srgb": "#d43745",
+                "p3": "oklch(0.58 0.193 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-5",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.119,
+              21.1
+            ],
+            "hex": "#923a3d"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-6",
+              "tiers": {
+                "srgb": "#923a3d",
+                "p3": "oklch(0.47 0.119 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.209,
+              21.1
+            ],
+            "hex": "#e53748"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-7",
+              "tiers": {
+                "srgb": "#e53748",
+                "p3": "oklch(0.61 0.209 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-7",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.221,
+              21.1
+            ],
+            "hex": "#ff8989"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-8",
+              "tiers": {
+                "srgb": "#ff8989",
+                "p3": "oklch(0.76 0.221 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-8",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ff8989",
+              "lightnessDrift": 1.4965793582177866e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.193,
+              21.1
+            ],
+            "hex": "#ffaaa8"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-9",
+              "tiers": {
+                "srgb": "#ffaaa8",
+                "p3": "oklch(0.82 0.193 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-9",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffaaa8",
+              "lightnessDrift": 1.3020809053188032e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.154,
+              21.1
+            ],
+            "hex": "#ffc8c5"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-10",
+              "tiers": {
+                "srgb": "#ffc8c5",
+                "p3": "oklch(0.88 0.154 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-10",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffc8c5",
+              "lightnessDrift": 1.1461188953454382e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.119,
+              21.1
+            ],
+            "hex": "#ffdfde"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-11",
+              "tiers": {
+                "srgb": "#ffdfde",
+                "p3": "oklch(0.93 0.119 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-11",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffdfde",
+              "lightnessDrift": 1.0384463355883611e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.133,
+              21.1
+            ],
+            "hex": "#ffd6d4"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-12",
+              "tiers": {
+                "srgb": "#ffd6d4",
+                "p3": "oklch(0.91 0.133 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-12",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffd6d4",
+              "lightnessDrift": 1.0794038873829237e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.081,
+              21.1
+            ],
+            "hex": "#fffbfa"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-13",
+              "tiers": {
+                "srgb": "#fffbfa",
+                "p3": "oklch(0.99 0.081 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#fffbfa",
+              "lightnessDrift": 9.300224479424912e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.042,
+              21.1
+            ],
+            "hex": "#492d2c"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-14",
+              "tiers": {
+                "srgb": "#492d2c",
+                "p3": "oklch(0.33 0.042 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.003,
+              21.1
+            ],
+            "hex": "#040303"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-danger-15",
+              "tiers": {
+                "srgb": "#040303",
+                "p3": "oklch(0.1 0.003 21.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "red-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      },
+      "info": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.003,
+              240.7
+            ],
+            "hex": "#0a0b0c"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-1",
+              "tiers": {
+                "srgb": "#0a0b0c",
+                "p3": "oklch(0.15 0.003 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.011,
+              240.7
+            ],
+            "hex": "#1d2226"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-2",
+              "tiers": {
+                "srgb": "#1d2226",
+                "p3": "oklch(0.25 0.011 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.07,
+              240.7
+            ],
+            "hex": "#33607e"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-3",
+              "tiers": {
+                "srgb": "#33607e",
+                "p3": "oklch(0.47 0.07 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.091,
+              240.7
+            ],
+            "hex": "#316f98"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-4",
+              "tiers": {
+                "srgb": "#316f98",
+                "p3": "oklch(0.52 0.091 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.113,
+              240.7
+            ],
+            "hex": "#2e82b6"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-5",
+              "tiers": {
+                "srgb": "#2e82b6",
+                "p3": "oklch(0.58 0.113 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-5",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.07,
+              240.7
+            ],
+            "hex": "#33607e"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-6",
+              "tiers": {
+                "srgb": "#33607e",
+                "p3": "oklch(0.47 0.07 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.123,
+              240.7
+            ],
+            "hex": "#2d8bc5"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-7",
+              "tiers": {
+                "srgb": "#2d8bc5",
+                "p3": "oklch(0.61 0.123 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-7",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.13,
+              240.7
+            ],
+            "hex": "#5abbfb"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-8",
+              "tiers": {
+                "srgb": "#5abbfb",
+                "p3": "oklch(0.76 0.13 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-8",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.113,
+              240.7
+            ],
+            "hex": "#87cdff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-9",
+              "tiers": {
+                "srgb": "#87cdff",
+                "p3": "oklch(0.82 0.113 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-9",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#87cdff",
+              "lightnessDrift": 5.128240565532849e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.091,
+              240.7
+            ],
+            "hex": "#b1deff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-10",
+              "tiers": {
+                "srgb": "#b1deff",
+                "p3": "oklch(0.88 0.091 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-10",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#b1deff",
+              "lightnessDrift": 4.574542755708677e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.07,
+              240.7
+            ],
+            "hex": "#d3ecff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-11",
+              "tiers": {
+                "srgb": "#d3ecff",
+                "p3": "oklch(0.93 0.07 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-11",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#d3ecff",
+              "lightnessDrift": 4.1976061737614145e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.078,
+              240.7
+            ],
+            "hex": "#c6e6ff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-12",
+              "tiers": {
+                "srgb": "#c6e6ff",
+                "p3": "oklch(0.91 0.078 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-12",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#c6e6ff",
+              "lightnessDrift": 4.340362558252764e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.047,
+              240.7
+            ],
+            "hex": "#f9fcff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-13",
+              "tiers": {
+                "srgb": "#f9fcff",
+                "p3": "oklch(0.99 0.047 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#f9fcff",
+              "lightnessDrift": 3.824259331430824e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.025,
+              240.7
+            ],
+            "hex": "#2a3741"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-14",
+              "tiers": {
+                "srgb": "#2a3741",
+                "p3": "oklch(0.33 0.025 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.002,
+              240.7
+            ],
+            "hex": "#030304"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-info-15",
+              "tiers": {
+                "srgb": "#030304",
+                "p3": "oklch(0.1 0.002 240.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "blue-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.02,
+              252.5
+            ],
+            "hex": "#060c13"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-1",
+              "tiers": {
+                "srgb": "#060c13",
+                "p3": "oklch(0.15 0.02 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.036,
+              252.5
+            ],
+            "hex": "#152332"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-2",
+              "tiers": {
+                "srgb": "#152332",
+                "p3": "oklch(0.25 0.036 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.04,
+              252.5
+            ],
+            "hex": "#4b5d71"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-3",
+              "tiers": {
+                "srgb": "#4b5d71",
+                "p3": "oklch(0.47 0.04 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.052,
+              252.5
+            ],
+            "hex": "#536b87"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-4",
+              "tiers": {
+                "srgb": "#536b87",
+                "p3": "oklch(0.52 0.052 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.065,
+              252.5
+            ],
+            "hex": "#5e7da0"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-5",
+              "tiers": {
+                "srgb": "#5e7da0",
+                "p3": "oklch(0.58 0.065 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-5",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.04,
+              252.5
+            ],
+            "hex": "#4b5d71"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-6",
+              "tiers": {
+                "srgb": "#4b5d71",
+                "p3": "oklch(0.47 0.04 252.5)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.058,
+              249.3
+            ],
+            "hex": "#6886a5"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-7",
+              "tiers": {
+                "srgb": "#6886a5",
+                "p3": "oklch(0.61 0.058 249.3)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-7",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.048,
+              246.1
+            ],
+            "hex": "#99b5ce"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-8",
+              "tiers": {
+                "srgb": "#99b5ce",
+                "p3": "oklch(0.76 0.048 246.1)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-8",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.03,
+              243
+            ],
+            "hex": "#b4c7d6"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-9",
+              "tiers": {
+                "srgb": "#b4c7d6",
+                "p3": "oklch(0.82 0.03 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-9",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.024,
+              243
+            ],
+            "hex": "#cbdae6"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-10",
+              "tiers": {
+                "srgb": "#cbdae6",
+                "p3": "oklch(0.88 0.024 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-10",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.019,
+              243
+            ],
+            "hex": "#deeaf4"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-11",
+              "tiers": {
+                "srgb": "#deeaf4",
+                "p3": "oklch(0.93 0.019 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-11",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.021,
+              243
+            ],
+            "hex": "#d6e3ee"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-12",
+              "tiers": {
+                "srgb": "#d6e3ee",
+                "p3": "oklch(0.91 0.021 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-12",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.013,
+              243
+            ],
+            "hex": "#f9fcff"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-13",
+              "tiers": {
+                "srgb": "#f9fcff",
+                "p3": "oklch(0.99 0.013 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#f9fcff",
+              "lightnessDrift": 3.8244684197330514e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.007,
+              243
+            ],
+            "hex": "#323639"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-14",
+              "tiers": {
+                "srgb": "#323639",
+                "p3": "oklch(0.33 0.007 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0,
+              243
+            ],
+            "hex": "#030303"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-neutral-15",
+              "tiers": {
+                "srgb": "#030303",
+                "p3": "oklch(0.1 0 243)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "north-sea-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      },
+      "success": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.004,
+              143
+            ],
+            "hex": "#0a0c0a"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-1",
+              "tiers": {
+                "srgb": "#0a0c0a",
+                "p3": "oklch(0.15 0.004 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.013,
+              143
+            ],
+            "hex": "#1e231e"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-2",
+              "tiers": {
+                "srgb": "#1e231e",
+                "p3": "oklch(0.25 0.013 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.086,
+              143
+            ],
+            "hex": "#3c673a"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-3",
+              "tiers": {
+                "srgb": "#3c673a",
+                "p3": "oklch(0.47 0.086 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.111,
+              143
+            ],
+            "hex": "#3e793c"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-4",
+              "tiers": {
+                "srgb": "#3e793c",
+                "p3": "oklch(0.52 0.111 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.139,
+              143
+            ],
+            "hex": "#418e3e"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-5",
+              "tiers": {
+                "srgb": "#418e3e",
+                "p3": "oklch(0.58 0.139 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-5",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.086,
+              143
+            ],
+            "hex": "#3c673a"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-6",
+              "tiers": {
+                "srgb": "#3c673a",
+                "p3": "oklch(0.47 0.086 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.15,
+              143
+            ],
+            "hex": "#439941"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-7",
+              "tiers": {
+                "srgb": "#439941",
+                "p3": "oklch(0.61 0.15 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-7",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.159,
+              143
+            ],
+            "hex": "#6eca6a"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-8",
+              "tiers": {
+                "srgb": "#6eca6a",
+                "p3": "oklch(0.76 0.159 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-8",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.139,
+              143
+            ],
+            "hex": "#8cdb87"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-9",
+              "tiers": {
+                "srgb": "#8cdb87",
+                "p3": "oklch(0.82 0.139 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-9",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.111,
+              143
+            ],
+            "hex": "#aceba8"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-10",
+              "tiers": {
+                "srgb": "#aceba8",
+                "p3": "oklch(0.88 0.111 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-10",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.086,
+              143
+            ],
+            "hex": "#c7f7c3"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-11",
+              "tiers": {
+                "srgb": "#c7f7c3",
+                "p3": "oklch(0.93 0.086 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-11",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.096,
+              143
+            ],
+            "hex": "#bcf2b8"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-12",
+              "tiers": {
+                "srgb": "#bcf2b8",
+                "p3": "oklch(0.91 0.096 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-12",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.058,
+              143
+            ],
+            "hex": "#f5fff5"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-13",
+              "tiers": {
+                "srgb": "#f5fff5",
+                "p3": "oklch(0.99 0.058 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#f5fff5",
+              "lightnessDrift": 2.2804071531101755e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.03,
+              143
+            ],
+            "hex": "#2c392b"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-14",
+              "tiers": {
+                "srgb": "#2c392b",
+                "p3": "oklch(0.33 0.03 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.002,
+              143
+            ],
+            "hex": "#030303"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-success-15",
+              "tiers": {
+                "srgb": "#030303",
+                "p3": "oklch(0.1 0.002 143)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "green-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      },
+      "warning": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.15,
+              0.004,
+              58.7
+            ],
+            "hex": "#0c0b09"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-1",
+              "tiers": {
+                "srgb": "#0c0b09",
+                "p3": "oklch(0.15 0.004 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-1",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.25,
+              0.013,
+              58.7
+            ],
+            "hex": "#27201c"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-2",
+              "tiers": {
+                "srgb": "#27201c",
+                "p3": "oklch(0.25 0.013 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-2",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.085,
+              58.7
+            ],
+            "hex": "#7e4e25"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-3",
+              "tiers": {
+                "srgb": "#7e4e25",
+                "p3": "oklch(0.47 0.085 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-3",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.52,
+              0.11,
+              58.7
+            ],
+            "hex": "#97571b"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-4",
+              "tiers": {
+                "srgb": "#97571b",
+                "p3": "oklch(0.52 0.11 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-4",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.58,
+              0.138,
+              58.7
+            ],
+            "hex": "#b46200"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-5",
+              "tiers": {
+                "srgb": "#b46200",
+                "p3": "oklch(0.58 0.138 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-5",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#b46200",
+              "lightnessDrift": 8.914989013675267e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.47,
+              0.085,
+              58.7
+            ],
+            "hex": "#7e4e25"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-6",
+              "tiers": {
+                "srgb": "#7e4e25",
+                "p3": "oklch(0.47 0.085 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-6",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.61,
+              0.149,
+              58.7
+            ],
+            "hex": "#c16900"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-7",
+              "tiers": {
+                "srgb": "#c16900",
+                "p3": "oklch(0.61 0.149 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-7",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#c16900",
+              "lightnessDrift": 7.999933615554511e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "8": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.76,
+              0.157,
+              58.7
+            ],
+            "hex": "#f99539"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-8",
+              "tiers": {
+                "srgb": "#f99539",
+                "p3": "oklch(0.76 0.157 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-8",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "9": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.82,
+              0.138,
+              58.7
+            ],
+            "hex": "#ffb070"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-9",
+              "tiers": {
+                "srgb": "#ffb070",
+                "p3": "oklch(0.82 0.138 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-9",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffb070",
+              "lightnessDrift": 1.2988504816124902e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "10": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.11,
+              58.7
+            ],
+            "hex": "#ffcca5"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-10",
+              "tiers": {
+                "srgb": "#ffcca5",
+                "p3": "oklch(0.88 0.11 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-10",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffcca5",
+              "lightnessDrift": 1.1440034874965477e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "11": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.085,
+              58.7
+            ],
+            "hex": "#ffe2cc"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-11",
+              "tiers": {
+                "srgb": "#ffe2cc",
+                "p3": "oklch(0.93 0.085 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-11",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffe2cc",
+              "lightnessDrift": 1.0372391101576284e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "12": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.095,
+              58.7
+            ],
+            "hex": "#ffd9bd"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-12",
+              "tiers": {
+                "srgb": "#ffd9bd",
+                "p3": "oklch(0.91 0.095 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-12",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#ffd9bd",
+              "lightnessDrift": 1.0778368508823633e-7,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "13": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.99,
+              0.058,
+              58.7
+            ],
+            "hex": "#fffbf8"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-13",
+              "tiers": {
+                "srgb": "#fffbf8",
+                "p3": "oklch(0.99 0.058 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-13",
+              "file": "src/palette-generator-export.css"
+            },
+            "com.equinor.eds.gamut": {
+              "outsideSrgb": true,
+              "strategy": "chroma-reduce",
+              "fallback": "#fffbf8",
+              "lightnessDrift": 9.298562919646258e-8,
+              "note": "Cannot be expressed in sRGB. The fallback holds lightness and hue and lowers chroma, so the family keeps a shared lightness at this step."
+            }
+          }
+        },
+        "14": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.33,
+              0.03,
+              58.7
+            ],
+            "hex": "#413226"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-14",
+              "tiers": {
+                "srgb": "#413226",
+                "p3": "oklch(0.33 0.03 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-14",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        },
+        "15": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.002,
+              58.7
+            ],
+            "hex": "#040303"
+          },
+          "$extensions": {
+            "com.equinor.eds.css": {
+              "variable": "--eds-color-warning-15",
+              "tiers": {
+                "srgb": "#040303",
+                "p3": "oklch(0.1 0.002 58.7)"
+              }
+            },
+            "com.equinor.eds.source": {
+              "generator": "orange-15",
+              "file": "src/palette-generator-export.css"
+            }
+          }
+        }
+      }
+    }
+  }
+}

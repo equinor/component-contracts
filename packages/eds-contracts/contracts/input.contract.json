@@ -1,0 +1,155 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.input",
+  "version": "0.7.0",
+  "description": "Input — the field box, and only the box. The root is a WRAPPER (an <input> cannot contain children — icons live inside the field), with the native control reset flat inside; states read through it via :has(). THE CLASSIC EDS FIELD (the EDS 1.0 identity, restored v0.6.0 from mock 345:1023): bg-input fill, square corners, and a thin bottom border that carries the states — border-neutral-medium at rest. xs-STRETCHED inset (a field is a stretched box; converges vertically with md-squished while the horizontal inset drops to xs — the field hugs its text). Height is never stated: inset × 2 + cap(value) resolves to 24 / 36 / 44. The assembled field is a COMPOSITION — see compositions/text-field.json.",
+  "notes": "v0.4.0 (Victor 2026-08-31): the BOXED field replaces EDS 1.0's underline — this redesign has real provenance (the previous team's mocks, continued by the current team), unlike the tab/banner redesigns we declined. Resting border is MEDIUM (Victor's call — a field is interactive; the visible affordance matches the mocks). States re-point the border: hover strong, :user-invalid danger-strong, disabled border-disabled; focus stays the ring (it REPLACES the border outline, same property). FIELDS SIT ON SURFACES, never the canvas (Victor's rule — and the box makes it moot in practice: the border separates the field from any backdrop). NOTE the team's border tokens now live in a third parallel system (non-interactive neutral muted/default/emphasis → primitive steps 4/7/9; interactive → 4/5/7; scale unidentified) — we stay on the semantic border ladder. One contract per box (Victor, 2026-08-29): EDS 1.0's drawback was designers assembling fields from parts; the fix is shipping BOTH the part and the composition. Validation is the platform's truth: invalid lowers to :has(:user-invalid) (matches only after user interaction — h/t Oddbjørn's design-system-css input). Icon slots per the EDS 2.0 Lab mockup (Text Input, 715:90251); REFUSED from that mockup for now: unit prefix/suffix, meta text, required marker (composition-level), warning/success validation tones (scoping list). Baseline-grid label alignment: recorded as an open idea, not built — Victor: labels are scanned, not read, 'I can't defend it', but shared form rhythm pleases. The disabled underline keeps its resting step. Placeholder ink has its own channel; Figma refuses it. v0.5.0 (2026-09-04): placeholder ink gets its own concept token — text-placeholder, disabled's rung under an honest name (Victor had hand-bound text-disabled: 'works, but looks disabled'; Lc 30 floor beside the affordance icon). Figma disposition placeholder ink REFUSED → LOWERED: the canvas component presents the EMPTY field, value text wears the placeholder ink; typed-text ink stays CSS-only. v0.6.0 (2026-09-05, Victor, from his mock 345:1023): BACK TO THE EDS 1.0 FIELD — square corners, filled bg-input, a thin bottom border (medium at rest, strong on hover, danger-strong invalid, border-disabled disabled). The v0.4.0 boxed look is retired here; the classic underline field is the EDS identity. v0.7.0 (2026-09-05, Victor, from the Figma review): THE VALUE FILLS — the spare inline space belongs to the text, so the trailing icon pins to the end while the leading icon keeps the normal icon gap (no nested wrapper groups: one FILL on the value is the whole mechanism, and it is what the CSS twin always did — flex: 1 1 auto on the control, fixed gaps both sides). The Figma set gets a 256 demo edge (the field's natural width, mock 345:1023; canvas convenience — instances resize freely).",
+  "props": [
+    {
+      "name": "value",
+      "description": "The field's content.",
+      "type": {
+        "text": true
+      },
+      "default": "Value",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "leadingIcon",
+      "description": "Optional leading icon inside the field.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Leading Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "trailingIcon",
+      "description": "Optional trailing icon inside the field.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Trailing Icon"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "align": "center",
+        "gap": "{spacing.spacing-icon-md-gap-horizontal}"
+      },
+      "inset": {
+        "size": "xs",
+        "proportion": "stretched",
+        "opticalLabel": "value"
+      },
+      "tokens": {
+        "background-color": "{color.concept.bg-input}",
+        "placeholder-color": "{color.concept.text-placeholder}",
+        "border-bottom-color": "{color.semantic.border-neutral-medium}"
+      },
+      "underline": "{spacing.sizing-stroke-thin}"
+    },
+    "icon": {
+      "when": "leadingIcon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "property": "↳ Leading Icon",
+        "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    },
+    "value": {
+      "typography": {
+        "label": "md",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-strong}"
+      },
+      "control": true,
+      "fill": true
+    },
+    "trailing-icon": {
+      "when": "trailingIcon",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "property": "↳ Trailing Icon",
+        "componentKey": "99d686d2f9b247ed799e74d7c617798d56602a1b"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/border-bottom-color": "{color.semantic.border-neutral-strong}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    },
+    {
+      "name": "invalid",
+      "tokens": {
+        "icon/color": "{color.semantic.icon-danger}",
+        "trailing-icon/color": "{color.semantic.icon-danger}",
+        "root/border-bottom-color": "{color.semantic.border-danger-strong}"
+      }
+    },
+    {
+      "name": "disabled",
+      "tokens": {
+        "root/background-color": "{color.concept.bg-disabled}",
+        "value/color": "{color.concept.text-disabled}",
+        "icon/color": "{color.concept.text-disabled}",
+        "trailing-icon/color": "{color.concept.text-disabled}",
+        "root/border-bottom-color": "{color.concept.border-disabled}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "input",
+    "aria": {
+      "aria-invalid": "reflected by the platform through :user-invalid; no class needed"
+    }
+  }
+}

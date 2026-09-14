@@ -1,0 +1,178 @@
+{
+  "component": "eds.table",
+  "requiredVariables": [
+    {
+      "name": "recipe/optical-padding-sm-squared-md-label-default-leading",
+      "collection": "density",
+      "values": {
+        "compact": 4,
+        "comfortable": 8,
+        "relaxed": 10
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-sm-vertical-squared) - var(--eds-half-leading-md-default))",
+      "description": "eds.table: md label in the sm-squared inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 24/36/44."
+    },
+    {
+      "name": "recipe/optical-padding-sm-squished-default-leading",
+      "collection": "density",
+      "values": {
+        "compact": 2,
+        "comfortable": 4,
+        "relaxed": 8
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-sm-vertical-squished) - var(--eds-half-leading-sm-default))",
+      "description": "eds.table: sm label in the sm-squished inset. Resolved because Figma cannot calc; CSS composes it live. Heights land at 20/24/36."
+    }
+  ],
+  "componentSet": {
+    "name": "Table",
+    "description": "Table — the density centerpiece. Rows and cells are DOM elements, not classable parts; the invariant holds PER CELL (padding = inset − halfLeading), so row heights emerge (24/36/44) and switching density shows MORE ROWS in the same viewport — never a narrower table. That asymmetry is the point: the horizontal/vertical spacing split is the prepared seam.\n\nGenerated from eds.table v0.3.0 — edit the contract, not this component.",
+    "axes": {
+      "Size": [
+        "Default",
+        "Compressed"
+      ],
+      "State": [
+        "Default",
+        "Hover",
+        "Selected"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "table": {
+      "columns": [
+        "Well",
+        "Person",
+        "Position",
+        "Status"
+      ],
+      "rows": [
+        [
+          "tp020",
+          "Eskhil Normann",
+          "Environment manager",
+          "Active"
+        ],
+        [
+          "tp021",
+          "Ingrid Berge",
+          "Drilling engineer",
+          "Active"
+        ],
+        [
+          "tp022",
+          "Jonas Vik",
+          "Geologist",
+          "Paused"
+        ],
+        [
+          "tp023",
+          "Maria Sund",
+          "Data engineer",
+          "Active"
+        ]
+      ],
+      "cellPadV": "recipe/optical-padding-sm-squared-md-label-default-leading",
+      "cellPadH": "spacing/inset-sm-horizontal",
+      "headerLabel": {
+        "fontFamily": "typography/font-family/ui",
+        "fontWeight": "font-weight/bolder",
+        "fontSize": "typography/font-size/md",
+        "lineHeight": "typography/line-height/default/md"
+      },
+      "cellLabel": {
+        "fontFamily": "typography/font-family/ui",
+        "fontWeight": "font-weight/normal",
+        "fontSize": "typography/font-size/md",
+        "lineHeight": "typography/line-height/default/md"
+      },
+      "headerBorder": "semantic/border-neutral-medium",
+      "cellBorder": "semantic/border-neutral-subtle",
+      "headerFg": "semantic/text-neutral-strong",
+      "cellFg": "semantic/text-neutral-strong",
+      "selectedBg": "semantic/bg-accent-fill-ghost-selected"
+    },
+    "root": {
+      "layout": "HORIZONTAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin"
+    },
+    "parts": [
+      {
+        "kind": "text",
+        "name": "header-cell",
+        "defaultText": "header-cell"
+      },
+      {
+        "kind": "text",
+        "name": "cell",
+        "defaultText": "cell"
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {},
+        "paddingBlock": "recipe/optical-padding-sm-squared-md-label-default-leading",
+        "paddingInline": "spacing/inset-sm-horizontal",
+        "insetVar": "spacing/inset-sm-vertical-squared",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/md",
+          "lineHeight": "typography/line-height/default/md"
+        }
+      },
+      "Compressed": {
+        "glyphs": {},
+        "paddingBlock": "recipe/optical-padding-sm-squished-default-leading",
+        "paddingInline": "spacing/inset-sm-horizontal",
+        "insetVar": "spacing/inset-sm-vertical-squished",
+        "label": {
+          "fontFamily": "typography/font-family/ui",
+          "fontWeight": "font-weight/normal",
+          "fontSize": "typography/font-size/sm",
+          "lineHeight": "typography/line-height/default/sm"
+        }
+      }
+    },
+    "variants": [
+      {
+        "name": "Size=Default, State=Default",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      },
+      {
+        "name": "Size=Default, State=Hover",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      },
+      {
+        "name": "Size=Default, State=Selected",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      },
+      {
+        "name": "Size=Compressed, State=Default",
+        "size": "Compressed",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      },
+      {
+        "name": "Size=Compressed, State=Hover",
+        "size": "Compressed",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      },
+      {
+        "name": "Size=Compressed, State=Selected",
+        "size": "Compressed",
+        "bg": "semantic/bg-surface",
+        "fg": "semantic/text-neutral-strong"
+      }
+    ]
+  }
+}

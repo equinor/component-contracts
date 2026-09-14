@@ -1,0 +1,63 @@
+/* Generated from contracts/checkbox.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-checkbox {
+      /* Size-dependent parameters (single size). */
+      --_glyph: var(--eds-sizing-icon-lg);
+      --_cap: var(--eds-cap-rounded-md);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5%203h14c1.1%200%202%20.9%202%202v14c0%201.1-.9%202-2%202H5c-1.1%200-2-.9-2-2V5c0-1.1.9-2%202-2m1%2016h12c.55%200%201-.45%201-1V6c0-.55-.45-1-1-1H6c-.55%200-1%20.45-1%201v12c0%20.55.45%201%201%201%22%2F%3E%3C%2Fsvg%3E");
+
+      cursor: var(--_cursor, pointer);
+
+      /* The element IS the control: the EDS icon (from @equinor/eds-icons,
+       * resolved at build time) is the MASK, the background is the ink —
+       * the CSS twin of the Figma mask+tint. The footprint stays the cap
+       * box, so the control sits on a label's cap line like any glyph. */
+      inline-size: var(--_glyph);
+      block-size: var(--_glyph);
+      margin: calc((var(--_cap) - var(--_glyph)) / 2);
+
+      appearance: none;
+      background-color: var(--_icon-fg);
+
+      mask-image: var(--_mask);
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
+  }
+
+  @layer variants {
+    .eds-checkbox:not(:checked, :indeterminate) {
+      --_icon-fg: var(--eds-color-icon-accent);
+    }
+
+    .eds-checkbox:checked {
+      --_icon-fg: var(--eds-color-icon-accent);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5%203h14c1.1%200%202%20.9%202%202v14c0%201.1-.9%202-2%202H5c-1.1%200-2-.9-2-2V5c0-1.1.9-2%202-2m4.3%2013.29c.39.39%201.02.39%201.41%200l7.58-7.59a.996.996%200%201%200-1.41-1.41L10%2014.17l-2.88-2.88a.996.996%200%201%200-1.41%201.41z%22%2F%3E%3C%2Fsvg%3E");
+    }
+
+    .eds-checkbox:indeterminate {
+      --_icon-fg: var(--eds-color-icon-accent);
+      --_mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5%203h14c1.1%200%202%20.9%202%202v14c0%201.1-.9%202-2%202H5c-1.1%200-2-.9-2-2V5c0-1.1.9-2%202-2m3%2010h8c.55%200%201-.45%201-1s-.45-1-1-1H8c-.55%200-1%20.45-1%201s.45%201%201%201%22%2F%3E%3C%2Fsvg%3E");
+    }
+  }
+
+  @layer states {
+    .eds-checkbox:disabled {
+      --_cursor: not-allowed;
+      --_icon-fg: var(--eds-color-text-disabled);
+    }
+
+    .eds-checkbox:focus-visible {
+      /* a mask clips the outline (measured), and filters apply AFTER
+       * masking — four hard drop-shadows draw a ring hugging the glyph. */
+      filter: drop-shadow(var(--eds-sizing-stroke-thick) 0 0 var(--eds-color-border-focus))
+        drop-shadow(calc(-1 * var(--eds-sizing-stroke-thick)) 0 0 var(--eds-color-border-focus))
+        drop-shadow(0 var(--eds-sizing-stroke-thick) 0 var(--eds-color-border-focus))
+        drop-shadow(0 calc(-1 * var(--eds-sizing-stroke-thick)) 0 var(--eds-color-border-focus));
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.top-bar",
+  "version": "0.6.0",
+  "description": "TopBar — the application header. A surface strip (white in light, a raised North Sea panel in dark — canvas sits below surface in both schemes) with a thick subtle underline (the SideBar's right border is the same rule, rotated). Identity leads: a swappable application symbol and the lg application name. Search and ghost-icon action Buttons trail — user settings, notifications, density. No tabs in the top bar: the tutorial showed that pattern, and it is retired.",
+  "notes": "v0.3.0 (2026-09-04, Victor's design review): underline back to THICK — overrules v0.2.0's hairline (that entry recorded the walk matching CSS down to a hand-built 1px; the design verdict standardises stroke-thick, colour subtle, shared with the SideBar edge). Container rule applied: 16×16 inset (md squared) and gap 16 (spacing-horizontal-md) — the icon-gap token here was the audit catch: icon gaps belong INSIDE atoms, between a glyph and its label. Distribution is now the CONTRACT's fact, not the consumer's: the title fills, search and actions trail to the inline end. Title steps up to lg compressed. The app symbol is an INSTANCE_SWAP slot — teams drop their product mark in; 'apps' is the placeholder — carried in code as consumer markup in the symbol cell. Search detail (same day): the Input instance shows the magnifier (Has Leading Icon on + the magnifier swapped in — the Input's default leading icon is 'add circle outlined', a fields-walk placeholder) and reads 'Search'. v0.4.0 (2026-09-04, same review): two spacing rungs discovered while Victor eyeballed the strip against the ladder. SEAT (xs, raw): a strip seating CONTROLS pads its cross-axis with the seat rung — one relation tighter than cluster; no optical compensation (controls carry no half-leading; icon-only precedent); height emerges as tallest control + 2×seat = 36/52/68 across densities. CLUSTER (sm): the three actions form one group; within-group gap sits one rung below the container gap (Gestalt + the optical argument: buttons bring their own air). Ladder purity chosen over the half-gap derivation (which resurrects EDS 1.x's 64 at relaxed but mints an off-ladder 10). v0.5.0 (2026-09-05, after the sidebar's slots): the three hard-coded actions became a TRUE SLOT that IS the actions cluster (sm gap bound on the slot itself) — designers add as many ghost-icon Buttons as they want (Victor's open-ended requirement, SCOPE polish item CLOSED); the account/notifications/tune trio remains as seed content. CSS unchanged: the .eds-actions cluster wrapper already was consumer markup. v0.6.0 (2026-09-05): the search field gets an authored width — 256, the rail's number (a deliberate rhyme).",
+  "props": [
+    {
+      "name": "title",
+      "description": "The application name.",
+      "type": {
+        "text": true
+      },
+      "default": "Application name",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-horizontal-md}",
+        "align": "center"
+      },
+      "inset": {
+        "size": "md",
+        "seat": true
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-surface}",
+        "border-bottom-color": "{color.semantic.border-neutral-subtle}"
+      }
+    },
+    "symbol": {
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-lg}",
+      "swap": {
+        "property": "Symbol",
+        "componentKey": "c34cd7ce05a7b4dfee9f28421a7cf83597fde0ed"
+      }
+    },
+    "title": {
+      "fill": true,
+      "typography": {
+        "label": "lg",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "bolder"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-strong}"
+      }
+    },
+    "search": {
+      "width": 256,
+      "instance": {
+        "component": "Input",
+        "overrides": {
+          "Value": "Search",
+          "Has Leading Icon": "true",
+          "↳ Leading Icon": "key:50bc558cebb0c9f98064afb18f448ca670519d9c"
+        },
+        "icon": "search"
+      }
+    },
+    "actions": {
+      "figmaSlot": true,
+      "cluster": "actions",
+      "seed": [
+        {
+          "component": "Button",
+          "overrides": {
+            "Variant": "Ghost-icon",
+            "Tone": "Neutral",
+            "↳ Leading Icon": "key:df75e4665f6aad158631af1a9a358ea97e85748e"
+          }
+        },
+        {
+          "component": "Button",
+          "overrides": {
+            "Variant": "Ghost-icon",
+            "Tone": "Neutral",
+            "↳ Leading Icon": "key:9be4f30d79fd86c1aa76dcc5ec941a7fb676d75e"
+          }
+        },
+        {
+          "component": "Button",
+          "overrides": {
+            "Variant": "Ghost-icon",
+            "Tone": "Neutral",
+            "↳ Leading Icon": "key:4393cf2fde14ebefeb1350a7455a02cd3351a667"
+          }
+        }
+      ]
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "header",
+    "role": "banner"
+  }
+}

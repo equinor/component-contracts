@@ -1,0 +1,2734 @@
+{
+  "typography": {
+    "font-family": {
+      "$type": "fontFamily",
+      "ui": {
+        "$value": "Inter",
+        "$description": "ui-body — SIL OFL 1.1",
+        "$extensions": {
+          "com.equinor.eds.font-metrics": {
+            "unitsPerEm": 2048,
+            "capHeight": 1490,
+            "xHeight": 1118,
+            "capRatio": 0.727539,
+            "xRatio": 0.545898
+          },
+          "com.equinor.eds.role": {
+            "reference": true,
+            "note": "x-heights are aligned to this family."
+          },
+          "com.equinor.eds.css": {
+            "emit": "font-face"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "header": {
+        "$value": "Equinor",
+        "$description": "header — Proprietary — Equinor ASA. Do not vendor or redistribute.",
+        "$extensions": {
+          "com.equinor.eds.font-metrics": {
+            "unitsPerEm": 1000,
+            "capHeight": 700,
+            "xHeight": 480,
+            "capRatio": 0.7,
+            "xRatio": 0.48
+          },
+          "com.equinor.eds.derived": {
+            "x-height-correction": {
+              "expression": "xRatio(reference) / xRatio(self)",
+              "inputs": {
+                "reference": "{typography.font-family.ui}"
+              },
+              "value": 1.137288,
+              "appliedAs": "baked into typography.header-font-size",
+              "note": "NOT emitted as CSS size-adjust. size-adjust is a CSS-only @font-face descriptor — Figma has no equivalent and React Native never parses it, so both would render the uncorrected size. Baking also keeps header sizes on the 0.5px grid, which size-adjust does not."
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "font-face"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      },
+      "code": {
+        "$value": "CommitMono",
+        "$description": "code — SIL OFL 1.1",
+        "$extensions": {
+          "com.equinor.eds.font-metrics": {
+            "unitsPerEm": 1000,
+            "capHeight": 700,
+            "xHeight": 540,
+            "capRatio": 0.7,
+            "xRatio": 0.54
+          },
+          "com.equinor.eds.derived": {
+            "x-height-correction": {
+              "expression": "xRatio(reference) / xRatio(self)",
+              "inputs": {
+                "reference": "{typography.font-family.ui}"
+              },
+              "value": 1.010922,
+              "appliedAs": "baked into typography.header-font-size",
+              "note": "NOT emitted as CSS size-adjust. size-adjust is a CSS-only @font-face descriptor — Figma has no equivalent and React Native never parses it, so both would render the uncorrected size. Baking also keeps header sizes on the 0.5px grid, which size-adjust does not."
+            }
+          },
+          "com.equinor.eds.css": {
+            "emit": "font-face"
+          },
+          "com.equinor.eds.figma": {
+            "emit": "value"
+          }
+        }
+      }
+    }
+  },
+  "font-weight": {
+    "$type": "fontWeight",
+    "$description": "Flat across every size and both families. The legacy per-size matrix carried no information beyond these three values.",
+    "lighter": {
+      "$value": 300
+    },
+    "normal": {
+      "$value": 400
+    },
+    "bolder": {
+      "$value": 500
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "$description": "Composed in the legacy build from decomposed Figma primitives; the primitives are not exposed as variables there either, so the composed values are carried across.",
+    "low": {
+      "$value": [
+        {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.2
+          }
+        },
+        {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 3,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.12
+          }
+        }
+      ],
+      "$description": "Tooltips, menus, popovers, autocomplete lists, snackbars."
+    },
+    "high": {
+      "$value": [
+        {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 12,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.2
+          }
+        },
+        {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 12,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 16,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 6,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.12
+          }
+        }
+      ],
+      "$description": "Dialogs, modals, drawers."
+    }
+  },
+  "recipe": {
+    "$description": "Optical padding for scanned controls. Tier 3 — 1cap resolves per font at the point of use, so these are expressions, not values. Read text uses text-box trim instead.",
+    "cap-rounded": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(1cap, 4px)",
+          "inputs": {}
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "cap-rounded-xs": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.727539, 4px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xs}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded-xs"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 8,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "cap-rounded-sm": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.727539, 4px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.sm}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded-sm"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "cap-rounded-md": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.727539, 4px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.md}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded-md"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "cap-rounded-lg": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.727539, 4px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.lg}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded-lg"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "cap-rounded-xl": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.727539, 4px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xl}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-cap-rounded-xl"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 16,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xs-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-squished}",
+            "lineHeight": "{typography.line-height.compressed.xs}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xs-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 2,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 4,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 6,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xs-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-squished}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xs-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 16,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 20,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 24,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xs-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-squared}",
+            "lineHeight": "{typography.line-height.compressed.xs}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xs-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 4,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 6,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 10,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xs-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-squared}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xs-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 20,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 24,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 32,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xs-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-stretched}",
+            "lineHeight": "{typography.line-height.compressed.xs}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xs-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 10,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 14,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xs-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xs-vertical-stretched}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xs-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 24,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 32,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 40,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-sm-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-squished}",
+            "lineHeight": "{typography.line-height.compressed.sm}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-sm-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 4,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 6,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 10,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-sm-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-squished}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-sm-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 20,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 24,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 36,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-sm-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-squared}",
+            "lineHeight": "{typography.line-height.compressed.sm}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-sm-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 10,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 14,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-sm-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-squared}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-sm-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 24,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 32,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 44,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-sm-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-stretched}",
+            "lineHeight": "{typography.line-height.compressed.sm}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-sm-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 10,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 14,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 18,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-sm-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-sm-vertical-stretched}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-sm-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 32,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 40,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 52,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-md-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-squished}",
+            "lineHeight": "{typography.line-height.compressed.md}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-md-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 10,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-md-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-squished}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-md-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 24,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 36,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 44,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-md-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-squared}",
+            "lineHeight": "{typography.line-height.compressed.md}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-md-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 10,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 14,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 16,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-md-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-squared}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-md-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 32,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 44,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 52,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-md-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-stretched}",
+            "lineHeight": "{typography.line-height.compressed.md}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-md-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 14,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 18,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 20,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-md-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-md-vertical-stretched}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-md-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 40,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 52,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 60,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-lg-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-squished}",
+            "lineHeight": "{typography.line-height.compressed.lg}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-lg-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 10,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 16,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-lg-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-squished}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-lg-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 36,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 44,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 52,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-lg-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-squared}",
+            "lineHeight": "{typography.line-height.compressed.lg}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-lg-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 14,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 16,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 20,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-lg-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-squared}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-lg-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 44,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 52,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 60,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-lg-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-stretched}",
+            "lineHeight": "{typography.line-height.compressed.lg}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-lg-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 18,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 20,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 24,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-lg-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-lg-vertical-stretched}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-lg-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 52,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 60,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 68,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xl-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-squished}",
+            "lineHeight": "{typography.line-height.compressed.xl}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xl-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 14,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 16,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 20,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xl-squished": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-squished}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xl-squished"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 44,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 52,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 64,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xl-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-squared}",
+            "lineHeight": "{typography.line-height.compressed.xl}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xl-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 18,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 20,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 24,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xl-squared": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-squared}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xl-squared"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 52,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 60,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 72,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-padding-xl-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset - (lineHeight - capRounded) / 2",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-stretched}",
+            "lineHeight": "{typography.line-height.compressed.xl}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-padding-xl-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 22,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 24,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 28,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    },
+    "optical-height-xl-stretched": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "inset * 2 + capRounded",
+          "inputs": {
+            "inset": "{spacing.spacing-inset-xl-vertical-stretched}",
+            "capRounded": "{recipe.cap-rounded}"
+          }
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-optical-height-xl-stretched"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 60,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 68,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 80,
+              "unit": "px"
+            }
+          },
+          "note": "Figma cannot compute 1cap; use the resolved table."
+        }
+      }
+    }
+  },
+  "ladder": {
+    "$type": "dimension",
+    "spacing": {
+      "0": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "7": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "9": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        }
+      },
+      "10": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "11": {
+        "$value": {
+          "value": 36,
+          "unit": "px"
+        },
+        "$description": "Extrapolated — top of the ladder steps by +4 (20, 24, 28, 32)"
+      },
+      "$description": "Shared spacing ladder. Density and proportion are index offsets into it.",
+      "$extensions": {
+        "com.equinor.eds.ladder": {
+          "values": [
+            1,
+            2,
+            4,
+            6,
+            8,
+            12,
+            16,
+            20,
+            24,
+            28,
+            32,
+            36
+          ],
+          "measuredLength": 11,
+          "extrapolatedTail": {
+            "value": 36,
+            "rule": "top of the ladder steps by +4 (20, 24, 28, 32)"
+          }
+        }
+      }
+    },
+    "icon": {
+      "0": {
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "7": {
+        "$value": {
+          "value": 37,
+          "unit": "px"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 42,
+          "unit": "px"
+        }
+      },
+      "9": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      },
+      "10": {
+        "$value": {
+          "value": 56,
+          "unit": "px"
+        }
+      },
+      "11": {
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        },
+        "$description": "Extrapolated — top of the ladder follows the type ratio 2^(1/5): 56 * 1.1487 = 64.3"
+      },
+      "$description": "Shared icon ladder. Density and proportion are index offsets into it.",
+      "$extensions": {
+        "com.equinor.eds.ladder": {
+          "values": [
+            14,
+            16,
+            18,
+            20,
+            24,
+            28,
+            32,
+            37,
+            42,
+            48,
+            56,
+            64
+          ],
+          "measuredLength": 11,
+          "extrapolatedTail": {
+            "value": 64,
+            "rule": "top of the ladder follows the type ratio 2^(1/5): 56 * 1.1487 = 64.3"
+          }
+        }
+      }
+    },
+    "selectable": {
+      "0": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 36,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 44,
+          "unit": "px"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 52,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 60,
+          "unit": "px"
+        }
+      },
+      "7": {
+        "$value": {
+          "value": 68,
+          "unit": "px"
+        },
+        "$description": "Extrapolated — top of the ladder steps by +8 (44, 52, 60)"
+      },
+      "$description": "Shared selectable ladder. Density and proportion are index offsets into it.",
+      "$extensions": {
+        "com.equinor.eds.ladder": {
+          "values": [
+            16,
+            20,
+            24,
+            36,
+            44,
+            52,
+            60,
+            68
+          ],
+          "measuredLength": 7,
+          "extrapolatedTail": {
+            "value": 68,
+            "rule": "top of the ladder steps by +8 (44, 52, 60)"
+          }
+        }
+      }
+    },
+    "radius": {
+      "0": {
+        "$value": {
+          "value": 3,
+          "unit": "px"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 5,
+          "unit": "px"
+        },
+        "$description": "Extrapolated — ladder is 3, 4 — continues by +1"
+      },
+      "$description": "Shared radius ladder. Density and proportion are index offsets into it.",
+      "$extensions": {
+        "com.equinor.eds.ladder": {
+          "values": [
+            3,
+            4,
+            5
+          ],
+          "measuredLength": 2,
+          "extrapolatedTail": {
+            "value": 5,
+            "rule": "ladder is 3, 4 — continues by +1"
+          }
+        }
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "spacing-inset-xs-horizontal": {
+      "$value": "{spacing.spacing-horizontal-xs}",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xs-horizontal"
+        }
+      }
+    },
+    "spacing-inset-xs-vertical-squished": {
+      "$value": "{spacing.spacing-vertical-2xs}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xs",
+            "proportion": "squished",
+            "proportionOffset": -1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xs-vertical-squished"
+        }
+      }
+    },
+    "spacing-inset-xs-vertical-squared": {
+      "$value": "{spacing.spacing-vertical-xs}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xs",
+            "proportion": "squared",
+            "proportionOffset": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xs-vertical-squared"
+        }
+      }
+    },
+    "spacing-inset-xs-vertical-stretched": {
+      "$value": "{spacing.spacing-vertical-sm}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xs",
+            "proportion": "stretched",
+            "proportionOffset": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xs-vertical-stretched"
+        }
+      }
+    },
+    "spacing-inset-sm-horizontal": {
+      "$value": "{spacing.spacing-horizontal-sm}",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-sm-horizontal"
+        }
+      }
+    },
+    "spacing-inset-sm-vertical-squished": {
+      "$value": "{spacing.spacing-vertical-xs}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "sm",
+            "proportion": "squished",
+            "proportionOffset": -1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-sm-vertical-squished"
+        }
+      }
+    },
+    "spacing-inset-sm-vertical-squared": {
+      "$value": "{spacing.spacing-vertical-sm}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "sm",
+            "proportion": "squared",
+            "proportionOffset": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-sm-vertical-squared"
+        }
+      }
+    },
+    "spacing-inset-sm-vertical-stretched": {
+      "$value": "{spacing.spacing-vertical-md}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "sm",
+            "proportion": "stretched",
+            "proportionOffset": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-sm-vertical-stretched"
+        }
+      }
+    },
+    "spacing-inset-md-horizontal": {
+      "$value": "{spacing.spacing-horizontal-md}",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-md-horizontal"
+        }
+      }
+    },
+    "spacing-inset-md-vertical-squished": {
+      "$value": "{spacing.spacing-vertical-sm}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "md",
+            "proportion": "squished",
+            "proportionOffset": -1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-md-vertical-squished"
+        }
+      }
+    },
+    "spacing-inset-md-vertical-squared": {
+      "$value": "{spacing.spacing-vertical-md}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "md",
+            "proportion": "squared",
+            "proportionOffset": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-md-vertical-squared"
+        }
+      }
+    },
+    "spacing-inset-md-vertical-stretched": {
+      "$value": "{spacing.spacing-vertical-lg}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "md",
+            "proportion": "stretched",
+            "proportionOffset": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-md-vertical-stretched"
+        }
+      }
+    },
+    "spacing-inset-lg-horizontal": {
+      "$value": "{spacing.spacing-horizontal-lg}",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-lg-horizontal"
+        }
+      }
+    },
+    "spacing-inset-lg-vertical-squished": {
+      "$value": "{spacing.spacing-vertical-md}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "lg",
+            "proportion": "squished",
+            "proportionOffset": -1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-lg-vertical-squished"
+        }
+      }
+    },
+    "spacing-inset-lg-vertical-squared": {
+      "$value": "{spacing.spacing-vertical-lg}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "lg",
+            "proportion": "squared",
+            "proportionOffset": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-lg-vertical-squared"
+        }
+      }
+    },
+    "spacing-inset-lg-vertical-stretched": {
+      "$value": "{spacing.spacing-vertical-xl}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "lg",
+            "proportion": "stretched",
+            "proportionOffset": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-lg-vertical-stretched"
+        }
+      }
+    },
+    "spacing-inset-xl-horizontal": {
+      "$value": "{spacing.spacing-horizontal-xl}",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xl-horizontal"
+        }
+      }
+    },
+    "spacing-inset-xl-vertical-squished": {
+      "$value": "{spacing.spacing-vertical-lg}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xl",
+            "proportion": "squished",
+            "proportionOffset": -1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xl-vertical-squished"
+        }
+      }
+    },
+    "spacing-inset-xl-vertical-squared": {
+      "$value": "{spacing.spacing-vertical-xl}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xl",
+            "proportion": "squared",
+            "proportionOffset": 0
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xl-vertical-squared"
+        }
+      }
+    },
+    "spacing-inset-xl-vertical-stretched": {
+      "$value": "{spacing.spacing-vertical-2xl}",
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "spacing[labelIndex + proportionOffset]",
+          "inputs": {
+            "size": "xl",
+            "proportion": "stretched",
+            "proportionOffset": 1
+          }
+        },
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-inset-xl-vertical-stretched"
+        }
+      }
+    },
+    "spacing-icon-xs-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xs}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-xs-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 6,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 8,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-xs-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xs}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-xs-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 6,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 8,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-sm-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.sm}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-sm-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 8,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-sm-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.sm}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-sm-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 6,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 8,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-md-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.md}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-md-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 10,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-md-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.md}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-md-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 8,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 10,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-lg-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.lg}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-lg-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 10,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-lg-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.lg}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-lg-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 8,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 10,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 12,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 10,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 14,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 10,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 14,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-2xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.2xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-2xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 16,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-2xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.2xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-2xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 12,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 16,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-3xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.3xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-3xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 16,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 18,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-3xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.3xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-3xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 12,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 16,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 18,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-4xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.4xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-4xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 16,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 18,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 20,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-4xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.4xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-4xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 16,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 18,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 20,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-5xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.5xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-5xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 18,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 20,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 22,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-5xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.5xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-5xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 18,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 20,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 22,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-6xl-gap-horizontal": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.6xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-6xl-gap-horizontal"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 20,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 22,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 26,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-icon-6xl-gap-vertical": {
+      "$extensions": {
+        "com.equinor.eds.derived": {
+          "expression": "round(fontSize * 0.618, 2px)",
+          "inputs": {
+            "fontSize": "{typography.font-size.6xl}"
+          },
+          "note": "Golden ratio — matches `gap: round(0.618em, 1px)` in Button/button.css."
+        },
+        "com.equinor.eds.css": {
+          "emit": "expression",
+          "variable": "--eds-spacing-icon-6xl-gap-vertical"
+        },
+        "com.equinor.eds.figma": {
+          "emit": "resolved",
+          "resolved": {
+            "compact": {
+              "value": 20,
+              "unit": "px"
+            },
+            "comfortable": {
+              "value": 22,
+              "unit": "px"
+            },
+            "relaxed": {
+              "value": 26,
+              "unit": "px"
+            }
+          }
+        }
+      }
+    },
+    "spacing-horizontal-none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-horizontal-none"
+        }
+      }
+    },
+    "spacing-vertical-none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-vertical-none"
+        }
+      }
+    },
+    "spacing-border-radius-none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-border-radius-none"
+        }
+      }
+    },
+    "spacing-border-radius-pill": {
+      "$value": {
+        "value": 1000,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-spacing-border-radius-pill"
+        }
+      }
+    },
+    "sizing-stroke-none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-stroke-none"
+        }
+      }
+    },
+    "sizing-stroke-thin": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-stroke-thin"
+        }
+      }
+    },
+    "sizing-stroke-thick": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Does not move with density.",
+      "$extensions": {
+        "com.equinor.eds.css": {
+          "variable": "--eds-sizing-stroke-thick"
+        }
+      }
+    }
+  },
+  "grid": {
+    "$type": "dimension",
+    "base": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Layout grid. The invariant that line-heights snap to — the resulting ratio curve is derived from it and is deliberately non-monotonic."
+    }
+  }
+}

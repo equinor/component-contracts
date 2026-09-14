@@ -1,0 +1,77 @@
+{
+  "$comment": [
+    "Font metrics extracted from the EDS CDN variable fonts, for build-time cap-height",
+    "and x-height calculations. Metrics only — no font binaries are vendored, because the",
+    "Equinor typeface licence prohibits duplication and distribution.",
+    "Source: https://cdn.eds.equinor.com/font/eds-uprights-vf.css",
+    "Regenerate with: pnpm run extract:font-metrics",
+    "size-adjust is NOT emitted. The x-height correction is baked into the header font-size tokens instead, so one number serves CSS, Figma and React Native — see DECISIONS.md 5."
+  ],
+  "extractedAt": "2026-08-23",
+  "fonts": {
+    "Inter": {
+      "role": "ui-body",
+      "unitsPerEm": 2048,
+      "capHeight": 1490,
+      "xHeight": 1118,
+      "capRatio": 0.727539,
+      "xRatio": 0.545898,
+      "sizeAdjust": 1.0,
+      "effectiveCapRatio": 0.727539,
+      "licence": "SIL OFL 1.1",
+      "source": "https://cdn.eds.equinor.com/font/InterVariable.woff2",
+      "src": [
+        "url(../../fonts/InterVariable.woff2) format(\"woff2-variations\")",
+        "url(https://cdn.eds.equinor.com/font/InterVariable.woff2) format(\"woff2-variations\")",
+        "url(https://cdn.eds.equinor.com/font/Inter-Regular.woff) format(\"woff\")"
+      ],
+      "weightRange": "1 999",
+      "vendored": "fonts/InterVariable.woff2 — SIL OFL 1.1 permits it; offline/stage safety (venue wifi). Equinor stays CDN+local(): its licence forbids vendoring."
+    },
+    "Equinor": {
+      "role": "header",
+      "unitsPerEm": 1000,
+      "capHeight": 700,
+      "xHeight": 480,
+      "capRatio": 0.7,
+      "xRatio": 0.48,
+      "sizeAdjust": 1.0,
+      "effectiveCapRatio": 0.7,
+      "licence": "Proprietary — Equinor ASA. Do not vendor or redistribute.",
+      "source": "https://cdn.eds.equinor.com/font/EquinorVariable-VF.woff2",
+      "src": [
+        "url(https://cdn.eds.equinor.com/font/EquinorVariable-VF.woff2) format(\"woff2-variations\")",
+        "url(https://cdn.eds.equinor.com/font/EquinorVariable-VF.woff) format(\"woff-variations\")",
+        "url(https://cdn.eds.equinor.com/font/Equinor-Regular.woff) format(\"woff\")"
+      ],
+      "weightRange": "1 999"
+    },
+    "CommitMono": {
+      "role": "code",
+      "unitsPerEm": 1000,
+      "capHeight": 700,
+      "xHeight": 540,
+      "capRatio": 0.7,
+      "xRatio": 0.54,
+      "sizeAdjust": 1.0,
+      "effectiveCapRatio": 0.7,
+      "licence": "SIL OFL 1.1",
+      "source": "https://cdn.eds.equinor.com/font/CommitMonoV143-VF.woff2",
+      "src": [
+        "url(../../fonts/CommitMonoV143-VF.woff2) format(\"woff2-variations\")",
+        "url(https://cdn.eds.equinor.com/font/CommitMonoV143-VF.woff2) format(\"woff2-variations\")"
+      ],
+      "weightRange": "1 999",
+      "vendored": "fonts/CommitMonoV143-VF.woff2 — SIL OFL 1.1."
+    }
+  },
+  "discrepancies": [
+    {
+      "issue": "size-adjust does not achieve x-height alignment",
+      "detail": "Shipped CSS uses 105.9% for Equinor and 95.2% for CommitMono, both labelled 'Match Inter x-height'. Computed from current metrics, alignment requires 113.73% and 101.09% respectively. decisions.md records 113.6363%, which matches the computed value.",
+      "hypothesis": "Values likely calculated against an earlier Equinor VF with a larger x-height (105.9% implies ~0.5155 vs today's 0.480) and not recalculated after a font update. Unverified.",
+      "impact": "At 105.9% Equinor's x-height renders at ~93% of Inter's, so the faces remain visibly mismatched.",
+      "status": "resolved — confirmed a miscalculation. The correction is now derived and baked into header font sizes rather than transcribed into a font descriptor."
+    }
+  ]
+}

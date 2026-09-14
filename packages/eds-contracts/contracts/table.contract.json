@@ -1,0 +1,135 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.table",
+  "version": "0.3.0",
+  "description": "Table — the density centerpiece. Rows and cells are DOM elements, not classable parts; the invariant holds PER CELL (padding = inset − halfLeading), so row heights emerge (24/36/44) and switching density shows MORE ROWS in the same viewport — never a narrower table. That asymmetry is the point: the horizontal/vertical spacing split is the prepared seam.",
+  "notes": "Row hover rides the neutral ghost ladder; the selected row binds the accent ghost-selected rung — same mechanism as menu items, because a table row IS a transparent-resting interactive surface. Column widths are content's business (Figma: column-major grid, columns hug). Sorting, virtualization and cell renderers are application concerns. v0.2.0 (2026-09-06, Victor, from the Storefront's props tables): the COMPRESSED size, for big data tables. sm cells in an sm-squished inset; the invariant holds per cell, so rows land 20/24/36 across densities (8+8+8 at comfortable), still never authored. The size is a channel-variable override in CSS (data-size='compressed' repoints the five size variables). Figma disposition: LOWERED for now; the canvas table ships the Default size only, until the table builder learns per-variant cell bindings (queued in SCOPE). v0.3.0 (2026-09-06, Victor, from Google Sheets' wrapped cells measured at ~1.35): CELL TEXT IS READ, NOT SCANNED — both sizes move to the default leading (md 14/20, compressed sm 12/16) and the vertical padding absorbs the larger half-leading, so every row height stays exactly where it was (24/36/44 and 20/24/36): the leading variant changes the padding, never the height — the invariant's own promise, applied to prose in cells. Header cells ride the same leading (an accepted trade: headers are scanned labels, but they are single-line, so the shared leading is invisible and keeps ONE padding pairing per size on both surfaces).",
+  "props": [
+    {
+      "name": "size",
+      "description": "Row density WITHIN a density mode: default (md cells, sm-squared inset) for reading tables, compressed (sm cells, sm-squished inset) for big data tables. Heights stay emergent: 24/36/44 default, 20/24/36 compressed.",
+      "type": {
+        "enum": [
+          "default",
+          "compressed"
+        ]
+      },
+      "default": "default",
+      "anatomy": {
+        "default": {
+          "inset": "sm",
+          "label": "md"
+        },
+        "compressed": {
+          "inset": "sm",
+          "label": "sm",
+          "proportion": "squished"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "demo": {
+    "columns": [
+      "Well",
+      "Person",
+      "Position",
+      "Status"
+    ],
+    "rows": [
+      [
+        "tp020",
+        "Eskhil Normann",
+        "Environment manager",
+        "Active"
+      ],
+      [
+        "tp021",
+        "Ingrid Berge",
+        "Drilling engineer",
+        "Active"
+      ],
+      [
+        "tp022",
+        "Jonas Vik",
+        "Geologist",
+        "Paused"
+      ],
+      [
+        "tp023",
+        "Maria Sund",
+        "Data engineer",
+        "Active"
+      ]
+    ]
+  },
+  "anatomy": {
+    "root": {
+      "inset": {
+        "size": "sm",
+        "proportion": "squared",
+        "opticalLabel": "cell"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-surface}"
+      }
+    },
+    "row": {
+      "element": "tr",
+      "tokens": {
+        "background-color": "{color.semantic.bg-neutral-fill-ghost-default}"
+      }
+    },
+    "header-cell": {
+      "element": "th",
+      "typography": {
+        "label": "md",
+        "variant": "default",
+        "family": "ui",
+        "weight": "bolder"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-strong}",
+        "border-bottom-color": "{color.semantic.border-neutral-medium}"
+      }
+    },
+    "cell": {
+      "element": "td",
+      "typography": {
+        "label": "md",
+        "variant": "default",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-strong}",
+        "border-bottom-color": "{color.semantic.border-neutral-subtle}"
+      }
+    }
+  },
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "row/background-color": "{color.semantic.bg-neutral-fill-ghost-hover}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "row/background-color": "{color.semantic.bg-accent-fill-ghost-selected}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "table"
+  }
+}

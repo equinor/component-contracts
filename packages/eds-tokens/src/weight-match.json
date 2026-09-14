@@ -1,0 +1,52 @@
+{
+  "$description": "Equinor font-weights matched to Inter tiers at the same perceived size — MEASURED, not derived: stem widths read from the font outlines by typography-weight-matching/scripts/stem.py (equinor/skills). Source: ids-meetup-oslo-26 issue #42 + the Option B (500-matched bolder) comment, 2026-09-06. Inputs: Inter.woff2 (sha256 87a69ae…) vs CDN EquinorVariable-VF.woff2, x-height correction 1.137288, opsz = the step's UI px clamped to Inter's 14–32 axis. Values fall with size because Inter's optical axis thins stems and Equinor has none. Tiers = Inter 300/400/500 (500 = the team-parity Medium; Victor's Option B ruling 2026-09-06: ONE bolder tier across both families).",
+  "regenerate": "stem.py Inter.woff2 EquinorVariable-VF.woff2 --match 300,400,500 --opsz <text px> --correction 1.137288",
+  "opszClamp": [
+    14,
+    32
+  ],
+  "points": [
+    {
+      "px": 14,
+      "lighter": 376.2,
+      "normal": 458.5,
+      "bolder": 552.7
+    },
+    {
+      "px": 16,
+      "lighter": 375.1,
+      "normal": 456.2,
+      "bolder": 550.2
+    },
+    {
+      "px": 18.5,
+      "lighter": 373.8,
+      "normal": 453.4,
+      "bolder": 547.0
+    },
+    {
+      "px": 21,
+      "lighter": 372.4,
+      "normal": 450.5,
+      "bolder": 543.8
+    },
+    {
+      "px": 24.5,
+      "lighter": 370.5,
+      "normal": 446.6,
+      "bolder": 539.3
+    },
+    {
+      "px": 28,
+      "lighter": 368.5,
+      "normal": 442.6,
+      "bolder": 534.9
+    },
+    {
+      "px": 32,
+      "lighter": 366.3,
+      "normal": 438.0,
+      "bolder": 529.8
+    }
+  ]
+}

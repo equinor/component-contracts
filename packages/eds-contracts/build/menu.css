@@ -1,0 +1,40 @@
+/* Generated from contracts/menu.contract.json — do not edit. */
+
+@layer eds-components {
+  @layer base, variants, states;
+
+  @layer base {
+    .eds-menu {
+      /* No variant axes — the channel variables live on the root. */
+      --_bg: var(--eds-color-bg-floating);
+      --_elevation: var(--eds-elevation-low);
+
+      display: flex;
+      flex-direction: column;
+
+      /* the bleed guard: the panel pads its block ends by ITS OWN radius
+       * (same token), so full-bleed item fills never clip the corners;
+       * the sides stay unpadded — items run edge to edge. The inline
+       * zero is EXPLICIT: the UA's [popover] { padding: 0.25em } sets
+       * all four sides, and an unauthored side belongs to the UA. */
+      box-sizing: border-box;
+      padding-block: var(--eds-spacing-border-radius-rounded);
+      padding-inline: 0;
+
+      /* popover-safe: the contract names popover + anchor positioning
+       * as the consumer's mechanism — our display must not beat the
+       * UA's closed-state display: none. */
+      &[popover]:not(:popover-open) {
+        display: none;
+      }
+
+      border: none;
+      border-radius: var(--_radius, var(--eds-spacing-border-radius-rounded));
+
+      background-color: var(--_bg);
+
+      /* Elevation lowers to an effect style in Figma, a shadow here. */
+      box-shadow: var(--_elevation, none);
+    }
+  }
+}

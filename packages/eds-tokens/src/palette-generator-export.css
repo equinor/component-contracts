@@ -1,0 +1,200 @@
+:root {
+  /* Design system colors using light-dark() function */
+  --color-moss-green-1: light-dark(
+    oklch(0.97 0.013 184.6),
+    oklch(0.15 0.002 184.6)
+  );
+  --color-moss-green-2: light-dark(
+    oklch(0.999 0.01 184.6),
+    oklch(0.25 0.006 184.6)
+  );
+  --color-moss-green-3: light-dark(
+    oklch(0.91 0.022 184.6),
+    oklch(0.47 0.038 184.6)
+  );
+  --color-moss-green-4: light-dark(
+    oklch(0.87 0.029 184.6),
+    oklch(0.52 0.049 184.6)
+  );
+  --color-moss-green-5: light-dark(
+    oklch(0.82 0.04 184.6),
+    oklch(0.58 0.061 184.6)
+  );
+  --color-moss-green-6: light-dark(
+    oklch(0.87 0.029 184.6),
+    oklch(0.47 0.038 184.6)
+  );
+  --color-moss-green-7: light-dark(
+    oklch(0.75 0.058 191.3),
+    oklch(0.61 0.07 191.3)
+  );
+  --color-moss-green-8: light-dark(
+    oklch(0.52 0.075 197.9),
+    oklch(0.76 0.077 197.9)
+  );
+  --color-moss-green-9: light-dark(
+    oklch(0.5 0.075 204.6),
+    oklch(0.82 0.071 204.6)
+  );
+  --color-moss-green-10: light-dark(
+    oklch(0.44 0.062 204.6),
+    oklch(0.88 0.057 204.6)
+  );
+  --color-moss-green-11: light-dark(
+    oklch(0.42 0.057 204.6),
+    oklch(0.93 0.044 204.6)
+  );
+  --color-moss-green-12: light-dark(
+    oklch(0.46 0.066 204.6),
+    oklch(0.91 0.049 204.6)
+  );
+  --color-moss-green-13: light-dark(
+    oklch(0.23 0.015 204.6),
+    oklch(0.99 0.03 204.6)
+  );
+  --color-moss-green-14: light-dark(
+    oklch(0.9 0.028 204.6),
+    oklch(0.33 0.015 204.6)
+  );
+  --color-moss-green-15: light-dark(
+    oklch(1 0.011 204.6),
+    oklch(0.1 0.001 204.6)
+  );
+
+  --color-gray-1: light-dark(oklch(0.97 0 0), oklch(0.15 0 0));
+  --color-gray-2: light-dark(oklch(0.999 0 0), oklch(0.25 0 0));
+  --color-gray-3: light-dark(oklch(0.91 0 0), oklch(0.47 0 0));
+  --color-gray-4: light-dark(oklch(0.87 0 0), oklch(0.52 0 0));
+  --color-gray-5: light-dark(oklch(0.82 0 0), oklch(0.58 0 0));
+  --color-gray-6: light-dark(oklch(0.87 0 0), oklch(0.47 0 0));
+  --color-gray-7: light-dark(oklch(0.75 0 0), oklch(0.61 0 0));
+  --color-gray-8: light-dark(oklch(0.52 0 0), oklch(0.76 0 0));
+  --color-gray-9: light-dark(oklch(0.5 0 0), oklch(0.82 0 0));
+  --color-gray-10: light-dark(oklch(0.44 0 0), oklch(0.88 0 0));
+  --color-gray-11: light-dark(oklch(0.42 0 0), oklch(0.93 0 0));
+  --color-gray-12: light-dark(oklch(0.46 0 0), oklch(0.91 0 0));
+  --color-gray-13: light-dark(oklch(0.23 0 0), oklch(0.99 0 0));
+  --color-gray-14: light-dark(oklch(0.9 0 0), oklch(0.33 0 0));
+  --color-gray-15: light-dark(oklch(1 0 0), oklch(0.1 0 0));
+
+  /* north-sea dark 1-2: chroma hand-raised 0.002->0.020 / 0.006->0.036 (2026-08-29).
+   * The generator's chroma envelope zeroes out at the ladder ends, which erased the
+   * North Sea tint from the dark canvas/surface pair — the original design carried
+   * chroma ~0.036 there (#132634 / #243746). Lightness untouched. Regenerate the
+   * envelope with a floor (or apcach) to make this hand-tune obsolete. */
+  --color-north-sea-1: light-dark(
+    oklch(0.97 0.014 252.5),
+    oklch(0.15 0.02 252.5)
+  );
+  --color-north-sea-2: light-dark(
+    oklch(0.999 0.011 252.5),
+    oklch(0.25 0.036 252.5)
+  );
+  --color-north-sea-3: light-dark(
+    oklch(0.91 0.023 252.5),
+    oklch(0.47 0.04 252.5)
+  );
+  --color-north-sea-4: light-dark(
+    oklch(0.87 0.031 252.5),
+    oklch(0.52 0.052 252.5)
+  );
+  --color-north-sea-5: light-dark(
+    oklch(0.82 0.042 252.5),
+    oklch(0.58 0.065 252.5)
+  );
+  --color-north-sea-6: light-dark(
+    oklch(0.87 0.031 252.5),
+    oklch(0.47 0.04 252.5)
+  );
+  --color-north-sea-7: light-dark(
+    oklch(0.75 0.048 249.3),
+    oklch(0.61 0.058 249.3)
+  );
+  --color-north-sea-8: light-dark(
+    oklch(0.52 0.046 246.1),
+    oklch(0.76 0.048 246.1)
+  );
+  --color-north-sea-9: light-dark(oklch(0.5 0.032 243), oklch(0.82 0.03 243));
+  --color-north-sea-10: light-dark(
+    oklch(0.44 0.026 243),
+    oklch(0.88 0.024 243)
+  );
+  --color-north-sea-11: light-dark(
+    oklch(0.42 0.024 243),
+    oklch(0.93 0.019 243)
+  );
+  --color-north-sea-12: light-dark(
+    oklch(0.46 0.028 243),
+    oklch(0.91 0.021 243)
+  );
+  --color-north-sea-13: light-dark(
+    oklch(0.23 0.007 243),
+    oklch(0.99 0.013 243)
+  );
+  --color-north-sea-14: light-dark(oklch(0.9 0.012 243), oklch(0.33 0.007 243));
+  --color-north-sea-15: light-dark(oklch(1 0.005 243), oklch(0.1 0 243));
+
+  --color-green-1: light-dark(oklch(0.97 0.03 143), oklch(0.15 0.004 143));
+  --color-green-2: light-dark(oklch(0.999 0.023 143), oklch(0.25 0.013 143));
+  --color-green-3: light-dark(oklch(0.91 0.05 143), oklch(0.47 0.086 143));
+  --color-green-4: light-dark(oklch(0.87 0.067 143), oklch(0.52 0.111 143));
+  --color-green-5: light-dark(oklch(0.82 0.091 143), oklch(0.58 0.139 143));
+  --color-green-6: light-dark(oklch(0.87 0.067 143), oklch(0.47 0.086 143));
+  --color-green-7: light-dark(oklch(0.75 0.125 143), oklch(0.61 0.15 143));
+  --color-green-8: light-dark(oklch(0.52 0.153 143), oklch(0.76 0.159 143));
+  --color-green-9: light-dark(oklch(0.5 0.146 143), oklch(0.82 0.139 143));
+  --color-green-10: light-dark(oklch(0.44 0.12 143), oklch(0.88 0.111 143));
+  --color-green-11: light-dark(oklch(0.42 0.111 143), oklch(0.93 0.086 143));
+  --color-green-12: light-dark(oklch(0.46 0.13 143), oklch(0.91 0.096 143));
+  --color-green-13: light-dark(oklch(0.23 0.03 143), oklch(0.99 0.058 143));
+  --color-green-14: light-dark(oklch(0.9 0.054 143), oklch(0.33 0.03 143));
+  --color-green-15: light-dark(oklch(1 0.022 143), oklch(0.1 0.002 143));
+
+  --color-blue-1: light-dark(oklch(0.97 0.025 240.7), oklch(0.15 0.003 240.7));
+  --color-blue-2: light-dark(oklch(0.999 0.019 240.7), oklch(0.25 0.011 240.7));
+  --color-blue-3: light-dark(oklch(0.91 0.041 240.7), oklch(0.47 0.07 240.7));
+  --color-blue-4: light-dark(oklch(0.87 0.055 240.7), oklch(0.52 0.091 240.7));
+  --color-blue-5: light-dark(oklch(0.82 0.074 240.7), oklch(0.58 0.113 240.7));
+  --color-blue-6: light-dark(oklch(0.87 0.055 240.7), oklch(0.47 0.07 240.7));
+  --color-blue-7: light-dark(oklch(0.75 0.102 240.7), oklch(0.61 0.123 240.7));
+  --color-blue-8: light-dark(oklch(0.52 0.125 240.7), oklch(0.76 0.13 240.7));
+  --color-blue-9: light-dark(oklch(0.5 0.12 240.7), oklch(0.82 0.113 240.7));
+  --color-blue-10: light-dark(oklch(0.44 0.099 240.7), oklch(0.88 0.091 240.7));
+  --color-blue-11: light-dark(oklch(0.42 0.091 240.7), oklch(0.93 0.07 240.7));
+  --color-blue-12: light-dark(oklch(0.46 0.106 240.7), oklch(0.91 0.078 240.7));
+  --color-blue-13: light-dark(oklch(0.23 0.025 240.7), oklch(0.99 0.047 240.7));
+  --color-blue-14: light-dark(oklch(0.9 0.044 240.7), oklch(0.33 0.025 240.7));
+  --color-blue-15: light-dark(oklch(1 0.018 240.7), oklch(0.1 0.002 240.7));
+
+  --color-orange-1: light-dark(oklch(0.97 0.03 58.7), oklch(0.15 0.004 58.7));
+  --color-orange-2: light-dark(oklch(0.999 0.023 58.7), oklch(0.25 0.013 58.7));
+  --color-orange-3: light-dark(oklch(0.91 0.05 58.7), oklch(0.47 0.085 58.7));
+  --color-orange-4: light-dark(oklch(0.87 0.066 58.7), oklch(0.52 0.11 58.7));
+  --color-orange-5: light-dark(oklch(0.82 0.09 58.7), oklch(0.58 0.138 58.7));
+  --color-orange-6: light-dark(oklch(0.87 0.066 58.7), oklch(0.47 0.085 58.7));
+  --color-orange-7: light-dark(oklch(0.75 0.124 58.7), oklch(0.61 0.149 58.7));
+  --color-orange-8: light-dark(oklch(0.52 0.152 58.7), oklch(0.76 0.157 58.7));
+  --color-orange-9: light-dark(oklch(0.5 0.145 58.7), oklch(0.82 0.138 58.7));
+  --color-orange-10: light-dark(oklch(0.44 0.12 58.7), oklch(0.88 0.11 58.7));
+  --color-orange-11: light-dark(oklch(0.42 0.11 58.7), oklch(0.93 0.085 58.7));
+  --color-orange-12: light-dark(oklch(0.46 0.129 58.7), oklch(0.91 0.095 58.7));
+  --color-orange-13: light-dark(oklch(0.23 0.03 58.7), oklch(0.99 0.058 58.7));
+  --color-orange-14: light-dark(oklch(0.9 0.053 58.7), oklch(0.33 0.03 58.7));
+  --color-orange-15: light-dark(oklch(1 0.022 58.7), oklch(0.1 0.002 58.7));
+
+  --color-red-1: light-dark(oklch(0.97 0.042 21.1), oklch(0.15 0.005 21.1));
+  --color-red-2: light-dark(oklch(0.999 0.032 21.1), oklch(0.25 0.018 21.1));
+  --color-red-3: light-dark(oklch(0.91 0.07 21.1), oklch(0.47 0.119 21.1));
+  --color-red-4: light-dark(oklch(0.87 0.093 21.1), oklch(0.52 0.154 21.1));
+  --color-red-5: light-dark(oklch(0.82 0.126 21.1), oklch(0.58 0.193 21.1));
+  --color-red-6: light-dark(oklch(0.87 0.093 21.1), oklch(0.47 0.119 21.1));
+  --color-red-7: light-dark(oklch(0.75 0.175 21.1), oklch(0.61 0.209 21.1));
+  --color-red-8: light-dark(oklch(0.52 0.214 21.1), oklch(0.76 0.221 21.1));
+  --color-red-9: light-dark(oklch(0.5 0.204 21.1), oklch(0.82 0.193 21.1));
+  --color-red-10: light-dark(oklch(0.44 0.168 21.1), oklch(0.88 0.154 21.1));
+  --color-red-11: light-dark(oklch(0.42 0.154 21.1), oklch(0.93 0.119 21.1));
+  --color-red-12: light-dark(oklch(0.46 0.181 21.1), oklch(0.91 0.133 21.1));
+  --color-red-13: light-dark(oklch(0.23 0.042 21.1), oklch(0.99 0.081 21.1));
+  --color-red-14: light-dark(oklch(0.9 0.075 21.1), oklch(0.33 0.042 21.1));
+  --color-red-15: light-dark(oklch(1 0.031 21.1), oklch(0.1 0.003 21.1));
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.tooltip",
+  "version": "0.3.0",
+  "description": "Tooltip — the floating hint, NEGATIVE: an inverse panel (near-black on light, near-white on dark) via the bg-inverse/text-on-inverse concept tokens, as EDS 1.x had it. Height emerges from the recipe: xs inset × 2 + cap(sm label). Twelve placements (side × start/center/end) — the full EDS 1.0 arrow fan, kept because product teams use all of it. PLACEMENT names where the TOOLTIP sits relative to its ANCHOR — the arrow points back at the anchor (Placement=Top: bubble above the target, arrow on the bubble's bottom edge). Same convention as Floating UI, CSS anchor positioning and EDS 1.0 (Popper). On a bare canvas this reads inverted; snap an instance to its target and it is right.",
+  "notes": "v0.1 shipped as a light floating surface (bg-floating + elevation-low) — overruled by Victor 2026-08-29: tooltips are negative, and the December set simply lacked the words for it. bg-inverse/text-on-inverse were added as concept tokens (palette steps 13/15, additive like the ghost ladder) rather than binding the emphasis fill, which is step 9 — a mid fill, nowhere near black. The arrow derives: width = the label's cap box, protrusion = half of it, so it scales with density like everything else (no arrow-size token). Placement names where the TOOLTIP sits relative to the anchor; the arrow renders on the opposite edge, pointing at the anchor. Positioning the floating layer itself is the consumer's job (popover + CSS anchor positioning is the intended pairing — see design-system-css autocomplete for prior art); this contract owns the bubble and the arrow.",
+  "props": [
+    {
+      "name": "label",
+      "description": "The hint text.",
+      "type": {
+        "text": true
+      },
+      "default": "Tooltip",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "placement",
+      "description": "Where the tooltip sits relative to its anchor; the arrow renders opposite, pointing at the anchor.",
+      "type": {
+        "enum": [
+          "top-start",
+          "top",
+          "top-end",
+          "bottom-start",
+          "bottom",
+          "bottom-end",
+          "left-start",
+          "left",
+          "left-end",
+          "right-start",
+          "right",
+          "right-end"
+        ]
+      },
+      "default": "bottom",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Placement",
+          "split": {
+            "separator": "-",
+            "axes": [
+              "Side",
+              "Align"
+            ],
+            "pad": "center"
+          }
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "direction": "row",
+        "align": "center"
+      },
+      "inset": {
+        "size": "xs",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "radius": "{spacing.spacing-border-radius-rounded}",
+      "tokens": {
+        "background-color": "{color.concept.bg-inverse}",
+        "elevation": "{elevation.low}"
+      }
+    },
+    "label": {
+      "typography": {
+        "label": "sm",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.concept.text-on-inverse}"
+      }
+    },
+    "arrow": {
+      "pointer": {
+        "prop": "placement"
+      }
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "div",
+    "role": "tooltip"
+  }
+}

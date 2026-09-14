@@ -1,0 +1,23 @@
+{
+  "name": "@equinor/eds-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Algorithmic design tokens for EDS \u2014 two runtime axes, formulas preserved.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node src/build/index.ts",
+    "test": "pnpm run test:formulas && pnpm run test:validate && pnpm run test:parity",
+    "test:formulas": "node test/formulas.check.ts",
+    "test:validate": "node test/validate.ts",
+    "test:parity": "node test/parity.ts",
+    "a11y": "node scripts/a11y-sweep.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "axe-core": "^4.13.0",
+    "playwright-core": "^1.56.0"
+  }
+}

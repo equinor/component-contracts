@@ -1,0 +1,46 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.label",
+  "version": "0.2.1",
+  "description": "Label — the form caption, sitting ON the baseline grid. Typography only: no box, no inset, no background — the occupied box is exactly the cap cell (--eds-cap-rounded, 8/8/12 for sm across densities), baseline at the box bottom. Proves the smallest possible contract: one text part, one color, one grid fact.",
+  "notes": "EDS 1.x paired an optional right-aligned meta text; that is composition (two labels in a row with justify-between), not anatomy — left to consumers. Disabled styling is the field's concern, not the label's: <label> has no :disabled. v0.2.0 (2026-09-05, Victor): THE CAPTION SITS ON THE BASELINE GRID — form text next to form text aligns when every text box is a real glyph box, not a line box with phantom leading (the banner's v0.3.0 mechanism, codepen VYmaowY: text-box trim-both ex alphabetic + padding-top round(1cap,4px)−1ex, @supports-gated; fallback keeps the untrimmed line box). Figma is NOT a divergence here — but not via a height-bound cell either: v0.2.0's bound height was a single-line trap (Victor: a second line falls out of the box). v0.2.1 is Victor's original La Dupla mechanism: the text gets leadingTrim CAP_HEIGHT + FILL width (wraps, grows), and the root hugs with a FIGMA-ONLY top pad — figma-only/baseline-pad-sm = capRounded(4px grid) − Figma's pixel-rounded cap, per density (0 / −1 / +2 — a leadingTrim text node measures round(fontSize × 1490/2048) whole pixels, so Victor's original −1 was EXACT; yes, Figma binds negative padding) — so an n-line caption measures capRounded + (n−1)·lineHeight on BOTH surfaces, exact at every line count (CSS: round(1cap,4px)−1ex from the ex line; same total, different formula — the variable must NEVER be read in code, and its ledger entry says so). The cap ratio both surfaces use is Inter's own (1490/2048). The first CARRIED trim — 'Figma cannot trim' was wrong (issue #40).",
+  "props": [
+    {
+      "name": "text",
+      "description": "The caption.",
+      "type": {
+        "text": true
+      },
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Text"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "baseline": true
+    },
+    "label": {
+      "typography": {
+        "label": "sm",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-subtle}"
+      }
+    }
+  },
+  "states": [],
+  "semantics": {
+    "element": "label"
+  }
+}

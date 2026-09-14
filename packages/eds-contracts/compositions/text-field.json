@@ -1,0 +1,38 @@
+{
+  "id": "eds.text-field",
+  "name": "TextField",
+  "description": "Label + Input + helper — the assembled field. A composition owns LAYOUT only: every box belongs to its own contract, and the assembly ships ready-made so designers never rebuild it from parts (EDS 1.0's drawback — the fix is shipping BOTH the parts and the composition). Every part FILLS the field's width (Victor 2026-09-05): the box spans, and the captions wrap at the field's edge instead of stretching it.",
+  "layout": {
+    "direction": "column",
+    "gap": "{spacing.spacing-vertical-xs}"
+  },
+  "parts": [
+    {
+      "component": "Label",
+      "overrides": {
+        "Text": "Label"
+      },
+      "fill": true
+    },
+    {
+      "component": "Input",
+      "fill": true
+    },
+    {
+      "component": "Label",
+      "overrides": {
+        "Text": "Helper text"
+      },
+      "fill": true
+    }
+  ],
+  "markup": [
+    "<div class=\"eds-text-field\">",
+    "  <label class=\"eds-label\" for=\"well-name\">Label</label>",
+    "  <div class=\"eds-input\">",
+    "    <input id=\"well-name\" placeholder=\"Value\">",
+    "  </div>",
+    "  <p class=\"eds-label\">Helper text</p>",
+    "</div>"
+  ]
+}

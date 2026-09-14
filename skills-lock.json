@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "break": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/break/SKILL.md",
+      "computedHash": "b38ee955d035b89612a21af9bbbb9b5f52a98362b6ee51469f8b0beeb941be79"
+    },
+    "design-tokens": {
+      "source": "ilikescience/design-tokens-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "662b15297c34d9db514777ceb715884fd23827b2d7b3f5d1859a99d27833df96"
+    },
+    "interface-review": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interface-review/SKILL.md",
+      "computedHash": "1c23e3d7c8018908e640a8882f91de6fd7341ef495294fbaee99eecf3d4a17dc"
+    },
+    "variant": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/variant/SKILL.md",
+      "computedHash": "32e6e3e6968d7b9e2106cb0ef59c61c1eb826de188733036b359b4166dadbacb"
+    }
+  }
+}

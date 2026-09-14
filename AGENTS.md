@@ -1,0 +1,37 @@
+# component-contracts — agent instructions
+
+pnpm workspace. **pnpm only** (`only-allow` enforces it); `pnpm dlx`,
+never `npx`. Node 24+ runs the TypeScript sources directly — there is no
+transpile step.
+
+## Rule of thumb: asking → CLI; building → sources
+
+For questions *about* the design system (props, variants, contrast,
+principles), answer through the CLI — it computes from the same sources
+that build the components, with provenance:
+
+```sh
+pnpm --filter @equinor/eds-cli exec eds component <name>
+pnpm --filter @equinor/eds-cli exec eds explain <topic>
+pnpm --filter @equinor/eds-cli exec eds contrast <target> [--scheme dark]
+```
+
+When *changing* the system, edit the sources and rebuild — never the
+output. `build/` directories and both root `DESIGN*.md` files are
+generated. The freshness checks fail on hand edits.
+
+## Commands (repo root)
+
+```sh
+pnpm build   # tokens then contracts
+pnpm test    # every package's checks; the parity harness must pass before any commit
+pnpm a11y    # axe sweep over storefront, demos and previews
+pnpm pages   # assemble the GitHub Pages tree (script: scripts/build-pages.mjs)
+```
+
+## Package rules
+
+Each package carries its own AGENTS.md with the load-bearing rules
+(heights are never authored; data-* variants; semantic descendants by
+element; channel variables). Read `packages/eds-contracts/AGENTS.md`
+before touching contracts or emitters.

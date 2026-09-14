@@ -1,0 +1,38 @@
+[
+  {
+    "fact": "collapse is an instance of Side-bar-item (composition-lite)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: a slot — the consumer places the component; Figma: an exposed instance of the generated set, so its own props stay reachable."
+  },
+  {
+    "fact": "prop collapsed (false|true)",
+    "css": "CARRIED",
+    "figma": "LOWERED",
+    "note": "CSS: [data-<axis>='<value>'] attributes, default = attribute absent (ADR-0006); Figma: Collapsed variant axis."
+  },
+  {
+    "fact": "inline-end edge: the underline, rotated",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "CSS: an OUTER box-shadow on the inline-end edge (geometry untouched, and full-bleed items cannot paint over it); Figma: an OUTSIDE stroke, strokeRightWeight variable-bound — an inside stroke disappears behind the slot's full-bleed children (Victor's catch, 2026-09-05). Shared rule with the top bar (thick, subtle)."
+  },
+  {
+    "fact": "collapsed width = eds.side-bar-item's square edge",
+    "css": "CARRIED",
+    "figma": "RESOLVED",
+    "note": "The rail is exactly as wide as its squares are tall (inset×2 + cap). CSS composes the calc live; Figma binds the minted per-density value to the collapsed variants. Collapsed, only the matched item kind remains: CSS hides other children; Figma hides seeds that cannot mirror the axis (their submenu floats)."
+  },
+  {
+    "fact": "items: a true SLOT — designers add as many children as they want",
+    "css": "CARRIED",
+    "figma": "CARRIED",
+    "note": "Slots GA'd June 2026. CSS: the root's children ARE the content; Figma: a SLOT node seeded with 5 representative instances (demo content, freely replaced per instance)."
+  },
+  {
+    "fact": "semantics: <nav> role=navigation",
+    "css": "CARRIED",
+    "figma": "REFUSED",
+    "note": "A canvas has no accessibility tree. Refused, not dropped — the fact stays in the contract."
+  }
+]

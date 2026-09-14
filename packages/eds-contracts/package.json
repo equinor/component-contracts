@@ -1,0 +1,19 @@
+{
+  "name": "@equinor/eds-contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Spec-driven EDS components \u2014 one contract per component, generating both CSS and a Figma component set.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node src/build.ts",
+    "test": "node test/check.ts",
+    "preview": "pnpm dlx http-server .. -p 9999 -c-1 -o /eds-contracts/preview/index.html"
+  },
+  "dependencies": {
+    "@equinor/eds-icons": "^1.5.1",
+    "@equinor/eds-tokens": "workspace:*"
+  }
+}

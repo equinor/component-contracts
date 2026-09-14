@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<!--
+DERIVED (computed live via the skill scripts under /tmp/eds-attempt-2v/skills/, not transcribed):
+
+- spacing-ladder/scripts/spacing.py `control` — button geometry per density, for both
+  sizes this file implements (size "md" = spacing.py's own `--size md`, size "sm" =
+  `--size sm`), proportion "squished" (label buttons) and "squared" (the icon-only
+  button, per the skill's "padding equals inset on all sides" rule for icon-only controls):
+    md squished  compact:  pad-inline 12  pad-block 6   height 24  cap 8   icon-gap 8
+                 comfortable: pad-inline 16  pad-block 10  height 36  cap 12  icon-gap 8
+                 relaxed:  pad-inline 20  pad-block 12  height 44  cap 12  icon-gap 10
+    sm squished  compact:  pad-inline 8   pad-block 4   height 20  cap 8   icon-gap 6
+                 comfortable: pad-inline 12  pad-block 6   height 24  cap 8   icon-gap 8
+                 relaxed:  pad-inline 16  pad-block 10  height 36  cap 12  icon-gap 8
+    md squared (icon-only): compact inset 12 → h32, comfortable inset 16 → h44, relaxed inset 20 → h52
+    sm squared (icon-only): compact inset 8  → h24, comfortable inset 12 → h32, relaxed inset 16 → h44
+  Command run: `python3 skills/spacing-ladder/scripts/spacing.py control --size {md,sm}
+  --proportion {squished,squared} --label {md,sm} --density all`. `spacing.py check` and
+  `scale.py --check` both passed (exit 0) before use, confirming the constants match the
+  skills' own documented fixtures (button 24/36/44 comfortable, etc).
+- typography-scale/scripts/scale.py `--format table` — confirms the comfortable body-sm/
+  body-md sizes and compressed line-heights DESIGN.md lists (12px/12px and 14px/16px) are
+  exactly what the formula produces at those steps; used to sanity-check the spacing
+  script's font-size inputs. No mismatch found between DESIGN.md's typography table and
+  the scale script's output — the two sources agree everywhere they overlap.
+- Icon "footprint" negative-overflow: footprint (content box) = cap-rounded per the
+  spacing skill; centred via CSS grid `place-items:center` with `overflow:visible`, which
+  produces the same symmetric overflow as the skill's literal
+  `margin: calc((cap − glyph) / 2)` recipe without depending on inline-baseline layout.
+
+MISMATCH noted: colour-fill-tiers/SKILL.md prose says disabled ink for the emphasis tier
+is "text-disabled and icon-disabled" (§3), but DESIGN.md's flat token list (and its own
+eds.button recipe table) has no `icon-disabled` token at all — every disabled cell in the
+button recipe (icon/color, label/color, trailing-icon/color, root/border-color) resolves
+to the *same* literal, light-dark(#aeaeae, #6886a5), which is exactly `text-disabled` /
+`border-disabled`. This file follows DESIGN.md (the computable, checkable source) and
+binds disabled icon ink to `text-disabled`, since no separate icon-disabled value exists
+to bind to.
+
+GUESSED (no source states these; professional judgement, confessed):
+- The button contract's axis list is "tone(3) × variant(4) × size(2)"; DESIGN.md's layout
+  table gives three *density* values (24/36/44), not two *size* values, and nothing in
+  either source names what the two sizes are. I read "size" as literally the
+  spacing-ladder script's own `--size` parameter (it takes rung names, and the script
+  ships exactly two nearby rungs relevant to a button: `md`, the rung that reproduces
+  the documented 24/36/44 heights, and `sm`, one rung down) and implemented two button
+  sizes, "md" (default) and "sm", both fully computed. This is the single biggest
+  interpretive leap in the file — a different, equally defensible reading (e.g. "size"
+  meaning something unrelated to the spacing rung system) would change this section.
+- Icon glyph pixel size is held flat across density (20px for size "md", 18px for size
+  "sm") rather than scaling with density, because DESIGN.md's `sizing-icon-*` ladder is
+  given as one flat list with no density association, unlike every other button number.
+  I paired button size "md" with `sizing-icon-md` (20px) and "sm" with `sizing-icon-sm`
+  (18px) by name-matching, which is plausible but not stated anywhere.
+- All four button variants reserve a 1px transparent border (only `secondary` colors
+  it), and padding-block is reduced by 1px accordingly, purely so the bordered and
+  borderless variants land on the *same* emergent height instead of the border adding
+  2px to `secondary` alone. Neither source discusses this; it is standard practice, not
+  a documented recipe.
+- Hover/active background steps for `secondary`/`ghost`/`ghost-icon` are read off the
+  ghost fill ladder (`bg-{tone}-fill-ghost-hover/active`) per colour-fill-tiers' "ghost
+  gains a step on hover (3) and active (4)" rule — the button recipe table doesn't spell
+  out hover/active *values*, only which channels exist, so the actual hex pairing is
+  inferred from the fill-tier naming convention, not read from a hover-state row.
+- Demo-only additions with no contract basis at all: the icon glyphs themselves (generic
+  check-mark / plus SVGs — the contract says icons are glyphs but ships no artwork), the
+  label copy ("Save" / "Confirm" / "Delete" / icon-only aria-labels), the light/dark and
+  density and size toggles' interaction chrome, and the live "computed height" readout
+  (a genuine `getBoundingClientRect()` measurement, added specifically to honor the
+  non-negotiable "never author a control height — read it back").
+-->
+<html lang="en" data-color-scheme="light" data-density="comfortable">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDS — Button</title>
+<style>
+  /* ============================================================
+     TOKENS — the subset DESIGN.md's eds.button contract binds.
+     Colors ship as light-dark() pairs; color-scheme drives them.
+     ============================================================ */
+  :root {
+    color-scheme: light;
+    --eds-font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* static surfaces */
+    --c-canvas:  light-dark(#f5f5f5, #060c13);
+    --c-surface: light-dark(#ffffff, #152332);
+    --c-border-subtle: light-dark(#d4d4d4, #4b5d71);
+    --c-text-strong: light-dark(#1d1d1d, #f9fcff);
+    --c-text-subtle: light-dark(#585858, #d6e3ee);
+
+    /* shared, tone-independent */
+    --c-text-disabled:   light-dark(#aeaeae, #6886a5);
+    --c-border-disabled: light-dark(#aeaeae, #6886a5);
+    --c-border-focus:    light-dark(#6fb6e8, #2d8bc5);
+    --c-fill-emphasis-disabled: light-dark(#e1e1e1, #4b5d71);
+
+    /* neutral tone */
+    --neutral-emphasis-default: light-dark(#636363, #b4c7d6);
+    --neutral-emphasis-hover:   light-dark(#525252, #cbdae6);
+    --neutral-emphasis-active:  light-dark(#4d4d4d, #deeaf4);
+    --neutral-on-emphasis-text: light-dark(#ffffff, #030303);
+    --neutral-on-emphasis-icon: light-dark(#dedede, #323639);
+    --neutral-ghost-hover:  light-dark(#e1e1e1, #4b5d71);
+    --neutral-ghost-active: light-dark(#d4d4d4, #536b87);
+    --neutral-strong-text:  light-dark(#1d1d1d, #f9fcff);
+    --neutral-icon:         light-dark(#585858, #d6e3ee);
+    --neutral-border-strong: light-dark(#696969, #99b5ce);
+
+    /* accent tone */
+    --accent-emphasis-default: light-dark(#206f77, #8cd2da);
+    --accent-emphasis-hover:   light-dark(#1f5c63, #ace3e9);
+    --accent-emphasis-active:  light-dark(#20565c, #c7f1f6);
+    --accent-on-emphasis-text: light-dark(#ffffff, #030303);
+    --accent-on-emphasis-icon: light-dark(#cae4e7, #2d3839);
+    --accent-ghost-hover:  light-dark(#d2e6e3, #42625d);
+    --accent-ghost-active: light-dark(#c0dbd6, #47726c);
+    --accent-strong-text:  light-dark(#151f20, #f4feff);
+    --accent-icon:         light-dark(#206369, #bcebf1);
+    --accent-border-strong: light-dark(#277678, #73c0c3);
+
+    /* danger tone */
+    --danger-emphasis-default: light-dark(#bb002b, #ffaaa8);
+    --danger-emphasis-hover:   light-dark(#9a1026, #ffc8c5);
+    --danger-emphasis-active:  light-dark(#8e1525, #ffdfde);
+    --danger-on-emphasis-text: light-dark(#ffffff, #040303);
+    --danger-on-emphasis-icon: light-dark(#ffd1cf, #492d2c);
+    --danger-ghost-hover:  light-dark(#ffd6d4, #923a3d);
+    --danger-ghost-active: light-dark(#ffc3c1, #b03940);
+    --danger-strong-text:  light-dark(#2e1414, #fffbfa);
+    --danger-icon:         light-dark(#a50827, #ffd6d4);
+    --danger-border-strong: light-dark(#c5002e, #ff8989);
+  }
+  html[data-color-scheme="dark"]  { color-scheme: dark; }
+  html[data-color-scheme="light"] { color-scheme: light; }
+
+  /* ============================================================
+     GEOMETRY — computed via spacing-ladder/scripts/spacing.py
+     `control`, never authored. See DERIVED comment at file top.
+     ============================================================ */
+  :root, [data-density="comfortable"] {
+    --md-pad-i: 16px; --md-pad-b: 10px; --md-h: 36px; --md-cap: 12px; --md-gap: 8px;
+    --sm-pad-i: 12px; --sm-pad-b: 6px;  --sm-h: 24px; --sm-cap: 8px;  --sm-gap: 8px;
+    --md-font: 14px; --md-lh: 16px;
+    --sm-font: 12px; --sm-lh: 12px;
+  }
+  [data-density="compact"] {
+    --md-pad-i: 12px; --md-pad-b: 6px; --md-h: 24px; --md-cap: 8px; --md-gap: 8px;
+    --sm-pad-i: 8px;  --sm-pad-b: 4px; --sm-h: 20px; --sm-cap: 8px; --sm-gap: 6px;
+    --md-font: 12px;   --md-lh: 12px;
+    --sm-font: 10.5px; --sm-lh: 12px;
+  }
+  [data-density="relaxed"] {
+    --md-pad-i: 20px; --md-pad-b: 12px; --md-h: 44px; --md-cap: 12px; --md-gap: 10px;
+    --sm-pad-i: 16px; --sm-pad-b: 10px; --sm-h: 36px; --sm-cap: 12px; --sm-gap: 8px;
+    --md-font: 16px; --md-lh: 20px;
+    --sm-font: 14px; --sm-lh: 16px;
+  }
+  /* icon glyph — flat across density; GUESSED, see top comment */
+  :root { --icon-glyph-md: 20px; --icon-glyph-sm: 18px; }
+
+  /* ============================================================
+     BASE PAGE CHROME
+     ============================================================ */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--eds-font);
+    background: var(--c-canvas);
+    color: var(--c-text-strong);
+    padding: 24px;
+  }
+  h1 { font-size: 1.3125rem; margin: 0 0 4px; }
+  p.lede { color: var(--c-text-subtle); margin: 0 0 20px; max-width: 68ch; }
+  .panel {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border-subtle);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  h2 { font-size: 1rem; margin: 0 0 12px; }
+  code { background: var(--c-canvas); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+
+  /* ---- toggle controls ---- */
+  .controls { display: flex; gap: 24px; flex-wrap: wrap; }
+  .control-group { display: flex; flex-direction: column; gap: 6px; }
+  .control-group span.label { font-size: 0.75rem; color: var(--c-text-subtle); text-transform: uppercase; letter-spacing: 0.04em; }
+  .segmented { display: inline-flex; border: 1px solid var(--c-border-subtle); border-radius: 4px; overflow: hidden; }
+  .segmented button {
+    font-family: var(--eds-font); font-size: 0.75rem; padding: 6px 12px; border: none;
+    background: var(--c-surface); color: var(--c-text-strong); cursor: pointer;
+  }
+  .segmented button + button { border-left: 1px solid var(--c-border-subtle); }
+  .segmented button[aria-pressed="true"] { background: var(--neutral-emphasis-default); color: var(--neutral-on-emphasis-text); }
+
+  /* ============================================================
+     THE BUTTON — one class, channel variables, states declare
+     only what they change (DESIGN.md non-negotiable #3).
+     ============================================================ */
+  .eds-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--_gap);
+    font-family: var(--eds-font);
+    font-weight: 500;
+    font-size: var(--_font);
+    line-height: var(--_lh);
+    padding-inline: var(--_pad-i);
+    padding-block: calc(var(--_pad-b) - 1px); /* -1px: border reservation, see GUESSED */
+    border-radius: var(--_radius);
+    border: 1px solid var(--_border-color, transparent);
+    background-color: var(--_bg);
+    color: var(--_ink);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .eds-button .eds-icon { color: var(--_icon); }
+
+  /* size axis: md (default) | sm — spacing-ladder's own --size names, see GUESSED */
+  .eds-button[data-eds-size="md"] { --_pad-i: var(--md-pad-i); --_pad-b: var(--md-pad-b); --_font: var(--md-font); --_lh: var(--md-lh); --_gap: var(--md-gap); --_cap: var(--md-cap); }
+  .eds-button[data-eds-size="sm"] { --_pad-i: var(--sm-pad-i); --_pad-b: var(--sm-pad-b); --_font: var(--sm-font); --_lh: var(--sm-lh); --_gap: var(--sm-gap); --_cap: var(--sm-cap); }
+
+  .eds-icon { width: var(--_cap); height: var(--_cap); display: grid; place-items: center; overflow: visible; flex: none; }
+  .eds-button[data-eds-size="md"] .eds-icon svg { width: var(--icon-glyph-md); height: var(--icon-glyph-md); }
+  .eds-button[data-eds-size="sm"] .eds-icon svg { width: var(--icon-glyph-sm); height: var(--icon-glyph-sm); }
+
+  /* radius: rounded.md everywhere except the earned pill on ghost-icon */
+  .eds-button { --_radius: 4px; }
+  .eds-button[data-variant="ghost-icon"] {
+    --_radius: 1000px;
+    /* icon-only: no half-leading to subtract, padding = raw inset on every side (squared) */
+    padding-inline: var(--_pad-i);
+    padding-block: calc(var(--_pad-i) - 1px);
+    aspect-ratio: 1;
+  }
+
+  /* ---- tone × variant: rest colors, straight off DESIGN.md's per-tone-per-variant
+     frontmatter entries; hover/active read off the ghost / emphasis fill ladders
+     per colour-fill-tiers (ghost gains a step on hover=3, active=4). ---- */
+
+  /* neutral */
+  .eds-button[data-tone="neutral"][data-variant="primary"] {
+    --_bg: var(--neutral-emphasis-default); --_bg-hover: var(--neutral-emphasis-hover); --_bg-active: var(--neutral-emphasis-active);
+    --_ink: var(--neutral-on-emphasis-text); --_icon: var(--neutral-on-emphasis-icon);
+  }
+  .eds-button[data-tone="neutral"][data-variant="secondary"] {
+    --_bg: transparent; --_bg-hover: var(--neutral-ghost-hover); --_bg-active: var(--neutral-ghost-active);
+    --_ink: var(--neutral-strong-text); --_icon: var(--neutral-icon); --_border-color: var(--neutral-border-strong);
+  }
+  .eds-button[data-tone="neutral"][data-variant="ghost"],
+  .eds-button[data-tone="neutral"][data-variant="ghost-icon"] {
+    --_bg: transparent; --_bg-hover: var(--neutral-ghost-hover); --_bg-active: var(--neutral-ghost-active);
+    --_ink: var(--neutral-strong-text); --_icon: var(--neutral-icon);
+  }
+
+  /* accent */
+  .eds-button[data-tone="accent"][data-variant="primary"] {
+    --_bg: var(--accent-emphasis-default); --_bg-hover: var(--accent-emphasis-hover); --_bg-active: var(--accent-emphasis-active);
+    --_ink: var(--accent-on-emphasis-text); --_icon: var(--accent-on-emphasis-icon);
+  }
+  .eds-button[data-tone="accent"][data-variant="secondary"] {
+    --_bg: transparent; --_bg-hover: var(--accent-ghost-hover); --_bg-active: var(--accent-ghost-active);
+    --_ink: var(--accent-strong-text); --_icon: var(--accent-icon); --_border-color: var(--accent-border-strong);
+  }
+  .eds-button[data-tone="accent"][data-variant="ghost"],
+  .eds-button[data-tone="accent"][data-variant="ghost-icon"] {
+    --_bg: transparent; --_bg-hover: var(--accent-ghost-hover); --_bg-active: var(--accent-ghost-active);
+    --_ink: var(--accent-strong-text); --_icon: var(--accent-icon);
+  }
+
+  /* danger */
+  .eds-button[data-tone="danger"][data-variant="primary"] {
+    --_bg: var(--danger-emphasis-default); --_bg-hover: var(--danger-emphasis-hover); --_bg-active: var(--danger-emphasis-active);
+    --_ink: var(--danger-on-emphasis-text); --_icon: var(--danger-on-emphasis-icon);
+  }
+  .eds-button[data-tone="danger"][data-variant="secondary"] {
+    --_bg: transparent; --_bg-hover: var(--danger-ghost-hover); --_bg-active: var(--danger-ghost-active);
+    --_ink: var(--danger-strong-text); --_icon: var(--danger-icon); --_border-color: var(--danger-border-strong);
+  }
+  .eds-button[data-tone="danger"][data-variant="ghost"],
+  .eds-button[data-tone="danger"][data-variant="ghost-icon"] {
+    --_bg: transparent; --_bg-hover: var(--danger-ghost-hover); --_bg-active: var(--danger-ghost-active);
+    --_ink: var(--danger-strong-text); --_icon: var(--danger-icon);
+  }
+
+  /* ---- states: change only what they declare (non-negotiable #3) ---- */
+  .eds-button:not(:disabled):hover,
+  .eds-button[data-force-state="hover"] { background-color: var(--_bg-hover); }
+
+  .eds-button:not(:disabled):active,
+  .eds-button[data-force-state="active"] { background-color: var(--_bg-active); }
+
+  /* focus — the ring REPLACES the border, mirrors :focus-visible; fill untouched */
+  .eds-button:focus-visible,
+  .eds-button[data-force-state="focus"] {
+    outline: 2px solid var(--c-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* disabled — ink/border go to the shared disabled tokens for every variant;
+     ONLY the emphasis (primary) tier also gets the grey plate. Secondary/ghost/
+     ghost-icon keep their resting background: "the contract refuses to invent
+     a binding it does not have." */
+  .eds-button:disabled,
+  .eds-button[data-force-state="disabled"] {
+    cursor: not-allowed;
+    color: var(--c-text-disabled);
+    --_icon: var(--c-text-disabled);
+  }
+  .eds-button[data-variant="primary"]:disabled,
+  .eds-button[data-variant="primary"][data-force-state="disabled"] {
+    background-color: var(--c-fill-emphasis-disabled);
+  }
+  .eds-button[data-variant="secondary"]:disabled,
+  .eds-button[data-variant="secondary"][data-force-state="disabled"] {
+    border-color: var(--c-border-disabled);
+  }
+
+  /* ============================================================
+     DEMO GRID
+     ============================================================ */
+  table.grid { border-collapse: collapse; width: 100%; }
+  table.grid th, table.grid td { padding: 10px 8px; text-align: center; vertical-align: middle; }
+  table.grid thead th { font-size: 0.75rem; color: var(--c-text-subtle); font-weight: 600; border-bottom: 1px solid var(--c-border-subtle); }
+  table.grid thead tr:first-child th { border-bottom: none; padding-bottom: 2px; }
+  table.grid tbody th {
+    font-size: 0.75rem; color: var(--c-text-subtle); text-align: left; white-space: nowrap;
+    border-right: 1px solid var(--c-border-subtle);
+  }
+  table.grid tbody tr:nth-child(odd) td, table.grid tbody tr:nth-child(odd) th { background: color-mix(in srgb, var(--c-canvas) 55%, transparent); }
+  .tone-group-neutral { color: var(--neutral-icon); }
+  .tone-group-accent { color: var(--accent-icon); }
+  .tone-group-danger { color: var(--danger-icon); }
+
+  .size-demo { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; }
+  .size-demo figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size-demo figcaption { font-size: 0.7rem; color: var(--c-text-subtle); font-family: ui-monospace, monospace; }
+
+  .slots-demo { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .slots-demo figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .slots-demo figcaption { font-size: 0.7rem; color: var(--c-text-subtle); }
+
+  footer { font-size: 0.75rem; color: var(--c-text-subtle); margin-top: 24px; }
+</style>
+</head>
+<body>
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 2, first run.</strong> <strong>5 confessed guesses</strong>, and one flaw nobody confessed because nobody knew: icons seated 4px low, found by measurement. Filed on the skills repo, the skill learnt the glyph seat overnight, and the re-run (attempt-2.html) measures 0px. Guessing migrates; it never disappears.</span></aside>
+
+
+<header>
+  <h1>eds.button</h1>
+  <p class="lede">
+    v0.8.0 — tone(3) × variant(4) × size(2), states rest / hover / focus / active / disabled.
+    Geometry is computed, not typed: height = inset × 2 + cap, per density. Toggle the modes
+    below; every number in the grid recomputes from the same three CSS variable blocks.
+  </p>
+
+  <div class="panel controls">
+    <div class="control-group">
+      <span class="label">Color scheme</span>
+      <div class="segmented" role="group" aria-label="Color scheme">
+        <button type="button" data-toggle="color-scheme" data-value="light" aria-pressed="true">Light</button>
+        <button type="button" data-toggle="color-scheme" data-value="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="label">Density</span>
+      <div class="segmented" role="group" aria-label="Density">
+        <button type="button" data-toggle="density" data-value="compact" aria-pressed="false">Compact</button>
+        <button type="button" data-toggle="density" data-value="comfortable" aria-pressed="true">Comfortable</button>
+        <button type="button" data-toggle="density" data-value="relaxed" aria-pressed="false">Relaxed</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="label">Size (grid below)</span>
+      <div class="segmented" role="group" aria-label="Size">
+        <button type="button" data-toggle="size" data-value="md" aria-pressed="true">md</button>
+        <button type="button" data-toggle="size" data-value="sm" aria-pressed="false">sm</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="panel">
+  <h2>Tone × variant × state</h2>
+  <table class="grid" id="main-grid">
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan="4" class="tone-group-neutral">Neutral</th>
+        <th colspan="4" class="tone-group-accent">Accent</th>
+        <th colspan="4" class="tone-group-danger">Danger</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Primary</th><th>Secondary</th><th>Ghost</th><th>Icon</th>
+        <th>Primary</th><th>Secondary</th><th>Ghost</th><th>Icon</th>
+        <th>Primary</th><th>Secondary</th><th>Ghost</th><th>Icon</th>
+      </tr>
+    </thead>
+    <tbody id="grid-body">
+      <!-- rows injected by script: rest / hover / active / focus / disabled -->
+    </tbody>
+  </table>
+</section>
+
+<section class="panel">
+  <h2>Size — computed, not authored</h2>
+  <p class="lede" style="margin-bottom:16px;">
+    <code>size="md"</code> and <code>size="sm"</code> at the current density and color
+    scheme. Captions are read back live via <code>getBoundingClientRect()</code> — never
+    a typed pixel value.
+  </p>
+  <div class="size-demo" id="size-demo"></div>
+</section>
+
+<section class="panel">
+  <h2>Icon slots</h2>
+  <p class="lede" style="margin-bottom:16px;">
+    A button carries an optional leading icon, an optional trailing icon, or neither —
+    and the round ghost-icon shape is the system's only icon-only button
+    (colour-fill-tiers, representative request 1).
+  </p>
+  <div class="slots-demo" id="slots-demo"></div>
+</section>
+
+<footer>
+  Font stack names Inter first per the contract; no network font is loaded. See the two
+  HTML comments at the top of this file's source for the full DERIVED / GUESSED ledger.
+</footer>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  function icon(kind) {
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("stroke", "currentColor");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("d", kind === "plus" ? "M12 5v14M5 12h14" : "M4 12.5l5 5L20 7");
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function makeButton({ tone, variant, size = "md", label, withIcon = true, trailingIcon = false, forceState, disabled }) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "eds-button";
+    btn.dataset.tone = tone;
+    btn.dataset.variant = variant;
+    btn.dataset.edsSize = size;
+    if (forceState) btn.dataset.forceState = forceState;
+    if (disabled) btn.disabled = true;
+
+    if (variant === "ghost-icon") {
+      btn.appendChild(Object.assign(document.createElement("span"), { className: "eds-icon" })).appendChild(icon("plus"));
+      btn.setAttribute("aria-label", label || "Icon action");
+    } else {
+      if (withIcon) btn.appendChild(Object.assign(document.createElement("span"), { className: "eds-icon" })).appendChild(icon("check"));
+      const text = document.createElement("span");
+      text.textContent = label;
+      btn.appendChild(text);
+      if (trailingIcon) btn.appendChild(Object.assign(document.createElement("span"), { className: "eds-icon" })).appendChild(icon("plus"));
+    }
+    return btn;
+  }
+
+  const TONES = ["neutral", "accent", "danger"];
+  const VARIANTS = ["primary", "secondary", "ghost", "ghost-icon"];
+  const LABELS = { neutral: "Save", accent: "Confirm", danger: "Delete" };
+  const STATES = [
+    { key: "rest",     rowLabel: "Rest" },
+    { key: "hover",    rowLabel: "Hover",    force: "hover" },
+    { key: "active",   rowLabel: "Active",   force: "active" },
+    { key: "focus",    rowLabel: "Focus",    force: "focus" },
+    { key: "disabled", rowLabel: "Disabled", force: "disabled", disabled: true },
+  ];
+
+  const gridBody = document.getElementById("grid-body");
+  let currentSize = "md";
+
+  function buildGrid() {
+    gridBody.innerHTML = "";
+    for (const st of STATES) {
+      const tr = document.createElement("tr");
+      const th = document.createElement("th");
+      th.textContent = st.rowLabel;
+      tr.appendChild(th);
+      for (const tone of TONES) {
+        for (const variant of VARIANTS) {
+          const td = document.createElement("td");
+          td.appendChild(makeButton({
+            tone, variant, size: currentSize,
+            label: LABELS[tone],
+            forceState: st.force,
+            disabled: !!st.disabled,
+          }));
+          tr.appendChild(td);
+        }
+      }
+      gridBody.appendChild(tr);
+    }
+  }
+
+  function buildSizeDemo() {
+    const host = document.getElementById("size-demo");
+    host.innerHTML = "";
+    for (const size of ["md", "sm"]) {
+      const fig = document.createElement("figure");
+      const btn = makeButton({ tone: "accent", variant: "primary", size, label: "Confirm" });
+      fig.appendChild(btn);
+      const cap = document.createElement("figcaption");
+      cap.dataset.measure = size;
+      cap.textContent = `size=${size} — measuring…`;
+      fig.appendChild(cap);
+      host.appendChild(fig);
+    }
+  }
+
+  function buildSlotsDemo() {
+    const host = document.getElementById("slots-demo");
+    host.innerHTML = "";
+    const specs = [
+      { withIcon: true,  trailingIcon: false, label: "Leading icon", caption: "leading icon" },
+      { withIcon: false, trailingIcon: true,  label: "Trailing icon", caption: "trailing icon" },
+      { withIcon: true,  trailingIcon: true,  label: "Both", caption: "leading + trailing" },
+      { withIcon: false, trailingIcon: false, label: "Label only", caption: "label only" },
+    ];
+    for (const s of specs) {
+      const fig = document.createElement("figure");
+      fig.appendChild(makeButton({ tone: "accent", variant: "secondary", size: "md", ...s }));
+      const cap = document.createElement("figcaption");
+      cap.textContent = s.caption;
+      fig.appendChild(cap);
+      host.appendChild(fig);
+    }
+    const fig = document.createElement("figure");
+    fig.appendChild(makeButton({ tone: "accent", variant: "ghost-icon", size: "md", label: "Add item" }));
+    const cap = document.createElement("figcaption");
+    cap.textContent = "icon-only (ghost-icon)";
+    fig.appendChild(cap);
+    host.appendChild(fig);
+  }
+
+  function measure() {
+    document.querySelectorAll("[data-measure]").forEach((cap) => {
+      const btn = cap.previousElementSibling || cap.parentElement.querySelector(".eds-button");
+      if (!btn) return;
+      const h = btn.getBoundingClientRect().height;
+      cap.textContent = `size=${cap.dataset.measure} — ${Math.round(h * 100) / 100}px measured`;
+    });
+  }
+
+  // ---- toggles ----
+  document.querySelectorAll(".segmented").forEach((group) => {
+    group.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-toggle]");
+      if (!btn) return;
+      const { toggle, value } = btn.dataset;
+      group.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+      if (toggle === "color-scheme") document.documentElement.dataset.colorScheme = value;
+      if (toggle === "density") document.documentElement.dataset.density = value;
+      if (toggle === "size") { currentSize = value; buildGrid(); }
+      requestAnimationFrame(measure);
+    });
+  });
+
+  buildGrid();
+  buildSizeDemo();
+  buildSlotsDemo();
+  requestAnimationFrame(measure);
+  window.addEventListener("resize", measure);
+})();
+</script>
+
+</body>
+</html>

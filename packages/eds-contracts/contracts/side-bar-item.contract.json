@@ -1,0 +1,176 @@
+{
+  "$schema": "../contract.schema.json",
+  "id": "eds.side-bar-item",
+  "version": "0.2.0",
+  "description": "SideBar item — the navigation row. lg-squared inset around an md compressed label (heights 40/52/60; the inset absorbs the half-leading), a swappable leading icon in the md cap cell, ghost ladder at rest, accent when selected (fill + strong underline ink + accent glyph/label), and a thin subtle underline as the list separator — items stack with no gap, the borders are the rhythm. Collapsed: an icon-only square (width = height = inset×2 + cap) — the icon centres itself, because (height − glyph)/2 = inset − (glyph − cap)/2 is an identity of the optical system. Has Menu: a chevron trails when expanded; a small corner flag (bottom-right) marks the submenu when collapsed.",
+  "notes": "v0.1.0 (2026-09-05, Victor's sidebar review; sources: Component Mocks 714-629 and the colour-tutorial application mock — both older geometry, corrected here to the ladder). Collapsed is a VARIANT (iconOnly structure — the Ghost-icon precedent), not a state: hover and selected still exist while collapsed. The chevron flip on open (accordion) and the Collapse item's first_page↔last_page swap are interaction facts, recorded not built — round B. Chevron key is the EDS Assets SET key; the builder resolves set keys to their default variant. Same day: collapsed gained code-side CASCADE (inherit) — one data-collapsed on the rail collapses every item; Figma cannot reach consumer slot content (the slots model: instance content is the instance's own), so baked defaults mirror and edited slots flip WITH the rail (multi-select) — recorded LOWERED. v0.2.0: Label ink nudged strong → SUBTLE (2026-09-05, Victor — 'will look better'): menu labels are SCANNED (md compressed), floor Lc 60; measured live via apca-w3: subtle at rest = 84.7 light / −86.1 dark on surface, −69.1 on the dark floating panel (the tightest real case, above the floor); hover 67/−69. Selected keeps text-accent-strong — the 60.4 corner never occurs. Accepted trade: label and icon now share step 12, flattening the strong-text/subtle-icon hierarchy for nav rows — quieter chrome, deliberate.",
+  "props": [
+    {
+      "name": "label",
+      "description": "The navigation label.",
+      "type": {
+        "text": true
+      },
+      "default": "Menu item",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "slot": true
+        }
+      }
+    },
+    {
+      "name": "collapsed",
+      "description": "The sidebar's rail state, mirrored onto its items: icon-only square, label and chevron gone, the flag marks a submenu.",
+      "type": {
+        "enum": [
+          "false",
+          "true"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Collapsed"
+        },
+        "code": {
+          "attribute": true,
+          "inherit": true
+        }
+      }
+    },
+    {
+      "name": "hasMenu",
+      "description": "The item opens a submenu: chevron when expanded, corner flag when collapsed.",
+      "type": {
+        "boolean": true
+      },
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Has Menu"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "anatomy": {
+    "root": {
+      "width": 256,
+      "layout": {
+        "direction": "row",
+        "gap": "{spacing.spacing-icon-md-gap-horizontal}",
+        "align": "center"
+      },
+      "inset": {
+        "size": "lg",
+        "proportion": "squared",
+        "opticalLabel": "label"
+      },
+      "tokens": {
+        "background-color": "{color.semantic.bg-neutral-fill-ghost-default}",
+        "border-bottom-color": "{color.semantic.border-neutral-subtle}"
+      },
+      "underline": "{spacing.sizing-stroke-thin}"
+    },
+    "icon": {
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "property": "↳ Icon",
+        "componentKey": "9596d7b5e9122ea96509f9c0910c894185ab92a6"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    },
+    "label": {
+      "fill": true,
+      "typography": {
+        "label": "md",
+        "variant": "compressed",
+        "family": "ui",
+        "weight": "normal"
+      },
+      "tokens": {
+        "color": "{color.semantic.text-neutral-subtle}"
+      }
+    },
+    "chevron": {
+      "when": "hasMenu",
+      "glyph": "{spacing.sizing-icon-md}",
+      "footprint": "{recipe.cap-rounded-md}",
+      "swap": {
+        "componentKey": "ab33a936157d8b357adb26228c9147e6c530a3e9",
+        "icon": "chevron_down"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    },
+    "flag": {
+      "when": "hasMenu",
+      "flag": {
+        "corner": "bottom-right"
+      },
+      "tokens": {
+        "color": "{color.semantic.icon-neutral}"
+      }
+    }
+  },
+  "variants": [
+    {
+      "when": {
+        "collapsed": "true"
+      },
+      "tokens": {},
+      "structure": {
+        "iconOnly": "icon",
+        "inset": "even"
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "hover",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-hover}"
+      }
+    },
+    {
+      "name": "active",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-neutral-fill-ghost-active}"
+      }
+    },
+    {
+      "name": "selected",
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-accent-fill-ghost-selected}",
+        "root/border-bottom-color": "{color.semantic.border-accent-strong}",
+        "label/color": "{color.semantic.text-accent-strong}",
+        "icon/color": "{color.semantic.icon-accent}"
+      }
+    },
+    {
+      "name": "focus",
+      "tokens": {
+        "root/focus-ring": "{color.concept.border-focus}"
+      }
+    }
+  ],
+  "semantics": {
+    "element": "a",
+    "role": "none",
+    "aria": {
+      "aria-current": "page on the selected item; aria-expanded on items with a submenu"
+    }
+  }
+}

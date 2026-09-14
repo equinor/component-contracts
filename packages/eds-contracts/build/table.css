@@ -1,0 +1,57 @@
+/* Generated from contracts/table.contract.json — do not edit. */
+
+@layer eds-components {
+  .eds-table {
+    /* Size-dependent parameters. */
+    --_font-size: var(--eds-typography-ui-body-md-font-size);
+    --_line-height: var(--eds-typography-ui-body-md-line-height-default);
+    --_half-leading: var(--eds-half-leading-md-default);
+    --_inset-v: var(--eds-spacing-inset-sm-vertical-squared);
+    --_inset-h: var(--eds-spacing-inset-sm-horizontal);
+
+    border-collapse: collapse;
+    font: var(--eds-font-weight-normal) var(--_font-size) / var(--_line-height) var(--eds-typography-ui-body-font-family);
+    background-color: var(--eds-color-bg-surface);
+
+    /* The invariant, per CELL: padding = inset − halfLeading, so the row
+     * height emerges — and density means MORE ROWS, not narrower tables. */
+    & th,
+    & td {
+      padding-block: calc(var(--_inset-v) - var(--_half-leading));
+      padding-inline: var(--_inset-h);
+      text-align: start;
+    }
+
+    /* Separators are inset box-shadows, not borders: a collapsed border
+     * still occupies layout space (half billed to each row), which would
+     * push rows off the 4px grid. The shadow overlays the padding, so the
+     * row rhythm stays exactly 24/36/44 — matching Figma's INSIDE strokes.
+     * Known cost: box-shadows drop in forced-colors mode and in print. */
+    & th {
+      font-weight: var(--eds-font-weight-bolder);
+      color: var(--eds-color-text-neutral-strong);
+      box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thick)) 0 var(--eds-color-border-neutral-medium);
+    }
+
+    & td {
+      color: var(--eds-color-text-neutral-strong);
+      box-shadow: inset 0 calc(-1 * var(--eds-sizing-stroke-thin)) 0 var(--eds-color-border-neutral-subtle);
+    }
+  }
+
+  .eds-table[data-size='compressed'] {
+    --_font-size: var(--eds-typography-ui-body-sm-font-size);
+    --_line-height: var(--eds-typography-ui-body-sm-line-height-default);
+    --_half-leading: var(--eds-half-leading-sm-default);
+    --_inset-v: var(--eds-spacing-inset-sm-vertical-squished);
+    --_inset-h: var(--eds-spacing-inset-sm-horizontal);
+  }
+
+  .eds-table tbody tr:not([aria-selected='true']):hover {
+    background-color: var(--eds-color-bg-neutral-fill-ghost-hover);
+  }
+
+  .eds-table tbody tr[aria-selected='true'] {
+    background-color: var(--eds-color-bg-accent-fill-ghost-selected);
+  }
+}

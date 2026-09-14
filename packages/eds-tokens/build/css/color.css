@@ -1,0 +1,756 @@
+/* EDS colour
+ * Generated — do not edit. Palette authored in OKLCH by the palette generator.
+ *
+ * Two tiers:
+ *   base                          sRGB fallback, gamut-mapped at build time
+ *   @media (color-gamut: p3)      the OKLCH originals
+ *
+ * 42 of 90 palette values fall outside sRGB, concentrated in the alarm hues
+ * (red, orange) — exactly the ones hex was clipping hardest. On an sRGB display the
+ * browser would gamut-map them itself, and implementations differ, so we map at build
+ * time and serve the result explicitly. Strategy: chroma-reduce — lightness and hue
+ * are held, chroma is lowered until the colour fits, so every family keeps a shared
+ * lightness at each step. Clamping would drift lightness by up to 0.017.
+ *
+ * Aliases are declared once on :root, where var() substitution happens — so they
+ * follow the palette active at the root, and only the palette flips per scheme.
+ * The scheme is a root-level switch by design: an interface is never light and
+ * dark at once. (Custom properties substitute where declared, so a nested
+ * [data-color-scheme] would flip only the direct per-scheme values anyway.)
+ */
+
+/* Scheme-independent aliases. */
+:where(:root) {
+  --eds-color-bg-accent-canvas: var(--eds-color-accent-1);
+  --eds-color-bg-accent-fill-emphasis-active: var(--eds-color-accent-11);
+  --eds-color-bg-accent-fill-emphasis-default: var(--eds-color-accent-9);
+  --eds-color-bg-accent-fill-emphasis-hover: var(--eds-color-accent-10);
+  --eds-color-bg-accent-fill-emphasis-selected: var(--eds-color-accent-11);
+  --eds-color-bg-accent-fill-ghost-active: var(--eds-color-accent-4);
+  --eds-color-bg-accent-fill-ghost-hover: var(--eds-color-accent-3);
+  --eds-color-bg-accent-fill-ghost-selected: var(--eds-color-accent-4);
+  --eds-color-bg-accent-fill-muted-active: var(--eds-color-accent-5);
+  --eds-color-bg-accent-fill-muted-default: var(--eds-color-accent-3);
+  --eds-color-bg-accent-fill-muted-hover: var(--eds-color-accent-4);
+  --eds-color-bg-accent-fill-muted-selected: var(--eds-color-accent-5);
+  --eds-color-bg-accent-surface: var(--eds-color-accent-2);
+  --eds-color-bg-backdrop: var(--eds-color-neutral-7);
+  --eds-color-bg-canvas: var(--eds-color-neutral-1);
+  --eds-color-bg-danger-canvas: var(--eds-color-danger-1);
+  --eds-color-bg-danger-fill-emphasis-active: var(--eds-color-danger-11);
+  --eds-color-bg-danger-fill-emphasis-default: var(--eds-color-danger-9);
+  --eds-color-bg-danger-fill-emphasis-hover: var(--eds-color-danger-10);
+  --eds-color-bg-danger-fill-emphasis-selected: var(--eds-color-danger-11);
+  --eds-color-bg-danger-fill-ghost-active: var(--eds-color-danger-4);
+  --eds-color-bg-danger-fill-ghost-hover: var(--eds-color-danger-3);
+  --eds-color-bg-danger-fill-ghost-selected: var(--eds-color-danger-4);
+  --eds-color-bg-danger-fill-muted-active: var(--eds-color-danger-5);
+  --eds-color-bg-danger-fill-muted-default: var(--eds-color-danger-3);
+  --eds-color-bg-danger-fill-muted-hover: var(--eds-color-danger-4);
+  --eds-color-bg-danger-fill-muted-selected: var(--eds-color-danger-5);
+  --eds-color-bg-danger-surface: var(--eds-color-danger-2);
+  --eds-color-bg-disabled: var(--eds-color-neutral-3);
+  --eds-color-bg-fill-emphasis-active: var(--eds-color-neutral-11);
+  --eds-color-bg-fill-emphasis-default: var(--eds-color-neutral-9);
+  --eds-color-bg-fill-emphasis-disabled: var(--eds-color-neutral-3);
+  --eds-color-bg-fill-emphasis-hover: var(--eds-color-neutral-10);
+  --eds-color-bg-fill-muted-active: var(--eds-color-neutral-5);
+  --eds-color-bg-fill-muted-default: var(--eds-color-neutral-3);
+  --eds-color-bg-fill-muted-disabled: var(--eds-color-neutral-3);
+  --eds-color-bg-fill-muted-hover: var(--eds-color-neutral-4);
+  --eds-color-bg-info-canvas: var(--eds-color-info-1);
+  --eds-color-bg-info-fill-emphasis-active: var(--eds-color-info-11);
+  --eds-color-bg-info-fill-emphasis-default: var(--eds-color-info-9);
+  --eds-color-bg-info-fill-emphasis-hover: var(--eds-color-info-10);
+  --eds-color-bg-info-fill-emphasis-selected: var(--eds-color-info-11);
+  --eds-color-bg-info-fill-muted-active: var(--eds-color-info-5);
+  --eds-color-bg-info-fill-muted-default: var(--eds-color-info-3);
+  --eds-color-bg-info-fill-muted-hover: var(--eds-color-info-4);
+  --eds-color-bg-info-fill-muted-selected: var(--eds-color-info-5);
+  --eds-color-bg-info-surface: var(--eds-color-info-2);
+  --eds-color-bg-input: var(--eds-color-neutral-1);
+  --eds-color-bg-inverse: var(--eds-color-neutral-13);
+  --eds-color-bg-neutral-canvas: var(--eds-color-neutral-1);
+  --eds-color-bg-neutral-fill-emphasis-active: var(--eds-color-neutral-11);
+  --eds-color-bg-neutral-fill-emphasis-default: var(--eds-color-neutral-9);
+  --eds-color-bg-neutral-fill-emphasis-hover: var(--eds-color-neutral-10);
+  --eds-color-bg-neutral-fill-emphasis-selected: var(--eds-color-neutral-11);
+  --eds-color-bg-neutral-fill-ghost-active: var(--eds-color-neutral-4);
+  --eds-color-bg-neutral-fill-ghost-hover: var(--eds-color-neutral-3);
+  --eds-color-bg-neutral-fill-ghost-selected: var(--eds-color-neutral-4);
+  --eds-color-bg-neutral-fill-muted-active: var(--eds-color-neutral-5);
+  --eds-color-bg-neutral-fill-muted-default: var(--eds-color-neutral-3);
+  --eds-color-bg-neutral-fill-muted-hover: var(--eds-color-neutral-4);
+  --eds-color-bg-neutral-fill-muted-selected: var(--eds-color-neutral-5);
+  --eds-color-bg-neutral-surface: var(--eds-color-neutral-2);
+  --eds-color-bg-success-canvas: var(--eds-color-success-1);
+  --eds-color-bg-success-fill-emphasis-active: var(--eds-color-success-11);
+  --eds-color-bg-success-fill-emphasis-default: var(--eds-color-success-9);
+  --eds-color-bg-success-fill-emphasis-hover: var(--eds-color-success-10);
+  --eds-color-bg-success-fill-emphasis-selected: var(--eds-color-success-11);
+  --eds-color-bg-success-fill-muted-active: var(--eds-color-success-5);
+  --eds-color-bg-success-fill-muted-default: var(--eds-color-success-3);
+  --eds-color-bg-success-fill-muted-hover: var(--eds-color-success-4);
+  --eds-color-bg-success-fill-muted-selected: var(--eds-color-success-5);
+  --eds-color-bg-success-surface: var(--eds-color-success-2);
+  --eds-color-bg-surface: var(--eds-color-neutral-2);
+  --eds-color-bg-warning-canvas: var(--eds-color-warning-1);
+  --eds-color-bg-warning-fill-emphasis-active: var(--eds-color-warning-11);
+  --eds-color-bg-warning-fill-emphasis-default: var(--eds-color-warning-9);
+  --eds-color-bg-warning-fill-emphasis-hover: var(--eds-color-warning-10);
+  --eds-color-bg-warning-fill-emphasis-selected: var(--eds-color-warning-11);
+  --eds-color-bg-warning-fill-muted-active: var(--eds-color-warning-5);
+  --eds-color-bg-warning-fill-muted-default: var(--eds-color-warning-3);
+  --eds-color-bg-warning-fill-muted-hover: var(--eds-color-warning-4);
+  --eds-color-bg-warning-fill-muted-selected: var(--eds-color-warning-5);
+  --eds-color-bg-warning-surface: var(--eds-color-warning-2);
+  --eds-color-border-accent-medium: var(--eds-color-accent-7);
+  --eds-color-border-accent-strong: var(--eds-color-accent-8);
+  --eds-color-border-accent-subtle: var(--eds-color-accent-6);
+  --eds-color-border-danger-medium: var(--eds-color-danger-7);
+  --eds-color-border-danger-strong: var(--eds-color-danger-8);
+  --eds-color-border-danger-subtle: var(--eds-color-danger-6);
+  --eds-color-border-disabled: var(--eds-color-neutral-7);
+  --eds-color-border-focus: var(--eds-color-info-7);
+  --eds-color-border-info-medium: var(--eds-color-info-7);
+  --eds-color-border-info-strong: var(--eds-color-info-8);
+  --eds-color-border-info-subtle: var(--eds-color-info-6);
+  --eds-color-border-medium: var(--eds-color-neutral-7);
+  --eds-color-border-neutral-medium: var(--eds-color-neutral-7);
+  --eds-color-border-neutral-strong: var(--eds-color-neutral-8);
+  --eds-color-border-neutral-subtle: var(--eds-color-neutral-6);
+  --eds-color-border-strong: var(--eds-color-neutral-8);
+  --eds-color-border-subtle: var(--eds-color-neutral-6);
+  --eds-color-border-success-medium: var(--eds-color-success-7);
+  --eds-color-border-success-strong: var(--eds-color-success-8);
+  --eds-color-border-success-subtle: var(--eds-color-success-6);
+  --eds-color-border-warning-medium: var(--eds-color-warning-7);
+  --eds-color-border-warning-strong: var(--eds-color-warning-8);
+  --eds-color-border-warning-subtle: var(--eds-color-warning-6);
+  --eds-color-icon-accent: var(--eds-color-accent-12);
+  --eds-color-icon-accent-on-emphasis: var(--eds-color-accent-14);
+  --eds-color-icon-danger: var(--eds-color-danger-12);
+  --eds-color-icon-danger-on-emphasis: var(--eds-color-danger-14);
+  --eds-color-icon-info: var(--eds-color-info-12);
+  --eds-color-icon-info-on-emphasis: var(--eds-color-info-14);
+  --eds-color-icon-neutral: var(--eds-color-neutral-12);
+  --eds-color-icon-neutral-on-emphasis: var(--eds-color-neutral-14);
+  --eds-color-icon-success: var(--eds-color-success-12);
+  --eds-color-icon-success-on-emphasis: var(--eds-color-success-14);
+  --eds-color-icon-warning: var(--eds-color-warning-12);
+  --eds-color-icon-warning-on-emphasis: var(--eds-color-warning-14);
+  --eds-color-text-accent-strong: var(--eds-color-accent-13);
+  --eds-color-text-accent-strong-on-emphasis: var(--eds-color-accent-15);
+  --eds-color-text-accent-subtle: var(--eds-color-accent-12);
+  --eds-color-text-accent-subtle-on-emphasis: var(--eds-color-accent-14);
+  --eds-color-text-danger-strong: var(--eds-color-danger-13);
+  --eds-color-text-danger-strong-on-emphasis: var(--eds-color-danger-15);
+  --eds-color-text-danger-subtle: var(--eds-color-danger-12);
+  --eds-color-text-danger-subtle-on-emphasis: var(--eds-color-danger-14);
+  --eds-color-text-disabled: var(--eds-color-neutral-7);
+  --eds-color-text-info-strong: var(--eds-color-info-13);
+  --eds-color-text-info-strong-on-emphasis: var(--eds-color-info-15);
+  --eds-color-text-info-subtle: var(--eds-color-info-12);
+  --eds-color-text-info-subtle-on-emphasis: var(--eds-color-info-14);
+  --eds-color-text-link: var(--eds-color-info-8);
+  --eds-color-text-neutral-strong: var(--eds-color-neutral-13);
+  --eds-color-text-neutral-strong-on-emphasis: var(--eds-color-neutral-15);
+  --eds-color-text-neutral-subtle: var(--eds-color-neutral-12);
+  --eds-color-text-neutral-subtle-on-emphasis: var(--eds-color-neutral-14);
+  --eds-color-text-on-inverse: var(--eds-color-neutral-15);
+  --eds-color-text-placeholder: var(--eds-color-neutral-7);
+  --eds-color-text-strong: var(--eds-color-neutral-13);
+  --eds-color-text-strong-on-emphasis: var(--eds-color-neutral-15);
+  --eds-color-text-subtle: var(--eds-color-neutral-12);
+  --eds-color-text-subtle-on-emphasis: var(--eds-color-neutral-14);
+  --eds-color-text-success-strong: var(--eds-color-success-13);
+  --eds-color-text-success-strong-on-emphasis: var(--eds-color-success-15);
+  --eds-color-text-success-subtle: var(--eds-color-success-12);
+  --eds-color-text-success-subtle-on-emphasis: var(--eds-color-success-14);
+  --eds-color-text-warning-strong: var(--eds-color-warning-13);
+  --eds-color-text-warning-strong-on-emphasis: var(--eds-color-warning-15);
+  --eds-color-text-warning-subtle: var(--eds-color-warning-12);
+  --eds-color-text-warning-subtle-on-emphasis: var(--eds-color-warning-14);
+  /* ghost resting fill — transparent, not white; ladder anchors one step low */
+  --eds-color-bg-neutral-fill-ghost-default: transparent;
+  /* ghost resting fill — transparent, not white; ladder anchors one step low */
+  --eds-color-bg-accent-fill-ghost-default: transparent;
+  /* ghost resting fill — transparent, not white; ladder anchors one step low */
+  --eds-color-bg-danger-fill-ghost-default: transparent;
+}
+
+/* --- sRGB fallback ------------------------------------------------------------- */
+
+:where(:root),
+[data-color-scheme='light'] {
+  --eds-color-accent-1: #ecf8f6;
+  --eds-color-accent-10: #1f5c63;
+  --eds-color-accent-11: #20565c;
+  --eds-color-accent-12: #206369;
+  --eds-color-accent-13: #151f20;
+  --eds-color-accent-14: #cae4e7;
+  --eds-color-accent-15: #ffffff;  /* gamut-mapped */
+  --eds-color-accent-2: #feffff;  /* gamut-mapped */
+  --eds-color-accent-3: #d2e6e3;
+  --eds-color-accent-4: #c0dbd6;
+  --eds-color-accent-5: #a8cdc7;
+  --eds-color-accent-6: #c0dbd6;
+  --eds-color-accent-7: #83bab7;
+  --eds-color-accent-8: #277678;
+  --eds-color-accent-9: #206f77;
+  --eds-color-danger-1: #fff1f1;  /* gamut-mapped */
+  --eds-color-danger-10: #9a1026;
+  --eds-color-danger-11: #8e1525;
+  --eds-color-danger-12: #a50827;
+  --eds-color-danger-13: #2e1414;
+  --eds-color-danger-14: #ffd1cf;  /* gamut-mapped */
+  --eds-color-danger-15: #ffffff;  /* gamut-mapped */
+  --eds-color-danger-2: #ffffff;  /* gamut-mapped */
+  --eds-color-danger-3: #ffd6d4;  /* gamut-mapped */
+  --eds-color-danger-4: #ffc3c1;  /* gamut-mapped */
+  --eds-color-danger-5: #ffaaa8;  /* gamut-mapped */
+  --eds-color-danger-6: #ffc3c1;  /* gamut-mapped */
+  --eds-color-danger-7: #ff8384;  /* gamut-mapped */
+  --eds-color-danger-8: #c5002e;  /* gamut-mapped */
+  --eds-color-danger-9: #bb002b;  /* gamut-mapped */
+  --eds-color-info-1: #ecf7ff;  /* gamut-mapped */
+  --eds-color-info-10: #075883;
+  --eds-color-info-11: #0d527a;
+  --eds-color-info-12: #025e8d;
+  --eds-color-info-13: #121f28;
+  --eds-color-info-14: #c5e3f9;
+  --eds-color-info-15: #ffffff;  /* gamut-mapped */
+  --eds-color-info-2: #feffff;  /* gamut-mapped */
+  --eds-color-info-3: #cae6fb;
+  --eds-color-info-4: #b5daf6;
+  --eds-color-info-5: #99cbf0;
+  --eds-color-info-6: #b5daf6;
+  --eds-color-info-7: #6fb6e8;
+  --eds-color-info-8: #0070a7;  /* gamut-mapped */
+  --eds-color-info-9: #006a9e;  /* gamut-mapped */
+  --eds-color-neutral-1: #f5f5f5;
+  --eds-color-neutral-10: #525252;
+  --eds-color-neutral-11: #4d4d4d;
+  --eds-color-neutral-12: #585858;
+  --eds-color-neutral-13: #1d1d1d;
+  --eds-color-neutral-14: #dedede;
+  --eds-color-neutral-15: #ffffff;
+  --eds-color-neutral-2: #ffffff;
+  --eds-color-neutral-3: #e1e1e1;
+  --eds-color-neutral-4: #d4d4d4;
+  --eds-color-neutral-5: #c4c4c4;
+  --eds-color-neutral-6: #d4d4d4;
+  --eds-color-neutral-7: #aeaeae;
+  --eds-color-neutral-8: #696969;
+  --eds-color-neutral-9: #636363;
+  --eds-color-success-1: #eafbe8;
+  --eds-color-success-10: #206220;
+  --eds-color-success-11: #205c1f;
+  --eds-color-success-12: #20691f;
+  --eds-color-success-13: #142114;
+  --eds-color-success-14: #cae8c7;
+  --eds-color-success-15: #ffffff;  /* gamut-mapped */
+  --eds-color-success-2: #fefffe;  /* gamut-mapped */
+  --eds-color-success-3: #cfeacc;
+  --eds-color-success-4: #bbe0b8;
+  --eds-color-success-5: #a2d49e;
+  --eds-color-success-6: #bbe0b8;
+  --eds-color-success-7: #7dc279;
+  --eds-color-success-8: #227e22;
+  --eds-color-success-9: #217721;
+  --eds-color-warning-1: #fff3e9;  /* gamut-mapped */
+  --eds-color-warning-10: #7c4100;  /* gamut-mapped */
+  --eds-color-warning-11: #743d00;  /* gamut-mapped */
+  --eds-color-warning-12: #844600;  /* gamut-mapped */
+  --eds-color-warning-13: #27190e;
+  --eds-color-warning-14: #fad6bc;
+  --eds-color-warning-15: #ffffff;  /* gamut-mapped */
+  --eds-color-warning-2: #fffffe;  /* gamut-mapped */
+  --eds-color-warning-3: #fcdac1;
+  --eds-color-warning-4: #f6caaa;
+  --eds-color-warning-5: #f0b689;
+  --eds-color-warning-6: #f6caaa;
+  --eds-color-warning-7: #e89959;
+  --eds-color-warning-8: #9c5400;  /* gamut-mapped */
+  --eds-color-warning-9: #944f00;  /* gamut-mapped */
+  --eds-color-bg-floating: #ffffff;  /* elevated: follows neutral-2 */
+}
+
+[data-color-scheme='dark'] {
+  --eds-color-accent-1: #0a0b0b;
+  --eds-color-accent-10: #ace3e9;
+  --eds-color-accent-11: #c7f1f6;
+  --eds-color-accent-12: #bcebf1;
+  --eds-color-accent-13: #f4feff;  /* gamut-mapped */
+  --eds-color-accent-14: #2d3839;
+  --eds-color-accent-15: #030303;
+  --eds-color-accent-2: #1f2322;
+  --eds-color-accent-3: #42625d;
+  --eds-color-accent-4: #47726c;
+  --eds-color-accent-5: #4e867f;
+  --eds-color-accent-6: #42625d;
+  --eds-color-accent-7: #4c918d;
+  --eds-color-accent-8: #73c0c3;
+  --eds-color-accent-9: #8cd2da;
+  --eds-color-danger-1: #0d0a0a;
+  --eds-color-danger-10: #ffc8c5;  /* gamut-mapped */
+  --eds-color-danger-11: #ffdfde;  /* gamut-mapped */
+  --eds-color-danger-12: #ffd6d4;  /* gamut-mapped */
+  --eds-color-danger-13: #fffbfa;  /* gamut-mapped */
+  --eds-color-danger-14: #492d2c;
+  --eds-color-danger-15: #040303;
+  --eds-color-danger-2: #2a1e1e;
+  --eds-color-danger-3: #923a3d;
+  --eds-color-danger-4: #b03940;
+  --eds-color-danger-5: #d43745;
+  --eds-color-danger-6: #923a3d;
+  --eds-color-danger-7: #e53748;
+  --eds-color-danger-8: #ff8989;  /* gamut-mapped */
+  --eds-color-danger-9: #ffaaa8;  /* gamut-mapped */
+  --eds-color-info-1: #0a0b0c;
+  --eds-color-info-10: #b1deff;  /* gamut-mapped */
+  --eds-color-info-11: #d3ecff;  /* gamut-mapped */
+  --eds-color-info-12: #c6e6ff;  /* gamut-mapped */
+  --eds-color-info-13: #f9fcff;  /* gamut-mapped */
+  --eds-color-info-14: #2a3741;
+  --eds-color-info-15: #030304;
+  --eds-color-info-2: #1d2226;
+  --eds-color-info-3: #33607e;
+  --eds-color-info-4: #316f98;
+  --eds-color-info-5: #2e82b6;
+  --eds-color-info-6: #33607e;
+  --eds-color-info-7: #2d8bc5;
+  --eds-color-info-8: #5abbfb;
+  --eds-color-info-9: #87cdff;  /* gamut-mapped */
+  --eds-color-neutral-1: #060c13;
+  --eds-color-neutral-10: #cbdae6;
+  --eds-color-neutral-11: #deeaf4;
+  --eds-color-neutral-12: #d6e3ee;
+  --eds-color-neutral-13: #f9fcff;  /* gamut-mapped */
+  --eds-color-neutral-14: #323639;
+  --eds-color-neutral-15: #030303;
+  --eds-color-neutral-2: #152332;
+  --eds-color-neutral-3: #4b5d71;
+  --eds-color-neutral-4: #536b87;
+  --eds-color-neutral-5: #5e7da0;
+  --eds-color-neutral-6: #4b5d71;
+  --eds-color-neutral-7: #6886a5;
+  --eds-color-neutral-8: #99b5ce;
+  --eds-color-neutral-9: #b4c7d6;
+  --eds-color-success-1: #0a0c0a;
+  --eds-color-success-10: #aceba8;
+  --eds-color-success-11: #c7f7c3;
+  --eds-color-success-12: #bcf2b8;
+  --eds-color-success-13: #f5fff5;  /* gamut-mapped */
+  --eds-color-success-14: #2c392b;
+  --eds-color-success-15: #030303;
+  --eds-color-success-2: #1e231e;
+  --eds-color-success-3: #3c673a;
+  --eds-color-success-4: #3e793c;
+  --eds-color-success-5: #418e3e;
+  --eds-color-success-6: #3c673a;
+  --eds-color-success-7: #439941;
+  --eds-color-success-8: #6eca6a;
+  --eds-color-success-9: #8cdb87;
+  --eds-color-warning-1: #0c0b09;
+  --eds-color-warning-10: #ffcca5;  /* gamut-mapped */
+  --eds-color-warning-11: #ffe2cc;  /* gamut-mapped */
+  --eds-color-warning-12: #ffd9bd;  /* gamut-mapped */
+  --eds-color-warning-13: #fffbf8;  /* gamut-mapped */
+  --eds-color-warning-14: #413226;
+  --eds-color-warning-15: #040303;
+  --eds-color-warning-2: #27201c;
+  --eds-color-warning-3: #7e4e25;
+  --eds-color-warning-4: #97571b;
+  --eds-color-warning-5: #b46200;  /* gamut-mapped */
+  --eds-color-warning-6: #7e4e25;
+  --eds-color-warning-7: #c16900;  /* gamut-mapped */
+  --eds-color-warning-8: #f99539;
+  --eds-color-warning-9: #ffb070;  /* gamut-mapped */
+  --eds-color-bg-floating: #4b5d71;  /* elevated: follows neutral-3 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme]) {
+    --eds-color-accent-1: #0a0b0b;
+    --eds-color-accent-10: #ace3e9;
+    --eds-color-accent-11: #c7f1f6;
+    --eds-color-accent-12: #bcebf1;
+    --eds-color-accent-13: #f4feff;  /* gamut-mapped */
+    --eds-color-accent-14: #2d3839;
+    --eds-color-accent-15: #030303;
+    --eds-color-accent-2: #1f2322;
+    --eds-color-accent-3: #42625d;
+    --eds-color-accent-4: #47726c;
+    --eds-color-accent-5: #4e867f;
+    --eds-color-accent-6: #42625d;
+    --eds-color-accent-7: #4c918d;
+    --eds-color-accent-8: #73c0c3;
+    --eds-color-accent-9: #8cd2da;
+    --eds-color-danger-1: #0d0a0a;
+    --eds-color-danger-10: #ffc8c5;  /* gamut-mapped */
+    --eds-color-danger-11: #ffdfde;  /* gamut-mapped */
+    --eds-color-danger-12: #ffd6d4;  /* gamut-mapped */
+    --eds-color-danger-13: #fffbfa;  /* gamut-mapped */
+    --eds-color-danger-14: #492d2c;
+    --eds-color-danger-15: #040303;
+    --eds-color-danger-2: #2a1e1e;
+    --eds-color-danger-3: #923a3d;
+    --eds-color-danger-4: #b03940;
+    --eds-color-danger-5: #d43745;
+    --eds-color-danger-6: #923a3d;
+    --eds-color-danger-7: #e53748;
+    --eds-color-danger-8: #ff8989;  /* gamut-mapped */
+    --eds-color-danger-9: #ffaaa8;  /* gamut-mapped */
+    --eds-color-info-1: #0a0b0c;
+    --eds-color-info-10: #b1deff;  /* gamut-mapped */
+    --eds-color-info-11: #d3ecff;  /* gamut-mapped */
+    --eds-color-info-12: #c6e6ff;  /* gamut-mapped */
+    --eds-color-info-13: #f9fcff;  /* gamut-mapped */
+    --eds-color-info-14: #2a3741;
+    --eds-color-info-15: #030304;
+    --eds-color-info-2: #1d2226;
+    --eds-color-info-3: #33607e;
+    --eds-color-info-4: #316f98;
+    --eds-color-info-5: #2e82b6;
+    --eds-color-info-6: #33607e;
+    --eds-color-info-7: #2d8bc5;
+    --eds-color-info-8: #5abbfb;
+    --eds-color-info-9: #87cdff;  /* gamut-mapped */
+    --eds-color-neutral-1: #060c13;
+    --eds-color-neutral-10: #cbdae6;
+    --eds-color-neutral-11: #deeaf4;
+    --eds-color-neutral-12: #d6e3ee;
+    --eds-color-neutral-13: #f9fcff;  /* gamut-mapped */
+    --eds-color-neutral-14: #323639;
+    --eds-color-neutral-15: #030303;
+    --eds-color-neutral-2: #152332;
+    --eds-color-neutral-3: #4b5d71;
+    --eds-color-neutral-4: #536b87;
+    --eds-color-neutral-5: #5e7da0;
+    --eds-color-neutral-6: #4b5d71;
+    --eds-color-neutral-7: #6886a5;
+    --eds-color-neutral-8: #99b5ce;
+    --eds-color-neutral-9: #b4c7d6;
+    --eds-color-success-1: #0a0c0a;
+    --eds-color-success-10: #aceba8;
+    --eds-color-success-11: #c7f7c3;
+    --eds-color-success-12: #bcf2b8;
+    --eds-color-success-13: #f5fff5;  /* gamut-mapped */
+    --eds-color-success-14: #2c392b;
+    --eds-color-success-15: #030303;
+    --eds-color-success-2: #1e231e;
+    --eds-color-success-3: #3c673a;
+    --eds-color-success-4: #3e793c;
+    --eds-color-success-5: #418e3e;
+    --eds-color-success-6: #3c673a;
+    --eds-color-success-7: #439941;
+    --eds-color-success-8: #6eca6a;
+    --eds-color-success-9: #8cdb87;
+    --eds-color-warning-1: #0c0b09;
+    --eds-color-warning-10: #ffcca5;  /* gamut-mapped */
+    --eds-color-warning-11: #ffe2cc;  /* gamut-mapped */
+    --eds-color-warning-12: #ffd9bd;  /* gamut-mapped */
+    --eds-color-warning-13: #fffbf8;  /* gamut-mapped */
+    --eds-color-warning-14: #413226;
+    --eds-color-warning-15: #040303;
+    --eds-color-warning-2: #27201c;
+    --eds-color-warning-3: #7e4e25;
+    --eds-color-warning-4: #97571b;
+    --eds-color-warning-5: #b46200;  /* gamut-mapped */
+    --eds-color-warning-6: #7e4e25;
+    --eds-color-warning-7: #c16900;  /* gamut-mapped */
+    --eds-color-warning-8: #f99539;
+    --eds-color-warning-9: #ffb070;  /* gamut-mapped */
+    --eds-color-bg-floating: #4b5d71;  /* elevated: follows neutral-3 */
+  }
+}
+
+/* --- wide gamut ---------------------------------------------------------------- */
+
+@media (color-gamut: p3) {
+  :where(:root),
+  [data-color-scheme='light'] {
+    --eds-color-accent-1: oklch(0.97 0.013 184.6);
+    --eds-color-accent-10: oklch(0.44 0.062 204.6);
+    --eds-color-accent-11: oklch(0.42 0.057 204.6);
+    --eds-color-accent-12: oklch(0.46 0.066 204.6);
+    --eds-color-accent-13: oklch(0.23 0.015 204.6);
+    --eds-color-accent-14: oklch(0.9 0.028 204.6);
+    --eds-color-accent-15: oklch(1 0.011 204.6);
+    --eds-color-accent-2: oklch(0.999 0.01 184.6);
+    --eds-color-accent-3: oklch(0.91 0.022 184.6);
+    --eds-color-accent-4: oklch(0.87 0.029 184.6);
+    --eds-color-accent-5: oklch(0.82 0.04 184.6);
+    --eds-color-accent-6: oklch(0.87 0.029 184.6);
+    --eds-color-accent-7: oklch(0.75 0.058 191.3);
+    --eds-color-accent-8: oklch(0.52 0.075 197.9);
+    --eds-color-accent-9: oklch(0.5 0.075 204.6);
+    --eds-color-danger-1: oklch(0.97 0.042 21.1);
+    --eds-color-danger-10: oklch(0.44 0.168 21.1);
+    --eds-color-danger-11: oklch(0.42 0.154 21.1);
+    --eds-color-danger-12: oklch(0.46 0.181 21.1);
+    --eds-color-danger-13: oklch(0.23 0.042 21.1);
+    --eds-color-danger-14: oklch(0.9 0.075 21.1);
+    --eds-color-danger-15: oklch(1 0.031 21.1);
+    --eds-color-danger-2: oklch(0.999 0.032 21.1);
+    --eds-color-danger-3: oklch(0.91 0.07 21.1);
+    --eds-color-danger-4: oklch(0.87 0.093 21.1);
+    --eds-color-danger-5: oklch(0.82 0.126 21.1);
+    --eds-color-danger-6: oklch(0.87 0.093 21.1);
+    --eds-color-danger-7: oklch(0.75 0.175 21.1);
+    --eds-color-danger-8: oklch(0.52 0.214 21.1);
+    --eds-color-danger-9: oklch(0.5 0.204 21.1);
+    --eds-color-info-1: oklch(0.97 0.025 240.7);
+    --eds-color-info-10: oklch(0.44 0.099 240.7);
+    --eds-color-info-11: oklch(0.42 0.091 240.7);
+    --eds-color-info-12: oklch(0.46 0.106 240.7);
+    --eds-color-info-13: oklch(0.23 0.025 240.7);
+    --eds-color-info-14: oklch(0.9 0.044 240.7);
+    --eds-color-info-15: oklch(1 0.018 240.7);
+    --eds-color-info-2: oklch(0.999 0.019 240.7);
+    --eds-color-info-3: oklch(0.91 0.041 240.7);
+    --eds-color-info-4: oklch(0.87 0.055 240.7);
+    --eds-color-info-5: oklch(0.82 0.074 240.7);
+    --eds-color-info-6: oklch(0.87 0.055 240.7);
+    --eds-color-info-7: oklch(0.75 0.102 240.7);
+    --eds-color-info-8: oklch(0.52 0.125 240.7);
+    --eds-color-info-9: oklch(0.5 0.12 240.7);
+    --eds-color-neutral-1: oklch(0.97 0 0);
+    --eds-color-neutral-10: oklch(0.44 0 0);
+    --eds-color-neutral-11: oklch(0.42 0 0);
+    --eds-color-neutral-12: oklch(0.46 0 0);
+    --eds-color-neutral-13: oklch(0.23 0 0);
+    --eds-color-neutral-14: oklch(0.9 0 0);
+    --eds-color-neutral-15: oklch(1 0 0);
+    --eds-color-neutral-2: oklch(0.999 0 0);
+    --eds-color-neutral-3: oklch(0.91 0 0);
+    --eds-color-neutral-4: oklch(0.87 0 0);
+    --eds-color-neutral-5: oklch(0.82 0 0);
+    --eds-color-neutral-6: oklch(0.87 0 0);
+    --eds-color-neutral-7: oklch(0.75 0 0);
+    --eds-color-neutral-8: oklch(0.52 0 0);
+    --eds-color-neutral-9: oklch(0.5 0 0);
+    --eds-color-success-1: oklch(0.97 0.03 143);
+    --eds-color-success-10: oklch(0.44 0.12 143);
+    --eds-color-success-11: oklch(0.42 0.111 143);
+    --eds-color-success-12: oklch(0.46 0.13 143);
+    --eds-color-success-13: oklch(0.23 0.03 143);
+    --eds-color-success-14: oklch(0.9 0.054 143);
+    --eds-color-success-15: oklch(1 0.022 143);
+    --eds-color-success-2: oklch(0.999 0.023 143);
+    --eds-color-success-3: oklch(0.91 0.05 143);
+    --eds-color-success-4: oklch(0.87 0.067 143);
+    --eds-color-success-5: oklch(0.82 0.091 143);
+    --eds-color-success-6: oklch(0.87 0.067 143);
+    --eds-color-success-7: oklch(0.75 0.125 143);
+    --eds-color-success-8: oklch(0.52 0.153 143);
+    --eds-color-success-9: oklch(0.5 0.146 143);
+    --eds-color-warning-1: oklch(0.97 0.03 58.7);
+    --eds-color-warning-10: oklch(0.44 0.12 58.7);
+    --eds-color-warning-11: oklch(0.42 0.11 58.7);
+    --eds-color-warning-12: oklch(0.46 0.129 58.7);
+    --eds-color-warning-13: oklch(0.23 0.03 58.7);
+    --eds-color-warning-14: oklch(0.9 0.053 58.7);
+    --eds-color-warning-15: oklch(1 0.022 58.7);
+    --eds-color-warning-2: oklch(0.999 0.023 58.7);
+    --eds-color-warning-3: oklch(0.91 0.05 58.7);
+    --eds-color-warning-4: oklch(0.87 0.066 58.7);
+    --eds-color-warning-5: oklch(0.82 0.09 58.7);
+    --eds-color-warning-6: oklch(0.87 0.066 58.7);
+    --eds-color-warning-7: oklch(0.75 0.124 58.7);
+    --eds-color-warning-8: oklch(0.52 0.152 58.7);
+    --eds-color-warning-9: oklch(0.5 0.145 58.7);
+    --eds-color-bg-floating: oklch(0.999 0 0);  /* elevated: follows neutral-2 */
+  }
+
+  [data-color-scheme='dark'] {
+    --eds-color-accent-1: oklch(0.15 0.002 184.6);
+    --eds-color-accent-10: oklch(0.88 0.057 204.6);
+    --eds-color-accent-11: oklch(0.93 0.044 204.6);
+    --eds-color-accent-12: oklch(0.91 0.049 204.6);
+    --eds-color-accent-13: oklch(0.99 0.03 204.6);
+    --eds-color-accent-14: oklch(0.33 0.015 204.6);
+    --eds-color-accent-15: oklch(0.1 0.001 204.6);
+    --eds-color-accent-2: oklch(0.25 0.006 184.6);
+    --eds-color-accent-3: oklch(0.47 0.038 184.6);
+    --eds-color-accent-4: oklch(0.52 0.049 184.6);
+    --eds-color-accent-5: oklch(0.58 0.061 184.6);
+    --eds-color-accent-6: oklch(0.47 0.038 184.6);
+    --eds-color-accent-7: oklch(0.61 0.07 191.3);
+    --eds-color-accent-8: oklch(0.76 0.077 197.9);
+    --eds-color-accent-9: oklch(0.82 0.071 204.6);
+    --eds-color-danger-1: oklch(0.15 0.005 21.1);
+    --eds-color-danger-10: oklch(0.88 0.154 21.1);
+    --eds-color-danger-11: oklch(0.93 0.119 21.1);
+    --eds-color-danger-12: oklch(0.91 0.133 21.1);
+    --eds-color-danger-13: oklch(0.99 0.081 21.1);
+    --eds-color-danger-14: oklch(0.33 0.042 21.1);
+    --eds-color-danger-15: oklch(0.1 0.003 21.1);
+    --eds-color-danger-2: oklch(0.25 0.018 21.1);
+    --eds-color-danger-3: oklch(0.47 0.119 21.1);
+    --eds-color-danger-4: oklch(0.52 0.154 21.1);
+    --eds-color-danger-5: oklch(0.58 0.193 21.1);
+    --eds-color-danger-6: oklch(0.47 0.119 21.1);
+    --eds-color-danger-7: oklch(0.61 0.209 21.1);
+    --eds-color-danger-8: oklch(0.76 0.221 21.1);
+    --eds-color-danger-9: oklch(0.82 0.193 21.1);
+    --eds-color-info-1: oklch(0.15 0.003 240.7);
+    --eds-color-info-10: oklch(0.88 0.091 240.7);
+    --eds-color-info-11: oklch(0.93 0.07 240.7);
+    --eds-color-info-12: oklch(0.91 0.078 240.7);
+    --eds-color-info-13: oklch(0.99 0.047 240.7);
+    --eds-color-info-14: oklch(0.33 0.025 240.7);
+    --eds-color-info-15: oklch(0.1 0.002 240.7);
+    --eds-color-info-2: oklch(0.25 0.011 240.7);
+    --eds-color-info-3: oklch(0.47 0.07 240.7);
+    --eds-color-info-4: oklch(0.52 0.091 240.7);
+    --eds-color-info-5: oklch(0.58 0.113 240.7);
+    --eds-color-info-6: oklch(0.47 0.07 240.7);
+    --eds-color-info-7: oklch(0.61 0.123 240.7);
+    --eds-color-info-8: oklch(0.76 0.13 240.7);
+    --eds-color-info-9: oklch(0.82 0.113 240.7);
+    --eds-color-neutral-1: oklch(0.15 0.02 252.5);
+    --eds-color-neutral-10: oklch(0.88 0.024 243);
+    --eds-color-neutral-11: oklch(0.93 0.019 243);
+    --eds-color-neutral-12: oklch(0.91 0.021 243);
+    --eds-color-neutral-13: oklch(0.99 0.013 243);
+    --eds-color-neutral-14: oklch(0.33 0.007 243);
+    --eds-color-neutral-15: oklch(0.1 0 243);
+    --eds-color-neutral-2: oklch(0.25 0.036 252.5);
+    --eds-color-neutral-3: oklch(0.47 0.04 252.5);
+    --eds-color-neutral-4: oklch(0.52 0.052 252.5);
+    --eds-color-neutral-5: oklch(0.58 0.065 252.5);
+    --eds-color-neutral-6: oklch(0.47 0.04 252.5);
+    --eds-color-neutral-7: oklch(0.61 0.058 249.3);
+    --eds-color-neutral-8: oklch(0.76 0.048 246.1);
+    --eds-color-neutral-9: oklch(0.82 0.03 243);
+    --eds-color-success-1: oklch(0.15 0.004 143);
+    --eds-color-success-10: oklch(0.88 0.111 143);
+    --eds-color-success-11: oklch(0.93 0.086 143);
+    --eds-color-success-12: oklch(0.91 0.096 143);
+    --eds-color-success-13: oklch(0.99 0.058 143);
+    --eds-color-success-14: oklch(0.33 0.03 143);
+    --eds-color-success-15: oklch(0.1 0.002 143);
+    --eds-color-success-2: oklch(0.25 0.013 143);
+    --eds-color-success-3: oklch(0.47 0.086 143);
+    --eds-color-success-4: oklch(0.52 0.111 143);
+    --eds-color-success-5: oklch(0.58 0.139 143);
+    --eds-color-success-6: oklch(0.47 0.086 143);
+    --eds-color-success-7: oklch(0.61 0.15 143);
+    --eds-color-success-8: oklch(0.76 0.159 143);
+    --eds-color-success-9: oklch(0.82 0.139 143);
+    --eds-color-warning-1: oklch(0.15 0.004 58.7);
+    --eds-color-warning-10: oklch(0.88 0.11 58.7);
+    --eds-color-warning-11: oklch(0.93 0.085 58.7);
+    --eds-color-warning-12: oklch(0.91 0.095 58.7);
+    --eds-color-warning-13: oklch(0.99 0.058 58.7);
+    --eds-color-warning-14: oklch(0.33 0.03 58.7);
+    --eds-color-warning-15: oklch(0.1 0.002 58.7);
+    --eds-color-warning-2: oklch(0.25 0.013 58.7);
+    --eds-color-warning-3: oklch(0.47 0.085 58.7);
+    --eds-color-warning-4: oklch(0.52 0.11 58.7);
+    --eds-color-warning-5: oklch(0.58 0.138 58.7);
+    --eds-color-warning-6: oklch(0.47 0.085 58.7);
+    --eds-color-warning-7: oklch(0.61 0.149 58.7);
+    --eds-color-warning-8: oklch(0.76 0.157 58.7);
+    --eds-color-warning-9: oklch(0.82 0.138 58.7);
+    --eds-color-bg-floating: oklch(0.47 0.04 252.5);  /* elevated: follows neutral-3 */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-scheme]) {
+      --eds-color-accent-1: oklch(0.15 0.002 184.6);
+      --eds-color-accent-10: oklch(0.88 0.057 204.6);
+      --eds-color-accent-11: oklch(0.93 0.044 204.6);
+      --eds-color-accent-12: oklch(0.91 0.049 204.6);
+      --eds-color-accent-13: oklch(0.99 0.03 204.6);
+      --eds-color-accent-14: oklch(0.33 0.015 204.6);
+      --eds-color-accent-15: oklch(0.1 0.001 204.6);
+      --eds-color-accent-2: oklch(0.25 0.006 184.6);
+      --eds-color-accent-3: oklch(0.47 0.038 184.6);
+      --eds-color-accent-4: oklch(0.52 0.049 184.6);
+      --eds-color-accent-5: oklch(0.58 0.061 184.6);
+      --eds-color-accent-6: oklch(0.47 0.038 184.6);
+      --eds-color-accent-7: oklch(0.61 0.07 191.3);
+      --eds-color-accent-8: oklch(0.76 0.077 197.9);
+      --eds-color-accent-9: oklch(0.82 0.071 204.6);
+      --eds-color-danger-1: oklch(0.15 0.005 21.1);
+      --eds-color-danger-10: oklch(0.88 0.154 21.1);
+      --eds-color-danger-11: oklch(0.93 0.119 21.1);
+      --eds-color-danger-12: oklch(0.91 0.133 21.1);
+      --eds-color-danger-13: oklch(0.99 0.081 21.1);
+      --eds-color-danger-14: oklch(0.33 0.042 21.1);
+      --eds-color-danger-15: oklch(0.1 0.003 21.1);
+      --eds-color-danger-2: oklch(0.25 0.018 21.1);
+      --eds-color-danger-3: oklch(0.47 0.119 21.1);
+      --eds-color-danger-4: oklch(0.52 0.154 21.1);
+      --eds-color-danger-5: oklch(0.58 0.193 21.1);
+      --eds-color-danger-6: oklch(0.47 0.119 21.1);
+      --eds-color-danger-7: oklch(0.61 0.209 21.1);
+      --eds-color-danger-8: oklch(0.76 0.221 21.1);
+      --eds-color-danger-9: oklch(0.82 0.193 21.1);
+      --eds-color-info-1: oklch(0.15 0.003 240.7);
+      --eds-color-info-10: oklch(0.88 0.091 240.7);
+      --eds-color-info-11: oklch(0.93 0.07 240.7);
+      --eds-color-info-12: oklch(0.91 0.078 240.7);
+      --eds-color-info-13: oklch(0.99 0.047 240.7);
+      --eds-color-info-14: oklch(0.33 0.025 240.7);
+      --eds-color-info-15: oklch(0.1 0.002 240.7);
+      --eds-color-info-2: oklch(0.25 0.011 240.7);
+      --eds-color-info-3: oklch(0.47 0.07 240.7);
+      --eds-color-info-4: oklch(0.52 0.091 240.7);
+      --eds-color-info-5: oklch(0.58 0.113 240.7);
+      --eds-color-info-6: oklch(0.47 0.07 240.7);
+      --eds-color-info-7: oklch(0.61 0.123 240.7);
+      --eds-color-info-8: oklch(0.76 0.13 240.7);
+      --eds-color-info-9: oklch(0.82 0.113 240.7);
+      --eds-color-neutral-1: oklch(0.15 0.02 252.5);
+      --eds-color-neutral-10: oklch(0.88 0.024 243);
+      --eds-color-neutral-11: oklch(0.93 0.019 243);
+      --eds-color-neutral-12: oklch(0.91 0.021 243);
+      --eds-color-neutral-13: oklch(0.99 0.013 243);
+      --eds-color-neutral-14: oklch(0.33 0.007 243);
+      --eds-color-neutral-15: oklch(0.1 0 243);
+      --eds-color-neutral-2: oklch(0.25 0.036 252.5);
+      --eds-color-neutral-3: oklch(0.47 0.04 252.5);
+      --eds-color-neutral-4: oklch(0.52 0.052 252.5);
+      --eds-color-neutral-5: oklch(0.58 0.065 252.5);
+      --eds-color-neutral-6: oklch(0.47 0.04 252.5);
+      --eds-color-neutral-7: oklch(0.61 0.058 249.3);
+      --eds-color-neutral-8: oklch(0.76 0.048 246.1);
+      --eds-color-neutral-9: oklch(0.82 0.03 243);
+      --eds-color-success-1: oklch(0.15 0.004 143);
+      --eds-color-success-10: oklch(0.88 0.111 143);
+      --eds-color-success-11: oklch(0.93 0.086 143);
+      --eds-color-success-12: oklch(0.91 0.096 143);
+      --eds-color-success-13: oklch(0.99 0.058 143);
+      --eds-color-success-14: oklch(0.33 0.03 143);
+      --eds-color-success-15: oklch(0.1 0.002 143);
+      --eds-color-success-2: oklch(0.25 0.013 143);
+      --eds-color-success-3: oklch(0.47 0.086 143);
+      --eds-color-success-4: oklch(0.52 0.111 143);
+      --eds-color-success-5: oklch(0.58 0.139 143);
+      --eds-color-success-6: oklch(0.47 0.086 143);
+      --eds-color-success-7: oklch(0.61 0.15 143);
+      --eds-color-success-8: oklch(0.76 0.159 143);
+      --eds-color-success-9: oklch(0.82 0.139 143);
+      --eds-color-warning-1: oklch(0.15 0.004 58.7);
+      --eds-color-warning-10: oklch(0.88 0.11 58.7);
+      --eds-color-warning-11: oklch(0.93 0.085 58.7);
+      --eds-color-warning-12: oklch(0.91 0.095 58.7);
+      --eds-color-warning-13: oklch(0.99 0.058 58.7);
+      --eds-color-warning-14: oklch(0.33 0.03 58.7);
+      --eds-color-warning-15: oklch(0.1 0.002 58.7);
+      --eds-color-warning-2: oklch(0.25 0.013 58.7);
+      --eds-color-warning-3: oklch(0.47 0.085 58.7);
+      --eds-color-warning-4: oklch(0.52 0.11 58.7);
+      --eds-color-warning-5: oklch(0.58 0.138 58.7);
+      --eds-color-warning-6: oklch(0.47 0.085 58.7);
+      --eds-color-warning-7: oklch(0.61 0.149 58.7);
+      --eds-color-warning-8: oklch(0.76 0.157 58.7);
+      --eds-color-warning-9: oklch(0.82 0.138 58.7);
+      --eds-color-bg-floating: oklch(0.47 0.04 252.5);  /* elevated: follows neutral-3 */
+    }
+  }
+}

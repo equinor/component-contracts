@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--
+  GUESSED — everything below is inferred, not stated verbatim in DESIGN.md:
+
+  1. The button axis table says "tone(3) x variant(4) x size(2)" but the
+     document never defines what "size" means or its two values. Density
+     (compact/comfortable/relaxed) already accounts for the three documented
+     heights (24/36/44px), so "size" must be something else. Guessed it means
+     a "default" vs "small" type-scale choice (body-md vs body-sm) that only
+     affects horizontal padding and font-size, not the emergent height.
+
+  2. {spacing.spacing-icon-md-gap-horizontal} (icon-to-label gap) is
+     referenced in the button recipe but never defined in the flat spacing
+     token list. Guessed 6px (spacing-horizontal-2xs).
+
+  3. {recipe.cap-rounded-md} (the "cap(label)" box used in the mandated
+     height formula "inset x 2 + cap(label)") has no numeric value anywhere.
+     Guessed 20px because it is the ONLY value that reproduces all three
+     documented button heights (24 / 36 / 44) using named
+     spacing-vertical-* tokens as the inset: 4xs(2)*2+20=24,
+     xs(8)*2+20=36, sm(12)*2+20=44. Backed into vertical insets of
+     2 / 8 / 12px for compact / comfortable / relaxed from this.
+
+  4. Horizontal padding per density (8 / 16 / 20px, i.e.
+     spacing-horizontal-xs/md/lg) is not stated for the button specifically;
+     guessed by analogy to the spacing ladder.
+
+  5. The disabled row of the button recipe table is blank for
+     root/background-color in every column. The prose footnotes explicitly
+     say disabled "changes nothing" for variant=secondary/ghost/ghost-icon
+     beyond the generic ink/border swap. By elimination, "primary" (the
+     filled variant) is the one where background DOES change on disabled;
+     guessed it uses the untoned bg-fill-emphasis-disabled token (only
+     generic disabled fill token defined in the doc — no toned variants
+     exist for it).
+
+  6. Icon artwork: the doc specifies icon footprint/size tokens but no
+     actual glyphs. Used a generic placeholder plus/check-style SVG.
+
+  7. Focus ring: doc says the ring "is the platform's, not a designable
+     state" and lists a single non-toned border-focus token. Guessed a
+     uniform 2px outline in that color for every tone/variant, not
+     tone-tinted.
+
+  8. UX/methodology (not a content guess): the full cross-product of
+     tone(3) x variant(4) x size(2) x density(3) x state(5) is 360 buttons.
+     To keep the page viewable as "a labeled grid on one screen," density
+     and size are page-level toggles that restyle the whole grid live,
+     rather than being rendered as 360 separate static buttons.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EDS — Button (built from DESIGN.md alone)</title>
+<style>
+:root {
+  color-scheme: light dark;
+
+  /* ---- raw doc tokens actually bound by eds.button (name/name-dark pairs -> light-dark()) ---- */
+  --eds-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --eds-radius-md: 4px;      /* rounded.md */
+  --eds-radius-pill: 1000px; /* rounded.pill */
+
+  --eds-focus: light-dark(#6fb6e8, #2d8bc5); /* colors.focus / focus-dark */
+
+  --eds-disabled-ink: light-dark(#aeaeae, #6886a5);   /* text-disabled / border-disabled */
+  --eds-disabled-fill: light-dark(#e1e1e1, #4b5d71);  /* bg-fill-emphasis-disabled (untoned) */
+
+  /* neutral */
+  --eds-bg-neutral-emphasis-default: light-dark(#636363, #b4c7d6);
+  --eds-bg-neutral-emphasis-hover:   light-dark(#525252, #cbdae6);
+  --eds-bg-neutral-emphasis-active:  light-dark(#4d4d4d, #deeaf4);
+  --eds-bg-neutral-ghost-hover:      light-dark(#e1e1e1, #4b5d71);
+  --eds-bg-neutral-ghost-active:     light-dark(#d4d4d4, #536b87);
+  --eds-text-neutral-strong-on-emphasis: light-dark(#ffffff, #030303);
+  --eds-icon-neutral-on-emphasis:        light-dark(#dedede, #323639);
+  --eds-text-neutral-strong: light-dark(#1d1d1d, #f9fcff);
+  --eds-icon-neutral:        light-dark(#585858, #d6e3ee);
+  --eds-border-neutral-strong: light-dark(#696969, #99b5ce);
+
+  /* accent */
+  --eds-bg-accent-emphasis-default: light-dark(#206f77, #8cd2da);
+  --eds-bg-accent-emphasis-hover:   light-dark(#1f5c63, #ace3e9);
+  --eds-bg-accent-emphasis-active:  light-dark(#20565c, #c7f1f6);
+  --eds-bg-accent-ghost-hover:      light-dark(#d2e6e3, #42625d);
+  --eds-bg-accent-ghost-active:     light-dark(#c0dbd6, #47726c);
+  --eds-text-accent-strong-on-emphasis: light-dark(#ffffff, #030303);
+  --eds-icon-accent-on-emphasis:        light-dark(#cae4e7, #2d3839);
+  --eds-text-accent-strong: light-dark(#151f20, #f4feff);
+  --eds-icon-accent:        light-dark(#206369, #bcebf1);
+  --eds-border-accent-strong: light-dark(#277678, #73c0c3);
+
+  /* danger */
+  --eds-bg-danger-emphasis-default: light-dark(#bb002b, #ffaaa8);
+  --eds-bg-danger-emphasis-hover:   light-dark(#9a1026, #ffc8c5);
+  --eds-bg-danger-emphasis-active:  light-dark(#8e1525, #ffdfde);
+  --eds-bg-danger-ghost-hover:      light-dark(#ffd6d4, #923a3d);
+  --eds-bg-danger-ghost-active:     light-dark(#ffc3c1, #b03940);
+  --eds-text-danger-strong-on-emphasis: light-dark(#ffffff, #040303);
+  --eds-icon-danger-on-emphasis:        light-dark(#ffd1cf, #492d2c);
+  --eds-text-danger-strong: light-dark(#2e1414, #fffbfa);
+  --eds-icon-danger:        light-dark(#a50827, #ffd6d4);
+  --eds-border-danger-strong: light-dark(#c5002e, #ff8989);
+
+  /* surfaces for the page itself (bg-canvas / bg-surface / text) */
+  --eds-bg-canvas: light-dark(#f5f5f5, #060c13);
+  --eds-bg-surface: light-dark(#ffffff, #152332);
+  --eds-text: light-dark(#1d1d1d, #f9fcff);
+  --eds-text-subtle: light-dark(#585858, #d6e3ee);
+  --eds-border-subtle: light-dark(#d4d4d4, #4b5d71);
+
+  /* GUESSED cap box (see note 3 above) */
+  --eds-cap: 20px;
+  /* GUESSED icon/label gap (see note 2) */
+  --eds-gap-icon-label: 6px;
+}
+
+/* ---- density: the only stated numbers are the resulting heights; insets are back-solved (GUESSED, note 3/4) ---- */
+[data-density="compact"]     { --_inset-v: 2px;  --_inset-h: 8px; }
+[data-density="comfortable"] { --_inset-v: 8px;  --_inset-h: 16px; }
+[data-density="relaxed"]     { --_inset-v: 12px; --_inset-h: 20px; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--eds-font);
+  background: var(--eds-bg-canvas);
+  color: var(--eds-text);
+  padding: 24px 32px 64px;
+}
+
+h1 { font-size: 1.3125rem; margin: 0 0 4px; }
+h2 { font-size: 1rem; margin: 32px 0 12px; padding-top: 16px; border-top: 1px solid var(--eds-border-subtle); }
+p.lede { color: var(--eds-text-subtle); font-size: 0.875rem; margin: 0 0 20px; max-width: 70ch; }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  background: var(--eds-bg-surface);
+  border: 1px solid var(--eds-border-subtle);
+  border-radius: var(--eds-radius-md);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 0.8125rem;
+}
+.controls fieldset { border: none; margin: 0; padding: 0; display: flex; gap: 8px; align-items: center; }
+.controls legend { font-weight: 600; padding: 0 8px 0 0; float: left; color: var(--eds-text-subtle); }
+.controls label { display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
+
+/* ================= eds-button ================= */
+.eds-button {
+  appearance: none;
+  font-family: var(--eds-font);
+  font-size: 0.875rem;          /* typography.body-md */
+  line-height: 16px;            /* body-md lineHeight-compressed */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eds-gap-icon-label);
+  border-radius: var(--eds-radius-md);
+  border: 1px solid var(--_border, transparent);
+  background-color: var(--_bg);
+  color: var(--_ink);
+  min-height: calc(var(--_inset-v, 8px) * 2 + var(--eds-cap));
+  padding-block: var(--_inset-v, 8px);
+  padding-inline: var(--_inset-h, 16px);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.eds-button .icon { width: 20px; height: 20px; flex: none; display: inline-flex; }
+.eds-button .icon svg { width: 100%; height: 100%; }
+
+/* GUESSED size axis (note 1): only touches type + horizontal padding, never height */
+.eds-button[data-size="small"] {
+  font-size: 0.75rem;   /* body-sm */
+  line-height: 12px;    /* body-sm lineHeight-compressed */
+  padding-inline: calc(var(--_inset-h, 16px) * 0.75);
+}
+
+/* icon-only: padding = inset when there is no text (Shapes section) */
+.eds-button[data-variant="ghost-icon"] {
+  border-radius: var(--eds-radius-pill);
+  padding-inline: var(--_inset-v, 8px);
+  aspect-ratio: 1 / 1;
+}
+
+/* ---- tone x variant color mapping (from components.button-* recipes) ---- */
+.eds-button[data-tone="neutral"][data-variant="primary"] {
+  --_bg: var(--eds-bg-neutral-emphasis-default);
+  --_bg-hover: var(--eds-bg-neutral-emphasis-hover);
+  --_bg-active: var(--eds-bg-neutral-emphasis-active);
+  --_ink: var(--eds-text-neutral-strong-on-emphasis);
+  --_icon: var(--eds-icon-neutral-on-emphasis);
+}
+.eds-button[data-tone="neutral"][data-variant="secondary"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-neutral-ghost-hover);
+  --_bg-active: var(--eds-bg-neutral-ghost-active);
+  --_ink: var(--eds-text-neutral-strong);
+  --_icon: var(--eds-icon-neutral);
+  --_border: var(--eds-border-neutral-strong);
+}
+.eds-button[data-tone="neutral"][data-variant="ghost"],
+.eds-button[data-tone="neutral"][data-variant="ghost-icon"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-neutral-ghost-hover);
+  --_bg-active: var(--eds-bg-neutral-ghost-active);
+  --_ink: var(--eds-text-neutral-strong);
+  --_icon: var(--eds-icon-neutral);
+}
+
+.eds-button[data-tone="accent"][data-variant="primary"] {
+  --_bg: var(--eds-bg-accent-emphasis-default);
+  --_bg-hover: var(--eds-bg-accent-emphasis-hover);
+  --_bg-active: var(--eds-bg-accent-emphasis-active);
+  --_ink: var(--eds-text-accent-strong-on-emphasis);
+  --_icon: var(--eds-icon-accent-on-emphasis);
+}
+.eds-button[data-tone="accent"][data-variant="secondary"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-accent-ghost-hover);
+  --_bg-active: var(--eds-bg-accent-ghost-active);
+  --_ink: var(--eds-text-accent-strong);
+  --_icon: var(--eds-icon-accent);
+  --_border: var(--eds-border-accent-strong);
+}
+.eds-button[data-tone="accent"][data-variant="ghost"],
+.eds-button[data-tone="accent"][data-variant="ghost-icon"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-accent-ghost-hover);
+  --_bg-active: var(--eds-bg-accent-ghost-active);
+  --_ink: var(--eds-text-accent-strong);
+  --_icon: var(--eds-icon-accent);
+}
+
+.eds-button[data-tone="danger"][data-variant="primary"] {
+  --_bg: var(--eds-bg-danger-emphasis-default);
+  --_bg-hover: var(--eds-bg-danger-emphasis-hover);
+  --_bg-active: var(--eds-bg-danger-emphasis-active);
+  --_ink: var(--eds-text-danger-strong-on-emphasis);
+  --_icon: var(--eds-icon-danger-on-emphasis);
+}
+.eds-button[data-tone="danger"][data-variant="secondary"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-danger-ghost-hover);
+  --_bg-active: var(--eds-bg-danger-ghost-active);
+  --_ink: var(--eds-text-danger-strong);
+  --_icon: var(--eds-icon-danger);
+  --_border: var(--eds-border-danger-strong);
+}
+.eds-button[data-tone="danger"][data-variant="ghost"],
+.eds-button[data-tone="danger"][data-variant="ghost-icon"] {
+  --_bg: transparent;
+  --_bg-hover: var(--eds-bg-danger-ghost-hover);
+  --_bg-active: var(--eds-bg-danger-ghost-active);
+  --_ink: var(--eds-text-danger-strong);
+  --_icon: var(--eds-icon-danger);
+}
+
+.eds-button .icon { color: var(--_icon); }
+
+/* ---- states: "states change only what they declare" (non-negotiable #3) ---- */
+/* real interactive states (playground) */
+.eds-button:not(:disabled):hover   { background-color: var(--_bg-hover); }
+.eds-button:not(:disabled):active  { background-color: var(--_bg-active); }
+.eds-button:focus-visible { outline: 2px solid var(--eds-focus); outline-offset: 2px; }
+.eds-button:disabled {
+  cursor: not-allowed;
+  color: var(--eds-disabled-ink);
+  --_icon: var(--eds-disabled-ink);
+}
+.eds-button[data-variant="secondary"]:disabled { border-color: var(--eds-disabled-ink); }
+.eds-button[data-variant="primary"]:disabled   { background-color: var(--eds-disabled-fill); }
+
+/* forced states for the static grid (same rules, driven by data-force instead of a real pseudo-class) */
+.eds-button[data-force="hover"]  { background-color: var(--_bg-hover); }
+.eds-button[data-force="active"] { background-color: var(--_bg-active); }
+.eds-button[data-force="focus"]  { outline: 2px solid var(--eds-focus); outline-offset: 2px; }
+.eds-button[data-force="disabled"] {
+  cursor: not-allowed;
+  color: var(--eds-disabled-ink);
+  --_icon: var(--eds-disabled-ink);
+}
+.eds-button[data-variant="secondary"][data-force="disabled"] { border-color: var(--eds-disabled-ink); }
+.eds-button[data-variant="primary"][data-force="disabled"]   { background-color: var(--eds-disabled-fill); }
+
+/* ================= grid scaffolding ================= */
+.grid-wrap { overflow-x: auto; }
+table.state-grid { border-collapse: collapse; width: 100%; min-width: 900px; }
+table.state-grid caption { text-align: left; caption-side: top; font-size: 0.8125rem; color: var(--eds-text-subtle); margin-bottom: 8px; }
+table.state-grid th, table.state-grid td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--eds-border-subtle);
+  text-align: left;
+  vertical-align: middle;
+}
+table.state-grid thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--eds-text-subtle); }
+table.state-grid tbody th { font-size: 0.8125rem; white-space: nowrap; color: var(--eds-text-subtle); font-weight: 600; }
+
+.icon-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.icon-row > div { text-align: center; font-size: 0.75rem; color: var(--eds-text-subtle); }
+.icon-row .eds-button { margin-bottom: 6px; }
+
+.playground { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; background: var(--eds-bg-surface); border: 1px solid var(--eds-border-subtle); border-radius: var(--eds-radius-md); padding: 16px; }
+
+footer.notes { margin-top: 40px; font-size: 0.75rem; color: var(--eds-text-subtle); max-width: 80ch; }
+footer.notes code { background: var(--eds-bg-surface); padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body data-density="comfortable">
+<!-- curator’s label: added 2026-09-09 for the talk stage. Not part of the
+     artifact; everything below this block is exactly as produced. -->
+<aside aria-label="Curator’s label" style="display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;background:var(--eds-color-bg-info-surface, #feffff);color:var(--eds-color-text-info-strong, #121f28);border:1px solid var(--eds-color-border-info-subtle, #b5daf6);border-radius:var(--eds-spacing-border-radius-rounded, 4px);font:13px/1.5 system-ui,-apple-system,sans-serif"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--eds-color-icon-info, #025e8d)" fill-rule="evenodd" aria-hidden="true" style="flex:none"><path d="M12.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2C6.48 2 2 6.48 2 12s4.48 10 10.01 10M13 9V7h-2v2zm0 8v-6h-2v6zm7-5c0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8 8-3.58 8-8"/></svg><span><span style="display:block;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--eds-color-text-info-subtle, #025e8d)">Curator’s label · added for the talk · everything below is the artifact, untouched</span><strong>Attempt 1 of 3: the document alone.</strong> Built by a fresh sandboxed agent from a verbose, Atlassian-grade DESIGN.md (1,071 lines, every value disclosed) and nothing else. Values transfer, derivations do not: <strong>8 confessed guesses</strong> (the GUESSED comment in this file's source, as the agent wrote it).</span></aside>
+
+
+<h1>EDS — Button</h1>
+<p class="lede">
+  Built from a single reference document (DESIGN.md) — tone × variant × size × density × state,
+  reconstructed from the frontmatter token digest and the resolved-state recipe tables. Where the
+  document was silent, a guess was made and logged at the top of this file's source.
+</p>
+
+<div class="controls">
+  <fieldset>
+    <legend>Colour scheme</legend>
+    <label><input type="radio" name="scheme" value="auto" checked> Auto</label>
+    <label><input type="radio" name="scheme" value="light"> Light</label>
+    <label><input type="radio" name="scheme" value="dark"> Dark</label>
+  </fieldset>
+  <fieldset>
+    <legend>Density</legend>
+    <label><input type="radio" name="density" value="compact"> Compact</label>
+    <label><input type="radio" name="density" value="comfortable" checked> Comfortable</label>
+    <label><input type="radio" name="density" value="relaxed"> Relaxed</label>
+  </fieldset>
+  <fieldset>
+    <legend>Size (GUESSED axis)</legend>
+    <label><input type="radio" name="size" value="default" checked> Default</label>
+    <label><input type="radio" name="size" value="small"> Small</label>
+  </fieldset>
+</div>
+
+<h2>Rest / hover / focus / active / disabled — every tone × variant</h2>
+<div class="grid-wrap">
+<table class="state-grid" id="mainGrid">
+  <caption>Density and size follow the controls above; states are forced for display (no mouse needed) except the Disabled column, which uses a real <code>disabled</code> attribute.</caption>
+  <thead>
+    <tr><th>Tone / variant</th><th>Rest</th><th>Hover</th><th>Focus</th><th>Active</th><th>Disabled</th></tr>
+  </thead>
+  <tbody id="gridBody"></tbody>
+</table>
+</div>
+
+<h2>Icon-only (ghost-icon) — the earned pill</h2>
+<p class="lede">Padding equals the inset with no text, so the circle falls out of the geometry, per the Shapes section.</p>
+<div class="icon-row">
+  <div><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="default" aria-label="Neutral icon action"><span class="icon icon-slot"></span></button><br>Neutral</div>
+  <div><button class="eds-button" data-tone="accent" data-variant="ghost-icon" data-size="default" aria-label="Accent icon action"><span class="icon icon-slot"></span></button><br>Accent</div>
+  <div><button class="eds-button" data-tone="danger" data-variant="ghost-icon" data-size="default" aria-label="Danger icon action"><span class="icon icon-slot"></span></button><br>Danger</div>
+  <div><button class="eds-button" data-tone="neutral" data-variant="ghost-icon" data-size="default" aria-label="Disabled neutral icon action" disabled><span class="icon icon-slot"></span></button><br>Disabled</div>
+</div>
+
+<h2>Live playground</h2>
+<p class="lede">Real buttons — hover, tab to focus, click and hold to see :active, or disable them. Reflects the Density / Size controls above.</p>
+<div class="playground" id="playground">
+  <button class="eds-button" data-tone="accent" data-variant="primary" data-size="default">Primary action</button>
+  <button class="eds-button" data-tone="accent" data-variant="secondary" data-size="default">Secondary</button>
+  <button class="eds-button" data-tone="accent" data-variant="ghost" data-size="default">Ghost</button>
+  <button class="eds-button" data-tone="danger" data-variant="primary" data-size="default">Delete</button>
+  <button class="eds-button" data-tone="neutral" data-variant="secondary" data-size="default" disabled>Disabled</button>
+  <button class="eds-button" data-tone="accent" data-variant="primary" data-size="default">
+    <span class="icon icon-slot" aria-hidden="true"></span>
+    With icon
+  </button>
+</div>
+
+<footer class="notes">
+  Source: <code>/tmp/eds-attempt-1v/DESIGN.md</code> only — no other files, no network. Guesses made
+  along the way are logged as an HTML comment at the very top of this file's &lt;style&gt; block.
+</footer>
+
+<script>
+// generic 20px placeholder glyph (GUESSED — doc gives sizing, never artwork)
+const ICON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 4v12M4 10h12" stroke-linecap="round"/></svg>';
+document.querySelectorAll('.icon-slot').forEach(el => { el.innerHTML = ICON; });
+
+const TONES = ['neutral', 'accent', 'danger'];
+const VARIANTS = ['primary', 'secondary', 'ghost', 'ghost-icon'];
+const STATES = [
+  { key: 'rest',     label: 'Rest' },
+  { key: 'hover',    label: 'Hover' },
+  { key: 'focus',    label: 'Focus' },
+  { key: 'active',   label: 'Active' },
+  { key: 'disabled', label: 'Disabled' },
+];
+
+function labelFor(tone, variant) {
+  const t = tone[0].toUpperCase() + tone.slice(1);
+  const v = variant.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+  return `${t} / ${v}`;
+}
+
+function buildGrid() {
+  const body = document.getElementById('gridBody');
+  body.innerHTML = '';
+  const size = document.querySelector('input[name="size"]:checked').value;
+
+  TONES.forEach(tone => {
+    VARIANTS.forEach(variant => {
+      const tr = document.createElement('tr');
+      const th = document.createElement('th');
+      th.scope = 'row';
+      th.textContent = labelFor(tone, variant);
+      tr.appendChild(th);
+
+      STATES.forEach(state => {
+        const td = document.createElement('td');
+        const btn = document.createElement('button');
+        btn.className = 'eds-button';
+        btn.dataset.tone = tone;
+        btn.dataset.variant = variant;
+        btn.dataset.size = size;
+        const isIconOnly = variant === 'ghost-icon';
+        btn.setAttribute(isIconOnly ? 'aria-label' : 'type', isIconOnly ? `${labelFor(tone, variant)} ${state.label}` : 'button');
+        if (!isIconOnly) btn.textContent = 'Button';
+        else btn.innerHTML = `<span class="icon">${ICON}</span>`;
+
+        if (state.key === 'disabled') {
+          btn.disabled = true;
+        } else if (state.key !== 'rest') {
+          btn.dataset.force = state.key;
+        }
+        td.appendChild(btn);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  });
+}
+
+document.querySelectorAll('input[name="scheme"]').forEach(input => {
+  input.addEventListener('change', e => {
+    const v = e.target.value;
+    document.documentElement.style.colorScheme = v === 'auto' ? 'light dark' : v;
+  });
+});
+
+document.querySelectorAll('input[name="density"]').forEach(input => {
+  input.addEventListener('change', e => {
+    document.body.dataset.density = e.target.value;
+  });
+});
+
+document.querySelectorAll('input[name="size"]').forEach(input => {
+  input.addEventListener('change', () => buildGrid());
+});
+
+buildGrid();
+</script>
+</body>
+</html>

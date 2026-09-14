@@ -1,0 +1,113 @@
+{
+  "component": "eds.side-bar",
+  "requiredVariables": [
+    {
+      "name": "recipe/square-side-bar-item",
+      "collection": "density",
+      "values": {
+        "compact": 40,
+        "comfortable": 52,
+        "relaxed": 60
+      },
+      "codeSyntax": "calc(var(--eds-spacing-inset-lg-vertical-squared) * 2 + var(--eds-cap-rounded-md))",
+      "description": "eds.side-bar: the collapsed rail width = eds.side-bar-item's square edge (its height, which is also its collapsed width). Resolved because Figma cannot calc; CSS composes it live."
+    }
+  ],
+  "componentSet": {
+    "name": "Side-bar",
+    "description": "SideBar — the navigation rail. A surface column on the canvas (the classic chrome split, both schemes) with a thick subtle inline-end border — the top bar's underline, rotated. Items stack with no gap (their underlines are the rhythm) in a true SLOT: designers add as many as they want. The Collapse item pins to the bottom. Expanded width 256 (authored, constant across densities); collapsed width DERIVES from the item's square edge (40/52/60) — so the rail is exactly as wide as its squares are tall. The collapsed submenu is the floating Menu: composition, not new anatomy. NOTE — collapsing an instance with edited items: slot content is the instance's own (that's the point of slots), so it does not follow the rail's Collapsed automatically. Multi-select the items and flip their Collapsed with the rail's; sub-items simply leave (their submenu floats). Fresh instances mirror automatically. In code this cascades: one data-collapsed on the nav.\n\nGenerated from eds.side-bar v0.4.0 — edit the contract, not this component.",
+    "axes": {
+      "Collapsed": [
+        "False",
+        "True"
+      ],
+      "State": [
+        "Default"
+      ]
+    },
+    "textProps": [],
+    "booleanProps": [],
+    "root": {
+      "layout": "VERTICAL",
+      "align": "CENTER",
+      "strokeWeightVar": "sizing/stroke-thin",
+      "fixedWidth": 256,
+      "fixedHeight": 640,
+      "endlineVar": "sizing/stroke-thick"
+    },
+    "parts": [
+      {
+        "kind": "slot",
+        "name": "items",
+        "fill": true,
+        "seed": [
+          {
+            "component": "Side-bar-item",
+            "overrides": {
+              "Label": "Home"
+            }
+          },
+          {
+            "component": "Side-bar-item",
+            "overrides": {
+              "Label": "Edit",
+              "Has Menu": "true"
+            }
+          },
+          {
+            "component": "Side-bar-sub-item",
+            "overrides": {
+              "Label": "Gas",
+              "State": "Selected"
+            }
+          },
+          {
+            "component": "Side-bar-sub-item",
+            "overrides": {
+              "Label": "Fields"
+            }
+          },
+          {
+            "component": "Side-bar-item",
+            "overrides": {
+              "Label": "Favourites"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "instance",
+        "name": "collapse",
+        "component": "Side-bar-item",
+        "overrides": {
+          "Label": "Collapse",
+          "↳ Icon": "key:2e82bdda5b791fa2c647da522dfa289d6876d138"
+        },
+        "collapsedOverrides": {
+          "↳ Icon": "key:8d2cf7772cf7eb6efea11b909e8142ec3ec96396"
+        }
+      }
+    ],
+    "bySize": {
+      "Default": {
+        "glyphs": {}
+      }
+    },
+    "variants": [
+      {
+        "name": "Collapsed=False",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "borderRight": "semantic/border-neutral-subtle"
+      },
+      {
+        "name": "Collapsed=True",
+        "size": "Default",
+        "bg": "semantic/bg-surface",
+        "borderRight": "semantic/border-neutral-subtle",
+        "collapsed": true,
+        "widthVar": "recipe/square-side-bar-item"
+      }
+    ]
+  }
+}
