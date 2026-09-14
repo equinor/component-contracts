@@ -49,7 +49,7 @@ export const LINE_HEIGHT_CURVES = {
   /** Scanned text — UI labels. Exists so a wrapped label reads as one block.
    *  Named `compressed`, not `squished`: `squished` is Nathan Curtis's term for the
    *  spacing proportion, and using it for both made two unrelated things collide
-   *  inside a single expression. See PLAN.md Deferred for the stronger rename. */
+   *  inside a single expression. A stronger rename is deferred. */
   compressed: { max: 1.13, drop: 0.13 },
 } as const
 export type LineHeightVariant = keyof typeof LINE_HEIGHT_CURVES
@@ -105,7 +105,7 @@ export function capHeightPx(
 /**
  * Half-leading: half the difference between the line box and the glyph extent.
  * Subtracting it from vertical padding makes a control land on the grid while
- * keeping an honest line-height. See PLAN.md "The optical-padding recipe".
+ * keeping an honest line-height. See docs/optical-padding.md.
  */
 export function halfLeadingPx(
   lineHeightPx: number,

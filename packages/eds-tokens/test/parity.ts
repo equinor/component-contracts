@@ -189,7 +189,7 @@ if (failures.length) {
 }
 const unresolved = DEVIATIONS.filter((d) => !d.resolved).length
 if (unresolved)
-  console.log(`\n${unresolved} deviation(s) awaiting a decision — see PLAN.md`)
+  console.log(`\n${unresolved} deviation(s) awaiting a decision — pinned in test/deviations.ts`)
 
 // --- check 3: colour ---------------------------------------------------------------
 // The palette is now authored in OKLCH. Four things to establish:
@@ -381,7 +381,7 @@ if (unresolved)
    *  Proportions and sizes are now semantic choices made at authoring time, so a
    *  component references e.g. --eds-spacing-inset-md-vertical-squished directly
    *  instead of switching --eds-spacing-proportions-md-vertical via an attribute.
-   *  See PLAN.md "Scanned vs read" and the spacing section. */
+   *  See documentation/adr/0005-apca-contrast-targets.md for the scanned vs read distinction. */
   const DROPPED_AXIS_OUTPUTS = [
     /^--eds-spacing-proportions-/, // was [data-space-proportions]
     /^--eds-selectable-(space|gap)-/, // was [data-selectable-space]

@@ -34,7 +34,7 @@
 
 /** Where each ladder ends in the legacy data. Beyond this we are extrapolating,
  *  because `relaxed` never existed there. Flagged rather than silently invented —
- *  these four numbers need a design decision. See REVIEW.md. */
+ *  these four numbers need a design decision (pinned in test/deviations.ts). */
 export const EXTRAPOLATED = {
   spacing: {
     value: 36,

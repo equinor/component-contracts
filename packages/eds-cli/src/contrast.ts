@@ -172,7 +172,7 @@ export function contrast(
       ['lc', `${lc.toFixed(1)}  (signed: positive = dark text on light)`],
       [
         'threshold',
-        `Lc ${threshold.lc} — ${threshold.use}; targets per packages/eds-tokens/PLAN.md (Lc 90 body / Lc 60 spot-readable)`,
+        `Lc ${threshold.lc} — ${threshold.use}; targets per documentation/adr/0005-apca-contrast-targets.md (Lc 90 read / Lc 60 scanned)`,
       ],
       ['verdict', pass ? 'PASS' : 'FAIL'],
     ]),

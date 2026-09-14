@@ -33,7 +33,7 @@ export const DEVIATIONS: Deviation[] = [
     reason:
       'Ours ports typography.css faithfully (curve indexed by step label, n=4 here). The oracle ' +
       'behaves as though the curve is indexed by absolute px size (16px always gets 24px), which ' +
-      'is arguably more defensible but is an improvement rather than a fix — see PLAN.md ' +
+      'is arguably more defensible but is an improvement rather than a fix ' +
       '"Governing constraint". Decision: keep the faithful port. Recorded as a finding, ' +
       'not a pending decision.',
     resolved: true,
@@ -57,7 +57,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -70,7 +70,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -83,7 +83,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -96,7 +96,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -109,7 +109,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -122,7 +122,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -135,7 +135,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -148,7 +148,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -161,7 +161,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -174,7 +174,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -187,7 +187,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -200,7 +200,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -213,7 +213,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -226,7 +226,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -239,7 +239,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -252,7 +252,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -265,7 +265,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -278,7 +278,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -291,7 +291,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -304,7 +304,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -317,7 +317,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -330,7 +330,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -343,7 +343,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -356,7 +356,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -369,7 +369,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -382,7 +382,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -395,7 +395,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -408,7 +408,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -421,7 +421,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -434,7 +434,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -447,7 +447,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
   {
@@ -460,7 +460,7 @@ export const DEVIATIONS: Deviation[] = [
       'half-pixel offset rendering icons blurry, so icon gaps now land on whole ' +
       'ladder values. round(fontSize x 0.618, 2px) instead of 0.5px; legacy used ' +
       'browser-computed round(0.618em, 1px). Deliberate, applies wherever the two ' +
-      'snaps disagree. See DECISIONS.md "Gap snap".',
+      'snaps disagree. See documentation/adr/0006-icon-gaps-snap-to-2px.md.',
     resolved: true,
   },
 ]

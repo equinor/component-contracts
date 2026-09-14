@@ -13,7 +13,7 @@ set. The contract is the source of truth; the renderers never sync side-to-side.
   package's formulas; silence is never a pass.
 - `preview/index.html` — hand-authored code preview (density + scheme toggles).
 - `SCOPE.md` — what's shipped (incl. Figma node ids) and what's next, in order.
-- The token package lives in `../eds-tokens` (its own harness + DECISIONS.md).
+- The token package lives in `../eds-tokens` (its own harness).
 
 ## Commands
 

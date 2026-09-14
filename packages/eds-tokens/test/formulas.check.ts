@@ -67,7 +67,7 @@ console.log(`  ${failures.length} unexplained\n`)
 for (const e of expected) console.log(`  known: ${e}`)
 const unresolved = DEVIATIONS.filter((d) => !d.resolved).length
 if (unresolved)
-  console.log(`\n${unresolved} deviation(s) awaiting a decision — see PLAN.md`)
+  console.log(`\n${unresolved} deviation(s) awaiting a decision — pinned in test/deviations.ts`)
 if (failures.length) {
   console.log('\n' + failures.join('\n'))
   process.exit(1)
