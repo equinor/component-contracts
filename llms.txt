@@ -1,0 +1,19 @@
+# Equinor Design System — component contracts
+
+One JSON contract per component generates the component in both CSS and
+Figma; a parity harness proves the surfaces agree. Everything below is
+generated from the contracts and tokens — computed, never recalled.
+
+- DESIGN.md: /DESIGN.md (thin: rules and pointers, ~11 KB)
+- DESIGN.verbose.md: /DESIGN.verbose.md (full disclosure: palette, recipes, resolved states)
+- Component contracts (the source of truth): /packages/eds-contracts/contracts/<name>.contract.json
+- Contract schema: /packages/eds-contracts/contract.schema.json
+- Token CSS (link these, never copy values): /packages/eds-tokens/build/css/index.css
+- Component CSS: /packages/eds-contracts/build/<name>.css
+- Live component browser with correct markup per component: /storefront/ (the DOM pane shows the exact markup)
+- Skills (principles as runnable algorithms): https://github.com/equinor/skills — install: npx skills add equinor/skills
+- Source: https://github.com/equinor/component-contracts
+
+Rules for agents: bind tokens, never raw hex or px. Never author a
+control height. Variants are data-* attributes; defaults are attribute
+absent. Copy markup from the Storefront's DOM pane, not from memory.
