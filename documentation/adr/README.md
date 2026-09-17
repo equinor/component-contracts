@@ -13,3 +13,4 @@ the working notebook they were distilled from is not part of this repo.
 | [0004](0004-header-typography-is-corrected-and-matched.md) | Header typography is x-height corrected and stem matched | Accepted | 2026-09-06 |
 | [0005](0005-apca-contrast-targets.md) | Contrast targets are APCA: Lc 90 read, Lc 60 scanned and icons | Accepted | 2026-08-28 |
 | [0006](0006-icon-gaps-snap-to-2px.md) | Icon gaps snap to 2px | Accepted | 2026-08-28 |
+| [0007](0007-contracts-are-distributed-not-copied.md) | Contracts are distributed, not copied; extensions are merged, verified and visible | Proposed | 2026-09-17 |
