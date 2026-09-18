@@ -8,6 +8,7 @@
  */
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { loadWithExtends, type ExtensionDiff } from './extend.ts'
 import {
   DENSITIES,
   fontSizeRem,
@@ -212,6 +213,7 @@ export type StructuralVariant = {
 }
 
 export type ResolvedContract = {
+  extensionDiff: ExtensionDiff | null
   contract: any
   geometry: Geometry[] | null
   /** one per size-axis value; index 0 = the default value */
@@ -232,7 +234,9 @@ export type ResolvedContract = {
 }
 
 export function resolveContract(contractPath: string): ResolvedContract {
-  const contract = loadJson(contractPath)
+  // ADR-0007: a contract may extend an upstream one; the MERGE is what
+  // gets resolved, emitted and verified, and the diff travels with it
+  const { contract, diff: extensionDiff } = loadWithExtends(contractPath)
   const universe = tokenUniverse()
 
   const refs: ResolvedContract['refs'] = []
@@ -502,6 +506,7 @@ export function resolveContract(contractPath: string): ResolvedContract {
     sizeAxis,
     structural,
     refs,
+    extensionDiff,
   }
 }
 

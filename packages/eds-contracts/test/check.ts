@@ -1299,6 +1299,53 @@ for (const [name, exp] of Object.entries(EXPECT)) {
   )
 }
 
+// ---- 6b. contract extension (ADR-0007): merged, verified, refused ----------------
+{
+  // the success path: a local system's button gains a link variant
+  const ext = resolveContract(
+    'packages/eds-contracts/test/fixtures/example-link.button.contract.json',
+  )
+  ok(ext.contract.id === 'example.button', 'extension keeps its own id')
+  ok(ext.contract.extends === 'eds.button@0.8.0', 'provenance is recorded on the merge')
+  assert.deepEqual(
+    ext.contract.props.find((p: any) => p.name === 'variant').type.enum,
+    ['primary', 'secondary', 'ghost', 'ghost-icon', 'link'],
+    'enum values append, base order kept',
+  )
+  ok(
+    (ext.extensionDiff ?? []).length === 5,
+    `the diff reports every divergence (${ext.extensionDiff?.length} entries: enum + 4 variant blocks)`,
+  )
+  const extCss = emitCss(ext)
+  ok(extCss.includes('.example-button'), 'a local component carries its local class name')
+  ok(!extCss.includes('.eds-button'), 'the extension does not squat on the upstream class')
+  ok(
+    extCss.includes(`[data-variant='link']`) && extCss.includes('--eds-color-text-link'),
+    'the link variant emits, bound to existing tokens only',
+  )
+  // the base contract is untouched by the merge
+  const base = resolveContract('packages/eds-contracts/contracts/button.contract.json')
+  ok(
+    base.contract.props.find((p: any) => p.name === 'variant').type.enum.length === 4 &&
+      base.extensionDiff === null,
+    'the upstream contract is unchanged and carries no diff',
+  )
+  checks += 7
+
+  // the refusal path: an info tone needs a ghost ladder the system lacks
+  let refused = ''
+  try {
+    resolveContract('packages/eds-contracts/test/fixtures/example-info.button.contract.json')
+  } catch (e: any) {
+    refused = e.message
+  }
+  ok(
+    refused.includes('bg-info-fill-ghost'),
+    'an unsatisfiable extension is REFUSED with the missing token named — the gap becomes an upstream request, never a broken component',
+  )
+  checks++
+}
+
 // ---- 7. DESIGN.md: the fourth renderer --------------------------------------------
 {
   const md = emitDesignMd()

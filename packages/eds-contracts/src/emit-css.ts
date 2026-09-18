@@ -105,7 +105,7 @@ function sizeParams(
  *  MORE ROWS, not narrower tables. */
 function emitTableCss(r: ResolvedContract): string {
   const c = r.contract
-  const cls = `.eds-${c.id.split('.')[1]}`
+  const cls = '.' + c.id.replace('.', '-')  // eds.button → .eds-button; a local system's example.button → .example-button
   const inset = c.anatomy.root.inset
   const pick = (key: string) => {
     const hit = pickRef(r.refs, key)
@@ -225,7 +225,7 @@ function emitTableCss(r: ResolvedContract): string {
 export function emitCss(r: ResolvedContract): string {
   const c = r.contract
   if (c.semantics.element === 'table') return emitTableCss(r)
-  const cls = `.eds-${c.id.split('.')[1]}`
+  const cls = '.' + c.id.replace('.', '-')  // eds.button → .eds-button; a local system's example.button → .example-button
   const inset = c.anatomy.root.inset
   // The text part: the optical label when the inset names one, otherwise the
   // first part that declares typography (a component may have neither).

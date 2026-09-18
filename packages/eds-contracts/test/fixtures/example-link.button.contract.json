@@ -1,0 +1,40 @@
+{
+  "$schema": "../../contract.schema.json",
+  "id": "example.button",
+  "version": "0.1.0",
+  "extends": "eds.button@0.8.0",
+  "description": "A local design system's button: everything eds.button is, plus a link variant. EDS deliberately ships no link-styled button; this team's product needs one. The extension binds only tokens that already exist (the ghost ladder per tone, and concept/text-link for the ink) and the merged contract is emitted and verified like any other.",
+  "notes": "The ADR-0007 demo extension, the success path. Its sibling fixture (example-info) is the refusal path: extending the tone enum with info fails because the system has no info ghost ladder — the mechanism reports the gap instead of emitting a broken component, and that report is how local needs become upstream requests. Merge notes: the background rides the {tone} ghost ladder (specificity beats the root defaults, exactly like the ghost variant); the link ink is pinned per tone because a variant-wide concrete token ties with the anatomy's tone-interpolated ink and loses on the system's first-added-wins tie-break.",
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": ["link"]
+      }
+    }
+  ],
+  "variants": [
+    {
+      "when": {
+        "variant": "link"
+      },
+      "tokens": {
+        "root/background-color": "{color.semantic.bg-{tone}-fill-ghost-default}",
+        "root/background-color:hover": "{color.semantic.bg-{tone}-fill-ghost-hover}",
+        "root/background-color:active": "{color.semantic.bg-{tone}-fill-ghost-active}"
+      }
+    },
+    {
+      "when": { "variant": "link", "tone": "neutral" },
+      "tokens": { "label/color": "{color.concept.text-link}", "icon/color": "{color.concept.text-link}" }
+    },
+    {
+      "when": { "variant": "link", "tone": "accent" },
+      "tokens": { "label/color": "{color.concept.text-link}", "icon/color": "{color.concept.text-link}" }
+    },
+    {
+      "when": { "variant": "link", "tone": "danger" },
+      "tokens": { "label/color": "{color.concept.text-link}", "icon/color": "{color.concept.text-link}" }
+    }
+  ]
+}
