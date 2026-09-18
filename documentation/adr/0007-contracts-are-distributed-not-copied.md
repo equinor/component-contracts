@@ -103,6 +103,19 @@ Two obligations make extension safe:
 - Bad, because subtree consumers carry the full repo until the package
   ships
 
+### Implementation (v1, 2026-09-18)
+
+`packages/eds-contracts/src/extend.ts` + the `extends` field in the
+schema. Props and states merge by name, variants by their `when` object,
+enum values append; the resolver resolves the MERGE, so the emitters and
+their invariants run on it, and `resolveContract` returns the diff.
+An unsatisfiable extension is refused with the missing token named (the
+fixture pair in `test/fixtures/` pins both paths: a link variant that
+builds and verifies, and an info tone the system's token set cannot
+satisfy). Not yet done: running the full component harness suite against
+consumer extensions in their own repos; today the emit-time invariants
+plus the repo's checks carry it.
+
 ### Confirmation
 
 A consumer repo's CI runs the harness from the vendored/installed

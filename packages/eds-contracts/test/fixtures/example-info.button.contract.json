@@ -1,0 +1,16 @@
+{
+  "$schema": "../../contract.schema.json",
+  "id": "example.button",
+  "version": "0.1.0",
+  "extends": "eds.button@0.8.0",
+  "description": "A local design system's button: everything eds.button is, plus an info tone. EDS deliberately ships no info button; this team needs one, and the info token ladder already exists — so the extension is five lines, and the merged contract is emitted and verified like any other.",
+  "notes": "The ADR-0007 demo extension: enum values append, tokens interpolate over the extended enum, and the diff report records exactly one divergence from upstream.",
+  "props": [
+    {
+      "name": "tone",
+      "type": {
+        "enum": ["info"]
+      }
+    }
+  ]
+}

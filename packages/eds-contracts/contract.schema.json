@@ -36,7 +36,12 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "type", "default", "bindings"],
+        "required": [
+          "name",
+          "type",
+          "default",
+          "bindings"
+        ],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -50,7 +55,9 @@
             "oneOf": [
               {
                 "type": "object",
-                "required": ["enum"],
+                "required": [
+                  "enum"
+                ],
                 "additionalProperties": false,
                 "properties": {
                   "enum": {
@@ -64,7 +71,9 @@
               },
               {
                 "type": "object",
-                "required": ["boolean"],
+                "required": [
+                  "boolean"
+                ],
                 "additionalProperties": false,
                 "properties": {
                   "boolean": {
@@ -74,7 +83,9 @@
               },
               {
                 "type": "object",
-                "required": ["text"],
+                "required": [
+                  "text"
+                ],
                 "additionalProperties": false,
                 "properties": {
                   "text": {
@@ -90,20 +101,46 @@
             "description": "Marks this enum prop as the SIZE AXIS (at most one per contract): each value maps to anatomy parameters. The contract's anatomy literals describe the default value; other values re-derive insets, labels, icon glyph/footprint, pairings and geometry. label/inset are scale sizes; icon overrides the glyph size when it does not track the label.",
             "additionalProperties": {
               "type": "object",
-              "required": ["inset", "label"],
+              "required": [
+                "inset",
+                "label"
+              ],
               "additionalProperties": false,
               "properties": {
                 "inset": {
-                  "enum": ["xs", "sm", "md", "lg", "xl"]
+                  "enum": [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl"
+                  ]
                 },
                 "label": {
-                  "enum": ["xs", "sm", "md", "lg", "xl"]
+                  "enum": [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl"
+                  ]
                 },
                 "icon": {
-                  "enum": ["xs", "sm", "md", "lg", "xl", "2xl"]
+                  "enum": [
+                    "xs",
+                    "sm",
+                    "md",
+                    "lg",
+                    "xl",
+                    "2xl"
+                  ]
                 },
                 "proportion": {
-                  "enum": ["squished", "squared", "stretched"],
+                  "enum": [
+                    "squished",
+                    "squared",
+                    "stretched"
+                  ],
                   "description": "Overrides the root inset's proportion for this size value (the table's compressed size drops squared to squished). Default: the root's proportion."
                 }
               }
@@ -111,25 +148,40 @@
           },
           "bindings": {
             "type": "object",
-            "required": ["figma", "code"],
+            "required": [
+              "figma",
+              "code"
+            ],
             "additionalProperties": false,
             "properties": {
               "figma": {
                 "type": "object",
-                "required": ["kind", "property"],
+                "required": [
+                  "kind",
+                  "property"
+                ],
                 "additionalProperties": false,
                 "properties": {
                   "kind": {
-                    "enum": ["VARIANT", "TEXT", "BOOLEAN", "INSTANCE_SWAP"]
+                    "enum": [
+                      "VARIANT",
+                      "TEXT",
+                      "BOOLEAN",
+                      "INSTANCE_SWAP"
+                    ]
                   },
                   "property": {
                     "type": "string"
                   },
                   "split": {
                     "type": "object",
-                    "required": ["separator", "axes", "pad"],
+                    "required": [
+                      "separator",
+                      "axes",
+                      "pad"
+                    ],
                     "additionalProperties": false,
-                    "description": "One code value writes SEVERAL Figma variant axes (the tooltip's placement → Side × Align — the Astryx factoring): the enum value splits on the separator; a missing tail part takes the pad value ('top' → Side=Top, Align=Center). The code attribute keeps the single compound value (ecosystem convention: Floating UI placements); only the Figma picker is factored.",
+                    "description": "One code value writes SEVERAL Figma variant axes (the tooltip's placement \u2192 Side \u00d7 Align \u2014 the Astryx factoring): the enum value splits on the separator; a missing tail part takes the pad value ('top' \u2192 Side=Top, Align=Center). The code attribute keeps the single compound value (ecosystem convention: Floating UI placements); only the Figma picker is factored.",
                     "properties": {
                       "separator": {
                         "type": "string"
@@ -165,7 +217,7 @@
                   },
                   "inherit": {
                     "type": "boolean",
-                    "description": "The attribute CASCADES: the item also takes a value carried by ANY ancestor ([attr='v'] *) — one data-collapsed on the rail collapses every item; no per-item attribute needed. Figma cannot cascade into consumer slot content (instance content is the instance's own — the slots model): baked defaults mirror the variant, edited slots are flipped WITH the rail by multi-select. A recorded, bounded divergence."
+                    "description": "The attribute CASCADES: the item also takes a value carried by ANY ancestor ([attr='v'] *) \u2014 one data-collapsed on the rail collapses every item; no per-item attribute needed. Figma cannot cascade into consumer slot content (instance content is the instance's own \u2014 the slots model): baked defaults mirror the variant, edited slots are flipped WITH the rail by multi-select. A recorded, bounded divergence."
                   }
                 }
               }
@@ -176,7 +228,9 @@
     },
     "anatomy": {
       "type": "object",
-      "required": ["root"],
+      "required": [
+        "root"
+      ],
       "additionalProperties": {
         "$ref": "#/$defs/part"
       },
@@ -191,7 +245,10 @@
       "description": "Token overrides pinned to specific prop values \u2014 for facts interpolation cannot express uniformly (e.g. on-emphasis text colors, the ghost ladder for transparent-resting variants). Keys are part/channel, optionally :state-suffixed (root/background-color:hover) to override a state per variant. Most-specific match wins. The border-color channel renders as an inside outline in CSS (width: sizing-stroke-thin, no layout shift) and an inside stroke in Figma.",
       "items": {
         "type": "object",
-        "required": ["when", "tokens"],
+        "required": [
+          "when",
+          "tokens"
+        ],
         "additionalProperties": false,
         "properties": {
           "when": {
@@ -203,7 +260,9 @@
           "structure": {
             "type": "object",
             "description": "Structural overrides pinned to prop values \u2014 for variants whose anatomy differs, not just their colors (e.g. an icon-only round button). Facts here are still contract facts: both emitters consume them.",
-            "required": ["iconOnly"],
+            "required": [
+              "iconOnly"
+            ],
             "additionalProperties": false,
             "properties": {
               "iconOnly": {
@@ -211,7 +270,9 @@
                 "description": "The sole visible part for these variants; text parts and other glyph parts are absent."
               },
               "inset": {
-                "enum": ["even"],
+                "enum": [
+                  "even"
+                ],
                 "description": "Padding = the raw inset on all sides. With no text there is no half-leading to compensate, so the optical correction drops out and width = height = inset \u00d7 2 + cap: a circle under a pill radius."
               },
               "radius": {
@@ -233,12 +294,15 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "tokens"],
+        "required": [
+          "name",
+          "tokens"
+        ],
         "additionalProperties": false,
         "properties": {
           "interactiveOnly": {
             "const": true,
-            "description": "The state exists only when the component is rendered as an interactive element: CSS gates the rule on :is(a, button) — no data-interactive attribute, the markup already says it (the card's hover). Focus needs no gate: a div cannot match :focus-visible."
+            "description": "The state exists only when the component is rendered as an interactive element: CSS gates the rule on :is(a, button) \u2014 no data-interactive attribute, the markup already says it (the card's hover). Focus needs no gate: a div cannot match :focus-visible."
           },
           "name": {
             "enum": [
@@ -270,7 +334,10 @@
     "demo": {
       "type": "object",
       "description": "Canvas demo data (tables need content to show a grid). CSS ignores it \u2014 markup is the consumer's.",
-      "required": ["columns", "rows"],
+      "required": [
+        "columns",
+        "rows"
+      ],
       "additionalProperties": false,
       "properties": {
         "columns": {
@@ -292,7 +359,9 @@
     },
     "semantics": {
       "type": "object",
-      "required": ["element"],
+      "required": [
+        "element"
+      ],
       "additionalProperties": false,
       "properties": {
         "element": {
@@ -308,6 +377,10 @@
           }
         }
       }
+    },
+    "extends": {
+      "type": "string",
+      "description": "Extend an upstream contract (ADR-0007): 'eds.button' or pinned 'eds.button@0.8.0'. Arrays merge by name, enum props append values, and the merged contract is what gets emitted and verified; the merge's diff report makes local divergence visible."
     }
   },
   "$defs": {
@@ -329,27 +402,47 @@
           "additionalProperties": false,
           "properties": {
             "direction": {
-              "enum": ["row", "column"]
+              "enum": [
+                "row",
+                "column"
+              ]
             },
             "gap": {
               "$ref": "#/$defs/tokenRef"
             },
             "align": {
-              "enum": ["center", "start", "end", "baseline"]
+              "enum": [
+                "center",
+                "start",
+                "end",
+                "baseline"
+              ]
             }
           }
         },
         "inset": {
           "type": "object",
-          "required": ["size"],
+          "required": [
+            "size"
+          ],
           "additionalProperties": false,
           "description": "Padding. Horizontal = inset-{size}-horizontal. Vertical is DERIVED: inset-{size}-vertical-{proportion} minus the half-leading of the part named by opticalLabel. Height is therefore inset \u00d7 2 + cap(label) \u2014 never authored. `proportion` is required unless `seat` is set.",
           "properties": {
             "size": {
-              "enum": ["xs", "sm", "md", "lg", "xl"]
+              "enum": [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl"
+              ]
             },
             "proportion": {
-              "enum": ["squished", "squared", "stretched"]
+              "enum": [
+                "squished",
+                "squared",
+                "stretched"
+              ]
             },
             "opticalLabel": {
               "type": "string",
@@ -363,26 +456,36 @@
         },
         "figmaSlot": {
           "const": true,
-          "description": "Figma-only: the part is the consumer's content area — a true SLOT node (Slots GA'd June 2026; the builder falls back to a dashed placeholder frame where the API is missing). Designers put as many children in as they want. CSS carries nothing: children of the root ARE the content, spaced by the root's gap."
+          "description": "Figma-only: the part is the consumer's content area \u2014 a true SLOT node (Slots GA'd June 2026; the builder falls back to a dashed placeholder frame where the API is missing). Designers put as many children in as they want. CSS carries nothing: children of the root ARE the content, spaced by the root's gap."
         },
         "seed": {
           "type": "array",
           "description": "Figma-only demo content for a figmaSlot part: instances placed inside the slot as its default content. Same shape as `instance` (component + overrides).",
           "items": {
             "type": "object",
-            "required": ["component"],
+            "required": [
+              "component"
+            ],
             "additionalProperties": false,
             "properties": {
-              "component": { "type": "string" },
+              "component": {
+                "type": "string"
+              },
               "overrides": {
                 "type": "object",
-                "additionalProperties": { "type": "string" }
+                "additionalProperties": {
+                  "type": "string"
+                }
               }
             }
           }
         },
         "element": {
-          "enum": ["tr", "th", "td"],
+          "enum": [
+            "tr",
+            "th",
+            "td"
+          ],
           "description": "TABLE parts: the part styles a DOM element inside the root (rows and cells cannot be classed per-instance). CSS: a nested element rule; Figma: lowered into the generated grid demo (column-major, so columns align)."
         },
         "corner": {
@@ -391,15 +494,15 @@
         },
         "cluster": {
           "type": "string",
-          "description": "Names the CLUSTER this part belongs to — selectables acting as one group (the top bar's action row). Consecutive parts sharing a cluster name are wrapped, and the cluster's internal gap is the CLUSTER rung: sm, one rung below the container gap (Gestalt: within-group < between-group; optically, boxes that bring their own inset need less air added). CSS: a flex wrapper element `.eds-<cluster>` the consumer's markup groups; Figma: an auto-layout frame with the gap bound to spacing/horizontal-sm."
+          "description": "Names the CLUSTER this part belongs to \u2014 selectables acting as one group (the top bar's action row). Consecutive parts sharing a cluster name are wrapped, and the cluster's internal gap is the CLUSTER rung: sm, one rung below the container gap (Gestalt: within-group < between-group; optically, boxes that bring their own inset need less air added). CSS: a flex wrapper element `.eds-<cluster>` the consumer's markup groups; Figma: an auto-layout frame with the gap bound to spacing/horizontal-sm."
         },
         "fill": {
           "const": true,
-          "description": "The part absorbs the root's spare inline space — the CONTRACT owns the horizontal distribution (the top bar's identity leads, search and actions trail). CSS: margin-inline-end auto on the part — siblings after it trail to the inline end, the part's own box never stretches. Figma: the part FILLs and the set's variants get a fixed demo width so the distribution is visible (instances resize freely). A bounded divergence: auto margin vs FILL stretch — same seam, different mechanism."
+          "description": "The part absorbs the root's spare inline space \u2014 the CONTRACT owns the horizontal distribution (the top bar's identity leads, search and actions trail). CSS: margin-inline-end auto on the part \u2014 siblings after it trail to the inline end, the part's own box never stretches. Figma: the part FILLs and the set's variants get a fixed demo width so the distribution is visible (instances resize freely). A bounded divergence: auto margin vs FILL stretch \u2014 same seam, different mechanism."
         },
         "overhang": {
           "$ref": "#/$defs/tokenRef",
-          "description": "How far a corner instance's box overflows its own cap box per side — the instanced component's OWN inset, declared here rather than assumed (e.g. the Button's inset-md-vertical-squished)."
+          "description": "How far a corner instance's box overflows its own cap box per side \u2014 the instanced component's OWN inset, declared here rather than assumed (e.g. the Button's inset-md-vertical-squished)."
         },
         "control": {
           "const": true,
@@ -407,7 +510,12 @@
         },
         "typography": {
           "type": "object",
-          "required": ["label", "variant", "family", "weight"],
+          "required": [
+            "label",
+            "variant",
+            "family",
+            "weight"
+          ],
           "additionalProperties": false,
           "properties": {
             "label": {
@@ -425,13 +533,24 @@
               ]
             },
             "variant": {
-              "enum": ["default", "compressed"]
+              "enum": [
+                "default",
+                "compressed"
+              ]
             },
             "family": {
-              "enum": ["ui", "header", "code"]
+              "enum": [
+                "ui",
+                "header",
+                "code"
+              ]
             },
             "weight": {
-              "enum": ["lighter", "normal", "bolder"]
+              "enum": [
+                "lighter",
+                "normal",
+                "bolder"
+              ]
             }
           }
         },
@@ -440,7 +559,9 @@
         },
         "pointer": {
           "type": "object",
-          "required": ["prop"],
+          "required": [
+            "prop"
+          ],
           "additionalProperties": false,
           "description": "Marks the part as the bubble POINTER (tooltip/popover arrow). It paints with the root background, its size derives from the label's cap box (width = cap, protrusion = cap/2 \u2014 density-scaling, never authored), and it sits on the edge opposite the placement, pointing at the anchor. CSS: a ::before pseudo-element positioned by placement modifiers. Figma: a triangle in an auto-layout wrapper, ordered and rotated per placement variant.",
           "properties": {
@@ -460,17 +581,19 @@
         },
         "width": {
           "type": "number",
-          "description": "Root only: an AUTHORED inline size — the rare owned dimension (the sidebar's 256). CSS: emitted as inline-size ONLY when no fill part exists (a fill part means the width is a demo strip, not the component's fact); Figma: the set's variants are built at this width (instances resize freely). When absent, a fill part alone gets the 1200 demo strip."
+          "description": "Root only: an AUTHORED inline size \u2014 the rare owned dimension (the sidebar's 256). CSS: emitted as inline-size ONLY when no fill part exists (a fill part means the width is a demo strip, not the component's fact); Figma: the set's variants are built at this width (instances resize freely). When absent, a fill part alone gets the 1200 demo strip."
         },
         "height": {
           "type": "number",
-          "description": "Root only: a Figma DEMO block size for containers whose real height is the app's (the sidebar). CSS: never emitted — the consumer owns it; Figma: the variants are built at this height so a filling slot has an edge to fill to."
+          "description": "Root only: a Figma DEMO block size for containers whose real height is the app's (the sidebar). CSS: never emitted \u2014 the consumer owns it; Figma: the variants are built at this height so a filling slot has an edge to fill to."
         },
         "collapsedWidth": {
           "type": "object",
-          "required": ["matches"],
+          "required": [
+            "matches"
+          ],
           "additionalProperties": false,
-          "description": "Root only: the collapsed rail's width DERIVES from another contract's square edge — the matched item's height (inset×2 + cap), which is also that item's collapsed width. Applies to variants where the `collapsed` prop is 'true'. CSS: a live calc under [data-collapsed='true']; Figma: a minted recipe variable bound to the collapsed variants' width (RESOLVED).",
+          "description": "Root only: the collapsed rail's width DERIVES from another contract's square edge \u2014 the matched item's height (inset\u00d72 + cap), which is also that item's collapsed width. Applies to variants where the `collapsed` prop is 'true'. CSS: a live calc under [data-collapsed='true']; Figma: a minted recipe variable bound to the collapsed variants' width (RESOLVED).",
           "properties": {
             "matches": {
               "type": "string",
@@ -480,37 +603,45 @@
         },
         "endline": {
           "$ref": "#/$defs/tokenRef",
-          "description": "Weight of the border-inline-end edge (root only) — the sidebar's right border, the top bar's underline rotated. Colour from the border-right-color channel. CSS: an inset box-shadow so geometry is untouched; Figma: strokeRightWeight, variable-bound."
+          "description": "Weight of the border-inline-end edge (root only) \u2014 the sidebar's right border, the top bar's underline rotated. Colour from the border-right-color channel. CSS: an inset box-shadow so geometry is untouched; Figma: strokeRightWeight, variable-bound."
         },
         "bleedGuard": {
           "const": true,
-          "description": "Root only (floating panels): the panel pads its block ends by ITS OWN RADIUS — same token — so the items' full-bleed fills can never clip the rounded corners; the sides stay unpadded (items run edge to edge). CSS: padding-block from the radius ref; Figma: paddingTop/Bottom bound to the radius variable."
+          "description": "Root only (floating panels): the panel pads its block ends by ITS OWN RADIUS \u2014 same token \u2014 so the items' full-bleed fills can never clip the rounded corners; the sides stay unpadded (items run edge to edge). CSS: padding-block from the radius ref; Figma: paddingTop/Bottom bound to the radius variable."
         },
         "baseline": {
           "const": true,
-          "description": "Root only, boxless text (captions, helpers): the text sits ON the baseline grid — a single line occupies exactly the cap cell (--eds-cap-rounded), n lines occupy capRounded + (n−1)·lineHeight, baseline at the box bottom. CSS: text-box trim-both ex alphabetic + padding-top round(1cap,4px)−1ex, @supports-gated (fallback: the untrimmed line box). Figma (the La Dupla mechanism): the text leadingTrim CAP_HEIGHT + FILL width, the root hugs with a FIGMA-ONLY top pad (figma-only/baseline-pad-<size> = 4px-grid cap − Figma's pixel-rounded cap per density, negative where the pixel cap exceeds the cell) — a minted value code must NEVER read. Both surfaces trim: a CARRIED fact, not a divergence."
+          "description": "Root only, boxless text (captions, helpers): the text sits ON the baseline grid \u2014 a single line occupies exactly the cap cell (--eds-cap-rounded), n lines occupy capRounded + (n\u22121)\u00b7lineHeight, baseline at the box bottom. CSS: text-box trim-both ex alphabetic + padding-top round(1cap,4px)\u22121ex, @supports-gated (fallback: the untrimmed line box). Figma (the La Dupla mechanism): the text leadingTrim CAP_HEIGHT + FILL width, the root hugs with a FIGMA-ONLY top pad (figma-only/baseline-pad-<size> = 4px-grid cap \u2212 Figma's pixel-rounded cap per density, negative where the pixel cap exceeds the cell) \u2014 a minted value code must NEVER read. Both surfaces trim: a CARRIED fact, not a divergence."
         },
         "indent": {
           "type": "object",
-          "required": ["alignsWith"],
+          "required": [
+            "alignsWith"
+          ],
           "additionalProperties": false,
-          "description": "Root only: the leading inset is DERIVED from another contract — this part's label left edge aligns with the named contract's label left edge (parent inset + icon cap cell + icon gap). CSS: padding-inline-start as a live calc over the three tokens; Figma: a minted recipe variable (RESOLVED — Figma cannot calc).",
+          "description": "Root only: the leading inset is DERIVED from another contract \u2014 this part's label left edge aligns with the named contract's label left edge (parent inset + icon cap cell + icon gap). CSS: padding-inline-start as a live calc over the three tokens; Figma: a minted recipe variable (RESOLVED \u2014 Figma cannot calc).",
           "properties": {
             "alignsWith": {
               "type": "string",
               "description": "The contract id whose label this indent aligns to (e.g. eds.side-bar-item)."
             },
-            "why": { "type": "string" }
+            "why": {
+              "type": "string"
+            }
           }
         },
         "flag": {
           "type": "object",
-          "required": ["corner"],
+          "required": [
+            "corner"
+          ],
           "additionalProperties": false,
-          "description": "A small corner triangle indicator (the collapsed sidebar item's submenu mark). Legs = the xs spacing rung (density-scaling). Built ONLY in iconOnly variants; its `when` boolean gates visibility there. CSS: an ::after pseudo (clip-path triangle, ink from the part's color channel) — emitter-owned decoration, no markup; Figma: a corner-constrained vector.",
+          "description": "A small corner triangle indicator (the collapsed sidebar item's submenu mark). Legs = the xs spacing rung (density-scaling). Built ONLY in iconOnly variants; its `when` boolean gates visibility there. CSS: an ::after pseudo (clip-path triangle, ink from the part's color channel) \u2014 emitter-owned decoration, no markup; Figma: a corner-constrained vector.",
           "properties": {
             "corner": {
-              "enum": ["bottom-right"]
+              "enum": [
+                "bottom-right"
+              ]
             }
           }
         },
@@ -524,7 +655,10 @@
         },
         "whenValue": {
           "type": "object",
-          "required": ["prop", "value"],
+          "required": [
+            "prop",
+            "value"
+          ],
           "additionalProperties": false,
           "description": "Shows the part only for this enum-prop value (the enum sibling of `when`). CSS: the part is display:none under every other value's selector; Figma: hidden in every other variant. The control glyphs of checkbox/radio/switch swap this way.",
           "properties": {
@@ -538,7 +672,9 @@
         },
         "instance": {
           "type": "object",
-          "required": ["component"],
+          "required": [
+            "component"
+          ],
           "additionalProperties": false,
           "description": "Composition-lite: the part IS an instance of another generated component (e.g. a Banner's action Button). CSS carries it as a SLOT (the consumer places the component's markup); Figma places an exposed instance of the named set's default variant, with optional property overrides.",
           "properties": {
@@ -550,26 +686,29 @@
               "additionalProperties": {
                 "type": "string"
               },
-              "description": "Figma property overrides on the placed instance. An INSTANCE_SWAP override takes a 'key:<componentKey>' value — the builder imports and swaps."
+              "description": "Figma property overrides on the placed instance. An INSTANCE_SWAP override takes a 'key:<componentKey>' value \u2014 the builder imports and swaps."
             },
             "icon": {
               "type": "string",
-              "description": "The @equinor/eds-icons export the instance's icon slot carries — the CODE side of a 'key:' swap override; the emitter masks the slot's empty .eds-icon span with it."
+              "description": "The @equinor/eds-icons export the instance's icon slot carries \u2014 the CODE side of a 'key:' swap override; the emitter masks the slot's empty .eds-icon span with it."
             },
             "collapsedOverrides": {
               "type": "object",
               "additionalProperties": {
                 "type": "string"
               },
-              "description": "Override entries applied ON TOP of `overrides` in variants where the Collapsed axis is 'true' (the sidebar's Collapse control faces the other way: first_page expanded, last_page collapsed). CSS carries the flip as a MIRROR on the pinned item's icon, because the two glyphs are horizontal mirror twins — one svg in the markup, scale: -1 1 under the collapsed attribute."
+              "description": "Override entries applied ON TOP of `overrides` in variants where the Collapsed axis is 'true' (the sidebar's Collapse control faces the other way: first_page expanded, last_page collapsed). CSS carries the flip as a MIRROR on the pinned item's icon, because the two glyphs are horizontal mirror twins \u2014 one svg in the markup, scale: -1 1 under the collapsed attribute."
             }
           }
         },
         "swapByProp": {
           "type": "object",
-          "required": ["prop", "glyphs"],
+          "required": [
+            "prop",
+            "glyphs"
+          ],
           "additionalProperties": false,
-          "description": "A glyph whose IDENTITY follows an enum prop (the banner's tone icon): one part, one class, a fixed glyph per value — never designer-swappable. Figma: each variant places the value's library component (mask+tint); CSS: the value's data-attribute selector sets --_mask to the icon's build-time data URI.",
+          "description": "A glyph whose IDENTITY follows an enum prop (the banner's tone icon): one part, one class, a fixed glyph per value \u2014 never designer-swappable. Figma: each variant places the value's library component (mask+tint); CSS: the value's data-attribute selector sets --_mask to the icon's build-time data URI.",
           "properties": {
             "prop": {
               "type": "string"
@@ -578,7 +717,10 @@
               "type": "object",
               "additionalProperties": {
                 "type": "object",
-                "required": ["componentKey", "icon"],
+                "required": [
+                  "componentKey",
+                  "icon"
+                ],
                 "additionalProperties": false,
                 "properties": {
                   "componentKey": {
@@ -586,7 +728,7 @@
                   },
                   "icon": {
                     "type": "string",
-                    "description": "The @equinor/eds-icons export name — the CODE side of the same icon."
+                    "description": "The @equinor/eds-icons export name \u2014 the CODE side of the same icon."
                   }
                 }
               }
@@ -595,7 +737,9 @@
         },
         "swap": {
           "type": "object",
-          "required": ["componentKey"],
+          "required": [
+            "componentKey"
+          ],
           "additionalProperties": false,
           "description": "Figma-only content binding for a glyph part: an INSTANCE_SWAP component property, defaulting to the library component with this key (EDS Assets). CSS carries content as markup \u2014 the fact is LOWERED in Figma, CARRIED as a slot in code.",
           "properties": {
