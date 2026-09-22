@@ -107,7 +107,13 @@ function schemeColors() {
   const all = (): { name: string; light: string; dark: string }[] => {
     const out: { name: string; light: string; dark: string }[] = []
     for (const group of ['semantic', 'concept'] as const) {
-      for (const name of Object.keys(semantic[group] ?? {})) {
+      // concepts may live only in the scheme files (bg-floating) — a recipe
+      // that references one needs it defined, or the linter reports broken-ref
+      const names = new Set([
+        ...Object.keys(semantic[group] ?? {}),
+        ...(group === 'concept' ? Object.keys(schemes.light.concept ?? {}) : []),
+      ])
+      for (const name of names) {
         if (name.startsWith('$')) continue
         try {
           out.push({ name, ...byGroup(group, name) })
@@ -296,8 +302,12 @@ export function emitDesignMd(verbose = false): string {
     if (v.dark !== v.light) out.push(`  ${name}-dark: "${v.dark}"`)
   }
   if (verbose) {
-    // the full palette-resolved set, both schemes — nothing held back
+    // the full palette-resolved set, both schemes — nothing held back.
+    // The friendly aliases above own their names: a semantic token that
+    // happens to share one (text-subtle) would be a duplicate YAML key.
+    const taken = new Set(colorPairs.map(([name]) => name))
     for (const c of colors.all()) {
+      if (taken.has(c.name)) continue
       out.push(`  ${c.name}: "${c.light}"`)
       if (c.dark !== c.light) out.push(`  ${c.name}-dark: "${c.dark}"`)
     }

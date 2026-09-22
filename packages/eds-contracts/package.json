@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "node src/build.ts",
-    "test": "node test/check.ts",
+    "test": "node test/check.ts && pnpm run lint:design",
+    "lint:design": "pnpm dlx @google/design.md lint ../../DESIGN.md && pnpm dlx @google/design.md lint ../../DESIGN.verbose.md",
     "preview": "pnpm dlx http-server .. -p 9999 -c-1 -o /eds-contracts/preview/index.html"
   },
   "dependencies": {
