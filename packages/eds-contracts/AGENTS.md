@@ -6,7 +6,10 @@ set. The contract is the source of truth; the renderers never sync side-to-side.
 ## The map
 
 - `contracts/*.contract.json` — authored. The only place component facts live.
-- `contract.schema.json` — the contract vocabulary.
+- `contract.schema.json` — the contract vocabulary. Its `$id` is the
+  published URL (`equinor.github.io/component-contracts/schema/v0/…`, via
+  `pnpm pages`); contracts reference it RELATIVELY so the repo validates
+  offline. Bump `v0` only on a breaking vocabulary change.
 - `src/` — resolver + emitters (`emit-css`, `emit-figma`, `emit-builder`).
 - `build/` — **generated. Never edit.** Change the contract, run the build.
 - `test/check.ts` — the harness. Every number is recomputed from the token

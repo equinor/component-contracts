@@ -3,7 +3,7 @@
  *  reference must exist in the artefacts the token package actually shipped.
  *  Silence is never a pass. */
 import { strict as assert } from 'node:assert'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import {
   ledger,
@@ -1344,6 +1344,37 @@ for (const [name, exp] of Object.entries(EXPECT)) {
     'an unsatisfiable extension is REFUSED with the missing token named — the gap becomes an upstream request, never a broken component',
   )
   checks++
+}
+
+// ---- 6c. the schema's published identity (issue #4) --------------------------------
+{
+  // $id resolves to where scripts/build-pages.mjs publishes it on GitHub
+  // Pages (the www branch); eds.equinor.com is not ours. The path is
+  // versioned (v0: contracts are pre-1.0). Contracts keep RELATIVE $schema
+  // refs so the repo validates offline — the URL is the identity, not the
+  // dependency.
+  const schema = JSON.parse(
+    readFileSync(root + 'packages/eds-contracts/contract.schema.json', 'utf8'),
+  )
+  const published =
+    'https://equinor.github.io/component-contracts/schema/v0/contract.schema.json'
+  ok(schema.$id === published, `contract.schema.json $id is the published URL`)
+  ok(
+    readFileSync(root + 'scripts/build-pages.mjs', 'utf8').includes(
+      "'schema/v0/contract.schema.json'",
+    ),
+    'build-pages publishes the schema at the $id path',
+  )
+  for (const f of readdirSync(root + 'packages/eds-contracts/contracts')) {
+    if (!f.endsWith('.contract.json')) continue
+    const c = JSON.parse(
+      readFileSync(root + 'packages/eds-contracts/contracts/' + f, 'utf8'),
+    )
+    ok(
+      c.$schema === '../contract.schema.json',
+      `${f}: $schema stays relative (offline validation)`,
+    )
+  }
 }
 
 // ---- 7. DESIGN.md: the fourth renderer --------------------------------------------

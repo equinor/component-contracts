@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://eds.equinor.com/contracts/contract.schema.json",
+  "$id": "https://equinor.github.io/component-contracts/schema/v0/contract.schema.json",
   "title": "EDS component contract",
   "description": "One component, one contract. The contract is the source of truth: the CSS and the Figma component set are renderers of it and never sync side-to-side. EDS-specific invariant: control heights are never authored \u2014 a part that declares `inset` derives its vertical padding optically from the part named by `opticalLabel` (padding = inset \u2212 halfLeading(label), so height = inset \u00d7 2 + cap(label)). Every fact an emitter consumes is dispositioned CARRIED, LOWERED, RESOLVED, or REFUSED \u2014 no silent loss, no invention.",
   "type": "object",

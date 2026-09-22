@@ -43,6 +43,15 @@ for (const p of [
 ])
   cpSync(path.join(root, p), path.join(site, p), { recursive: true })
 
+// the schema at its $id — a versioned path (v0: contracts are pre-1.0) so
+// the URL is a deliberate promise, not wherever the file happens to live
+const schema = JSON.parse(readFileSync(path.join(root, 'packages/eds-contracts/contract.schema.json'), 'utf8'))
+const schemaPath = 'schema/v0/contract.schema.json'
+if (schema.$id !== `https://equinor.github.io/component-contracts/${schemaPath}`)
+  throw new Error(`contract.schema.json $id does not match the published path ${schemaPath}`)
+mkdirSync(path.join(site, path.dirname(schemaPath)), { recursive: true })
+cpSync(path.join(root, 'packages/eds-contracts/contract.schema.json'), path.join(site, schemaPath))
+
 // llms.txt: the discovery pointer (Astryx's shape — point at the sources,
 // never dump them). Agents in consumer repos fetch this first.
 writeFileSync(
@@ -56,7 +65,7 @@ generated from the contracts and tokens — computed, never recalled.
 - DESIGN.md: /DESIGN.md (thin: rules and pointers, ~11 KB)
 - DESIGN.verbose.md: /DESIGN.verbose.md (full disclosure: palette, recipes, resolved states)
 - Component contracts (the source of truth): /packages/eds-contracts/contracts/<name>.contract.json
-- Contract schema: /packages/eds-contracts/contract.schema.json
+- Contract schema (its $id, versioned): /schema/v0/contract.schema.json
 - Token CSS (link these, never copy values): /packages/eds-tokens/build/css/index.css
 - Component CSS: /packages/eds-contracts/build/<name>.css
 - Live component browser with correct markup per component: /storefront/ (the DOM pane shows the exact markup)
