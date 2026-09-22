@@ -292,8 +292,6 @@ colors:
   text-strong-dark: "oklch(0.99 0.013 243)"
   text-strong-on-emphasis: "oklch(1 0 0)"
   text-strong-on-emphasis-dark: "oklch(0.1 0 243)"
-  text-subtle: "oklch(0.46 0 0)"
-  text-subtle-dark: "oklch(0.91 0.021 243)"
   text-subtle-on-emphasis: "oklch(0.9 0 0)"
   text-subtle-on-emphasis-dark: "oklch(0.33 0.007 243)"
   text-success-strong: "oklch(0.23 0.03 143)"
@@ -335,6 +333,8 @@ colors:
   text-on-inverse-dark: "oklch(0.1 0 243)"
   text-placeholder: "oklch(0.75 0 0)"
   text-placeholder-dark: "oklch(0.61 0.058 249.3)"
+  bg-floating: "oklch(0.999 0 0)"
+  bg-floating-dark: "oklch(0.47 0.04 252.5)"
 typography:
   body:
     fontFamily: "Inter"

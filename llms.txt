@@ -7,7 +7,7 @@ generated from the contracts and tokens — computed, never recalled.
 - DESIGN.md: /DESIGN.md (thin: rules and pointers, ~11 KB)
 - DESIGN.verbose.md: /DESIGN.verbose.md (full disclosure: palette, recipes, resolved states)
 - Component contracts (the source of truth): /packages/eds-contracts/contracts/<name>.contract.json
-- Contract schema: /packages/eds-contracts/contract.schema.json
+- Contract schema (its $id, versioned): /schema/v0/contract.schema.json
 - Token CSS (link these, never copy values): /packages/eds-tokens/build/css/index.css
 - Component CSS: /packages/eds-contracts/build/<name>.css
 - Live component browser with correct markup per component: /storefront/ (the DOM pane shows the exact markup)
