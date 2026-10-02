@@ -44,5 +44,5 @@ before touching contracts or emitters.
 - `.agents/skills` is INSTALLED from external sources via the `skills`
   CLI, pinned in `skills-lock.json` — update through the CLI, never by
   editing the files.
-- The typography and spacing skills live in `equinor/skills` (separate
+- The typography and spacing skills live in `equinor/design-engineering-skills` (separate
   repo, referenced, never vendored).

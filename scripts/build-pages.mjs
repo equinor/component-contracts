@@ -69,7 +69,7 @@ generated from the contracts and tokens — computed, never recalled.
 - Token CSS (link these, never copy values): /packages/eds-tokens/build/css/index.css
 - Component CSS: /packages/eds-contracts/build/<name>.css
 - Live component browser with correct markup per component: /storefront/ (the DOM pane shows the exact markup)
-- Skills (principles as runnable algorithms): https://github.com/equinor/skills — install: npx skills add equinor/skills
+- Skills (principles as runnable algorithms): https://github.com/equinor/design-engineering-skills — install: npx skills add equinor/design-engineering-skills
 - Source: https://github.com/equinor/component-contracts
 
 Rules for agents: bind tokens, never raw hex or px. Never author a
