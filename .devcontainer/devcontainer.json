@@ -1,0 +1,13 @@
+{
+  "name": "component-contracts workshop",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && npm install -g @anthropic-ai/claude-code @github/copilot",
+  "customizations": {
+    "vscode": {
+      "extensions": ["github.copilot", "github.copilot-chat"]
+    }
+  },
+  "hostRequirements": {
+    "cpus": 2
+  }
+}
