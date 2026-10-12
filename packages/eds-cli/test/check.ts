@@ -220,4 +220,20 @@ const has = (out: string, needle: string, msg: string) =>
   has(search.out, 'eds explain brand', 'search routes red to the brand doc')
 }
 
+// ---- register-extension (ADR-0007's feedback loop: registering is validating) ----
+{
+  const fixture =
+    'packages/eds-contracts/test/fixtures/example-link.button.contract.json'
+  const dry = eds('register-extension', fixture, '--dry-run')
+  ok(dry.code === 0, 'register-extension --dry-run exits 0 on a valid extension')
+  has(dry.out, '[extension] example.button extends eds.button@0.8.0', 'report titles the lineage')
+  has(dry.out, 'props/variant/type/enum', 'diff names the enum append')
+  has(dry.out, '5 change(s) against upstream', 'diff is counted')
+  has(dry.out, 'promotion candidates', 'report says why it exists')
+
+  // a base contract is not an extension — refused, not invented
+  const base = eds('register-extension', 'packages/eds-contracts/contracts/button.contract.json', '--dry-run')
+  ok(base.code !== 0, 'register-extension refuses a non-extending contract')
+}
+
 console.log(`eds-cli checks passed: ${checks}`)

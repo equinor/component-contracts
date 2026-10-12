@@ -9,6 +9,7 @@ import { component } from './component.ts'
 import { contrast } from './contrast.ts'
 import { explain } from './explain.ts'
 import { search } from './search.ts'
+import { register } from './register.ts'
 import { SCHEMES, type Scheme } from './colors.ts'
 import { blocks, record, section } from './render.ts'
 
@@ -39,6 +40,11 @@ const USAGE = blocks(
   record([
     ['command', 'search <query>'],
     ['answers', 'one ranked list over components and principles docs'],
+  ]),
+  record([
+    ['command', 'register-extension <contract.json> [--dry-run]'],
+    ['answers', 'validates an extension by merging it, reports its diff as a GitHub issue'],
+    ['source', 'the merge (src/extend.ts) — registering is validating (ADR-0007)'],
   ]),
 )
 
@@ -90,9 +96,16 @@ function main(argv: string[]) {
       if (!query) fail('usage: eds search <query>')
       result = search(query)
       break
+    case 'register-extension': {
+      const dry = rest.includes('--dry-run')
+      const path = rest.filter((a) => a !== '--dry-run')[0]
+      if (!path) fail('usage: eds register-extension <contract.json> [--dry-run]')
+      result = { out: register(path, dry), code: 0 }
+      break
+    }
     default:
       fail(
-        `unknown command '${command}' — commands: component, explain, contrast, search (eds --help)`,
+        `unknown command '${command}' — commands: component, explain, contrast, search, register-extension (eds --help)`,
       )
   }
   process.stdout.write(result.out)

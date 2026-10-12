@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      '@equinor/eds-cli':
+        specifier: workspace:*
+        version: link:packages/eds-cli
 
   packages/eds-cli:
     dependencies:
