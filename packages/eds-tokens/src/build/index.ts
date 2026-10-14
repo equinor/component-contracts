@@ -11,7 +11,7 @@ import {
 } from './color.ts'
 import { opticalPaddingDoc, opticalPaddingSkill } from './docs.ts'
 import { figmaVariables } from './figma.ts'
-import { figmaBuilderScript } from './figma-builder.ts'
+import { figmaBuilderScripts } from './figma-builder.ts'
 
 const root = fileURLToPath(new URL('../..', import.meta.url))
 const repo = fileURLToPath(new URL('../../../..', import.meta.url))
@@ -46,7 +46,7 @@ write('tokens/eds.resolver.json', json(resolver()))
 console.log('\nfigma')
 const figmaPayload = figmaVariables({ primitives, densities, semantic, schemes })
 write('build/figma/variables.json', json(figmaPayload))
-write('build/figma/variables.figma-build.js', figmaBuilderScript(figmaPayload))
+for (const part of figmaBuilderScripts(figmaPayload)) write(part.file, part.script)
 
 console.log('\ncss')
 write('build/css/typography.css', typographyCss())
