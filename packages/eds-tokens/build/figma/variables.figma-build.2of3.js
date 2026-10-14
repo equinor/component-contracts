@@ -92,6 +92,10 @@ if (expect) {
     report.verified[cn] = { expected: n, actual: counts[cn] ?? 0 };
     if ((counts[cn] ?? 0) < n) report.errors.push('collection ' + cn + ' has ' + (counts[cn] ?? 0) + ' of ' + n + ' variables');
   }
+  const styleNames = new Set((await figma.getLocalEffectStylesAsync()).map(x => x.name));
+  const missingStyles = (P.effectStyles ?? []).filter(e => !styleNames.has(e.name)).map(e => e.name);
+  report.verified.effectStyles = { expected: (P.effectStyles ?? []).length, missing: missingStyles };
+  if (missingStyles.length) report.errors.push('missing effect styles: ' + missingStyles.join(', '));
 }
 report.complete = report.errors.length === 0 && report.aliasesDeferred.length === 0;
 return report;
