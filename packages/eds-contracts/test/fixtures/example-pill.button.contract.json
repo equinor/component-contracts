@@ -1,0 +1,40 @@
+{
+  "$schema": "../../contract.schema.json",
+  "id": "example.pill-button",
+  "version": "0.1.0",
+  "extends": "eds.button@0.8.0",
+  "description": "Workshop exercise fixture: a labelled pill-shaped button. Pins the emitter path for a variant structure.radius WITHOUT iconOnly \u2014 the shape changes, the label stays.",
+  "props": [
+    {
+      "name": "shape",
+      "description": "Corner treatment. Rounded is the system default; pill is the extension's addition.",
+      "type": {
+        "enum": [
+          "rounded",
+          "pill"
+        ]
+      },
+      "default": "rounded",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape"
+        },
+        "code": {
+          "attribute": true
+        }
+      }
+    }
+  ],
+  "variants": [
+    {
+      "when": {
+        "shape": "pill"
+      },
+      "structure": {
+        "radius": "{spacing.spacing-border-radius-pill}"
+      },
+      "tokens": {}
+    }
+  ]
+}

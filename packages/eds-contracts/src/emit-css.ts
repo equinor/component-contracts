@@ -1168,13 +1168,15 @@ export function emitCss(r: ResolvedContract): string {
       .join('')
     b.push('')
     b.push(`${cls}${mods} {`)
-    b.push(
-      `  /* icon-only: no text, so no half-leading to compensate — the optical`,
-    )
-    b.push(
-      `   * correction drops out. Padding = inset on all sides, and width =`,
-    )
-    b.push(`   * height = inset × 2 + cap: a circle under the pill radius. */`)
+    if (sv.iconOnly) {
+      b.push(
+        `  /* icon-only: no text, so no half-leading to compensate — the optical`,
+      )
+      b.push(
+        `   * correction drops out. Padding = inset on all sides, and width =`,
+      )
+      b.push(`   * height = inset × 2 + cap: a circle under the pill radius. */`)
+    }
     if (sv.inset === 'even') {
       b.push(`  --_half-leading: 0px;`)
       b.push(`  --_inset-h: var(--_inset-v);`)
@@ -1183,7 +1185,7 @@ export function emitCss(r: ResolvedContract): string {
       const hit = pickRef(r.refs, 'root/radius', sv.when)!
       b.push(`  --_radius: var(${hit.cssVar});`)
     }
-    {
+    if (sv.iconOnly) {
       // attribute-driven icon-only (the collapsed sidebar item): the same
       // markup must collapse, so the label and chevron leave via CSS —
       // button's ghost-icon leaves them out of the markup instead.
@@ -1209,7 +1211,7 @@ export function emitCss(r: ResolvedContract): string {
     // the accessible name must come from the author. The guard paints the
     // omission — silence is never a pass, in the CSS itself. :where() zeroes
     // the guard's specificity so the focus ring still wins while focused.
-    if (['button', 'a', 'input'].includes(c.semantics.element)) {
+    if (sv.iconOnly && ['button', 'a', 'input'].includes(c.semantics.element)) {
       stateRules.push('')
       stateRules.push(
         `${cls}${mods}:where(:not([aria-label], [aria-labelledby])) {`,

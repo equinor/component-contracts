@@ -1346,6 +1346,39 @@ for (const [name, exp] of Object.entries(EXPECT)) {
   checks++
 }
 
+// ---- 6d. labelled structural variant (the workshop exercise, found 2026-10-14) -----
+{
+  // A pill-shaped LABELLED button: variant structure.radius without iconOnly.
+  // Found by the first rehearsal run: the schema demanded iconOnly and the
+  // CSS emitter treated every structural variant as icon-only (hiding the
+  // label, demanding aria-label, skipping nothing) — so the pill never
+  // reached either surface. These checks pin the labelled path.
+  const pill = resolveContract(
+    'packages/eds-contracts/test/fixtures/example-pill.button.contract.json',
+  )
+  const css = emitCss(pill)
+  ok(
+    /\[data-shape='pill'\][^{]*\{[^}]*--_radius: var\(--eds-spacing-border-radius-pill\)/s.test(css),
+    'pill variant sets --_radius from the pill radius token in CSS',
+  )
+  const pillRule = css.split("[data-shape='pill']")[1]?.split('}')[0] ?? ''
+  ok(!pillRule.includes('display: none'), 'labelled pill hides nothing — the label stays')
+  ok(
+    !css.includes("[data-shape='pill']:where(:not([aria-label]"),
+    'no icon-only aria-label guard on a labelled variant',
+  )
+  const ghost = emitCss(resolveContract('packages/eds-contracts/contracts/button.contract.json'))
+  ok(
+    ghost.includes("ghost-icon']:where(:not([aria-label]"),
+    'ghost-icon keeps its aria-label guard — icon-only behaviour unchanged',
+  )
+  ok(
+    JSON.stringify(emitFigmaPlan(pill)).includes('spacing/border-radius-pill'),
+    'Figma plan binds the pill radius variable for the pill variants',
+  )
+  checks++
+}
+
 // ---- 6c. the schema's published identity (issue #4) --------------------------------
 {
   // $id resolves to where scripts/build-pages.mjs publishes it on GitHub
