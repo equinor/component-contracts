@@ -15,9 +15,14 @@ for (const pc of P.collections) {
   if (!coll) { coll = figma.variables.createVariableCollection(pc.name); collByName.set(pc.name, coll); }
   report.collectionsEnsured++;
   const byMode = new Map(coll.modes.map(m => [m.name, m.modeId]));
-  for (const modeName of pc.modes) {
+  // the default ("Auto") mode is whichever exists first: claim the initial
+  // mode for the payload's declared default before any other mode lands
+  const orderedModes = pc.defaultMode
+    ? [pc.defaultMode, ...pc.modes.filter(m => m !== pc.defaultMode)]
+    : pc.modes;
+  for (const modeName of orderedModes) {
     if (byMode.has(modeName)) continue;
-    const unclaimed = coll.modes.find(m => !pc.modes.includes(m.name));
+    const unclaimed = coll.modes.find(m => !orderedModes.includes(m.name));
     if (unclaimed) { coll.renameMode(unclaimed.modeId, modeName); byMode.set(modeName, unclaimed.modeId); }
     else byMode.set(modeName, coll.addMode(modeName));
   }

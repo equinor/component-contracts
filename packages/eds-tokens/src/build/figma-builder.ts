@@ -37,9 +37,14 @@ for (const pc of P.collections) {
   if (!coll) { coll = figma.variables.createVariableCollection(pc.name); collByName.set(pc.name, coll); }
   report.collectionsEnsured++;
   const byMode = new Map(coll.modes.map(m => [m.name, m.modeId]));
-  for (const modeName of pc.modes) {
+  // the default ("Auto") mode is whichever exists first: claim the initial
+  // mode for the payload's declared default before any other mode lands
+  const orderedModes = pc.defaultMode
+    ? [pc.defaultMode, ...pc.modes.filter(m => m !== pc.defaultMode)]
+    : pc.modes;
+  for (const modeName of orderedModes) {
     if (byMode.has(modeName)) continue;
-    const unclaimed = coll.modes.find(m => !pc.modes.includes(m.name));
+    const unclaimed = coll.modes.find(m => !orderedModes.includes(m.name));
     if (unclaimed) { coll.renameMode(unclaimed.modeId, modeName); byMode.set(modeName, unclaimed.modeId); }
     else byMode.set(modeName, coll.addMode(modeName));
   }
@@ -141,7 +146,7 @@ function allAliases(payload: FigmaPayload): Alias[] {
 
 export function figmaBuilderScripts(payload: FigmaPayload): { file: string; script: string }[] {
   // pack variables greedily into parts under the budget, payload order kept
-  type Part = { collections: { name: string; modes: string[]; variables: FigmaVariable[] }[] }
+  type Part = { collections: { name: string; modes: string[]; defaultMode?: string; variables: FigmaVariable[] }[] }
   const parts: Part[] = []
   let current: Part = { collections: [] }
   let size = 0
@@ -155,7 +160,7 @@ export function figmaBuilderScripts(payload: FigmaPayload): { file: string; scri
       }
       let slot = current.collections.find((c) => c.name === pc.name)
       if (!slot) {
-        slot = { name: pc.name, modes: pc.modes, variables: [] }
+        slot = { name: pc.name, modes: pc.modes, defaultMode: pc.defaultMode, variables: [] }
         current.collections.push(slot)
         size += JSON.stringify({ name: pc.name, modes: pc.modes }).length
       }

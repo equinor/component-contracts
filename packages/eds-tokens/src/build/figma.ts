@@ -35,7 +35,7 @@ export type FigmaVariable = {
   alias?: { collection: string; name: string }
 }
 export type FigmaPayload = {
-  collections: { name: string; modes: string[]; variables: FigmaVariable[] }[]
+  collections: { name: string; modes: string[]; defaultMode?: string; variables: FigmaVariable[] }[]
   effectStyles: { name: string; description?: string; effects: unknown[] }[]
 }
 
@@ -301,6 +301,9 @@ export function figmaVariables(inputs: {
       {
         name: 'density',
         modes: [...DENSITY_MODES],
+        // Figma's "Auto" resolves to the collection's default (first) mode —
+        // the system's default density is comfortable, not payload order
+        defaultMode: 'comfortable',
         variables: [...densityVars.values()],
       },
       {

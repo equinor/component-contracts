@@ -7,6 +7,7 @@
         "comfortable",
         "relaxed"
       ],
+      "defaultMode": "comfortable",
       "variables": [
         {
           "name": "density/base",
