@@ -74,6 +74,7 @@ const effectByName = new Map((await figma.getLocalEffectStylesAsync()).map(s => 
 const cs = PLAN.componentSet;
 const maxX = Math.max(0, ...figma.currentPage.children.map(n => n.x + n.width));
 const comps = [];
+const skippedMirrors = [];
 let bindings = 0;
 let y = 0;
 if (cs.table) {
@@ -142,10 +143,19 @@ for (const spec of cs.variants) {
   const axisCtx = Object.fromEntries(
     spec.name.split(', ').filter(s => s.includes('=')).map(s => s.split('=')));
   const mirrorAxes = (inst) => {
+    // Mirror the host's axis values onto an instanced part — but a shared
+    // axis NAME does not imply shared VALUES (banner's Tone has info; its
+    // dismiss Button's Tone does not — the missing ghost ladder). A value
+    // the instance's set lacks is skipped, keeping the instance's default:
+    // the composed part stays valid instead of failing the whole build.
+    const group = inst.mainComponent?.parent?.variantGroupProperties ?? null;
     for (const [axis, val] of Object.entries(axisCtx)) {
-      if (inst.componentProperties && inst.componentProperties[axis] !== undefined) {
-        inst.setProperties({ [axis]: val });
+      if (!inst.componentProperties || inst.componentProperties[axis] === undefined) continue;
+      if (group && group[axis] && !group[axis].values.includes(val)) {
+        skippedMirrors.push(spec.name + ': ' + axis + '=' + val + ' not on ' + inst.mainComponent.parent.name);
+        continue;
       }
+      inst.setProperties({ [axis]: val });
     }
   };
   const comp = figma.createComponent();
@@ -674,6 +684,7 @@ return {
   variants: variantNodes.length,
   expectedVariants: cs.variants.length,
   bindings,
+  skippedMirrors,
   ensuredVariables: ensured,
   props: Object.keys(set.componentPropertyDefinitions),
 };
