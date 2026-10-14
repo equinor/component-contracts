@@ -679,11 +679,26 @@ return {
 };
 `
 
+const MAX_SCRIPT = 50_000 // the Figma MCP use_figma payload ceiling
+
+/** The template, minified for transport: full-line comments and blank
+ *  lines dropped, trailing space trimmed. The source above stays the
+ *  readable truth; the artifact is for machines. */
+const BUILDER_MIN = BUILDER.split('\n')
+  .map((l) => l.replace(/\s+$/, '').replace(/^\s+/, ''))
+  .filter((l) => l.trim() !== '' && !l.trim().startsWith('//'))
+  .join('\n')
+
 export function emitBuilder(plan: FigmaPlan): string {
-  return (
+  const script =
     `// Generated builder for ${plan.component} — do not edit; edit the contract.\n` +
     `// Transport-agnostic: Figma MCP use_figma, or figma-console-mcp figma_execute.\n` +
     `const PLAN = ${JSON.stringify(plan)};\n` +
-    BUILDER
-  )
+    BUILDER_MIN
+  if (script.length > MAX_SCRIPT)
+    throw new Error(
+      `${plan.component} builder is ${script.length} chars — over the ` +
+        `${MAX_SCRIPT} use_figma ceiling; split the plan or slim the builder`,
+    )
+  return script
 }
