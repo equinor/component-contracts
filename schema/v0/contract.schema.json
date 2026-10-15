@@ -260,9 +260,6 @@
           "structure": {
             "type": "object",
             "description": "Structural overrides pinned to prop values \u2014 for variants whose anatomy differs, not just their colors (e.g. an icon-only round button). Facts here are still contract facts: both emitters consume them.",
-            "required": [
-              "iconOnly"
-            ],
             "additionalProperties": false,
             "properties": {
               "iconOnly": {
