@@ -6,6 +6,7 @@
  *
  *  Transport-agnostic: run via the Figma MCP `use_figma` or figma-console-mcp
  *  `figma_execute`. Returns a manifest for verification against the plan. */
+import { createHash } from 'node:crypto'
 import type { FigmaPlan } from './emit-figma.ts'
 
 const BUILDER = String.raw`
@@ -73,7 +74,7 @@ const effectByName = new Map((await figma.getLocalEffectStylesAsync()).map(s => 
 // a label builds no text, a rule builds no layout at all.
 const cs = PLAN.componentSet;
 const maxX = Math.max(0, ...figma.currentPage.children.map(n => n.x + n.width));
-const comps = [];
+let comps = [];
 const skippedMirrors = [];
 let bindings = 0;
 let y = 0;
@@ -134,6 +135,14 @@ if (cs.table) {
     ensuredVariables: ensured,
     props: [],
   };
+}
+// Large component sets are emitted in PARTS (use_figma payload ceiling).
+// Each part builds a slice of the variants and tags them; the final part
+// gathers every tagged component and combines them. Part 1 first removes
+// leftovers of an earlier, interrupted run of the same build — the final
+// part clears its tags, so a completed set is never touched.
+if (PLAN.part && PLAN.part.index === 1) {
+  for (const n of figma.currentPage.findAll(n => n.type === 'COMPONENT' && n.getPluginData('eds-build') === PLAN.part.tag)) n.remove();
 }
 for (const spec of cs.variants) {
   const size = cs.bySize[spec.size];
@@ -627,6 +636,14 @@ for (const spec of cs.variants) {
   comps.push(comp);
 }
 
+if (PLAN.part) {
+  for (const c of comps) c.setPluginData('eds-build', PLAN.part.tag);
+  if (PLAN.part.index < PLAN.part.of) {
+    return { part: PLAN.part.index, of: PLAN.part.of, name: cs.name, componentsBuilt: comps.length, bindings, skippedMirrors, ensuredVariables: ensured, next: 'run part ' + (PLAN.part.index + 1) };
+  }
+  comps = figma.currentPage.findAll(n => n.type === 'COMPONENT' && n.getPluginData('eds-build') === PLAN.part.tag);
+  if (comps.length !== PLAN.part.expectedVariants) throw new Error('found ' + comps.length + ' of ' + PLAN.part.expectedVariants + ' variants — run every part, in order, starting with part 1');
+}
 // 3. Combine, arrange, wire component properties. A plan whose only variant
 // carries no axis name ships a plain COMPONENT — no set, no synthetic axis.
 let set;
@@ -659,14 +676,13 @@ for (const part of cs.parts) {
     };
   }
 }
-const specByName = new Map(cs.variants.map(v => [v.name, v]));
+const iconOnlyNames = new Set(PLAN.part ? PLAN.part.iconOnlyNames : cs.variants.filter(v => v.iconOnly).map(v => v.name));
 for (const comp of variantNodes) {
-  const spec = specByName.get(comp.name);
   for (const p of Object.values(propRefs)) {
     // icon-only variants expose only the icon's INSTANCE_SWAP and any
     // visibility toggles whose parts exist there (the flag) — text wiring
     // has nothing to act on and stays unwired.
-    if (spec && spec.iconOnly && !p.inner && p.field !== 'visible') continue;
+    if (iconOnlyNames.has(comp.name) && !p.inner && p.field !== 'visible') continue;
     for (const partName of (p.parts || [p.part])) {
       let node = comp.findOne(n => n.name === partName); // parts may sit inside the bubble wrapper
       if (node && p.inner) node = node.findOne(n => n.type === 'INSTANCE'); // the glyph, now nested in the ink group
@@ -678,11 +694,12 @@ for (const comp of variantNodes) {
     }
   }
 }
+if (PLAN.part) for (const c of variantNodes) c.setPluginData('eds-build', '');
 return {
   componentSetId: set.id,
   name: cs.name,
   variants: variantNodes.length,
-  expectedVariants: cs.variants.length,
+  expectedVariants: PLAN.part ? PLAN.part.expectedVariants : cs.variants.length,
   bindings,
   skippedMirrors,
   ensuredVariables: ensured,
@@ -700,16 +717,59 @@ const BUILDER_MIN = BUILDER.split('\n')
   .filter((l) => l.trim() !== '' && !l.trim().startsWith('//'))
   .join('\n')
 
+const PART_BUDGET = 40_000 // per-part target, headroom under the ceiling
+
+const header = (component: string, note: string) =>
+  `// Generated builder for ${component}${note} — do not edit; edit the contract.\n` +
+  `// Transport-agnostic: Figma MCP use_figma, or figma-console-mcp figma_execute.\n`
+
+/** One script when the component fits a single use_figma call; otherwise
+ *  ordered parts (variants sliced, final part combines). Every script is
+ *  asserted under the ceiling — overflow fails the build, never the demo. */
+export function emitBuilderParts(plan: FigmaPlan): { suffix: string; script: string }[] {
+  const single = header(plan.component, '') + `const PLAN = ${JSON.stringify(plan)};\n` + BUILDER_MIN
+  if (single.length <= MAX_SCRIPT) return [{ suffix: '', script: single }]
+
+  const cs: any = (plan as any).componentSet
+  const variants: any[] = cs.variants
+  const tag = plan.component + '#' + createHash('sha1').update(JSON.stringify(plan)).digest('hex').slice(0, 8)
+  const iconOnlyNames = variants.filter((v) => v.iconOnly).map((v) => v.name)
+  const fixed =
+    header(plan.component, ' — part 99 of 99').length +
+    JSON.stringify({ ...plan, componentSet: { ...cs, variants: [] } }).length +
+    JSON.stringify({ index: 99, of: 99, tag, expectedVariants: variants.length, iconOnlyNames }).length +
+    BUILDER_MIN.length + 64
+  const room = PART_BUDGET - fixed
+  const chunks: any[][] = [[]]
+  let used = 0
+  for (const v of variants) {
+    const n = JSON.stringify(v).length + 1
+    if (n > room) throw new Error(`${plan.component}: one variant exceeds the part budget`)
+    if (used + n > room && chunks[chunks.length - 1].length) { chunks.push([]); used = 0 }
+    chunks[chunks.length - 1].push(v)
+    used += n
+  }
+  const of = chunks.length
+  return chunks.map((chunk, i) => {
+    const last = i === of - 1
+    const partPlan = {
+      ...plan,
+      componentSet: { ...cs, variants: chunk },
+      part: { index: i + 1, of, tag, expectedVariants: variants.length, ...(last ? { iconOnlyNames } : {}) },
+    }
+    const script =
+      header(plan.component, ` — part ${i + 1} of ${of}; run all parts in order`) +
+      `const PLAN = ${JSON.stringify(partPlan)};\n` + BUILDER_MIN
+    if (script.length > MAX_SCRIPT)
+      throw new Error(`${plan.component} part ${i + 1} is ${script.length} chars — over ${MAX_SCRIPT}`)
+    return { suffix: `.${i + 1}of${of}`, script }
+  })
+}
+
+/** Single-script convenience; throws if the component needs parts. */
 export function emitBuilder(plan: FigmaPlan): string {
-  const script =
-    `// Generated builder for ${plan.component} — do not edit; edit the contract.\n` +
-    `// Transport-agnostic: Figma MCP use_figma, or figma-console-mcp figma_execute.\n` +
-    `const PLAN = ${JSON.stringify(plan)};\n` +
-    BUILDER_MIN
-  if (script.length > MAX_SCRIPT)
-    throw new Error(
-      `${plan.component} builder is ${script.length} chars — over the ` +
-        `${MAX_SCRIPT} use_figma ceiling; split the plan or slim the builder`,
-    )
-  return script
+  const parts = emitBuilderParts(plan)
+  if (parts.length > 1)
+    throw new Error(`${plan.component} needs ${parts.length} parts — use emitBuilderParts`)
+  return parts[0].script
 }

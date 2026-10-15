@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { ledger, resolveContract } from './resolve.ts'
 import { emitCss } from './emit-css.ts'
 import { emitFigmaPlan } from './emit-figma.ts'
-import { emitBuilder } from './emit-builder.ts'
+import { emitBuilderParts } from './emit-builder.ts'
 import {
   emitCompositionBuilder,
   emitCompositionCss,
@@ -39,7 +39,8 @@ for (const file of readdirSync(pkg + 'contracts').filter((f) =>
     pkg + `build/${name}.figma-plan.json`,
     JSON.stringify(plan, null, 2) + '\n',
   )
-  writeFileSync(pkg + `build/${name}.figma-build.js`, emitBuilder(plan))
+  for (const part of emitBuilderParts(plan))
+    writeFileSync(pkg + `build/${name}.figma-build${part.suffix}.js`, part.script)
   writeFileSync(
     pkg + `build/${name}.ledger.json`,
     JSON.stringify(ledger(r), null, 2) + '\n',

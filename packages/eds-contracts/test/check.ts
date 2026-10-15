@@ -20,7 +20,7 @@ import {
 } from '../../eds-tokens/src/formulas.ts'
 import { emitCss } from '../src/emit-css.ts'
 import { emitFigmaPlan } from '../src/emit-figma.ts'
-import { emitBuilder } from '../src/emit-builder.ts'
+import { emitBuilder, emitBuilderParts } from '../src/emit-builder.ts'
 import {
   emitCompositionBuilder,
   emitCompositionCss,
@@ -292,7 +292,7 @@ for (const [name, exp] of Object.entries(EXPECT)) {
   for (const [file, fresh] of [
     [`${name}.css`, css],
     [`${name}.figma-plan.json`, JSON.stringify(plan, null, 2) + '\n'],
-    [`${name}.figma-build.js`, emitBuilder(plan)],
+    ...emitBuilderParts(plan).map((p) => [`${name}.figma-build${p.suffix}.js`, p.script] as const),
     [`${name}.ledger.json`, JSON.stringify(ledger(r), null, 2) + '\n'],
   ] as const) {
     let disk = ''
@@ -1376,6 +1376,29 @@ for (const [name, exp] of Object.entries(EXPECT)) {
     JSON.stringify(emitFigmaPlan(pill)).includes('spacing/border-radius-pill'),
     'Figma plan binds the pill radius variable for the pill variants',
   )
+  checks++
+  // the pill has 192 variants: too big for one use_figma call, so it ships
+  // in ordered parts — every part under the ceiling, every variant in
+  // exactly one part, only the final part combines
+  const pillPlan: any = emitFigmaPlan(pill)
+  const parts = emitBuilderParts(pillPlan)
+  ok(parts.length > 1, `pill builder splits into parts (${parts.length})`)
+  ok(parts.every((p) => p.script.length <= 50_000), 'every part fits one use_figma call')
+  const AsyncFn = Object.getPrototypeOf(async () => {}).constructor
+  for (const p of parts) new AsyncFn(p.script) // each part is a valid script body
+  const partPlans = parts.map((p) => JSON.parse(p.script.match(/const PLAN = (\{.*\});\n/)![1]))
+  ok(
+    partPlans.reduce((n, pp) => n + pp.componentSet.variants.length, 0) === pillPlan.componentSet.variants.length,
+    'parts cover every variant exactly once',
+  )
+  ok(new Set(partPlans.map((pp) => pp.part.tag)).size === 1, 'all parts share one build tag')
+  ok(
+    partPlans.filter((pp) => pp.part.iconOnlyNames).length === 1 &&
+      partPlans[partPlans.length - 1].part.iconOnlyNames,
+    'only the final part carries the combine-time data',
+  )
+  ok(emitBuilderParts(emitFigmaPlan(resolveContract('packages/eds-contracts/contracts/card.contract.json'))).length === 1,
+    'components that fit stay a single script')
   checks++
 }
 

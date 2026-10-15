@@ -55,7 +55,7 @@ node.fills = [figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: {
 const effectByName = new Map((await figma.getLocalEffectStylesAsync()).map(s => [s.name, s]));
 const cs = PLAN.componentSet;
 const maxX = Math.max(0, ...figma.currentPage.children.map(n => n.x + n.width));
-const comps = [];
+let comps = [];
 const skippedMirrors = [];
 let bindings = 0;
 let y = 0;
@@ -112,6 +112,9 @@ bindings,
 ensuredVariables: ensured,
 props: [],
 };
+}
+if (PLAN.part && PLAN.part.index === 1) {
+for (const n of figma.currentPage.findAll(n => n.type === 'COMPONENT' && n.getPluginData('eds-build') === PLAN.part.tag)) n.remove();
 }
 for (const spec of cs.variants) {
 const size = cs.bySize[spec.size];
@@ -495,6 +498,14 @@ spacer.visible = c.visible;
 }
 comps.push(comp);
 }
+if (PLAN.part) {
+for (const c of comps) c.setPluginData('eds-build', PLAN.part.tag);
+if (PLAN.part.index < PLAN.part.of) {
+return { part: PLAN.part.index, of: PLAN.part.of, name: cs.name, componentsBuilt: comps.length, bindings, skippedMirrors, ensuredVariables: ensured, next: 'run part ' + (PLAN.part.index + 1) };
+}
+comps = figma.currentPage.findAll(n => n.type === 'COMPONENT' && n.getPluginData('eds-build') === PLAN.part.tag);
+if (comps.length !== PLAN.part.expectedVariants) throw new Error('found ' + comps.length + ' of ' + PLAN.part.expectedVariants + ' variants — run every part, in order, starting with part 1');
+}
 let set;
 if (comps.length === 1 && !cs.variants[0].name) {
 set = comps[0];
@@ -525,11 +536,10 @@ inner: true,
 };
 }
 }
-const specByName = new Map(cs.variants.map(v => [v.name, v]));
+const iconOnlyNames = new Set(PLAN.part ? PLAN.part.iconOnlyNames : cs.variants.filter(v => v.iconOnly).map(v => v.name));
 for (const comp of variantNodes) {
-const spec = specByName.get(comp.name);
 for (const p of Object.values(propRefs)) {
-if (spec && spec.iconOnly && !p.inner && p.field !== 'visible') continue;
+if (iconOnlyNames.has(comp.name) && !p.inner && p.field !== 'visible') continue;
 for (const partName of (p.parts || [p.part])) {
 let node = comp.findOne(n => n.name === partName); // parts may sit inside the bubble wrapper
 if (node && p.inner) node = node.findOne(n => n.type === 'INSTANCE'); // the glyph, now nested in the ink group
@@ -541,11 +551,12 @@ if (spacer) spacer.componentPropertyReferences = { visible: p.id };
 }
 }
 }
+if (PLAN.part) for (const c of variantNodes) c.setPluginData('eds-build', '');
 return {
 componentSetId: set.id,
 name: cs.name,
 variants: variantNodes.length,
-expectedVariants: cs.variants.length,
+expectedVariants: PLAN.part ? PLAN.part.expectedVariants : cs.variants.length,
 bindings,
 skippedMirrors,
 ensuredVariables: ensured,
