@@ -30,6 +30,7 @@ for c in button card checkbox chip divider input label menu-item radio \
 done
 
 start=$(date +%s)
+ran=0
 first=1
 skipping=0; [ -n "$FROM" ] && skipping=1
 for f in "${STEPS[@]}"; do
