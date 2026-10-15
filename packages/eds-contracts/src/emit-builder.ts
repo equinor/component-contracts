@@ -766,6 +766,12 @@ export function emitBuilderParts(plan: FigmaPlan): { suffix: string; script: str
   })
 }
 
+/** One script with no size check — for transports without the use_figma
+ *  ceiling (the EDS Contract Runner plugin). */
+export function emitBuilderWhole(plan: FigmaPlan): string {
+  return header(plan.component, '') + `const PLAN = ${JSON.stringify(plan)};\n` + BUILDER_MIN
+}
+
 /** Single-script convenience; throws if the component needs parts. */
 export function emitBuilder(plan: FigmaPlan): string {
   const parts = emitBuilderParts(plan)

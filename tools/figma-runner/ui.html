@@ -10,6 +10,9 @@
 </style>
 <h1>EDS Contract Runner</h1>
 <p>Choose the generated <code>*.figma-build*.js</code> files. They run in name order (part 1 before part 2), one at a time, and stop at the first error.</p>
+<p><label for="paste">Paste a builder script:</label></p>
+<textarea id="paste" rows="5" style="width:100%;font:11px monospace" placeholder="Paste the whole file here"></textarea>
+<p>…or choose file(s):</p>
 <input id="files" type="file" accept=".js" multiple />
 <p></p>
 <button id="run" disabled>Run</button>
@@ -19,13 +22,17 @@
   const run = document.getElementById('run');
   const log = document.getElementById('log');
   let pending = null;
-  input.onchange = () => { run.disabled = input.files.length === 0; log.innerHTML = ''; };
+  const paste = document.getElementById('paste');
+  const refresh = () => { run.disabled = input.files.length === 0 && paste.value.trim() === ''; log.innerHTML = ''; };
+  input.onchange = refresh; paste.oninput = refresh;
   onmessage = (e) => { const m = e.data.pluginMessage; if (m && m.type === 'result' && pending) { pending(m); pending = null; } };
   const send = (name, src) => new Promise((resolve) => { pending = resolve; parent.postMessage({ pluginMessage: { type: 'run', name, src } }, '*'); });
   run.onclick = async () => {
     run.disabled = true; log.innerHTML = '';
-    const files = [...input.files].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-    for (const f of files) {
+    const jobs = paste.value.trim()
+      ? [{ name: 'pasted script', text: async () => paste.value }]
+      : [...input.files].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+    for (const f of jobs) {
       const li = document.createElement('li'); li.textContent = f.name + ' …'; log.append(li);
       const m = await send(f.name, await f.text());
       li.className = m.ok ? 'ok' : 'fail';
