@@ -52,5 +52,6 @@ for f in "${STEPS[@]}"; do
   fi
   summary=$(printf '%s' "$out" | grep -v '^hint:' | tr -d '\n' | cut -c1-140)
   printf '%-40s %3ss  %s\n' "$name" "$((t1 - t0))" "$summary"
+  ran=$((ran + 1))
 done
-printf '\nAll %d steps done in %ss.\n' "${#STEPS[@]}" "$(( $(date +%s) - start ))"
+printf '\n%d of %d steps done in %ss.\n' "$ran" "${#STEPS[@]}" "$(( $(date +%s) - start ))"
