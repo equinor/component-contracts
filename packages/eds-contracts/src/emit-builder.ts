@@ -151,17 +151,19 @@ for (const spec of cs.variants) {
   // name mirror it (the collapsed rail collapses its items)
   const axisCtx = Object.fromEntries(
     spec.name.split(', ').filter(s => s.includes('=')).map(s => s.split('=')));
-  const mirrorAxes = (inst) => {
+  const mirrorAxes = async (inst) => {
     // Mirror the host's axis values onto an instanced part — but a shared
     // axis NAME does not imply shared VALUES (banner's Tone has info; its
     // dismiss Button's Tone does not — the missing ghost ladder). A value
     // the instance's set lacks is skipped, keeping the instance's default:
     // the composed part stays valid instead of failing the whole build.
-    const group = inst.mainComponent?.parent?.variantGroupProperties ?? null;
+    // async: the sync .mainComponent read is unreliable under dynamic page loading
+    const main = await inst.getMainComponentAsync();
+    const group = main?.parent?.variantGroupProperties ?? null;
     for (const [axis, val] of Object.entries(axisCtx)) {
       if (!inst.componentProperties || inst.componentProperties[axis] === undefined) continue;
       if (group && group[axis] && !group[axis].values.includes(val)) {
-        skippedMirrors.push(spec.name + ': ' + axis + '=' + val + ' not on ' + inst.mainComponent.parent.name);
+        skippedMirrors.push(spec.name + ': ' + axis + '=' + val + ' not on ' + main.parent.name);
         continue;
       }
       inst.setProperties({ [axis]: val });
@@ -425,7 +427,7 @@ for (const spec of cs.variants) {
       inst.name = part.name;
       seatFor(part).appendChild(inst);
       inst.isExposedInstance = true;
-      mirrorAxes(inst);
+      await mirrorAxes(inst);
       if (cs.root.layout === 'VERTICAL') inst.layoutSizingHorizontal = 'FILL';
       // Collapsed variants may re-point overrides (the Collapse control's
       // icon faces the other way: first_page expanded, last_page collapsed)
@@ -479,7 +481,7 @@ for (const spec of cs.variants) {
               : value === 'true' ? true : value === 'false' ? false : value;
             if (key) inst.setProperties({ [key]: v });
           }
-          mirrorAxes(inst);
+          await mirrorAxes(inst);
         }
       } else {
         const slot = figma.createFrame();

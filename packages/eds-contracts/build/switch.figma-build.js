@@ -121,12 +121,13 @@ const size = cs.bySize[spec.size];
 if (!size) throw new Error('no bySize entry for ' + spec.size);
 const axisCtx = Object.fromEntries(
 spec.name.split(', ').filter(s => s.includes('=')).map(s => s.split('=')));
-const mirrorAxes = (inst) => {
-const group = inst.mainComponent?.parent?.variantGroupProperties ?? null;
+const mirrorAxes = async (inst) => {
+const main = await inst.getMainComponentAsync();
+const group = main?.parent?.variantGroupProperties ?? null;
 for (const [axis, val] of Object.entries(axisCtx)) {
 if (!inst.componentProperties || inst.componentProperties[axis] === undefined) continue;
 if (group && group[axis] && !group[axis].values.includes(val)) {
-skippedMirrors.push(spec.name + ': ' + axis + '=' + val + ' not on ' + inst.mainComponent.parent.name);
+skippedMirrors.push(spec.name + ': ' + axis + '=' + val + ' not on ' + main.parent.name);
 continue;
 }
 inst.setProperties({ [axis]: val });
@@ -337,7 +338,7 @@ const inst = (src.type === 'COMPONENT_SET' ? src.defaultVariant : src).createIns
 inst.name = part.name;
 seatFor(part).appendChild(inst);
 inst.isExposedInstance = true;
-mirrorAxes(inst);
+await mirrorAxes(inst);
 if (cs.root.layout === 'VERTICAL') inst.layoutSizingHorizontal = 'FILL';
 const effective = spec.collapsed && part.collapsedOverrides
 ? { ...part.overrides, ...part.collapsedOverrides }
@@ -380,7 +381,7 @@ const v = typeof value === 'string' && value.startsWith('key:')
 : value === 'true' ? true : value === 'false' ? false : value;
 if (key) inst.setProperties({ [key]: v });
 }
-mirrorAxes(inst);
+await mirrorAxes(inst);
 }
 } else {
 const slot = figma.createFrame();
