@@ -23,6 +23,16 @@ byName.set(rv.name, v);
 ensured.push(rv.name);
 }
 const need = (n) => { const v = byName.get(n); if (!v) throw new Error('missing variable: ' + n); return v; };
+const autoLayout = (dir, props) => {
+const f = figma.createFrame();
+f.layoutMode = dir;
+f.primaryAxisSizingMode = 'AUTO';
+f.counterAxisSizingMode = 'AUTO';
+f.fills = [];
+f.clipsContent = false;
+if (props && props.name) f.name = props.name;
+return f;
+};
 const importedByKey = {};
 for (const part of PLAN.componentSet.parts) {
 const keys = [];
@@ -73,7 +83,7 @@ const rootBg = cs.variants[0].bg;
 if (rootBg) bindFill(comp, rootBg);
 const selectedRow = T.rows.length - 1; // the demo shows the selected rung
 const cell = (text, isHeader, rowIndex) => {
-const box = figma.createAutoLayout('HORIZONTAL', { name: isHeader ? 'header-cell' : 'cell' });
+const box = autoLayout('HORIZONTAL', { name: isHeader ? 'header-cell' : 'cell' });
 box.fills = [];
 box.counterAxisAlignItems = 'CENTER';
 box.setBoundVariable('paddingTop', need(T.cellPadV));
@@ -95,7 +105,7 @@ bindings += Object.keys(T.cellLabel).length + 6;
 return box;
 };
 for (let cix = 0; cix < T.columns.length; cix++) {
-const col = figma.createAutoLayout('VERTICAL', { name: 'column' });
+const col = autoLayout('VERTICAL', { name: 'column' });
 col.fills = [];
 col.itemSpacing = 0;
 comp.appendChild(col);
@@ -154,8 +164,8 @@ comp.counterAxisAlignItems = spec.pointer.align === 'start' ? 'MIN' : spec.point
 comp.itemSpacing = 0;
 comp.fills = [];
 comp.clipsContent = false;
-root = figma.createAutoLayout('HORIZONTAL', { name: 'bubble' });
-const arrowRow = figma.createAutoLayout('HORIZONTAL', { name: 'arrow' });
+root = autoLayout('HORIZONTAL', { name: 'bubble' });
+const arrowRow = autoLayout('HORIZONTAL', { name: 'arrow' });
 arrowRow.fills = [];
 arrowRow.clipsContent = false;
 if (spec.pointer.side === 'top' || spec.pointer.side === 'left') {
@@ -258,7 +268,7 @@ const clusterFrames = {};
 const seatFor = (part) => {
 if (!part.cluster) return root;
 if (!clusterFrames[part.cluster]) {
-const w = figma.createAutoLayout('HORIZONTAL', { name: part.cluster });
+const w = autoLayout('HORIZONTAL', { name: part.cluster });
 w.fills = [];
 w.counterAxisAlignItems = 'CENTER';
 root.appendChild(w);
@@ -277,7 +287,7 @@ const g = size.glyphs[part.name];
 const swapKey = (spec.glyphSwaps && spec.glyphSwaps[part.name]) ||
 (part.swap && part.swap.componentKey);
 const glyphInk = (spec.glyphFg && spec.glyphFg[part.name]) || spec.iconFg || spec.fg;
-const container = figma.createAutoLayout('HORIZONTAL', { name: part.name });
+const container = autoLayout('HORIZONTAL', { name: part.name });
 container.fills = [];
 container.clipsContent = false;
 root.appendChild(container);

@@ -1397,6 +1397,10 @@ for (const [name, exp] of Object.entries(EXPECT)) {
       partPlans[partPlans.length - 1].part.iconOnlyNames,
     'only the final part carries the combine-time data',
   )
+  // builders must run on the STANDARD Plugin API — plugins and design-bridge
+  // lack the Figma MCP's convenience helpers
+  for (const p of parts)
+    ok(!/figma\.(createAutoLayout|query)\(/.test(p.script), 'no MCP-only helpers in builder scripts')
   ok(emitBuilderParts(emitFigmaPlan(resolveContract('packages/eds-contracts/contracts/card.contract.json'))).length === 1,
     'components that fit stay a single script')
   checks++
