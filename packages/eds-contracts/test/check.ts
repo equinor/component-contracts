@@ -1397,6 +1397,21 @@ for (const [name, exp] of Object.entries(EXPECT)) {
       partPlans[partPlans.length - 1].part.iconOnlyNames,
     'only the final part carries the combine-time data',
   )
+  // icon keys: side-bar's collapse control uses the SAME prop name with
+  // DIFFERENT icons in overrides and collapsedOverrides; a merging collector
+  // imported only one (found by the first full design-bridge bootstrap)
+  {
+    const sb: any = emitFigmaPlan(resolveContract('packages/eds-contracts/contracts/side-bar.contract.json'))
+    const keys = new Set<string>()
+    const walk = (o: any) => {
+      if (typeof o === 'string') { if (o.startsWith('key:')) keys.add(o) }
+      else if (o && typeof o === 'object') for (const v of Object.values(o)) walk(v)
+    }
+    walk(sb.componentSet.parts)
+    ok(keys.size >= 2, 'side-bar references distinct icon keys across override sets')
+    ok(emitBuilder(sb).includes('walk(part);'),
+      'the icon collector walks every value instead of merging override sets')
+  }
   // builders must run on the STANDARD Plugin API — plugins and design-bridge
   // lack the Figma MCP's convenience helpers
   for (const p of parts)

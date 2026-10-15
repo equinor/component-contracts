@@ -2,13 +2,17 @@
 # Build the whole design system into a Figma file with design-bridge:
 # all variables (3 parts), then every component, dependencies first.
 #
-#   bash scripts/figma-bootstrap.sh <figma-file-key>
+#   bash scripts/figma-bootstrap.sh <figma-file-key> [start-at]
+#
+# start-at resumes at a step (e.g. side-bar) after a stopped run — steps
+# before it are skipped, since they are already in the file.
 #
 # Every script is the emitted artifact, piped from disk byte-for-byte.
 # One checkpoint (a named Figma version) is saved before the first step;
 # the run stops at the first failure.
 set -uo pipefail
-KEY="${1:?usage: bash scripts/figma-bootstrap.sh <figma-file-key>}"
+KEY="${1:?usage: bash scripts/figma-bootstrap.sh <figma-file-key> [start-at]}"
+FROM="${2:-}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 VARS="$ROOT/packages/eds-tokens/build/figma"
 COMP="$ROOT/packages/eds-contracts/build"
@@ -27,8 +31,12 @@ done
 
 start=$(date +%s)
 first=1
+skipping=0; [ -n "$FROM" ] && skipping=1
 for f in "${STEPS[@]}"; do
   name="$(basename "$f" .js)"
+  if [ $skipping -eq 1 ]; then
+    if [ "${name%%.figma-build*}" = "$FROM" ]; then skipping=0; else continue; fi
+  fi
   t0=$(date +%s)
   if [ $first -eq 1 ]; then
     out=$(design-bridge eval --file "$KEY" --checkpoint 'before bootstrap' --select result - < "$f" 2>&1)

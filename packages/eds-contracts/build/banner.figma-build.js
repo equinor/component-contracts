@@ -38,17 +38,12 @@ for (const part of PLAN.componentSet.parts) {
 const keys = [];
 if (part.kind === 'glyph' && part.swap) keys.push(part.swap.componentKey);
 if (part.kind === 'glyph' && part.swapByProp) keys.push(...Object.values(part.swapByProp.glyphs).map(g => g.componentKey));
-if (part.kind === 'instance') {
-for (const v of Object.values({ ...part.overrides, ...part.collapsedOverrides })) {
-if (typeof v === 'string' && v.startsWith('key:')) keys.push(v.slice(4));
-}
-}
-if (part.kind === 'slot') {
-for (const s of (part.seed || [])) {
-for (const v of Object.values(s.overrides || {})) {
-if (typeof v === 'string' && v.startsWith('key:')) keys.push(v.slice(4));
-}
-}
+if (part.kind === 'instance' || part.kind === 'slot') {
+const walk = (o) => {
+if (typeof o === 'string') { if (o.startsWith('key:')) keys.push(o.slice(4)); }
+else if (o && typeof o === 'object') for (const v of Object.values(o)) walk(v);
+};
+walk(part);
 }
 for (const k of keys) {
 if (importedByKey[k]) continue;
