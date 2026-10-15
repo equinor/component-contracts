@@ -1,0 +1,38 @@
+<style>
+  body { font: 12px/1.5 Inter, system-ui, sans-serif; margin: 12px; color: #1a1a1a; }
+  h1 { font-size: 13px; margin: 0 0 8px; }
+  p { margin: 0 0 8px; color: #565656; }
+  button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 0; background: #007079; color: #fff; cursor: pointer; }
+  button:disabled { background: #b3b3b3; cursor: default; }
+  ol { padding-left: 18px; margin: 8px 0; max-height: 260px; overflow: auto; }
+  li.ok::marker { color: #007079; } li.fail { color: #b30d2f; }
+  pre { white-space: pre-wrap; font-size: 11px; margin: 2px 0 6px; color: #565656; }
+</style>
+<h1>EDS Contract Runner</h1>
+<p>Choose the generated <code>*.figma-build*.js</code> files. They run in name order (part 1 before part 2), one at a time, and stop at the first error.</p>
+<input id="files" type="file" accept=".js" multiple />
+<p></p>
+<button id="run" disabled>Run</button>
+<ol id="log" aria-live="polite"></ol>
+<script>
+  const input = document.getElementById('files');
+  const run = document.getElementById('run');
+  const log = document.getElementById('log');
+  let pending = null;
+  input.onchange = () => { run.disabled = input.files.length === 0; log.innerHTML = ''; };
+  onmessage = (e) => { const m = e.data.pluginMessage; if (m && m.type === 'result' && pending) { pending(m); pending = null; } };
+  const send = (name, src) => new Promise((resolve) => { pending = resolve; parent.postMessage({ pluginMessage: { type: 'run', name, src } }, '*'); });
+  run.onclick = async () => {
+    run.disabled = true; log.innerHTML = '';
+    const files = [...input.files].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+    for (const f of files) {
+      const li = document.createElement('li'); li.textContent = f.name + ' …'; log.append(li);
+      const m = await send(f.name, await f.text());
+      li.className = m.ok ? 'ok' : 'fail';
+      li.textContent = f.name + (m.ok ? ' — done' : ' — FAILED');
+      const pre = document.createElement('pre'); pre.textContent = m.ok ? JSON.stringify(m.result) : m.error; li.append(pre);
+      if (!m.ok) break;
+    }
+    run.disabled = false;
+  };
+</script>
