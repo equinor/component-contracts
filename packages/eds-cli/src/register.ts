@@ -56,6 +56,7 @@ export function register(path: string, dryRun: boolean): string {
     )
   const body = renderDiffMarkdown(contract, diff)
   const title = `[extension] ${contract.id} extends ${contract.extends}`
+  let reason = 'gh unavailable'
 
   if (!dryRun) {
     const repo = process.env.EDS_REGISTRY_REPO
@@ -70,13 +71,17 @@ export function register(path: string, dryRun: boolean): string {
           ['changes', String(diff.length)],
         ]),
       )
-    } catch {
+    } catch (e: any) {
       // fall through to the printed report — the loop never loses data
+      reason =
+        e?.code === 'ENOENT'
+          ? 'the gh command is not installed here'
+          : String(e?.stderr || e?.message || e).trim().split('\n')[0]
     }
   }
   return blocks(
     section(
-      dryRun ? 'extension report (dry run)' : 'extension report (gh unavailable — post this manually)',
+      dryRun ? 'extension report (dry run)' : `extension report (not posted: ${reason}) — post this manually`,
       title,
     ),
     body,
